@@ -79,18 +79,6 @@ export default function LotListPage() {
                 Todos os itens são <strong>novos e sem uso</strong>. As avarias são exclusivamente estéticas e não comprometem o desempenho dos equipamentos. <strong>As Casas Bahia não oferecem garantia</strong> sobre estes produtos. Entrega disponível para todo o Brasil.
               </p>
             </div>
-            <div style={{ display: "flex", gap: isMobile ? 20 : 28, alignItems: "center" }}>
-              {[
-                { val: stats.total, label: "Total", color: CB_YELLOW },
-                { val: stats.vendidos, label: "Vendidos", color: "#4ade80" },
-                { val: stats.naoVendidos, label: "Disponíveis", color: "#4ade80" },
-              ].map(item => (
-                <div key={item.label} style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: isMobile ? 24 : 30, fontWeight: 900, color: item.color, lineHeight: 1 }}>{item.val}</div>
-                  <div style={{ fontSize: 10, opacity: 0.75, marginTop: 3, fontWeight: 700 }}>{item.label}</div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
