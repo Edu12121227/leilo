@@ -257,7 +257,7 @@ export default function LotDetailPage() {
                 <img
                   src="/images/grupo-casas-bahia.jpeg"
                   alt="Grupo Casas Bahia"
-                  style={{ height: 90, width: "auto", objectFit: "contain", marginBottom: 12, borderRadius: 8, display: "block", margin: "0 auto 12px" }}
+                  style={{ height: 220, width: "auto", objectFit: "contain", borderRadius: 10, display: "block", margin: "0 auto 14px" }}
                 />
                 <p style={{ fontSize: 12, color: "#555", lineHeight: 1.6 }}>
                   Leilão de Linha Branca - Logística Reversa<br />
