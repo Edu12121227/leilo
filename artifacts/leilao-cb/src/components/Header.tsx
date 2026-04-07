@@ -11,6 +11,11 @@ const CB_YELLOW = "#FFCC00";
 const CB_BLUE = "#0033C6";
 const CB_DARK = "#1a1a2e";
 
+function todayFull(): string {
+  const d = new Date();
+  return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
+}
+
 export default function Header({ onSearch, searchValue = "" }: HeaderProps) {
   const [, setLocation] = useLocation();
   const [query, setQuery] = useState(searchValue);
@@ -38,7 +43,7 @@ export default function Header({ onSearch, searchValue = "" }: HeaderProps) {
           justifyContent: "center",
         }}>
           <span style={{ color: "white", fontSize: isMobile ? 11 : 12, fontWeight: 800, letterSpacing: "0.8px", textTransform: "uppercase", textAlign: "center" }}>
-            Linha Branca com Avaria de Logística — Nº 144
+            Leilão encerra hoje, {todayFull()} — Não perca!
           </span>
         </div>
       </div>
