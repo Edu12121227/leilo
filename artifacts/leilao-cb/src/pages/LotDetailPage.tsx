@@ -225,24 +225,22 @@ export default function LotDetailPage() {
                 ) : (
                   <>
                     {/* Suggested bid */}
-                    <div style={{ backgroundColor: "#fffbea", border: "1px solid #f5c518", borderRadius: 8, padding: "10px 14px", marginBottom: 10 }}>
-                      <p style={{ fontSize: 12, color: "#7a5c00", fontWeight: 700, marginBottom: 2 }}>💡 Lance sugerido</p>
-                      <p style={{ fontSize: 18, fontWeight: 900, color: "#1a1a2e" }}>{formatBRL(priceNum + 80)}</p>
+                    <div style={{ borderTop: "1px solid #e8e8e8", borderBottom: "1px solid #e8e8e8", padding: "10px 0", marginBottom: 12 }}>
+                      <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 3 }}>Lance sugerido</p>
+                      <p style={{ fontSize: 20, fontWeight: 900, color: "#1a1a2e" }}>{formatBRL(priceNum + 80)}</p>
                     </div>
 
                     {/* Closing time */}
-                    <div style={{ backgroundColor: "#fff4f4", border: "1px solid #fca5a5", borderRadius: 8, padding: "8px 14px", marginBottom: 10, textAlign: "center" }}>
-                      <p style={{ fontSize: 12, fontWeight: 900, color: "#b91c1c" }}>
-                        ⏳ Encerramento: {todayDateStr().replace(" 11:00", "")} às 23:59
-                      </p>
-                    </div>
+                    <p style={{ fontSize: 12, color: "#555", fontWeight: 700, marginBottom: 12, textAlign: "center", letterSpacing: "0.2px" }}>
+                      Encerramento: {todayDateStr().replace(" 11:00", "")} às 23:59
+                    </p>
 
                     {/* Payment options */}
-                    <div style={{ backgroundColor: "#f0fdf4", border: "1px solid #86efac", borderRadius: 8, padding: "10px 14px", marginBottom: 10 }}>
-                      <p style={{ fontSize: 12, fontWeight: 900, color: "#166534", marginBottom: 6 }}>💳 Formas de pagamento</p>
-                      <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                        <p style={{ fontSize: 12, color: "#15803d" }}>✔ À vista — PIX ou Boleto Bancário</p>
-                        <p style={{ fontSize: 12, color: "#15803d" }}>✔ Parcelamento no Cartão de Crédito em até 12×</p>
+                    <div style={{ marginBottom: 12 }}>
+                      <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 6 }}>Formas de pagamento</p>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                        <p style={{ fontSize: 12, color: "#444" }}>— À vista: PIX ou Boleto Bancário</p>
+                        <p style={{ fontSize: 12, color: "#444" }}>— Parcelamento no Cartão de Crédito em até 12×</p>
                       </div>
                     </div>
 
@@ -258,12 +256,9 @@ export default function LotDetailPage() {
                     </button>
 
                     {/* Payment on delivery note */}
-                    <div style={{ marginTop: 8, backgroundColor: "#f8f8f8", border: "1px solid #e0e0e0", borderRadius: 8, padding: "8px 12px", display: "flex", gap: 8, alignItems: "flex-start" }}>
-                      <span style={{ fontSize: 14, flexShrink: 0 }}>🚚</span>
-                      <p style={{ fontSize: 11, color: "#666", lineHeight: 1.5 }}>
-                        O pagamento também pode ser realizado na entrega do produto, mediante aceitação dos termos de desistência.
-                      </p>
-                    </div>
+                    <p style={{ marginTop: 10, fontSize: 11, color: "#888", lineHeight: 1.6, borderTop: "1px solid #f0f0f0", paddingTop: 10 }}>
+                      O pagamento pode ser realizado na entrega do produto, mediante aceitação dos termos de desistência.
+                    </p>
                   </>
                 )}
                 <button
