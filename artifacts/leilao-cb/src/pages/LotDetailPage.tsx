@@ -153,16 +153,14 @@ export default function LotDetailPage() {
             }}>
               <p style={{ fontSize: 11, fontWeight: 800, color: "#999", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: 4 }}>Lance Final</p>
               <p style={{ fontSize: isMobile ? 28 : 36, fontWeight: 900, color: CB_BLUE, lineHeight: 1, marginBottom: 4 }}>{lot.price}</p>
-              <p style={{ fontSize: 11, color: "#bbb" }}>+ taxas do leiloeiro</p>
+              <p style={{ fontSize: 11, color: "#bbb" }}>Lance mínimo</p>
             </div>
 
             {/* CTA buttons */}
-            <a
-              href={lot.url}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
               style={{
                 display: "block",
+                width: "100%",
                 textAlign: "center",
                 padding: isMobile ? "14px" : "15px",
                 backgroundColor: CB_YELLOW,
@@ -170,12 +168,13 @@ export default function LotDetailPage() {
                 fontWeight: 900,
                 fontSize: isMobile ? 15 : 16,
                 borderRadius: 8,
-                textDecoration: "none",
+                border: "none",
+                cursor: "pointer",
                 fontFamily: "'Nunito', sans-serif",
               }}
             >
-              Comprar no TudoLeilão →
-            </a>
+              Dar Lance →
+            </button>
 
             <button
               onClick={() => setLocation("/")}
@@ -271,10 +270,9 @@ export default function LotDetailPage() {
             <p style={{ fontSize: 12, opacity: 0.65 }}>Leilão Oficial #144 — Linha Branca</p>
           </div>
           <div style={{ textAlign: isMobile ? "left" : "right", fontSize: 13 }}>
-            <p style={{ fontWeight: 800, marginBottom: 4 }}>Leiloeiro: TudoLeilão</p>
-            <p style={{ opacity: 0.75, marginBottom: 4 }}>Entrega em todo o Brasil 🚚</p>
-            <a href="https://tudoleilao.com.br/leilao/144/lotes" target="_blank" rel="noopener noreferrer"
-              style={{ color: CB_YELLOW, fontWeight: 900, textDecoration: "none" }}>tudoleilao.com.br →</a>
+            <p style={{ fontWeight: 800, marginBottom: 4 }}>Leilão Oficial Casas Bahia</p>
+            <p style={{ opacity: 0.75, marginBottom: 4 }}>Galpão: Jundiaí - SP</p>
+            <p style={{ opacity: 0.75 }}>🚚 Entrega em todo o Brasil</p>
           </div>
         </div>
       </footer>

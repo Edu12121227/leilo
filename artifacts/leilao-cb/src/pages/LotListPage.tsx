@@ -63,16 +63,16 @@ export default function LotListPage() {
       <div style={{ background: `linear-gradient(135deg, ${CB_BLUE} 0%, #0047D0 100%)`, color: "white" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "16px 12px" : "22px 16px" }}>
           <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "center", justifyContent: "space-between", gap: 12 }}>
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+            <div style={{ maxWidth: isMobile ? "100%" : 560 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                 <span style={{ backgroundColor: CB_YELLOW, color: CB_BLUE, fontSize: 10, fontWeight: 900, padding: "3px 9px", borderRadius: 4 }}>LEILÃO #144</span>
-                <span style={{ fontSize: 11, opacity: 0.7, fontWeight: 700 }}>TudoLeilão</span>
+                <span style={{ fontSize: 11, opacity: 0.7, fontWeight: 700 }}>Casas Bahia — Linha Branca</span>
               </div>
-              <h1 style={{ fontSize: isMobile ? 20 : 26, fontWeight: 900, lineHeight: 1.2, marginBottom: 4 }}>
-                Linha Branca — Logística Reversa
+              <h1 style={{ fontSize: isMobile ? 18 : 24, fontWeight: 900, lineHeight: 1.2, marginBottom: 8 }}>
+                Produtos novos com avaria de logística
               </h1>
-              <p style={{ fontSize: isMobile ? 12 : 13, opacity: 0.85, fontWeight: 600 }}>
-                Refrigeradores • Lavadoras • Fogões • Freezers — Entrega em todo o Brasil
+              <p style={{ fontSize: isMobile ? 12 : 13, opacity: 0.9, fontWeight: 600, lineHeight: 1.6 }}>
+                Refrigeradores, lavadoras, fogões e freezers que sofreram avarias durante o transporte ou no depósito. <strong>Produtos novos, testados e em funcionamento</strong> — vendidos com desconto por conta das avarias estéticas. <span style={{ opacity: 0.8 }}>Sem garantia Casas Bahia. Entrega em todo o Brasil.</span>
               </p>
             </div>
             <div style={{ display: "flex", gap: isMobile ? 20 : 28, alignItems: "center" }}>
@@ -214,10 +214,9 @@ export default function LotListPage() {
             </p>
           </div>
           <div style={{ textAlign: isMobile ? "left" : "right", fontSize: 13 }}>
-            <p style={{ fontWeight: 800, marginBottom: 4 }}>Leiloeiro: TudoLeilão</p>
+            <p style={{ fontWeight: 800, marginBottom: 4 }}>Leilão Oficial Casas Bahia</p>
             <p style={{ opacity: 0.75, marginBottom: 4 }}>Galpão: Jundiaí - SP</p>
-            <a href="https://tudoleilao.com.br/leilao/144/lotes" target="_blank" rel="noopener noreferrer"
-              style={{ color: CB_YELLOW, fontWeight: 900, textDecoration: "none" }}>tudoleilao.com.br →</a>
+            <p style={{ opacity: 0.75 }}>🚚 Entrega em todo o Brasil</p>
           </div>
         </div>
       </footer>
@@ -302,7 +301,6 @@ function ProductCard({ lot, isMobile, onClick }: { lot: (typeof lots)[0]; isMobi
           <p style={{ fontSize: isMobile ? 15 : 19, fontWeight: 900, color: CB_BLUE, lineHeight: 1, letterSpacing: "-0.3px" }}>
             {lot.price}
           </p>
-          {!isMobile && <p style={{ fontSize: 10, color: "#bbb", marginTop: 2 }}>+ taxas do leiloeiro</p>}
         </div>
 
         {/* Status + CTA */}

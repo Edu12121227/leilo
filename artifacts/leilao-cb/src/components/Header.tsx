@@ -52,22 +52,9 @@ export default function Header({ onSearch, searchValue = "" }: HeaderProps) {
             </div>
           )}
 
-          {/* Mobile left: delivery info */}
-          {isMobile && (
-            <span style={{ color: "rgba(255,255,255,0.85)", fontSize: 11, fontWeight: 600, display: "flex", alignItems: "center", gap: 4, whiteSpace: "nowrap" }}>
-              🚚 Entrega em todo o Brasil
-            </span>
-          )}
-
-          {/* Right: TudoLeilão link */}
-          <a
-            href="https://tudoleilao.com.br/leilao/144/lotes"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: CB_YELLOW, fontSize: isMobile ? 11 : 12, fontWeight: 800, textDecoration: "none", whiteSpace: "nowrap", flexShrink: 0 }}
-          >
-            {isMobile ? "TudoLeilão →" : "Ver no TudoLeilão →"}
-          </a>
+          <span style={{ color: isMobile ? "rgba(255,255,255,0.85)" : CB_YELLOW, fontSize: isMobile ? 11 : 12, fontWeight: 800, whiteSpace: "nowrap", flexShrink: 0 }}>
+            🚚 Entrega em todo o Brasil
+          </span>
         </div>
       </div>
 
@@ -91,7 +78,7 @@ export default function Header({ onSearch, searchValue = "" }: HeaderProps) {
               <img
                 src="/images/logo-casasbahia-oficial.png"
                 alt="Casas Bahia"
-                style={{ height: isMobile ? 30 : 40, width: "auto", display: "block" }}
+                style={{ height: isMobile ? 22 : 28, width: "auto", display: "block" }}
               />
             </button>
             {isMobile && (
