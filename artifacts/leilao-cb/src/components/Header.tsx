@@ -6,6 +6,9 @@ interface HeaderProps {
   searchValue?: string;
 }
 
+const CB_YELLOW = "#FFCC00";
+const CB_BLUE = "#003087";
+
 export default function Header({ onSearch, searchValue = "" }: HeaderProps) {
   const [, setLocation] = useLocation();
   const [query, setQuery] = useState(searchValue);
@@ -15,95 +18,140 @@ export default function Header({ onSearch, searchValue = "" }: HeaderProps) {
     if (onSearch) onSearch(query);
   };
 
+  const navCategories = [
+    { label: "Todos os Lotes", value: "" },
+    { label: "Refrigeradores", value: "REFRIGERADOR" },
+    { label: "Lavanderia", value: "LAVADORA" },
+    { label: "Fogões", value: "FOGÃO" },
+    { label: "Freezers", value: "FREEZER" },
+  ];
+
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
-      {/* Top bar - CB Blue */}
-      <div style={{ backgroundColor: '#003087' }} className="text-white">
-        <div className="max-w-7xl mx-auto px-4 py-1 flex items-center justify-between text-xs">
-          <div className="flex items-center gap-4">
-            <span>Leilão Oficial Casas Bahia</span>
-            <span className="hidden sm:inline">|</span>
-            <span className="hidden sm:inline">Linha Branca - Logística Reversa</span>
+    <header style={{ fontFamily: "'Nunito', sans-serif" }}>
+      {/* Top info bar */}
+      <div style={{ backgroundColor: CB_BLUE, color: "white", fontSize: 12 }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "6px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
+            <span style={{ fontWeight: 700 }}>Leilão Oficial Casas Bahia</span>
+            <span style={{ opacity: 0.6 }}>|</span>
+            <span style={{ opacity: 0.85 }}>Linha Branca — Logística Reversa</span>
           </div>
-          <div className="flex items-center gap-3">
-            <span>Retirada: Jundiaí - SP</span>
+          <div style={{ display: "flex", gap: 16, alignItems: "center", opacity: 0.9 }}>
+            <span>📍 Retirada: Jundiaí - SP</span>
+            <a
+              href="https://tudoleilao.com.br/leilao/144/lotes"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: CB_YELLOW, fontWeight: 700, textDecoration: "none" }}
+            >
+              Ver no TudoLeilão →
+            </a>
           </div>
         </div>
       </div>
 
       {/* Main header */}
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
-        {/* Logo */}
-        <button
-          onClick={() => setLocation("/")}
-          className="flex-shrink-0 flex items-center gap-2"
-        >
-          <div
-            style={{ backgroundColor: '#FFCC00' }}
-            className="px-3 py-2 rounded flex items-center"
+      <div style={{ backgroundColor: "white", borderBottom: "1px solid #e8e8e8" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "12px 16px", display: "flex", alignItems: "center", gap: 20 }}>
+          {/* Logo */}
+          <button
+            onClick={() => setLocation("/")}
+            style={{ flexShrink: 0, background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: 10, padding: 0 }}
           >
-            <span className="font-black text-lg" style={{ color: '#003087', letterSpacing: '-0.5px' }}>
-              Casas Bahia
-            </span>
-          </div>
-          <div className="hidden sm:block">
-            <p className="text-xs font-semibold" style={{ color: '#003087' }}>Leilão Oficial</p>
-            <p className="text-xs text-gray-500">Linha Branca</p>
-          </div>
-        </button>
-
-        {/* Search bar */}
-        <form onSubmit={handleSearch} className="flex-1 max-w-2xl">
-          <div className="flex">
-            <input
-              type="search"
-              value={query}
-              onChange={e => setQuery(e.target.value)}
-              placeholder="Buscar produtos no leilão..."
-              className="flex-1 border-2 border-gray-200 rounded-l-md px-4 py-2 text-sm outline-none focus:border-yellow-400 transition-colors"
+            <img
+              src="/images/logo-casasbahia.jpg"
+              alt="Casas Bahia"
+              style={{ width: 52, height: 52, borderRadius: 8, objectFit: "cover" }}
             />
-            <button
-              type="submit"
-              style={{ backgroundColor: '#FFCC00' }}
-              className="px-5 py-2 rounded-r-md font-semibold text-sm text-black hover:opacity-90 transition-opacity flex items-center gap-1"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-              <span className="hidden sm:inline">Buscar</span>
-            </button>
-          </div>
-        </form>
+            <div style={{ textAlign: "left" }}>
+              <div style={{ fontSize: 18, fontWeight: 900, color: CB_BLUE, lineHeight: 1.1, letterSpacing: "-0.5px" }}>
+                casas bahia
+              </div>
+              <div style={{ fontSize: 11, fontWeight: 600, color: "#888", letterSpacing: "0.5px", textTransform: "uppercase" }}>
+                Leilão #144
+              </div>
+            </div>
+          </button>
 
-        {/* Actions */}
-        <div className="flex-shrink-0 hidden md:flex items-center gap-3">
-          <a
-            href="https://tudoleilao.com.br/leilao/144/lotes"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ backgroundColor: '#003087' }}
-            className="text-white text-xs px-3 py-2 rounded font-semibold hover:opacity-90 transition-opacity"
-          >
-            Ver no TudoLeilão
-          </a>
+          {/* Search bar */}
+          <form onSubmit={handleSearch} style={{ flex: 1, maxWidth: 680 }}>
+            <div style={{ display: "flex", borderRadius: 8, overflow: "hidden", border: `2px solid ${CB_YELLOW}`, backgroundColor: "white" }}>
+              <input
+                type="search"
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                placeholder="Buscar por modelo, categoria ou nº do lote..."
+                style={{
+                  flex: 1,
+                  padding: "11px 16px",
+                  fontSize: 14,
+                  fontFamily: "'Nunito', sans-serif",
+                  fontWeight: 500,
+                  border: "none",
+                  outline: "none",
+                  color: "#1a1a2e",
+                }}
+              />
+              <button
+                type="submit"
+                style={{
+                  backgroundColor: CB_YELLOW,
+                  border: "none",
+                  padding: "0 22px",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  fontFamily: "'Nunito', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 14,
+                  color: CB_BLUE,
+                }}
+              >
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <span>Buscar</span>
+              </button>
+            </div>
+          </form>
+
+          {/* Side info */}
+          <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 2 }}>
+            <div style={{ fontSize: 11, color: "#888", fontWeight: 600 }}>LEILÃO</div>
+            <div style={{ fontSize: 13, fontWeight: 800, color: CB_BLUE }}>186 Lotes</div>
+          </div>
         </div>
       </div>
 
-      {/* Category bar */}
-      <div style={{ backgroundColor: '#FFCC00' }}>
-        <div className="max-w-7xl mx-auto px-4 py-1.5 flex items-center gap-6 overflow-x-auto">
-          {['Todos os Lotes', 'Refrigeradores', 'Lavanderia', 'Fogões', 'Freezers'].map(cat => (
+      {/* Category nav */}
+      <div style={{ backgroundColor: CB_YELLOW }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 16px", display: "flex", gap: 4, overflowX: "auto" }} className="no-scrollbar">
+          {navCategories.map(cat => (
             <button
-              key={cat}
+              key={cat.label}
               onClick={() => {
                 setLocation("/");
-                if (onSearch && cat !== 'Todos os Lotes') onSearch(cat === 'Refrigeradores' ? 'REFRIGERADOR' : cat === 'Lavanderia' ? 'LAVADORA' : cat === 'Fogões' ? 'FOGÃO' : cat === 'Freezers' ? 'FREEZER' : '');
-                if (onSearch && cat === 'Todos os Lotes') onSearch('');
+                if (onSearch) onSearch(cat.value);
+                setQuery(cat.value === "REFRIGERADOR" ? "REFRIGERADOR" : cat.value === "LAVADORA" ? "LAVADORA" : cat.value === "FOGÃO" ? "FOGÃO" : cat.value === "FREEZER" ? "FREEZER" : "");
               }}
-              className="text-xs font-bold whitespace-nowrap text-black hover:underline transition-all"
-              style={{ color: '#003087' }}
+              style={{
+                background: "none",
+                border: "none",
+                padding: "10px 14px",
+                fontFamily: "'Nunito', sans-serif",
+                fontWeight: 800,
+                fontSize: 13,
+                color: CB_BLUE,
+                cursor: "pointer",
+                whiteSpace: "nowrap",
+                borderBottom: "3px solid transparent",
+                transition: "border-color 0.15s",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.borderBottomColor = CB_BLUE)}
+              onMouseLeave={e => (e.currentTarget.style.borderBottomColor = "transparent")}
             >
-              {cat}
+              {cat.label}
             </button>
           ))}
         </div>
