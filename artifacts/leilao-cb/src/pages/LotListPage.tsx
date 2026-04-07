@@ -5,7 +5,7 @@ import { lots, getCategory, getCategoryImage } from "@/data/lots";
 
 const ITEMS_PER_PAGE = 20;
 const CB_YELLOW = "#FFCC00";
-const CB_BLUE = "#003087";
+const CB_BLUE = "#0033C6";
 
 const CATEGORIES = ["Todos", "Refrigeradores", "Lavanderia", "Fogões", "Freezers", "Eletrodomésticos"];
 const STATUSES = ["Todos", "Vendido", "Não Vendido"];
@@ -46,25 +46,23 @@ export default function LotListPage() {
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
   const paginated = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
-
   const handleSearch = (q: string) => { setSearch(q); setPage(1); };
 
   const stats = useMemo(() => {
-    const total = lots.length;
     const vendidos = lots.filter(l => l.status === "Vendido").length;
-    return { total, vendidos, naoVendidos: total - vendidos };
+    return { total: lots.length, vendidos, naoVendidos: lots.length - vendidos };
   }, []);
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#f5f5f5", fontFamily: "'Nunito', sans-serif" }}>
+    <div style={{ minHeight: "100vh", backgroundColor: "#f0f0f5", fontFamily: "'Nunito', sans-serif" }}>
       <Header onSearch={handleSearch} searchValue={search} />
 
-      {/* Hero banner */}
-      <div style={{ background: `linear-gradient(135deg, ${CB_BLUE} 0%, #0047C0 100%)`, color: "white" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "28px 16px" }}>
-          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 20 }}>
+      {/* ── Auction hero banner ── */}
+      <div style={{ background: `linear-gradient(135deg, ${CB_BLUE} 0%, #0047D0 100%)`, color: "white" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "22px 16px" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 5 }}>
                 <span style={{
                   backgroundColor: CB_YELLOW,
                   color: CB_BLUE,
@@ -73,27 +71,25 @@ export default function LotListPage() {
                   padding: "3px 10px",
                   borderRadius: 4,
                   letterSpacing: "0.5px",
-                }}>
-                  LEILÃO #144
-                </span>
-                <span style={{ fontSize: 12, opacity: 0.7, fontWeight: 600 }}>TudoLeilão</span>
+                }}>LEILÃO #144</span>
+                <span style={{ fontSize: 12, opacity: 0.7, fontWeight: 700 }}>TudoLeilão</span>
               </div>
-              <h1 style={{ fontSize: 28, fontWeight: 900, lineHeight: 1.15, letterSpacing: "-0.5px", marginBottom: 6 }}>
+              <h1 style={{ fontSize: 26, fontWeight: 900, lineHeight: 1.2, marginBottom: 4 }}>
                 Linha Branca — Logística Reversa
               </h1>
-              <p style={{ fontSize: 13, opacity: 0.8, fontWeight: 500 }}>
-                Refrigeradores • Lavadoras • Fogões • Freezers • Retirada em Jundiaí - SP
+              <p style={{ fontSize: 13, opacity: 0.85, fontWeight: 600 }}>
+                Refrigeradores • Lavadoras • Fogões • Freezers — Retirada em Jundiaí - SP
               </p>
             </div>
-            <div style={{ display: "flex", gap: 32 }}>
+            <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
               {[
                 { val: stats.total, label: "Total de Lotes", color: CB_YELLOW },
                 { val: stats.vendidos, label: "Vendidos", color: "#4ade80" },
                 { val: stats.naoVendidos, label: "Não Vendidos", color: "#f87171" },
               ].map(item => (
                 <div key={item.label} style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: 32, fontWeight: 900, color: item.color, lineHeight: 1 }}>{item.val}</div>
-                  <div style={{ fontSize: 11, opacity: 0.7, marginTop: 4, fontWeight: 600 }}>{item.label}</div>
+                  <div style={{ fontSize: 30, fontWeight: 900, color: item.color, lineHeight: 1 }}>{item.val}</div>
+                  <div style={{ fontSize: 11, opacity: 0.75, marginTop: 3, fontWeight: 700 }}>{item.label}</div>
                 </div>
               ))}
             </div>
@@ -101,75 +97,58 @@ export default function LotListPage() {
         </div>
       </div>
 
-      {/* Filters toolbar */}
-      <div style={{ backgroundColor: "white", borderBottom: "1px solid #e8e8e8", position: "sticky", top: 0, zIndex: 40, boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "10px 16px", display: "flex", flexWrap: "wrap", alignItems: "center", gap: 12 }}>
-          {/* Category filter as pills */}
+      {/* ── Filters bar ── */}
+      <div style={{
+        backgroundColor: "white",
+        borderBottom: "1px solid #e0e0e0",
+        position: "sticky",
+        top: 0,
+        zIndex: 40,
+        boxShadow: "0 2px 6px rgba(0,0,0,0.07)",
+      }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "10px 16px", display: "flex", flexWrap: "wrap", alignItems: "center", gap: 10 }}>
+          {/* Category pills */}
           <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
             {CATEGORIES.map(cat => (
               <button
                 key={cat}
                 onClick={() => { setCategory(cat); setPage(1); }}
                 style={{
-                  padding: "5px 14px",
+                  padding: "5px 13px",
                   borderRadius: 20,
-                  border: `2px solid ${category === cat ? CB_BLUE : "#e0e0e0"}`,
+                  border: `2px solid ${category === cat ? CB_BLUE : "#ddd"}`,
                   backgroundColor: category === cat ? CB_BLUE : "white",
                   color: category === cat ? "white" : "#555",
                   fontFamily: "'Nunito', sans-serif",
                   fontSize: 12,
-                  fontWeight: 700,
+                  fontWeight: 800,
                   cursor: "pointer",
-                  transition: "all 0.15s",
                   whiteSpace: "nowrap",
+                  transition: "all 0.15s",
                 }}
-              >
-                {cat}
-              </button>
+              >{cat}</button>
             ))}
           </div>
 
-          <div style={{ width: 1, height: 24, backgroundColor: "#e0e0e0", flexShrink: 0 }} />
+          <div style={{ width: 1, height: 22, backgroundColor: "#e0e0e0", flexShrink: 0 }} />
 
-          {/* Status */}
+          {/* Status dropdown */}
           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span style={{ fontSize: 12, fontWeight: 700, color: "#666" }}>Status:</span>
+            <span style={{ fontSize: 12, fontWeight: 800, color: "#666" }}>Status:</span>
             <select
               value={status}
               onChange={e => { setStatus(e.target.value); setPage(1); }}
-              style={{
-                border: "2px solid #e0e0e0",
-                borderRadius: 6,
-                padding: "4px 10px",
-                fontSize: 12,
-                fontFamily: "'Nunito', sans-serif",
-                fontWeight: 600,
-                color: "#333",
-                outline: "none",
-                cursor: "pointer",
-              }}
-            >
-              {STATUSES.map(s => <option key={s}>{s}</option>)}
-            </select>
+              style={{ border: "2px solid #ddd", borderRadius: 6, padding: "4px 10px", fontSize: 12, fontFamily: "'Nunito', sans-serif", fontWeight: 700, color: "#333", outline: "none", cursor: "pointer", backgroundColor: "white" }}
+            >{STATUSES.map(s => <option key={s}>{s}</option>)}</select>
           </div>
 
-          {/* Sort */}
+          {/* Sort dropdown */}
           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span style={{ fontSize: 12, fontWeight: 700, color: "#666" }}>Ordenar:</span>
+            <span style={{ fontSize: 12, fontWeight: 800, color: "#666" }}>Ordenar:</span>
             <select
               value={sortBy}
               onChange={e => { setSortBy(e.target.value as typeof sortBy); setPage(1); }}
-              style={{
-                border: "2px solid #e0e0e0",
-                borderRadius: 6,
-                padding: "4px 10px",
-                fontSize: 12,
-                fontFamily: "'Nunito', sans-serif",
-                fontWeight: 600,
-                color: "#333",
-                outline: "none",
-                cursor: "pointer",
-              }}
+              style={{ border: "2px solid #ddd", borderRadius: 6, padding: "4px 10px", fontSize: 12, fontFamily: "'Nunito', sans-serif", fontWeight: 700, color: "#333", outline: "none", cursor: "pointer", backgroundColor: "white" }}
             >
               <option value="lote">Nº do Lote</option>
               <option value="price-asc">Menor Preço</option>
@@ -177,23 +156,22 @@ export default function LotListPage() {
             </select>
           </div>
 
-          <div style={{ marginLeft: "auto", fontSize: 13, fontWeight: 700, color: "#666" }}>
-            {filtered.length} lote{filtered.length !== 1 ? "s" : ""} encontrado{filtered.length !== 1 ? "s" : ""}
+          <div style={{ marginLeft: "auto", fontSize: 13, fontWeight: 800, color: "#666" }}>
+            <span style={{ color: CB_BLUE }}>{filtered.length}</span> lote{filtered.length !== 1 ? "s" : ""} encontrado{filtered.length !== 1 ? "s" : ""}
           </div>
         </div>
       </div>
 
-      {/* Product grid */}
-      <main style={{ maxWidth: 1280, margin: "0 auto", padding: "20px 16px 40px" }}>
+      {/* ── Product grid ── */}
+      <main style={{ maxWidth: 1280, margin: "0 auto", padding: "20px 16px 48px" }}>
         {filtered.length === 0 ? (
           <div style={{ textAlign: "center", padding: "64px 0" }}>
             <div style={{ fontSize: 48, marginBottom: 16 }}>🔍</div>
-            <h3 style={{ fontSize: 18, fontWeight: 800, color: "#555", marginBottom: 8 }}>Nenhum lote encontrado</h3>
-            <p style={{ fontSize: 14, color: "#888" }}>Tente outro termo de busca ou remova os filtros</p>
+            <h3 style={{ fontSize: 20, fontWeight: 900, color: "#444", marginBottom: 8 }}>Nenhum lote encontrado</h3>
+            <p style={{ fontSize: 14, color: "#888" }}>Tente outro termo ou remova os filtros</p>
             <button
               onClick={() => { setSearch(""); setCategory("Todos"); setStatus("Todos"); }}
-              className="btn-yellow"
-              style={{ marginTop: 20, padding: "10px 24px", fontSize: 14 }}
+              style={{ marginTop: 20, padding: "10px 28px", backgroundColor: CB_YELLOW, color: CB_BLUE, fontWeight: 900, fontSize: 14, border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Nunito', sans-serif" }}
             >
               Limpar Filtros
             </button>
@@ -202,7 +180,7 @@ export default function LotListPage() {
           <>
             <div style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fill, minmax(210px, 1fr))",
               gap: 16,
             }}>
               {paginated.map(lot => (
@@ -217,51 +195,36 @@ export default function LotListPage() {
             {/* Pagination */}
             {totalPages > 1 && (
               <div style={{ marginTop: 36, display: "flex", justifyContent: "center", alignItems: "center", gap: 6 }}>
-                <PaginationBtn onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}>← Anterior</PaginationBtn>
-                {buildPageNumbers(page, totalPages).map((pn, i) =>
+                <PageBtn onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}>← Anterior</PageBtn>
+                {buildPages(page, totalPages).map((pn, i) =>
                   pn === "..." ? (
-                    <span key={`dots-${i}`} style={{ padding: "6px 4px", color: "#999" }}>…</span>
+                    <span key={`d${i}`} style={{ padding: "0 4px", color: "#bbb", fontWeight: 700 }}>•••</span>
                   ) : (
-                    <PaginationBtn
-                      key={pn}
-                      onClick={() => setPage(pn as number)}
-                      active={page === pn}
-                    >
-                      {pn}
-                    </PaginationBtn>
+                    <PageBtn key={pn} onClick={() => setPage(pn as number)} active={page === pn}>{pn}</PageBtn>
                   )
                 )}
-                <PaginationBtn onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}>Próxima →</PaginationBtn>
+                <PageBtn onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}>Próxima →</PageBtn>
               </div>
             )}
           </>
         )}
       </main>
 
-      {/* Footer */}
-      <footer style={{ backgroundColor: CB_BLUE, color: "white", padding: "32px 16px", marginTop: 8 }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 24 }}>
+      {/* ── Footer ── */}
+      <footer style={{ backgroundColor: CB_BLUE, color: "white", padding: "32px 16px" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 24, alignItems: "flex-start" }}>
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-              <img src="/images/logo-casasbahia.jpg" alt="Casas Bahia" style={{ width: 40, height: 40, borderRadius: 6, objectFit: "cover" }} />
-              <div>
-                <div style={{ fontWeight: 900, fontSize: 16, color: CB_YELLOW }}>casas bahia</div>
-                <div style={{ fontSize: 11, opacity: 0.7 }}>Leilão Oficial #144</div>
-              </div>
-            </div>
-            <p style={{ fontSize: 12, opacity: 0.65, maxWidth: 360 }}>
-              As fotos são meramente ilustrativas. Produtos NÃO TESTADOS, podendo apresentar avarias ou falta de componentes.
+            <img src="/images/logo-casasbahia-oficial.png" alt="Casas Bahia" style={{ height: 32, width: "auto", filter: "brightness(0) invert(1)", marginBottom: 10 }} />
+            <p style={{ fontSize: 12, opacity: 0.65, maxWidth: 380, lineHeight: 1.7 }}>
+              Leilão Oficial #144 — Linha Branca Logística Reversa.<br />
+              As fotos são <strong>meramente ilustrativas</strong>. Produtos NÃO TESTADOS, podendo apresentar avarias ou falta de componentes.
             </p>
           </div>
-          <div style={{ textAlign: "right", fontSize: 12 }}>
-            <p style={{ opacity: 0.85, fontWeight: 700, marginBottom: 4 }}>Leiloeiro: TudoLeilão</p>
-            <p style={{ opacity: 0.7, marginBottom: 4 }}>Local de Retirada: Jundiaí - SP</p>
-            <a
-              href="https://tudoleilao.com.br/leilao/144/lotes"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: CB_YELLOW, fontWeight: 700, textDecoration: "none" }}
-            >
+          <div style={{ textAlign: "right", fontSize: 13 }}>
+            <p style={{ fontWeight: 800, marginBottom: 4 }}>Leiloeiro: TudoLeilão</p>
+            <p style={{ opacity: 0.75, marginBottom: 4 }}>Local de Retirada: Jundiaí - SP</p>
+            <a href="https://tudoleilao.com.br/leilao/144/lotes" target="_blank" rel="noopener noreferrer"
+              style={{ color: CB_YELLOW, fontWeight: 900, textDecoration: "none", fontSize: 13 }}>
               tudoleilao.com.br →
             </a>
           </div>
@@ -271,68 +234,89 @@ export default function LotListPage() {
   );
 }
 
+// ── Product Card (matching CB's exact card style) ──
 function ProductCard({ lot, onClick }: { lot: (typeof lots)[0]; onClick: () => void }) {
   const isVendido = lot.status === "Vendido";
-  const image = getCategoryImage(lot.title);
+  const [hovered, setHovered] = useState(false);
 
   return (
     <div
-      className="product-card"
       onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
         backgroundColor: "white",
-        borderRadius: 10,
+        borderRadius: 8,
         overflow: "hidden",
-        boxShadow: "0 1px 4px rgba(0,0,0,0.08)",
-        border: "1px solid #ececec",
+        border: `1px solid ${hovered ? "#b0b0b0" : "#e8e8e8"}`,
         cursor: "pointer",
         display: "flex",
         flexDirection: "column",
+        boxShadow: hovered ? "0 6px 20px rgba(0,0,0,0.12)" : "0 2px 6px rgba(0,0,0,0.06)",
+        transform: hovered ? "translateY(-3px)" : "none",
+        transition: "box-shadow 0.18s, transform 0.18s, border-color 0.18s",
+        position: "relative",
       }}
     >
-      {/* Image area */}
-      <div style={{ position: "relative", aspectRatio: "1", overflow: "hidden", backgroundColor: "#f9f9f9" }}>
+      {/* Lote badge */}
+      <div style={{
+        position: "absolute",
+        top: 8,
+        left: 8,
+        backgroundColor: "rgba(0,0,0,0.6)",
+        color: "white",
+        fontSize: 10,
+        fontWeight: 900,
+        padding: "2px 7px",
+        borderRadius: 4,
+        zIndex: 2,
+        letterSpacing: "0.3px",
+      }}>
+        Lote {lot.loteNum}
+      </div>
+
+      {/* Status indicator dot */}
+      <div style={{
+        position: "absolute",
+        top: 10,
+        right: 10,
+        width: 9,
+        height: 9,
+        borderRadius: "50%",
+        backgroundColor: isVendido ? "#22c55e" : "#ef4444",
+        zIndex: 2,
+        boxShadow: `0 0 0 2px white`,
+      }} />
+
+      {/* Image */}
+      <div style={{ aspectRatio: "1", backgroundColor: "#fafafa", display: "flex", alignItems: "center", justifyContent: "center", padding: 12 }}>
         <img
-          src={image}
+          src={getCategoryImage(lot.title)}
           alt={lot.title}
           loading="lazy"
-          style={{ width: "100%", height: "100%", objectFit: "contain", padding: 8 }}
+          style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }}
         />
-        {/* Lote badge */}
-        <div style={{
-          position: "absolute",
-          top: 8,
-          left: 8,
-          backgroundColor: "rgba(0,0,0,0.65)",
-          color: "white",
-          fontSize: 10,
-          fontWeight: 800,
-          padding: "2px 7px",
-          borderRadius: 4,
-          backdropFilter: "blur(4px)",
-        }}>
-          Lote {lot.loteNum}
-        </div>
-        {/* Status dot */}
-        <div style={{
-          position: "absolute",
-          top: 8,
-          right: 8,
-          width: 10,
-          height: 10,
-          borderRadius: "50%",
-          backgroundColor: isVendido ? "#22c55e" : "#ef4444",
-          boxShadow: `0 0 0 2px white, 0 0 0 3px ${isVendido ? "#22c55e" : "#ef4444"}`,
-        }} />
       </div>
 
       {/* Content */}
-      <div style={{ padding: "10px 12px 12px", flex: 1, display: "flex", flexDirection: "column", gap: 8 }}>
+      <div style={{ padding: "10px 12px 14px", flex: 1, display: "flex", flexDirection: "column" }}>
+        {/* Stars (illustrative) */}
+        <div style={{ display: "flex", alignItems: "center", gap: 2, marginBottom: 5 }}>
+          {[1,2,3,4,5].map(i => (
+            <svg key={i} width="11" height="11" viewBox="0 0 24 24" fill={i <= 4 ? "#FFCC00" : "#ddd"}>
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+          ))}
+          <span style={{ fontSize: 10, color: "#888", marginLeft: 2, fontWeight: 700 }}>(4.0)</span>
+        </div>
+
+        {/* Title */}
         <p style={{
-          fontSize: 12,
+          fontSize: 13,
           fontWeight: 700,
-          color: "#1a1a2e",
+          color: "#333",
           lineHeight: 1.4,
+          marginBottom: 8,
           minHeight: "2.8em",
           display: "-webkit-box",
           WebkitLineClamp: 2,
@@ -342,34 +326,42 @@ function ProductCard({ lot, onClick }: { lot: (typeof lots)[0]; onClick: () => v
           {lot.title}
         </p>
 
-        <div style={{ marginTop: "auto" }}>
-          <p style={{ fontSize: 10, color: "#999", fontWeight: 600, marginBottom: 2 }}>Lance final</p>
-          <p style={{ fontSize: 17, fontWeight: 900, color: "#003087", lineHeight: 1 }}>{lot.price}</p>
+        {/* Price section */}
+        <div style={{ marginBottom: 10 }}>
+          <p style={{ fontSize: 10, color: "#aaa", fontWeight: 700, marginBottom: 2 }}>Lance final</p>
+          <p style={{ fontSize: 20, fontWeight: 900, color: CB_BLUE, lineHeight: 1, letterSpacing: "-0.3px" }}>
+            {lot.price}
+          </p>
+          <p style={{ fontSize: 10, color: "#999", marginTop: 3 }}>+ taxas do leiloeiro</p>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 6, marginTop: 4 }}>
+        {/* Status + CTA */}
+        <div style={{ marginTop: "auto", display: "flex", gap: 6, alignItems: "center" }}>
           <span style={{
             fontSize: 11,
-            fontWeight: 700,
+            fontWeight: 800,
             padding: "3px 8px",
             borderRadius: 4,
             backgroundColor: isVendido ? "#e6f9ef" : "#fef2f2",
             color: isVendido ? "#1a7a45" : "#c0392b",
-            border: `1px solid ${isVendido ? "#b8e8cf" : "#fcd5d5"}`,
+            border: `1px solid ${isVendido ? "#c3e6cb" : "#fcd5d5"}`,
+            flexShrink: 0,
           }}>
-            {lot.status}
+            {isVendido ? "✓ Vendido" : "○ Disponível"}
           </span>
           <button
             style={{
-              fontSize: 11,
-              fontWeight: 800,
-              padding: "3px 10px",
-              borderRadius: 4,
-              backgroundColor: "#FFCC00",
-              color: "#003087",
+              flex: 1,
+              padding: "6px 8px",
+              backgroundColor: CB_YELLOW,
+              color: "#1a1a2e",
+              fontWeight: 900,
+              fontSize: 12,
               border: "none",
+              borderRadius: 6,
               cursor: "pointer",
               fontFamily: "'Nunito', sans-serif",
+              letterSpacing: "0.2px",
             }}
           >
             Ver mais
@@ -380,7 +372,7 @@ function ProductCard({ lot, onClick }: { lot: (typeof lots)[0]; onClick: () => v
   );
 }
 
-function PaginationBtn({ children, onClick, disabled = false, active = false }: {
+function PageBtn({ children, onClick, disabled = false, active = false }: {
   children: React.ReactNode;
   onClick: () => void;
   disabled?: boolean;
@@ -391,24 +383,23 @@ function PaginationBtn({ children, onClick, disabled = false, active = false }: 
       onClick={onClick}
       disabled={disabled}
       style={{
-        padding: "7px 13px",
+        minWidth: 38,
+        padding: "7px 12px",
         borderRadius: 6,
-        border: `2px solid ${active ? "#003087" : "#e0e0e0"}`,
-        backgroundColor: active ? "#003087" : "white",
-        color: active ? "white" : disabled ? "#bbb" : "#333",
+        border: `2px solid ${active ? CB_BLUE : "#ddd"}`,
+        backgroundColor: active ? CB_BLUE : "white",
+        color: active ? "white" : disabled ? "#ccc" : "#444",
         fontFamily: "'Nunito', sans-serif",
-        fontWeight: 700,
+        fontWeight: 800,
         fontSize: 13,
         cursor: disabled ? "not-allowed" : "pointer",
         transition: "all 0.15s",
       }}
-    >
-      {children}
-    </button>
+    >{children}</button>
   );
 }
 
-function buildPageNumbers(current: number, total: number): (number | "...")[] {
+function buildPages(current: number, total: number): (number | "...")[] {
   if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
   const pages: (number | "...")[] = [1];
   if (current > 3) pages.push("...");
