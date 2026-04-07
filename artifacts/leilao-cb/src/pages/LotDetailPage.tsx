@@ -32,7 +32,7 @@ export default function LotDetailPage() {
   }
 
   const category = getCategory(lot.title);
-  const image = getCategoryImage(lot.title);
+  const image = getCategoryImage(lot);
   const isVendido = lot.status === "Vendido";
   const related = lots.filter(l => getCategory(l.title) === category && l.itemId !== lot.itemId).slice(0, isMobile ? 4 : 5);
   const descLines = lot.description.split("\n").filter(Boolean);
@@ -305,7 +305,7 @@ function RelatedCard({ lot, isMobile, onClick }: { lot: (typeof lots)[0]; isMobi
     >
       <div style={{ aspectRatio: "1", backgroundColor: "#fafafa", padding: isMobile ? 8 : 10 }}>
         <img
-          src={getCategoryImage(lot.title)}
+          src={getCategoryImage(lot)}
           alt={lot.title}
           loading="lazy"
           style={{ width: "100%", height: "100%", objectFit: "contain" }}

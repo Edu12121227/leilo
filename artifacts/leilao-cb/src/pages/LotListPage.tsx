@@ -260,7 +260,7 @@ function ProductCard({ lot, isMobile, onClick }: { lot: (typeof lots)[0]; isMobi
       {/* Image */}
       <div style={{ aspectRatio: "1", backgroundColor: "#fafafa", display: "flex", alignItems: "center", justifyContent: "center", padding: isMobile ? 8 : 12 }}>
         <img
-          src={getCategoryImage(lot.title)}
+          src={getCategoryImage(lot)}
           alt={lot.title}
           loading="lazy"
           style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }}

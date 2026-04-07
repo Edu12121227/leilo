@@ -1,1732 +1,1887 @@
 export interface Lot {
-  loteNum: string;
-  title: string;
-  description: string;
-  itemId: string;
-  url: string;
-  price: string;
-  status: string;
-}
+    loteNum: string;
+    title: string;
+    description: string;
+    itemId: string;
+    url: string;
+    price: string;
+    status: string;
+    image: string;
+  }
 
 export const lots: Lot[] = [
-  {
-    "loteNum": "240",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 240 LPN. C1237776 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1190",
-    "url": "https://tudoleilao.com.br/item/1190/detalhes",
-    "price": "R$1.488,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "241",
-    "title": "REFRIGERADOR FF 377L CONSUL CRM44MB 110V BC",
-    "description": "LOTE. 241 LPN. C1252604 \n1 REF FF 377L CONSUL CRM44MB 110V BC\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1191",
-    "url": "https://tudoleilao.com.br/item/1191/detalhes",
-    "price": "R$1.231,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "242",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX IT70S INOX LOOK BIVOLT",
-    "description": "LOTE. 242 LPN. C1252585 \n1 REF FF 480L ELECTROLUX IT70S INOX LOOK BIVOLT\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1192",
-    "url": "https://tudoleilao.com.br/item/1192/detalhes",
-    "price": "R$1.734,80",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "243",
-    "title": "REFRIGERADOR FF 340L CONSUL CRM39ABANA 110V BR",
-    "description": "LOTE. 243 LPN. C1245976 \n1 REF FF 340L CONSUL CRM39ABANA 110V BR\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1193",
-    "url": "https://tudoleilao.com.br/item/1193/detalhes",
-    "price": "R$1.444,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "244",
-    "title": "REFRIGERADOR FF 371L ELECTROLUX DFN41 110V BC",
-    "description": "LOTE. 244 LPN. C1252559 \n1 REF FF 371L ELECTROLUX DFN41 110V BC.\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1194",
-    "url": "https://tudoleilao.com.br/item/1194/detalhes",
-    "price": "R$1.270,80",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "245",
-    "title": "REFRIGERADOR FF 463L BRASTEMP BRM55FK 110V INOX",
-    "description": "LOTE. 245 LPN. C1246298 \n1 REF FF 463L BRASTEMP BRM55FK 110V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1195",
-    "url": "https://tudoleilao.com.br/item/1195/detalhes",
-    "price": "R$1.972,80",
-    "status": "Não Vendido"
-  },
-  {
-    "loteNum": "246",
-    "title": "REFRIGERADOR FF 447L BRASTEMP BRE57FB INVERSE 110V BRANCO",
-    "description": "LOTE. 246 LPN. C1246286 \n1 REF FF 447L BRASTEMP BRE57FB INVERSE 110V BRANCO\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1196",
-    "url": "https://tudoleilao.com.br/item/1196/detalhes",
-    "price": "R$1.857,20",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "247",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 247 LPN. C1247118 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1197",
-    "url": "https://tudoleilao.com.br/item/1197/detalhes",
-    "price": "R$1.388,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "248",
-    "title": "REFRIGERADOR FF 410L CONSUL CRM50LK INOX 220V",
-    "description": "LOTE. 248 LPN. C1251967 \n1 REF FF 410L CONSUL CRM50LK INOX 220V.\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1198",
-    "url": "https://tudoleilao.com.br/item/1198/detalhes",
-    "price": "R$1.501,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "249",
-    "title": "REFRIGERADOR FF 340L CONSUL CRM39ABANA 110V BR",
-    "description": "LOTE. 249 LPN. C1249042 \n1 REF FF 340L CONSUL CRM39ABANA 110V BR\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1199",
-    "url": "https://tudoleilao.com.br/item/1199/detalhes",
-    "price": "R$1.101,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "250",
-    "title": "REFRIGERADOR FF 447L BRASTEMP BRE57FB INVERSE 110V BRANCO",
-    "description": "LOTE. 250 LPN. C1251960 \n1 REF FF 447L BRASTEMP BRE57FB INVERSE 110V BRANCO\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1200",
-    "url": "https://tudoleilao.com.br/item/1200/detalhes",
-    "price": "R$1.857,20",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "251",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 251 LPN. C1253086 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1201",
-    "url": "https://tudoleilao.com.br/item/1201/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "252",
-    "title": "REFRIGERADOR FF 371L ELECTROLUX DFN41 110V BC",
-    "description": "LOTE. 252 LPN. C1253094 \n1 REF FF 371L ELECTROLUX DFN41 110V BC.\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1202",
-    "url": "https://tudoleilao.com.br/item/1202/detalhes",
-    "price": "R$1.270,80",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "253",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 253 LPN. C1253101 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1203",
-    "url": "https://tudoleilao.com.br/item/1203/detalhes",
-    "price": "R$1.388,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "254",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 254 LPN. C1256154 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1204",
-    "url": "https://tudoleilao.com.br/item/1204/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "255",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 255 LPN. C1256156 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1205",
-    "url": "https://tudoleilao.com.br/item/1205/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "256",
-    "title": "REFRIGERADOR FF 340L CONSUL CRM39ABANA 110V BR",
-    "description": "LOTE. 256 LPN. C1256157 \n1 REF FF 340L CONSUL CRM39ABANA 110V BR\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1206",
-    "url": "https://tudoleilao.com.br/item/1206/detalhes",
-    "price": "R$1.444,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "257",
-    "title": "REFRIGERADOR FF 371L ELECTROLUX DFN41 110V BC",
-    "description": "LOTE. 257 LPN. C1257014 \n1 REF FF 371L ELECTROLUX DFN41 110V BC.\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1207",
-    "url": "https://tudoleilao.com.br/item/1207/detalhes",
-    "price": "R$1.570,80",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "258",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 258 LPN. C1257015 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1208",
-    "url": "https://tudoleilao.com.br/item/1208/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "259",
-    "title": "REFRIGERADOR FF 340L CONSUL CRM39ABANA 110V BR",
-    "description": "LOTE. 259 LPN. C1257018 \n1 REF FF 340L CONSUL CRM39ABANA 110V BR\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1209",
-    "url": "https://tudoleilao.com.br/item/1209/detalhes",
-    "price": "R$1.444,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "260",
-    "title": "REFRIGERADOR FF 447L BRASTEMP BRE57FB INVERSE 110V BRANCO",
-    "description": "LOTE. 260 LPN. C1257019 \n1 REF FF 447L BRASTEMP BRE57FB INVERSE 110V BRANCO\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1210",
-    "url": "https://tudoleilao.com.br/item/1210/detalhes",
-    "price": "R$1.857,20",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "261",
-    "title": "REFRIGERADOR FF 371L ELECTROLUX DFN41 110V BC",
-    "description": "LOTE. 261 LPN. C1258568 \n1 REF FF 371L ELECTROLUX DFN41 110V BC.\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1211",
-    "url": "https://tudoleilao.com.br/item/1211/detalhes",
-    "price": "R$1.170,80",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "262",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 262 LPN. C1258569 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1212",
-    "url": "https://tudoleilao.com.br/item/1212/detalhes",
-    "price": "R$1.488,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "263",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 263 LPN. C1258570 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1213",
-    "url": "https://tudoleilao.com.br/item/1213/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "264",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 264 LPN. C1260124 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1214",
-    "url": "https://tudoleilao.com.br/item/1214/detalhes",
-    "price": "R$1.488,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "265",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 265 LPN. C1261063 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1215",
-    "url": "https://tudoleilao.com.br/item/1215/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "266",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX IT70S INOX LOOK BIVOLT",
-    "description": "LOTE. 266 LPN. C1261064 \n1 REF FF 480L ELECTROLUX IT70S INOX LOOK BIVOLT\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1216",
-    "url": "https://tudoleilao.com.br/item/1216/detalhes",
-    "price": "R$1.734,80",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "267",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 267 LPN. C1261065 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1217",
-    "url": "https://tudoleilao.com.br/item/1217/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "268",
-    "title": "REFRIGERADOR FF 340L CONSUL CRM39ABANA 110V BR",
-    "description": "LOTE. 268 LPN. C1261066 \n1 REF FF 340L CONSUL CRM39ABANA 110V BR\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1218",
-    "url": "https://tudoleilao.com.br/item/1218/detalhes",
-    "price": "R$1.444,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "269",
-    "title": "REFRIGERADOR FF 447L BRASTEMP BRE57FB INVERSE 110V BRANCO",
-    "description": "LOTE. 269 LPN. C1261978 \n1 REF FF 447L BRASTEMP BRE57FB INVERSE 110V BRANCO\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1219",
-    "url": "https://tudoleilao.com.br/item/1219/detalhes",
-    "price": "R$1.657,20",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "270",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 270 LPN. C1261979 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1220",
-    "url": "https://tudoleilao.com.br/item/1220/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "271",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 271 LPN. C1261981 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1221",
-    "url": "https://tudoleilao.com.br/item/1221/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "272",
-    "title": "REFRIGERADOR FF 377L CONSUL CRM44MB 110V BC",
-    "description": "LOTE. 272 LPN. C1261983 \n1 REF FF 377L CONSUL CRM44MB 110V BC\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1222",
-    "url": "https://tudoleilao.com.br/item/1222/detalhes",
-    "price": "R$1.431,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "273",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 273 LPN. C1262892 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1223",
-    "url": "https://tudoleilao.com.br/item/1223/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "274",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 274 LPN. C1263808 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1224",
-    "url": "https://tudoleilao.com.br/item/1224/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "275",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 275 LPN. C1263810 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1225",
-    "url": "https://tudoleilao.com.br/item/1225/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "276",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX IT70S INOX LOOK BIVOLT",
-    "description": "LOTE. 276 LPN. C1263811 \n1 REF FF 480L ELECTROLUX IT70S INOX LOOK BIVOLT\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1226",
-    "url": "https://tudoleilao.com.br/item/1226/detalhes",
-    "price": "R$1.834,80",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "277",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 277 LPN. C1263812 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1227",
-    "url": "https://tudoleilao.com.br/item/1227/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "278",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 278 LPN. C1263813 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1228",
-    "url": "https://tudoleilao.com.br/item/1228/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "279",
-    "title": "REFRIGERADOR FF 340L CONSUL CRM39ABANA 110V BR",
-    "description": "LOTE. 279 LPN. C1263814 \n1 REF FF 340L CONSUL CRM39ABANA 110V BR\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1229",
-    "url": "https://tudoleilao.com.br/item/1229/detalhes",
-    "price": "R$1.644,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "280",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 280 LPN. C1263815 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1230",
-    "url": "https://tudoleilao.com.br/item/1230/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "281",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 281 LPN. C1265658 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1231",
-    "url": "https://tudoleilao.com.br/item/1231/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "282",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 282 LPN. C1265659 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1232",
-    "url": "https://tudoleilao.com.br/item/1232/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "283",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 283 LPN. C1265660 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1233",
-    "url": "https://tudoleilao.com.br/item/1233/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "284",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 284 LPN. C1267465 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1234",
-    "url": "https://tudoleilao.com.br/item/1234/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "285",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 285 LPN. C1267466 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1235",
-    "url": "https://tudoleilao.com.br/item/1235/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "286",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 286 LPN. C1267467 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1236",
-    "url": "https://tudoleilao.com.br/item/1236/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "287",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 287 LPN. C1267468 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1237",
-    "url": "https://tudoleilao.com.br/item/1237/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "288",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 288 LPN. C1267469 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1238",
-    "url": "https://tudoleilao.com.br/item/1238/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "289",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 289 LPN. C1267471 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1239",
-    "url": "https://tudoleilao.com.br/item/1239/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "290",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 290 LPN. C1267472 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1240",
-    "url": "https://tudoleilao.com.br/item/1240/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "291",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 291 LPN. C1267473 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1241",
-    "url": "https://tudoleilao.com.br/item/1241/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "292",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 292 LPN. C1267474 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1242",
-    "url": "https://tudoleilao.com.br/item/1242/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "293",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 293 LPN. C1268388 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1243",
-    "url": "https://tudoleilao.com.br/item/1243/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "294",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 294 LPN. C1268389 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1244",
-    "url": "https://tudoleilao.com.br/item/1244/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "295",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 295 LPN. C1268390 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1245",
-    "url": "https://tudoleilao.com.br/item/1245/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "296",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 296 LPN. C1268391 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1246",
-    "url": "https://tudoleilao.com.br/item/1246/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "297",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 297 LPN. C1270208 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1247",
-    "url": "https://tudoleilao.com.br/item/1247/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "298",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 298 LPN. C1270210 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1248",
-    "url": "https://tudoleilao.com.br/item/1248/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "299",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 299 LPN. C1270211 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1249",
-    "url": "https://tudoleilao.com.br/item/1249/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "300",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 300 LPN. C1270213 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1250",
-    "url": "https://tudoleilao.com.br/item/1250/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "301",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 301 LPN. C1270214 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1251",
-    "url": "https://tudoleilao.com.br/item/1251/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "302",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 302 LPN. C1270215 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1252",
-    "url": "https://tudoleilao.com.br/item/1252/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "303",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 303 LPN. C1271154 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1253",
-    "url": "https://tudoleilao.com.br/item/1253/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "304",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 304 LPN. C1271155 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1254",
-    "url": "https://tudoleilao.com.br/item/1254/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "305",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 305 LPN. C1271156 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1255",
-    "url": "https://tudoleilao.com.br/item/1255/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "306",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 306 LPN. C1271157 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1256",
-    "url": "https://tudoleilao.com.br/item/1256/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "307",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 307 LPN. C1271158 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1257",
-    "url": "https://tudoleilao.com.br/item/1257/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "308",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 308 LPN. C1273005 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1258",
-    "url": "https://tudoleilao.com.br/item/1258/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "309",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 309 LPN. C1273006 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1259",
-    "url": "https://tudoleilao.com.br/item/1259/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "310",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 310 LPN. C1273007 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1260",
-    "url": "https://tudoleilao.com.br/item/1260/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "311",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 311 LPN. C1273008 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1261",
-    "url": "https://tudoleilao.com.br/item/1261/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "312",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 312 LPN. C1273009 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1262",
-    "url": "https://tudoleilao.com.br/item/1262/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "313",
-    "title": "REFRIGERADOR FF 340L CONSUL CRM39ABANA 110V BR",
-    "description": "LOTE. 313 LPN. C1273010 \n1 REF FF 340L CONSUL CRM39ABANA 110V BR\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1263",
-    "url": "https://tudoleilao.com.br/item/1263/detalhes",
-    "price": "R$1.644,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "314",
-    "title": "REFRIGERADOR FF 447L BRASTEMP BRE57FB INVERSE 110V BRANCO",
-    "description": "LOTE. 314 LPN. C1273013 \n1 REF FF 447L BRASTEMP BRE57FB INVERSE 110V BRANCO\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1264",
-    "url": "https://tudoleilao.com.br/item/1264/detalhes",
-    "price": "R$1.657,20",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "315",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 315 LPN. C1273014 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1265",
-    "url": "https://tudoleilao.com.br/item/1265/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "316",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 316 LPN. C1273015 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1266",
-    "url": "https://tudoleilao.com.br/item/1266/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "317",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 317 LPN. C1274866 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1267",
-    "url": "https://tudoleilao.com.br/item/1267/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "318",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 318 LPN. C1274867 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1268",
-    "url": "https://tudoleilao.com.br/item/1268/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "319",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 319 LPN. C1274868 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1269",
-    "url": "https://tudoleilao.com.br/item/1269/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "320",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 320 LPN. C1274869 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1270",
-    "url": "https://tudoleilao.com.br/item/1270/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "321",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 321 LPN. C1274870 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1271",
-    "url": "https://tudoleilao.com.br/item/1271/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "322",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 322 LPN. C1274871 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1272",
-    "url": "https://tudoleilao.com.br/item/1272/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "323",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 323 LPN. C1275785 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1273",
-    "url": "https://tudoleilao.com.br/item/1273/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "324",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 324 LPN. C1276710 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1274",
-    "url": "https://tudoleilao.com.br/item/1274/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "325",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 325 LPN. C1276711 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1275",
-    "url": "https://tudoleilao.com.br/item/1275/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "326",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 326 LPN. C1276712 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1276",
-    "url": "https://tudoleilao.com.br/item/1276/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "327",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 327 LPN. C1277641 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1277",
-    "url": "https://tudoleilao.com.br/item/1277/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "328",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 328 LPN. C1277642 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1278",
-    "url": "https://tudoleilao.com.br/item/1278/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "329",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 329 LPN. C1278566 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1279",
-    "url": "https://tudoleilao.com.br/item/1279/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "330",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 330 LPN. C1278567 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1280",
-    "url": "https://tudoleilao.com.br/item/1280/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "331",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 331 LPN. C1279494 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1281",
-    "url": "https://tudoleilao.com.br/item/1281/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "332",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 332 LPN. C1279495 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1282",
-    "url": "https://tudoleilao.com.br/item/1282/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "333",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 333 LPN. C1280421 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1283",
-    "url": "https://tudoleilao.com.br/item/1283/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "334",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 334 LPN. C1281363 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1284",
-    "url": "https://tudoleilao.com.br/item/1284/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "335",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 335 LPN. C1282297 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1285",
-    "url": "https://tudoleilao.com.br/item/1285/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "336",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 336 LPN. C1283233 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1286",
-    "url": "https://tudoleilao.com.br/item/1286/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "337",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 337 LPN. C1284186 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1287",
-    "url": "https://tudoleilao.com.br/item/1287/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "338",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 338 LPN. C1285135 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1288",
-    "url": "https://tudoleilao.com.br/item/1288/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "339",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 339 LPN. C1286082 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1289",
-    "url": "https://tudoleilao.com.br/item/1289/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "340",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 340 LPN. C1287033 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1290",
-    "url": "https://tudoleilao.com.br/item/1290/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "341",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 341 LPN. C1287982 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1291",
-    "url": "https://tudoleilao.com.br/item/1291/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "342",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 342 LPN. C1289851 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1292",
-    "url": "https://tudoleilao.com.br/item/1292/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "343",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 343 LPN. C1290804 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1293",
-    "url": "https://tudoleilao.com.br/item/1293/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "344",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 344 LPN. C1291756 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1294",
-    "url": "https://tudoleilao.com.br/item/1294/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "345",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 345 LPN. C1292712 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1295",
-    "url": "https://tudoleilao.com.br/item/1295/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "346",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 346 LPN. C1293676 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1296",
-    "url": "https://tudoleilao.com.br/item/1296/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "347",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 347 LPN. C1294640 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1297",
-    "url": "https://tudoleilao.com.br/item/1297/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "348",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 348 LPN. C1295603 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1298",
-    "url": "https://tudoleilao.com.br/item/1298/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "349",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 349 LPN. C1296569 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1299",
-    "url": "https://tudoleilao.com.br/item/1299/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "350",
-    "title": "FREEZER VERTICAL CONSUL CVU20GB DUPLA ACAO 110V BC",
-    "description": "LOTE. 350 LPN. C1297533 \n1 FRZ VERT CONSUL CVU20GB DUPLA ACAO 110V BC\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1300",
-    "url": "https://tudoleilao.com.br/item/1300/detalhes",
-    "price": "R$901,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "351",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 351 LPN. C1298497 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1301",
-    "url": "https://tudoleilao.com.br/item/1301/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "352",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 352 LPN. C1299464 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1302",
-    "url": "https://tudoleilao.com.br/item/1302/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "353",
-    "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
-    "description": "LOTE. 353 LPN. C1300443 \n1 REF FF 480L ELECTROLUX TF71 BC 127V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1303",
-    "url": "https://tudoleilao.com.br/item/1303/detalhes",
-    "price": "R$1.688,00",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "354",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 354 LPN. C1239553 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1304",
-    "url": "https://tudoleilao.com.br/item/1304/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "355",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 355 LPN. C1239555 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1305",
-    "url": "https://tudoleilao.com.br/item/1305/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "356",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 356 LPN. C1239557 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1306",
-    "url": "https://tudoleilao.com.br/item/1306/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "357",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 357 LPN. C1239558 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1307",
-    "url": "https://tudoleilao.com.br/item/1307/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "358",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 358 LPN. C1239560 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1308",
-    "url": "https://tudoleilao.com.br/item/1308/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "359",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 359 LPN. C1239561 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1309",
-    "url": "https://tudoleilao.com.br/item/1309/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "360",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 360 LPN. C1239563 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1310",
-    "url": "https://tudoleilao.com.br/item/1310/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "361",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 361 LPN. C1239565 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1311",
-    "url": "https://tudoleilao.com.br/item/1311/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "362",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 362 LPN. C1239566 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1312",
-    "url": "https://tudoleilao.com.br/item/1312/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "363",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 363 LPN. C1239568 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1313",
-    "url": "https://tudoleilao.com.br/item/1313/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "364",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 364 LPN. C1239570 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1314",
-    "url": "https://tudoleilao.com.br/item/1314/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "365",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 365 LPN. C1239571 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1315",
-    "url": "https://tudoleilao.com.br/item/1315/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "366",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 366 LPN. C1239573 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1316",
-    "url": "https://tudoleilao.com.br/item/1316/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "367",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 367 LPN. C1239574 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1317",
-    "url": "https://tudoleilao.com.br/item/1317/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "368",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 368 LPN. C1239576 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1318",
-    "url": "https://tudoleilao.com.br/item/1318/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "369",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 369 LPN. C1239577 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1319",
-    "url": "https://tudoleilao.com.br/item/1319/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "370",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 370 LPN. C1239579 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1320",
-    "url": "https://tudoleilao.com.br/item/1320/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "371",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 371 LPN. C1239580 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1321",
-    "url": "https://tudoleilao.com.br/item/1321/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "372",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 372 LPN. C1239582 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1322",
-    "url": "https://tudoleilao.com.br/item/1322/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "373",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 373 LPN. C1239584 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1323",
-    "url": "https://tudoleilao.com.br/item/1323/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "374",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 374 LPN. C1239585 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1324",
-    "url": "https://tudoleilao.com.br/item/1324/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "375",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 375 LPN. C1239587 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1325",
-    "url": "https://tudoleilao.com.br/item/1325/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "376",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 376 LPN. C1239588 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1326",
-    "url": "https://tudoleilao.com.br/item/1326/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "377",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 377 LPN. C1239590 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1327",
-    "url": "https://tudoleilao.com.br/item/1327/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "378",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 378 LPN. C1239591 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1328",
-    "url": "https://tudoleilao.com.br/item/1328/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "379",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 379 LPN. C1239593 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1329",
-    "url": "https://tudoleilao.com.br/item/1329/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "380",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 380 LPN. C1239594 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1330",
-    "url": "https://tudoleilao.com.br/item/1330/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "381",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 381 LPN. C1239596 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1331",
-    "url": "https://tudoleilao.com.br/item/1331/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "382",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 382 LPN. C1239597 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1332",
-    "url": "https://tudoleilao.com.br/item/1332/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "383",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 383 LPN. C1239599 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1333",
-    "url": "https://tudoleilao.com.br/item/1333/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "384",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 384 LPN. C1239600 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1334",
-    "url": "https://tudoleilao.com.br/item/1334/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "385",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 385 LPN. C1239602 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1335",
-    "url": "https://tudoleilao.com.br/item/1335/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "386",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 386 LPN. C1239603 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1336",
-    "url": "https://tudoleilao.com.br/item/1336/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "387",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 387 LPN. C1239605 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1337",
-    "url": "https://tudoleilao.com.br/item/1337/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "388",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 388 LPN. C1239606 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1338",
-    "url": "https://tudoleilao.com.br/item/1338/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "389",
-    "title": "LAVADORA CONSUL CWB22ABBNA 220V BC 22KG",
-    "description": "LOTE. 389 LPN. C1239608 \n1 LAV CONSUL CWB22ABBNA 220V BC 22KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1339",
-    "url": "https://tudoleilao.com.br/item/1339/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "390",
-    "title": "LAVA/SECA CONSUL CWC22ABBNA 220V BC 22/14KG",
-    "description": "LOTE. 390 LPN. C1244107 \n1 LAV/SEC CONSUL CWC22ABBNA 220V BC 22/14KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1340",
-    "url": "https://tudoleilao.com.br/item/1340/detalhes",
-    "price": "R$1.601,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "391",
-    "title": "LAVA/SECA CONSUL CWC22ABBNA 220V BC 22/14KG",
-    "description": "LOTE. 391 LPN. C1244109 \n1 LAV/SEC CONSUL CWC22ABBNA 220V BC 22/14KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1341",
-    "url": "https://tudoleilao.com.br/item/1341/detalhes",
-    "price": "R$1.601,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "392",
-    "title": "LAVA/SECA CONSUL CWC22ABBNA 220V BC 22/14KG",
-    "description": "LOTE. 392 LPN. C1244111 \n1 LAV/SEC CONSUL CWC22ABBNA 220V BC 22/14KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1342",
-    "url": "https://tudoleilao.com.br/item/1342/detalhes",
-    "price": "R$1.601,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "393",
-    "title": "LAVA/SECA CONSUL CWC22ABBNA 220V BC 22/14KG",
-    "description": "LOTE. 393 LPN. C1244113 \n1 LAV/SEC CONSUL CWC22ABBNA 220V BC 22/14KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1343",
-    "url": "https://tudoleilao.com.br/item/1343/detalhes",
-    "price": "R$1.601,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "394",
-    "title": "LAVA/SECA CONSUL CWC22ABBNA 220V BC 22/14KG",
-    "description": "LOTE. 394 LPN. C1244115 \n1 LAV/SEC CONSUL CWC22ABBNA 220V BC 22/14KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1344",
-    "url": "https://tudoleilao.com.br/item/1344/detalhes",
-    "price": "R$1.601,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "395",
-    "title": "LAVA/SECA CONSUL CWC22ABBNA 220V BC 22/14KG",
-    "description": "LOTE. 395 LPN. C1244117 \n1 LAV/SEC CONSUL CWC22ABBNA 220V BC 22/14KG\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1345",
-    "url": "https://tudoleilao.com.br/item/1345/detalhes",
-    "price": "R$1.601,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "396",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 396 LPN. C1250049 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1346",
-    "url": "https://tudoleilao.com.br/item/1346/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "397",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 397 LPN. C1250053 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1347",
-    "url": "https://tudoleilao.com.br/item/1347/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "398",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 398 LPN. C1250057 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1348",
-    "url": "https://tudoleilao.com.br/item/1348/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "399",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 399 LPN. C1250060 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1349",
-    "url": "https://tudoleilao.com.br/item/1349/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "400",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 400 LPN. C1250064 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1350",
-    "url": "https://tudoleilao.com.br/item/1350/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "401",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 401 LPN. C1250067 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1351",
-    "url": "https://tudoleilao.com.br/item/1351/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "402",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 402 LPN. C1250071 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1352",
-    "url": "https://tudoleilao.com.br/item/1352/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "403",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 403 LPN. C1250074 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1353",
-    "url": "https://tudoleilao.com.br/item/1353/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "404",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 404 LPN. C1250078 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1354",
-    "url": "https://tudoleilao.com.br/item/1354/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "405",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 405 LPN. C1250082 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1355",
-    "url": "https://tudoleilao.com.br/item/1355/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "406",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 406 LPN. C1250085 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1356",
-    "url": "https://tudoleilao.com.br/item/1356/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "407",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 407 LPN. C1250089 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1357",
-    "url": "https://tudoleilao.com.br/item/1357/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "408",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 408 LPN. C1250092 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1358",
-    "url": "https://tudoleilao.com.br/item/1358/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "409",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 409 LPN. C1250096 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1359",
-    "url": "https://tudoleilao.com.br/item/1359/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "410",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 410 LPN. C1250099 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1360",
-    "url": "https://tudoleilao.com.br/item/1360/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "411",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 411 LPN. C1250103 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1361",
-    "url": "https://tudoleilao.com.br/item/1361/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "412",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 412 LPN. C1250106 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1362",
-    "url": "https://tudoleilao.com.br/item/1362/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "413",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 413 LPN. C1250110 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1363",
-    "url": "https://tudoleilao.com.br/item/1363/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "414",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 414 LPN. C1250113 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1364",
-    "url": "https://tudoleilao.com.br/item/1364/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "415",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 415 LPN. C1250117 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1365",
-    "url": "https://tudoleilao.com.br/item/1365/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "416",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 416 LPN. C1250120 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1366",
-    "url": "https://tudoleilao.com.br/item/1366/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "417",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 417 LPN. C1250124 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1367",
-    "url": "https://tudoleilao.com.br/item/1367/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "418",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 418 LPN. C1250127 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1368",
-    "url": "https://tudoleilao.com.br/item/1368/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "419",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 419 LPN. C1250131 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1369",
-    "url": "https://tudoleilao.com.br/item/1369/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "420",
-    "title": "FOGÃO 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX",
-    "description": "LOTE. 420 LPN. C1250134 \n1 FG 5B DE PISO CONSUL CFO5LCANA GLP 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1370",
-    "url": "https://tudoleilao.com.br/item/1370/detalhes",
-    "price": "R$1.201,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "421",
-    "title": "FOGÃO 5B PISO ATLAS DAKO MAGISTER GLASS BIV INOX",
-    "description": "LOTE. 421 LPN. C1302202 \n1 FG 5B PISO ATLAS DAKO MAGISTER GLASS BIV INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1371",
-    "url": "https://tudoleilao.com.br/item/1371/detalhes",
-    "price": "R$1.101,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "422",
-    "title": "FOGÃO 5B PISO ATLAS DAKO MAGISTER GLASS BIV INOX",
-    "description": "LOTE. 422 LPN. C1302203 \n1 FG 5B PISO ATLAS DAKO MAGISTER GLASS BIV INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1372",
-    "url": "https://tudoleilao.com.br/item/1372/detalhes",
-    "price": "R$1.101,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "423",
-    "title": "FOGÃO 5B PISO ATLAS DAKO MAGISTER GLASS BIV PTO",
-    "description": "LOTE. 423 LPN. C1302204 \n1 FG 5B PISO ATLAS DAKO MAGISTER GLASS BIV PTO\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1373",
-    "url": "https://tudoleilao.com.br/item/1373/detalhes",
-    "price": "R$1.001,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "424",
-    "title": "FOGÃO 5B PISO ATLAS DAKO MAGISTER GLASS BIV PTO",
-    "description": "LOTE. 424 LPN. C1302205 \n1 FG 5B PISO ATLAS DAKO MAGISTER GLASS BIV PTO\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1374",
-    "url": "https://tudoleilao.com.br/item/1374/detalhes",
-    "price": "R$1.001,60",
-    "status": "Vendido"
-  },
-  {
-    "loteNum": "425",
-    "title": "FOGÃO 5B PISO ATLAS DAKO MAGISTER GLASS BIV PTO",
-    "description": "LOTE. 425 LPN. C1302205 \n1 FG 5B PISO ATLAS DAKO MAGISTER GLASS BIV PTO\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA.\nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP",
-    "itemId": "1375",
-    "url": "https://tudoleilao.com.br/item/1375/detalhes",
-    "price": "R$1.001,60",
-    "status": "Vendido"
-  }
+    {
+      "loteNum": "240",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
+      "description": "LOTE. 240 LPN. C1237776 \n1 REF FF 480L ELECTROLUX TF71 BC 127V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1190",
+      "url": "https://tudoleilao.com.br/item/1190/detalhes",
+      "price": "R$1.488,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002496/img-2496-69ae20a8f2db5.jpg"
+    },
+  {
+      "loteNum": "241",
+      "title": "REFRIGERADOR FF 377L CONSUL CRM44MB 110V BC",
+      "description": "LOTE. 241 LPN. C1252604 \n1 REF FF 377L CONSUL CRM44MB 110V BC \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1191",
+      "url": "https://tudoleilao.com.br/item/1191/detalhes",
+      "price": "R$1.231,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002497/img-2497-69ae21a85411c.jpg"
+    },
+  {
+      "loteNum": "242",
+      "title": "REFRIGERADOR  FF 480L ELECTROLUX IT70S INOX LOOK BIVOLT",
+      "description": "LOTE. 242 LPN. C1252585 \n1 REF FF 480L ELECTROLUX IT70S INOX LOOK BIVOLT \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1192",
+      "url": "https://tudoleilao.com.br/item/1192/detalhes",
+      "price": "R$1.734,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002498/img-2498-69ae21fe5ec1d.jpg"
+    },
+  {
+      "loteNum": "243",
+      "title": "REFRIGERADOR FF 340L CONSUL CRM39ABANA 110V BR",
+      "description": "LOTE. 243 LPN. C1245976 \n1 REF FF 340L CONSUL CRM39ABANA 110V BR \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1193",
+      "url": "https://tudoleilao.com.br/item/1193/detalhes",
+      "price": "R$1.444,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002499/img-2499-69ae225f3ebd6.jpg"
+    },
+  {
+      "loteNum": "244",
+      "title": "REFRIGERADOR FF 371L ELECTROLUX DFN41 110V BC.",
+      "description": "LOTE. 244 LPN. C1252559 \n1 REF FF 371L ELECTROLUX DFN41 110V BC. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1194",
+      "url": "https://tudoleilao.com.br/item/1194/detalhes",
+      "price": "R$1.270,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002500/img-2500-69ae22fcb9384.jpg"
+    },
+  {
+      "loteNum": "245",
+      "title": "REFRIGERADOR FF 463L BRASTEMP BRM55FK 110V INOX",
+      "description": "LOTE. 245 LPN. C1246298 \n1 REF FF 463L BRASTEMP BRM55FK 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1195",
+      "url": "https://tudoleilao.com.br/item/1195/detalhes",
+      "price": "R$1.972,80",
+      "status": "Não Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002501/img-2501-69ae235d42eb0.jpg"
+    },
+  {
+      "loteNum": "246",
+      "title": "REFRIGERADOR FF 447L BRASTEMP BRE57FB INVERSE 110V BRANCO",
+      "description": "LOTE. 246 LPN. C1246286 \n1 REF FF 447L BRASTEMP BRE57FB INVERSE 110V BRANCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1196",
+      "url": "https://tudoleilao.com.br/item/1196/detalhes",
+      "price": "R$1.857,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002502/img-2502-69ae23ac504d6.jpg"
+    },
+  {
+      "loteNum": "247",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
+      "description": "LOTE. 247 LPN. C1247118 \n1 REF FF 480L ELECTROLUX TF71 BC 127V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1197",
+      "url": "https://tudoleilao.com.br/item/1197/detalhes",
+      "price": "R$1.388,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002503/img-2503-69ae2405324e8.jpg"
+    },
+  {
+      "loteNum": "248",
+      "title": "REFRIGERADOR FF 410L CONSUL CRM50LK INOX 220V.",
+      "description": "LOTE. 248 LPN. C1251967 \n1 REF FF 410L CONSUL CRM50LK INOX 220V. Itens provenientes de logística reversa. \nPRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1198",
+      "url": "https://tudoleilao.com.br/item/1198/detalhes",
+      "price": "R$1.367,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002504/img-2504-69adfacca06b3.jpg"
+    },
+  {
+      "loteNum": "249",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX TF71S INOX LOOK 220V",
+      "description": "LOTE. 249 LPN. C1251755 1 REF FF 480L ELECTROLUX TF71S INOX LOOK 220V Itens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1199",
+      "url": "https://tudoleilao.com.br/item/1199/detalhes",
+      "price": "R$1.792,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002505/img-2505-69ae2464a79cd.jpg"
+    },
+  {
+      "loteNum": "250",
+      "title": "REFRIGERADOR DUP 334L CONSUL CRD37 220V BC",
+      "description": "LOTE. 250 LPN. C1251949 1 REF DUP 334L CONSUL CRD37 220V BC Itens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1200",
+      "url": "https://tudoleilao.com.br/item/1200/detalhes",
+      "price": "R$977,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002506/img-2506-69ae24ab7c162.jpg"
+    },
+  {
+      "loteNum": "251",
+      "title": "REFRIGERADOR 240L ELECTROLUX RE31 220V BC.",
+      "description": "LOTE. 251 LPN. C1251712 1 REF 240L ELECTROLUX RE31 220V BC. Itens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1201",
+      "url": "https://tudoleilao.com.br/item/1201/detalhes",
+      "price": "R$832,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002507/img-2507-69adfb6d9bf46.jpg"
+    },
+  {
+      "loteNum": "252",
+      "title": "REFRIGERADOR FF 375L BRASTEMP BRM44HK 110V INOX",
+      "description": "LOTE. 252 LPN. C1251710 \n1 REF FF 375L BRASTEMP BRM44HK 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1202",
+      "url": "https://tudoleilao.com.br/item/1202/detalhes",
+      "price": "",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002508/img-2508-69ae251a00d47.jpg"
+    },
+  {
+      "loteNum": "253",
+      "title": "REFRIGERADOR FF 375L BRASTEMP BRM44HB 110V BC.",
+      "description": "LOTE. 253 LPN. C1252144 1 REF FF 375L BRASTEMP BRM44HB 110V BC. Itens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1203",
+      "url": "https://tudoleilao.com.br/item/1203/detalhes",
+      "price": "R$1.348,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002509/img-2509-69adfbc8b1e62.jpg"
+    },
+  {
+      "loteNum": "254",
+      "title": "REFRIGERADOR FF 371L ELECTROLUX DFN41 110V BC.",
+      "description": "LOTE. 254 LPN. C1252149 1 REF FF 371L ELECTROLUX DFN41 110V BC. Itens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1204",
+      "url": "https://tudoleilao.com.br/item/1204/detalhes",
+      "price": "R$1.170,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002510/img-2510-69ae256dbf79e.jpg"
+    },
+  {
+      "loteNum": "255",
+      "title": "REFRIGERADOR FDR 554L BRASTEMP BRO85AK 220V INX",
+      "description": "LOTE. 255 LPN. C1251747 \n1 REF FDR 554L BRASTEMP BRO85AK 220V INX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1205",
+      "url": "https://tudoleilao.com.br/item/1205/detalhes",
+      "price": "R$3.680,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002511/img-2511-69ae25cb235cd.jpg"
+    },
+  {
+      "loteNum": "256",
+      "title": "REFRIGERADOR FF 455L CONSUL CRM53MB BRANCA 110V.",
+      "description": "LOTE. 256 LPN. C1246403 \n1 REF FF 455L CONSUL CRM53MB BRANCA 110V. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1206",
+      "url": "https://tudoleilao.com.br/item/1206/detalhes",
+      "price": "R$1.392,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002512/img-2512-69ae260fa9b46.jpg"
+    },
+  {
+      "loteNum": "257",
+      "title": "REFRIGERADOR FF 463L BRASTEMP BRM55FK 220V INOX",
+      "description": "LOTE. 257 LPN. C1237768 \n1 REF FF 463L BRASTEMP BRM55FK 220V INOX Itens provenientes de logística reversa. \nPRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1207",
+      "url": "https://tudoleilao.com.br/item/1207/detalhes",
+      "price": "R$1.372,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002513/img-2513-69ae26f88abb9.jpg"
+    },
+  {
+      "loteNum": "258",
+      "title": "REFRIGERADOR DUPLEX 395L LG GN-B392PLMB 127V INOX LOOK",
+      "description": "LOTE. 258 LPN. C1252580 \n1 REF DUPLEX 395L LG GN-B392PLMB 127V INOX LOOK \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1208",
+      "url": "https://tudoleilao.com.br/item/1208/detalhes",
+      "price": "R$1.376,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002514/img-2514-69ae26c4bd67e.jpg"
+    },
+  {
+      "loteNum": "259",
+      "title": "REFRIGERADOR FF 455L CONSUL CRM53MB BRANCA 110V.",
+      "description": "LOTE. 259 LPN. C1252607 \n1 REF FF 455L CONSUL CRM53MB BRANCA 110V.\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1209",
+      "url": "https://tudoleilao.com.br/item/1209/detalhes",
+      "price": "R$1.492,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002515/img-2515-69ae2743bb011.jpg"
+    },
+  {
+      "loteNum": "260",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX IT70B BLACK INOX BIVOLT",
+      "description": "LOTE. 260 LPN. C1252588 \n1 REF FF 480L ELECTROLUX IT70B BLACK INOX BIVOLT\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1210",
+      "url": "https://tudoleilao.com.br/item/1210/detalhes",
+      "price": "R$1.934,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002516/img-2516-69ae2796ad763.jpg"
+    },
+  {
+      "loteNum": "261",
+      "title": "REFRIGERADOR FF INVERTER 397L HISENSE RB-52W1ANRI 127V INOX",
+      "description": "LOTE. 261 LPN. C1252570 \n1 REF FF INVERTER 397L HISENSE RB-52W1ANRI 127V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1211",
+      "url": "https://tudoleilao.com.br/item/1211/detalhes",
+      "price": "R$2.400,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002517/img-2517-69ae28033b869.jpg"
+    },
+  {
+      "loteNum": "262",
+      "title": "REFRIGERADOR FF 375L BRASTEMP BRM44HK 110V INOX",
+      "description": "LOTE. 262 LPN. C1251710 \n1 REF FF 375L BRASTEMP BRM44HK 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1212",
+      "url": "https://tudoleilao.com.br/item/1212/detalhes",
+      "price": "R$1.344,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002518/img-2518-69ae286c98dd2.jpg"
+    },
+  {
+      "loteNum": "263",
+      "title": "REFRIGERADOR FF 333L CONSUL CRM40MB 220V BCO",
+      "description": "LOTE. 263 LPN. C1250775 \n1 REF FF 333L CONSUL CRM40MB 220V BCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1213",
+      "url": "https://tudoleilao.com.br/item/1213/detalhes",
+      "price": "R$1.095,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002519/img-2519-69ae28fb3b1d4.jpg"
+    },
+  {
+      "loteNum": "264",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX TF71B BLACK INOX 220V",
+      "description": "LOTE. 264 LPN. C1251965 \n1 REF FF 480L ELECTROLUX TF71B BLACK INOX 220V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1214",
+      "url": "https://tudoleilao.com.br/item/1214/detalhes",
+      "price": "R$1.500,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002520/img-2520-69ae296800c2c.jpg"
+    },
+  {
+      "loteNum": "265",
+      "title": "REFRIGERADOR FF 447L BRASTEMP BRE57FK INVERSE 220V INOX",
+      "description": "LOTE. 265 LPN. C1252572 \n1 REF FF 447L BRASTEMP BRE57FK INVERSE 220V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1453",
+      "url": "https://tudoleilao.com.br/item/1453/detalhes",
+      "price": "R$2.177,32",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002839/img-2839-69b347ec91674.jpg"
+    },
+  {
+      "loteNum": "266",
+      "title": "REFRIGERADOR FF 463L BRASTEMP BRM55FB 110V BRANCO",
+      "description": "LOTE. 266 LPN. C1252572 \n1 REF FF 463L BRASTEMP BRM55FB 110V BRANCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1215",
+      "url": "https://tudoleilao.com.br/item/1215/detalhes",
+      "price": "R$1.453,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002521/img-2521-69ae29b9cc8aa.jpg"
+    },
+  {
+      "loteNum": "267",
+      "title": "REFRIGERADOR FF 371L ELECTROLUX DFN41 110V BC.",
+      "description": "LOTE. 267 LPN. C1237758 \n1 REF FF 371L ELECTROLUX DFN41 110V BC. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1216",
+      "url": "https://tudoleilao.com.br/item/1216/detalhes",
+      "price": "R$1.370,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002522/img-2522-69ae2a188cab5.jpg"
+    },
+  {
+      "loteNum": "268",
+      "title": "REFRIGERADOR SBS 560L SAMSUNG RS57DG4100M9AZ INOX 127V",
+      "description": "LOTE. 268 LPN. C1237777 \n1 REF SBS 560L SAMSUNG RS57DG4100M9AZ INOX 127V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1217",
+      "url": "https://tudoleilao.com.br/item/1217/detalhes",
+      "price": "R$3.215,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002523/img-2523-69ae2a75ac132.jpg"
+    },
+  {
+      "loteNum": "269",
+      "title": "REFRIGERADOR FF 490L ELECTROLUX INVERSE IB7S 110V INOX",
+      "description": "LOTE. 269 LPN. C1267831 \n1 REF FF 490L ELECTROLUX INVERSE IB7S 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1218",
+      "url": "https://tudoleilao.com.br/item/1218/detalhes",
+      "price": "R$2.082,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002524/img-2524-69ae2ac536471.jpg"
+    },
+  {
+      "loteNum": "270",
+      "title": "REFRIGERADOR FF 447L BRASTEMP BRE57FK INVERSE 110V INOX",
+      "description": "LOTE. 270 LPN. C1267842 \n1 REF FF 447L BRASTEMP BRE57FK INVERSE 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1219",
+      "url": "https://tudoleilao.com.br/item/1219/detalhes",
+      "price": "R$2.222,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002525/img-2525-69ae2b21c5685.jpg"
+    },
+  {
+      "loteNum": "271",
+      "title": "REFRIGERADOR FF 455L CONSUL CRM53MB BRANCA 110V.",
+      "description": "LOTE. 271 LPN. C1267837 \n1 REF FF 455L CONSUL CRM53MB BRANCA 110V.\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1220",
+      "url": "https://tudoleilao.com.br/item/1220/detalhes",
+      "price": "R$1.192,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002526/img-2526-69ae2b778a2b6.jpg"
+    },
+  {
+      "loteNum": "272",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX IT70B BLACK INOX BIVOLT",
+      "description": "LOTE. 272 LPN. C1242962 \n1 REF FF 480L ELECTROLUX IT70B BLACK INOX BIVOLT \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1221",
+      "url": "https://tudoleilao.com.br/item/1221/detalhes",
+      "price": "R$1.734,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002527/img-2527-69ae2bc37e525.jpg"
+    },
+  {
+      "loteNum": "273",
+      "title": "REFRIGERADOR FF 377L CONSUL CRM44MB 220V BC",
+      "description": "LOTE. 273 LPN. C1241459 \n1 REF FF 377L CONSUL CRM44MB 220V BC\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1222",
+      "url": "https://tudoleilao.com.br/item/1222/detalhes",
+      "price": "R$1.431,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002528/img-2528-69ae2c2ccec55.jpg"
+    },
+  {
+      "loteNum": "274",
+      "title": "REFRIGERADOR FF 377L CONSUL CRM44MK 110V INX",
+      "description": "LOTE. 274 LPN. C1251759 \n1 REF FF 377L CONSUL CRM44MK 110V INX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1223",
+      "url": "https://tudoleilao.com.br/item/1223/detalhes",
+      "price": "R$1.536,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002529/img-2529-69ae2c70ac249.jpg"
+    },
+  {
+      "loteNum": "275",
+      "title": "REFRIGERADOR FF 490L ELECTROLUX INVERSE IB7S 110V INOX",
+      "description": "LOTE. 275 LPN. C1241486 \n1 REF FF 490L ELECTROLUX INVERSE IB7S 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1224",
+      "url": "https://tudoleilao.com.br/item/1224/detalhes",
+      "price": "R$1.882,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002530/img-2530-69ae2cb2a33e2.jpg"
+    },
+  {
+      "loteNum": "276",
+      "title": "REFRIGERADOR FF 411L SAMSUNG RT42DG6630S9FZ BIV INOX LOOK",
+      "description": "LOTE. 276 LPN. C1241959 \n1 REF FF 411L SAMSUNG RT42DG6630S9FZ BIV INOX LOOK \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1225",
+      "url": "https://tudoleilao.com.br/item/1225/detalhes",
+      "price": "R$1.442,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002531/img-2531-69aeae951c6c3.jpg"
+    },
+  {
+      "loteNum": "277",
+      "title": "REFRIGERADOR 590L ELECTROLUX IM8S 127V INOX.",
+      "description": "LOTE. 277 LPN. C1252566 \n1 REF 590L ELECTROLUX IM8S 127V INOX. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1226",
+      "url": "https://tudoleilao.com.br/item/1226/detalhes",
+      "price": "R$3.368,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002532/img-2532-69aeaedadb0d0.jpg"
+    },
+  {
+      "loteNum": "278",
+      "title": "REFRIGERADOR FF 463L BRASTEMP BRM55FB 110V BRANCO",
+      "description": "LOTE. 278 LPN. C1241678 \n1 REF FF 463L BRASTEMP BRM55FB 110V BRANCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1227",
+      "url": "https://tudoleilao.com.br/item/1227/detalhes",
+      "price": "R$1.453,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002533/img-2533-69aeaf5cdf0b6.jpg"
+    },
+  {
+      "loteNum": "279",
+      "title": "REFRIGERADOR 410L ELECTROLUX INVERTER IF46S 110V INOX",
+      "description": "LOTE. 279 LPN. C1252596 \n1 REF 410L ELECTROLUX INVERTER IF46S 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1228",
+      "url": "https://tudoleilao.com.br/item/1228/detalhes",
+      "price": "R$1.670,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002534/img-2534-69aeb0b500b3c.jpg"
+    },
+  {
+      "loteNum": "280",
+      "title": "REFRIGERADOR FF 377L CONSUL CRM44MB 110V BC",
+      "description": "LOTE. 280 LPN. C1252605 \n1 REF FF 377L CONSUL CRM44MB 110V BC \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1229",
+      "url": "https://tudoleilao.com.br/item/1229/detalhes",
+      "price": "R$1.431,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002535/img-2535-69aeb0ce926a7.jpg"
+    },
+  {
+      "loteNum": "281",
+      "title": "REFRIGERADOR FF 455L CONSUL CRM53MK INOX 110V.",
+      "description": "LOTE. 281 LPN. C1252608 \n1 REF FF 455L CONSUL CRM53MK INOX 110V. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1230",
+      "url": "https://tudoleilao.com.br/item/1230/detalhes",
+      "price": "R$1.320,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002536/img-2536-69ae214024959.jpg"
+    },
+  {
+      "loteNum": "282",
+      "title": "REFRIGERADOR SBS HISENSE RS3P428NEDA1 428L CINZA 127V",
+      "description": "LOTE. 282 LPN. C1252620 \n1 REF SBS HISENSE RS3P428NEDA1 428L CINZA 127V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1231",
+      "url": "https://tudoleilao.com.br/item/1231/detalhes",
+      "price": "R$1.832,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002537/img-2537-69aeb17f3b3fa.jpg"
+    },
+  {
+      "loteNum": "283",
+      "title": "REFRIGERADOR FF 375L BRASTEMP BRM44HB 110V BC.",
+      "description": "LOTE. 283 LPN. C1268699 \n1 REF FF 375L BRASTEMP BRM44HB 110V BC. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1232",
+      "url": "https://tudoleilao.com.br/item/1232/detalhes",
+      "price": "R$1.648,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002538/img-2538-69af685770e2a.jpg"
+    },
+  {
+      "loteNum": "284",
+      "title": "REFRIGERADOR FF 375L BRASTEMP BRM44HK 110V INOX",
+      "description": "LOTE. 284 LPN. C1267998 \n1 REF FF 375L BRASTEMP BRM44HK 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1233",
+      "url": "https://tudoleilao.com.br/item/1233/detalhes",
+      "price": "R$1.444,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002539/img-2539-69af69eb67090.jpg"
+    },
+  {
+      "loteNum": "285",
+      "title": "REFRIGERADOR T FREEZER 379L HISENSE RT3N375NAC31 INOX 110V",
+      "description": "LOTE. 285 LPN. C1268560 \n1 REF T FREEZER 379L HISENSE RT3N375NAC31 INOX 110V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1234",
+      "url": "https://tudoleilao.com.br/item/1234/detalhes",
+      "price": "R$1.279,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002540/img-2540-69af6b47c537c.jpg"
+    },
+  {
+      "loteNum": "286",
+      "title": "REFRIGERADOR 410L ELECTROLUX INVERTER IF46S 110V INOX",
+      "description": "LOTE. 286 LPN. C1269702 \n1 REF 410L ELECTROLUX INVERTER IF46S 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1235",
+      "url": "https://tudoleilao.com.br/item/1235/detalhes",
+      "price": "R$1.570,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002541/img-2541-69af6ba6b02a2.jpg"
+    },
+  {
+      "loteNum": "287",
+      "title": "REFRIGERADOR FF 377L CONSUL CRM44MB 110V BC",
+      "description": "LOTE. 287 LPN. C1270125 \n1 REF FF 377L CONSUL CRM44MB 110V BC \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1236",
+      "url": "https://tudoleilao.com.br/item/1236/detalhes",
+      "price": "R$1.231,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002542/img-2542-69af6c7c65881.jpg"
+    },
+  {
+      "loteNum": "288",
+      "title": "REFRIGERADOR FF 377L CONSUL CRM44MK 220V INX",
+      "description": "LOTE. 288 LPN. C1264513 \n1 REF FF 377L CONSUL CRM44MK 220V INX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1237",
+      "url": "https://tudoleilao.com.br/item/1237/detalhes",
+      "price": "R$1.536,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002543/img-2543-69af6eee85ba2.jpg"
+    },
+  {
+      "loteNum": "289",
+      "title": "REFRIGERADOR FF 375L BRASTEMP BRM44HK 110V INOX",
+      "description": "LOTE. 289 LPN. C1269790 \n1 REF FF 375L BRASTEMP BRM44HK 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1238",
+      "url": "https://tudoleilao.com.br/item/1238/detalhes",
+      "price": "R$1.500,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002544/img-2544-69af6f649a6c8.jpg"
+    },
+  {
+      "loteNum": "290",
+      "title": "REFRIGERADOR 590L ELECTROLUX IM8S 220V INOX",
+      "description": "LOTE. 290 LPN. C1266086 \n1 REF 590L ELECTROLUX IM8S 220V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1239",
+      "url": "https://tudoleilao.com.br/item/1239/detalhes",
+      "price": "R$3.200,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002545/img-2545-69af6fe15824e.jpg"
+    },
+  {
+      "loteNum": "291",
+      "title": "REFRIGERADOR FF 463L BRASTEMP BRM55FK 110V INOX",
+      "description": "LOTE. 291 LPN. C1268448 \n1 REF FF 463L BRASTEMP BRM55FK 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1240",
+      "url": "https://tudoleilao.com.br/item/1240/detalhes",
+      "price": "R$1.472,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002546/img-2546-69ae1c236925f.jpg"
+    },
+  {
+      "loteNum": "292",
+      "title": "REFRIGERADOR FF 463L BRASTEMP BRM55FB 110V BRANCO",
+      "description": "LOTE. 292 LPN. C1265725 \n1 REF FF 463L BRASTEMP BRM55FB 110V BRANCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1241",
+      "url": "https://tudoleilao.com.br/item/1241/detalhes",
+      "price": "R$1.553,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002547/img-2547-69ae1ca4a0c92.jpg"
+    },
+  {
+      "loteNum": "293",
+      "title": "REFRIGERADOR FF 375L BRASTEMP BRM44HK 110V INOX",
+      "description": "LOTE. 293 LPN. C1264143 \n1 REF FF 375L BRASTEMP BRM44HK 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1242",
+      "url": "https://tudoleilao.com.br/item/1242/detalhes",
+      "price": "R$1.544,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002548/img-2548-69ae1d2f91423.jpg"
+    },
+  {
+      "loteNum": "294",
+      "title": "REFRIGERADOR FF 455L CONSUL CRM53MB BRANCA 110V.",
+      "description": "LOTE. 294 LPN. C1267829 \n1 REF FF 455L CONSUL CRM53MB BRANCA 110V. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1243",
+      "url": "https://tudoleilao.com.br/item/1243/detalhes",
+      "price": "R$1.492,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002549/img-2549-69ae1d8dd2236.jpg"
+    },
+  {
+      "loteNum": "295",
+      "title": "REFRIGERADOR 590L ELECTROLUX IM8S 127V INOX.",
+      "description": "LOTE. 295 LPN. C1266095 \n1 REF 590L ELECTROLUX IM8S 127V INOX. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1244",
+      "url": "https://tudoleilao.com.br/item/1244/detalhes",
+      "price": "R$3.468,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002550/img-2550-69ae1e6c4bee1.jpg"
+    },
+  {
+      "loteNum": "296",
+      "title": "REFRIGERADOR 590L ELECTROLUX IM8S 127V INOX.",
+      "description": "LOTE. 296 LPN. C1266104 \n1 REF 590L ELECTROLUX IM8S 127V INOX.\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1245",
+      "url": "https://tudoleilao.com.br/item/1245/detalhes",
+      "price": "R$3.400,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002551/img-2551-69ae1ee02bb8a.jpg"
+    },
+  {
+      "loteNum": "297",
+      "title": "REFRIGERADOR FF 463L BRASTEMP BRM55FK 110V INOX",
+      "description": "LOTE. 297 LPN. C1269797 \n1 REF FF 463L BRASTEMP BRM55FK 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1246",
+      "url": "https://tudoleilao.com.br/item/1246/detalhes",
+      "price": "R$1.500,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002552/img-2552-69ae1f3b77663.jpg"
+    },
+  {
+      "loteNum": "298",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX IT70B BLACK INOX BIVOLT",
+      "description": "LOTE. 298 LPN. C1267847 \n1 REF FF 480L ELECTROLUX IT70B BLACK INOX BIVOLT \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1247",
+      "url": "https://tudoleilao.com.br/item/1247/detalhes",
+      "price": "R$1.934,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002553/img-2553-69ae1f9ad88cf.jpg"
+    },
+  {
+      "loteNum": "299",
+      "title": "REFRIGERADOR FF 411L SAMSUNG RT42DG6630B1FZ BIV BLACK INOX",
+      "description": "LOTE. 299 LPN. C1252584 \n1 REF FF 411L SAMSUNG RT42DG6630B1FZ BIV BLACK INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1248",
+      "url": "https://tudoleilao.com.br/item/1248/detalhes",
+      "price": "R$1.342,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002554/img-2554-69ae1ff2b5ed6.jpg"
+    },
+  {
+      "loteNum": "300",
+      "title": "REFRIGERADOR FF 371L ELECTROLUX DFN41 220V BC",
+      "description": "LOTE. 300 LPN. C1268509 \n1 REF FF 371L ELECTROLUX DFN41 220V BC \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1249",
+      "url": "https://tudoleilao.com.br/item/1249/detalhes",
+      "price": "R$1.370,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002555/img-2555-69ae204fc4f77.jpg"
+    },
+  {
+      "loteNum": "301",
+      "title": "REFRIGERADOR FF 375L BRASTEMP BRM44HB 110V BC.",
+      "description": "LOTE. 301 LPN. C1251953 \n1 REF FF 375L BRASTEMP BRM44HB 110V BC. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1250",
+      "url": "https://tudoleilao.com.br/item/1250/detalhes",
+      "price": "R$1.048,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002556/img-2556-69af55517bf3e.jpg"
+    },
+  {
+      "loteNum": "302",
+      "title": "FREEZER 197L ELECTROLUX VERTICAL FEI23 127V BCO",
+      "description": "LOTE. 302 LPN. C1266279 \n1 FREEZER 197L ELECTROLUX VERTICAL FEI23 127V BCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1251",
+      "url": "https://tudoleilao.com.br/item/1251/detalhes",
+      "price": "R$1.261,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002557/img-2557-69af560f28ee7.jpg"
+    },
+  {
+      "loteNum": "303",
+      "title": "REFRIGERADOR FF 386L CONSUL CRM44AB 110V BC",
+      "description": "LOTE. 303 LPN. C1263682 \n1 REF FF 386L CONSUL CRM44AB 110V BC \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1252",
+      "url": "https://tudoleilao.com.br/item/1252/detalhes",
+      "price": "R$1.131,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002558/img-2558-69af567d4f53d.jpg"
+    },
+  {
+      "loteNum": "304",
+      "title": "REFRIGERADOR FF 340L CONSUL CRM39AKBNA 220V EVOX",
+      "description": "LOTE. 304 LPN. C1264454 \n1 REF FF 340L CONSUL CRM39AKBNA 220V EVOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1253",
+      "url": "https://tudoleilao.com.br/item/1253/detalhes",
+      "price": "R$974,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002559/img-2559-69af56f3af4d3.jpg"
+    },
+  {
+      "loteNum": "305",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX TF71B BLACK INOX 220V",
+      "description": "LOTE. 305 LPN. C1266369 \n1 REF FF 480L ELECTROLUX TF71B BLACK INOX 220V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1254",
+      "url": "https://tudoleilao.com.br/item/1254/detalhes",
+      "price": "R$1.692,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002560/img-2560-69af5762bcb59.jpg"
+    },
+  {
+      "loteNum": "306",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
+      "description": "LOTE. 306 LPN. C1264705 \n1 REF FF 480L ELECTROLUX TF71 BC 127V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1255",
+      "url": "https://tudoleilao.com.br/item/1255/detalhes",
+      "price": "R$1.288,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002561/img-2561-69af57f642b55.jpg"
+    },
+  {
+      "loteNum": "307",
+      "title": "REFRIGERADOR FF 377L CONSUL CRM44MB 110V BC",
+      "description": "LOTE. 307 LPN. C1268449 \n1 REF FF 377L CONSUL CRM44MB 110V BC \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1256",
+      "url": "https://tudoleilao.com.br/item/1256/detalhes",
+      "price": "R$1.431,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002562/img-2562-69af58f30ea5b.jpg"
+    },
+  {
+      "loteNum": "308",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX TF71B BLACK INOX 127V",
+      "description": "LOTE. 308 LPN. C1268487 \n1 REF FF 480L ELECTROLUX TF71B BLACK INOX 127V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1257",
+      "url": "https://tudoleilao.com.br/item/1257/detalhes",
+      "price": "R$1.492,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002563/img-2563-69af5a404c44c.jpg"
+    },
+  {
+      "loteNum": "309",
+      "title": "REFRIGERADOR 410L ELECTROLUX INVERTER IF46S 110V INOX",
+      "description": "LOTE. 309 LPN. C1269795 \n1 REF 410L ELECTROLUX INVERTER IF46S 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1258",
+      "url": "https://tudoleilao.com.br/item/1258/detalhes",
+      "price": "R$1.470,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002564/img-2564-69af5aae3e2fd.jpg"
+    },
+  {
+      "loteNum": "310",
+      "title": "REFRIGERADOR FF 375L BRASTEMP BRM44HK 220V INOX",
+      "description": "LOTE. 310 LPN. C1268558 \n1 REF FF 375L BRASTEMP BRM44HK 220V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1259",
+      "url": "https://tudoleilao.com.br/item/1259/detalhes",
+      "price": "R$1.344,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002565/img-2565-69af5b15a2469.jpg"
+    },
+  {
+      "loteNum": "311",
+      "title": "REFRIGERADOR 590L ELECTROLUX IM8S 220V INOX",
+      "description": "LOTE. 311 LPN. C1264465 \n1 REF 590L ELECTROLUX IM8S 220V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1260",
+      "url": "https://tudoleilao.com.br/item/1260/detalhes",
+      "price": "R$3.768,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002566/img-2566-69af5b7a9770f.jpg"
+    },
+  {
+      "loteNum": "312",
+      "title": "REFRIGERADOR FF INVERTER 397L HISENSE RB-52W2ANRI 220V INOX",
+      "description": "LOTE. 312 LPN. C1248659 \n1 REF FF INVERTER 397L HISENSE RB-52W2ANRI 220V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1261",
+      "url": "https://tudoleilao.com.br/item/1261/detalhes",
+      "price": "R$1.230,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002567/img-2567-69af5c4a46e50.jpg"
+    },
+  {
+      "loteNum": "313",
+      "title": "REFRIGERADOR 240L ELECTROLUX RE31 220V BC.",
+      "description": "LOTE. 313 LPN. C1264515 \n1 REF 240L ELECTROLUX RE31 220V BC. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1262",
+      "url": "https://tudoleilao.com.br/item/1262/detalhes",
+      "price": "R$1.032,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002568/img-2568-69af5ca45e72e.jpg"
+    },
+  {
+      "loteNum": "314",
+      "title": "REFRIGERADOR FF 435L ELECTROLUX IS4S INOX 220V",
+      "description": "LOTE. 314 LPN. C1264447 \n1 REF FF 435L ELECTROLUX IS4S INOX 220V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1263",
+      "url": "https://tudoleilao.com.br/item/1263/detalhes",
+      "price": "R$2.521,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002569/img-2569-69af5d27c2fde.jpg"
+    },
+  {
+      "loteNum": "315",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX TF71B BLACK INOX 127V",
+      "description": "LOTE. 315 LPN. C1263771 \n1 REF FF 480L ELECTROLUX TF71B BLACK INOX 127V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1264",
+      "url": "https://tudoleilao.com.br/item/1264/detalhes",
+      "price": "R$1.400,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002570/img-2570-69af5d8d547f5.jpg"
+    },
+  {
+      "loteNum": "316",
+      "title": "REFRIGERADOR 410L ELECTROLUX INVERTER IF46S 220V INOX",
+      "description": "LOTE. 316 LPN. J2769470 \n1 REF 410L ELECTROLUX INVERTER IF46S 220V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1265",
+      "url": "https://tudoleilao.com.br/item/1265/detalhes",
+      "price": "R$1.370,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002571/img-2571-69af5e403cc54.jpg"
+    },
+  {
+      "loteNum": "317",
+      "title": "REFRIGERADOR FF 463L BRASTEMP BRM55FE 220V BLACK INOX",
+      "description": "LOTE. 317 LPN. C1264671 \n1 REF FF 463L BRASTEMP BRM55FE 220V BLACK INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1266",
+      "url": "https://tudoleilao.com.br/item/1266/detalhes",
+      "price": "R$1.386,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002572/img-2572-69af5f23e7b5d.jpg"
+    },
+  {
+      "loteNum": "318",
+      "title": "REFRIGERADOR FF 455L CONSUL CRM53MB BRANCA 110V.",
+      "description": "LOTE. 318 LPN. C1263683 \n1 REF FF 455L CONSUL CRM53MB BRANCA 110V. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1267",
+      "url": "https://tudoleilao.com.br/item/1267/detalhes",
+      "price": "R$1.292,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002573/img-2573-69af60f1e0366.jpg"
+    },
+  {
+      "loteNum": "319",
+      "title": "REFRIGERADOR FF 386L CONSUL CRM44AK 110V INX",
+      "description": "LOTE. 319 LPN. J2830696 \n1 REF FF 386L CONSUL CRM44AK 110V INX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1268",
+      "url": "https://tudoleilao.com.br/item/1268/detalhes",
+      "price": "R$1.436,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002574/img-2574-69af5b7ae8f0c.jpg"
+    },
+  {
+      "loteNum": "320",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX TF71S INOX LOOK 127V",
+      "description": "LOTE. 320 LPN. J2796164 \n1 REF FF 480L ELECTROLUX TF71S INOX LOOK 127V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1269",
+      "url": "https://tudoleilao.com.br/item/1269/detalhes",
+      "price": "R$1.792,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002575/img-2575-69af5c211daae.jpg"
+    },
+  {
+      "loteNum": "321",
+      "title": "REFRIGERADOR FF 463L BRASTEMP BRM55FK 110V INOX",
+      "description": "LOTE. 321 LPN. C1270078 \n1 REF FF 463L BRASTEMP BRM55FK 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1270",
+      "url": "https://tudoleilao.com.br/item/1270/detalhes",
+      "price": "R$1.472,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002576/img-2576-69af5ce79f7a5.jpg"
+    },
+  {
+      "loteNum": "322",
+      "title": "REFRIGERADOR FF 455L CONSUL CRM53MB BRANCA 110V.",
+      "description": "LOTE. 322 LPN. C1267839 \n1 REF FF 455L CONSUL CRM53MB BRANCA 110V.\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1271",
+      "url": "https://tudoleilao.com.br/item/1271/detalhes",
+      "price": "R$1.492,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002577/img-2577-69af5d88a2fe8.jpg"
+    },
+  {
+      "loteNum": "323",
+      "title": "REFRIGERADOR FF 490L ELECTROLUX INVERSE IB7S 110V INOX",
+      "description": "LOTE. 323 LPN. J2865455 \n1 REF FF 490L ELECTROLUX INVERSE IB7S 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1272",
+      "url": "https://tudoleilao.com.br/item/1272/detalhes",
+      "price": "R$1.982,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002578/img-2578-69af5f0d32af1.jpg"
+    },
+  {
+      "loteNum": "324",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX IT70S INOX LOOK BIVOLT",
+      "description": "LOTE. 324 LPN. C1265743 \n1 REF FF 480L ELECTROLUX IT70S INOX LOOK BIVOLT \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1273",
+      "url": "https://tudoleilao.com.br/item/1273/detalhes",
+      "price": "R$1.734,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002579/img-2579-69af639d756d6.jpg"
+    },
+  {
+      "loteNum": "325",
+      "title": "REFRIGERADOR FF 463L BRASTEMP BRM55FE 110V BLACK INOX",
+      "description": "LOTE. 325 LPN. C1265637 \n1 REF FF 463L BRASTEMP BRM55FE 110V BLACK INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1274",
+      "url": "https://tudoleilao.com.br/item/1274/detalhes",
+      "price": "R$1.486,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002580/img-2580-69af64102941a.jpg"
+    },
+  {
+      "loteNum": "326",
+      "title": "REFRIGERADOR FF 377L CONSUL CRM44MB 220V BC",
+      "description": "LOTE. 326 LPN. C1254618 \n1 REF FF 377L CONSUL CRM44MB 220V BC \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1275",
+      "url": "https://tudoleilao.com.br/item/1275/detalhes",
+      "price": "R$1.131,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002581/img-2581-69af64f8e7c9f.jpg"
+    },
+  {
+      "loteNum": "327",
+      "title": "REFRIGERADOR FF 411L SAMSUNG RT42DG6630B1FZ BIV BLACK INOX",
+      "description": "LOTE. 327 LPN. C1265635 \n1 REF FF 411L SAMSUNG RT42DG6630B1FZ BIV BLACK INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1276",
+      "url": "https://tudoleilao.com.br/item/1276/detalhes",
+      "price": "R$1.342,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002582/img-2582-69af65ae67aa0.jpg"
+    },
+  {
+      "loteNum": "328",
+      "title": "REFRIGERADOR FF 455L CONSUL CRM53MB BRANCA 110V.",
+      "description": "LOTE. 328 LPN. C1268507 \n1 REF FF 455L CONSUL CRM53MB BRANCA 110V.\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1277",
+      "url": "https://tudoleilao.com.br/item/1277/detalhes",
+      "price": "R$1.192,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002583/img-2583-69af6645b7509.jpg"
+    },
+  {
+      "loteNum": "329",
+      "title": "REFRIGERADOR FF 455L CONSUL CRM53MB BRANCA 220V.",
+      "description": "LOTE. 329 LPN. C1251971 \n1 REF FF 455L CONSUL CRM53MB BRANCA 220V. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1278",
+      "url": "https://tudoleilao.com.br/item/1278/detalhes",
+      "price": "R$1.192,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002584/img-2584-69af66f5eeb6b.jpg"
+    },
+  {
+      "loteNum": "330",
+      "title": "REFRIGERADOR FF 490L ELECTROLUX INVERSE IB7S 110V INOX",
+      "description": "LOTE. 330 LPN. C1265054 \n1 REF FF 490L ELECTROLUX INVERSE IB7S 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1279",
+      "url": "https://tudoleilao.com.br/item/1279/detalhes",
+      "price": "R$1.782,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002585/img-2585-69af67f578dec.jpg"
+    },
+  {
+      "loteNum": "331",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX TF71B BLACK INOX 127V",
+      "description": "LOTE. 331 LPN. C1265716 \n1 REF FF 480L ELECTROLUX TF71B BLACK INOX 127V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1280",
+      "url": "https://tudoleilao.com.br/item/1280/detalhes",
+      "price": "R$1.692,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002586/img-2586-69af68a77705d.jpg"
+    },
+  {
+      "loteNum": "332",
+      "title": "REFRIGERADOR 590L ELECTROLUX IM8S 127V INOX.",
+      "description": "LOTE. 332 LPN. N0079895 \n1 REF 590L ELECTROLUX IM8S 127V INOX. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1281",
+      "url": "https://tudoleilao.com.br/item/1281/detalhes",
+      "price": "R$3.468,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002587/img-2587-69af61cb65f4e.jpg"
+    },
+  {
+      "loteNum": "333",
+      "title": "REFRIGERADOR FF 391L SAMSUNG RT38DG6120S9FZ INOX LOOK BIV",
+      "description": "LOTE. 333 LPN. C1269910 \n1 REF FF 391L SAMSUNG RT38DG6120S9FZ INOX LOOK BIV \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1282",
+      "url": "https://tudoleilao.com.br/item/1282/detalhes",
+      "price": "R$1.392,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002588/img-2588-69af628d17ca5.jpg"
+    },
+  {
+      "loteNum": "334",
+      "title": "REFRIGERADOR 410L ELECTROLUX INVERTER IF46 220V BRANCO",
+      "description": "LOTE. 334 LPN. C1269787 \n1 REF 410L ELECTROLUX INVERTER IF46 220V BRANCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1283",
+      "url": "https://tudoleilao.com.br/item/1283/detalhes",
+      "price": "R$1.128,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002589/img-2589-69af625fb2c50.jpg"
+    },
+  {
+      "loteNum": "335",
+      "title": "REFRIGERADOR FF 490L ELECTROLUX INVERSE IB7S 220V INOX",
+      "description": "LOTE. 335 LPN. C1269758 \n1 REF FF 490L ELECTROLUX INVERSE IB7S 220V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1284",
+      "url": "https://tudoleilao.com.br/item/1284/detalhes",
+      "price": "R$2.082,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002590/img-2590-69af63cc588df.jpg"
+    },
+  {
+      "loteNum": "336",
+      "title": "REFRIGERADOR 590L ELECTROLUX IM8S 220V INOX",
+      "description": "LOTE. 336 LPN. C1266215 \n1 REF 590L ELECTROLUX IM8S 220V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1285",
+      "url": "https://tudoleilao.com.br/item/1285/detalhes",
+      "price": "R$4.000,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002591/img-2591-69af648256630.jpg"
+    },
+  {
+      "loteNum": "337",
+      "title": "REFRIGERADOR DUP 334L CONSUL CRD37 110V BC",
+      "description": "LOTE. 337 LPN. C1263850 \n1 REF DUP 334L CONSUL CRD37 110V BC \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1286",
+      "url": "https://tudoleilao.com.br/item/1286/detalhes",
+      "price": "R$1.077,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002592/img-2592-69af67569132d.jpg"
+    },
+  {
+      "loteNum": "338",
+      "title": "REFRIGERADOR DUP 334L CONSUL CRD37 220V BC",
+      "description": "LOTE. 338 LPN. C1251746 \n1 REF DUP 334L CONSUL CRD37 220V BC \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1287",
+      "url": "https://tudoleilao.com.br/item/1287/detalhes",
+      "price": "R$877,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002593/img-2593-69b0068b884f7.jpg"
+    },
+  {
+      "loteNum": "339",
+      "title": "REFRIGERADOR FF 447L BRASTEMP BRE57FK INVERSE 220V INOX",
+      "description": "LOTE. 339 LPN. C1251752 \n1 REF FF 447L BRASTEMP BRE57FK INVERSE 220V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1288",
+      "url": "https://tudoleilao.com.br/item/1288/detalhes",
+      "price": "R$1.522,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002594/img-2594-69b0072547fbc.jpg"
+    },
+  {
+      "loteNum": "340",
+      "title": "REFRIGERADOR SBS HISENSE RS3P428NEDA1 428L CINZA 220V",
+      "description": "LOTE. 340 LPN. C1252150 \n1 REF SBS HISENSE RS3P428NEDA1 428L CINZA 220V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1289",
+      "url": "https://tudoleilao.com.br/item/1289/detalhes",
+      "price": "R$2.500,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002595/img-2595-69b0079e4bbab.jpg"
+    },
+  {
+      "loteNum": "341",
+      "title": "REFRIGERADOR FF 490L ELECTROLUX INVERSE IB7S 220V INOX",
+      "description": "LOTE. 341 LPN. C1252392 \n1 REF FF 490L ELECTROLUX INVERSE IB7S 220V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1290",
+      "url": "https://tudoleilao.com.br/item/1290/detalhes",
+      "price": "R$2.482,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002596/img-2596-69b00843bbe02.jpg"
+    },
+  {
+      "loteNum": "342",
+      "title": "REFRIGERADOR FF 463L BRASTEMP BRM55FK 110V INOX",
+      "description": "LOTE. 342 LPN. C1264116 \n1 REF FF 463L BRASTEMP BRM55FK 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1291",
+      "url": "https://tudoleilao.com.br/item/1291/detalhes",
+      "price": "R$1.972,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002597/img-2597-69b008c5b911f.jpg"
+    },
+  {
+      "loteNum": "343",
+      "title": "REFRIGERADOR FF 463L BRASTEMP BRM55FB 220V BRANCO",
+      "description": "LOTE. 343 LPN. C1264025 \n1 REF FF 463L BRASTEMP BRM55FB 220V BRANCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1292",
+      "url": "https://tudoleilao.com.br/item/1292/detalhes",
+      "price": "R$1.353,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002598/img-2598-69b00ae91cae0.jpg"
+    },
+  {
+      "loteNum": "344",
+      "title": "REFRIGERADOR FF 463L BRASTEMP BRM55FK 110V INOX",
+      "description": "LOTE. 344 LPN. C1246298 \n1 REF FF 463L BRASTEMP BRM55FK 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1293",
+      "url": "https://tudoleilao.com.br/item/1293/detalhes",
+      "price": "R$1.472,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002599/img-2599-69b00b9900de9.jpg"
+    },
+  {
+      "loteNum": "345",
+      "title": "REFRIGERADOR FF 490L ELECTROLUX INVERSE IB7S 110V INOX",
+      "description": "LOTE. 345 LPN. C1252887 \n1 REF FF 490L ELECTROLUX INVERSE IB7S 110V INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1294",
+      "url": "https://tudoleilao.com.br/item/1294/detalhes",
+      "price": "R$1.682,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002600/img-2600-69b00c126db0d.jpg"
+    },
+  {
+      "loteNum": "346",
+      "title": "REFRIGERADOR FF 490L ELECTROLUX INVERSE IB7B 220 BLACK INOX",
+      "description": "LOTE. 346 LPN. C1251960 \n1 REF FF 490L ELECTROLUX INVERSE IB7B 220 BLACK INOX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1295",
+      "url": "https://tudoleilao.com.br/item/1295/detalhes",
+      "price": "",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002601/img-2601-69b00cc3cfa1c.jpg"
+    },
+  {
+      "loteNum": "347",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX TF71B BLACK INOX 220V",
+      "description": "LOTE. 347 LPN. C1244012 \n1 REF FF 480L ELECTROLUX TF71B BLACK INOX 220V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1296",
+      "url": "https://tudoleilao.com.br/item/1296/detalhes",
+      "price": "R$1.792,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002602/img-2602-69b00ec0c3245.jpg"
+    },
+  {
+      "loteNum": "348",
+      "title": "REFRIGERADOR FF 490L ELECTROLUX INVERSE IB7 220V BRANCO",
+      "description": "LOTE. 348 LPN. C1251959 \n1 REF FF 490L ELECTROLUX INVERSE IB7 220V BRANCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1297",
+      "url": "https://tudoleilao.com.br/item/1297/detalhes",
+      "price": "R$1.524,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002603/img-2603-69b0100412e33.jpg"
+    },
+  {
+      "loteNum": "349",
+      "title": "REFRIGERADOR FF 480L ELECTROLUX TF71B BLACK INOX 220V",
+      "description": "LOTE. 349 LPN. C1251964 \n1 REF FF 480L ELECTROLUX TF71B BLACK INOX 220V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1298",
+      "url": "https://tudoleilao.com.br/item/1298/detalhes",
+      "price": "R$1.792,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002604/img-2604-69b0108c3e48d.jpg"
+    },
+  {
+      "loteNum": "350",
+      "title": "REFRIGERADOR SBS 602L SAMSUNG RS65R5691M9/AZ CLOOK 127V IN",
+      "description": "LOTE. 350 LPN. C1263939 \n1 REF SBS 602L SAMSUNG RS65R5691M9/AZ CLOOK 127V IN \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1299",
+      "url": "https://tudoleilao.com.br/item/1299/detalhes",
+      "price": "R$5.637,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002605/img-2605-69b010f6478b9.jpg"
+    },
+  {
+      "loteNum": "351",
+      "title": "REFRIGERADOR FF 333L CONSUL CRM40MB 110V BCO",
+      "description": "LOTE. 351 LPN. C1268444 \n1 REF FF 333L CONSUL CRM40MB 110V BCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1300",
+      "url": "https://tudoleilao.com.br/item/1300/detalhes",
+      "price": "R$995,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002606/img-2606-69b01180d4b91.jpg"
+    },
+  {
+      "loteNum": "352",
+      "title": "REFRIGERADOR FF 410L CONSUL CRM50LK INOX 220V.",
+      "description": "LOTE. 352 LPN. C1251756 \n1 REF FF 410L CONSUL CRM50LK INOX 220V. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1301",
+      "url": "https://tudoleilao.com.br/item/1301/detalhes",
+      "price": "R$1.167,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002607/img-2607-69b0122c654e2.jpg"
+    },
+  {
+      "loteNum": "353",
+      "title": "REFRIGERADOR FF 410L CONSUL CRM50LB BRANCA 110V.",
+      "description": "LOTE. 353 LPN. C1251966 \n1 REF FF 410L CONSUL CRM50LB BRANCA 110V. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1302",
+      "url": "https://tudoleilao.com.br/item/1302/detalhes",
+      "price": "R$1.255,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002608/img-2608-69b012c2c7262.jpg"
+    },
+  {
+      "loteNum": "354",
+      "title": "REFRIGERADOR FF 455L CONSUL CRM53MK INOX 220V.",
+      "description": "LOTE. 354 LPN. C1241469 \n1 REF FF 455L CONSUL CRM53MK INOX 220V. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1303",
+      "url": "https://tudoleilao.com.br/item/1303/detalhes",
+      "price": "R$1.420,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002609/img-2609-69b013eba3f7b.jpg"
+    },
+  {
+      "loteNum": "355",
+      "title": "REFRIGERADOR 410L ELECTROLUX INVERTER IF46 110V BRANCO",
+      "description": "LOTE. 355 LPN. C1241465 \n1 REF 410L ELECTROLUX INVERTER IF46 110V BRANCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1304",
+      "url": "https://tudoleilao.com.br/item/1304/detalhes",
+      "price": "R$1.528,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002610/img-2610-69b014814f975.jpg"
+    },
+  {
+      "loteNum": "356",
+      "title": "REFRIGERADOR FF 463L BRASTEMP BRM55FB 110V BRANCO",
+      "description": "LOTE. 356 LPN. C1264045 \n1 REF FF 463L BRASTEMP BRM55FB 110V BRANCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1305",
+      "url": "https://tudoleilao.com.br/item/1305/detalhes",
+      "price": "R$1.653,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002611/img-2611-69b015379dcaa.jpg"
+    },
+  {
+      "loteNum": "357",
+      "title": "REFRIGERADOR FF 371L ELECTROLUX DFX41 110V INX.",
+      "description": "LOTE. 357 LPN. C1264026 \n1 REF FF 371L ELECTROLUX DFX41 110V INX. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1306",
+      "url": "https://tudoleilao.com.br/item/1306/detalhes",
+      "price": "R$1.596,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002612/img-2612-69b0165f4d24c.jpg"
+    },
+  {
+      "loteNum": "358",
+      "title": "REFRIGERADOR FF 455L CONSUL CRM53MB BRANCA 110V.",
+      "description": "LOTE. 358 LPN. C1246403 \n1 REF FF 455L CONSUL CRM53MB BRANCA 110V. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1307",
+      "url": "https://tudoleilao.com.br/item/1307/detalhes",
+      "price": "R$1.692,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002613/img-2613-69b017a5d7142.jpg"
+    },
+  {
+      "loteNum": "359",
+      "title": "REFRIGERADOR FF 490L ELECTROLUX INVERSE IB7S 110V INOX",
+      "description": "LOTE. 359 LPN. C1252829 \n1 REF FF 490L ELECTROLUX INVERSE IB7S 110V INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1308",
+      "url": "https://tudoleilao.com.br/item/1308/detalhes",
+      "price": "R$1.982,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002614/img-2614-69b018a29a0e8.jpg"
+    },
+  {
+      "loteNum": "360",
+      "title": "LAVADORA 14,5 KG ELECTROLUX LEE15 110V BRANCA",
+      "description": "LOTE. 360 LPN. C1299217 \n1 LAV 14,5 KG ELECTROLUX LEE15 110V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1309",
+      "url": "https://tudoleilao.com.br/item/1309/detalhes",
+      "price": "R$948,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002615/img-2615-69ae041aa9ae6.jpeg"
+    },
+  {
+      "loteNum": "361",
+      "title": "LAVADORA 13KG BRASTEMP BWK13AB 220V BRANCA",
+      "description": "LOTE. 361 LPN. C1295588 \n1 LAV 13KG BRASTEMP BWK13AB 220V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1310",
+      "url": "https://tudoleilao.com.br/item/1310/detalhes",
+      "price": "R$683,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002616/img-2616-69ae04ef3c6ae.jpeg"
+    },
+  {
+      "loteNum": "362",
+      "title": "LAVADORA 14,5 KG ELECTROLUX LEE15 110V BRANCA",
+      "description": "LOTE. 362 LPN. C1295421 \n1 LAV 14,5 KG ELECTROLUX LEE15 110V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1311",
+      "url": "https://tudoleilao.com.br/item/1311/detalhes",
+      "price": "R$1.048,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002617/img-2617-69ae052a0d6df.jpeg"
+    },
+  {
+      "loteNum": "363",
+      "title": "LAVADORA 18KG BRASTEMP BWF18AB 220V BC",
+      "description": "LOTE. 363 LPN. C1301000 \n1 LAV 18KG BRASTEMP BWF18AB 220V BC \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1312",
+      "url": "https://tudoleilao.com.br/item/1312/detalhes",
+      "price": "R$1.074,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002618/img-2618-69ae05cf625cb.jpeg"
+    },
+  {
+      "loteNum": "364",
+      "title": "LAVADORA 18KG BRASTEMP BWF18AB 220V BC",
+      "description": "LOTE. 364 LPN. C1308234 \n1 LAV 18KG BRASTEMP BWF18AB 220V BC \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1313",
+      "url": "https://tudoleilao.com.br/item/1313/detalhes",
+      "price": "R$1.074,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002619/img-2619-69ae061ee0ff2.jpeg"
+    },
+  {
+      "loteNum": "365",
+      "title": "LAVADORA 14,5 KG ELECTROLUX LEE15 110V BRANCA",
+      "description": "LOTE. 365 LPN. C1294696 \n1 LAV 14,5 KG ELECTROLUX LEE15 110V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1314",
+      "url": "https://tudoleilao.com.br/item/1314/detalhes",
+      "price": "R$948,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002620/img-2620-69ae065c47f09.jpeg"
+    },
+  {
+      "loteNum": "366",
+      "title": "LAVADORA 18KG ELECTROLUX LEB18 110V BLACK",
+      "description": "LOTE. 366 LPN. C1308231 \n1 LAV 18KG ELECTROLUX LEB18 110V BLACK \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1315",
+      "url": "https://tudoleilao.com.br/item/1315/detalhes",
+      "price": "R$1.204,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002621/img-2621-69ae08cf182b5.jpeg"
+    },
+  {
+      "loteNum": "367",
+      "title": "LAVADORA 13KG BRASTEMP BWK13AB 220V BRANCA",
+      "description": "LOTE. 367 LPN. C1280347 \n1 LAV 13KG BRASTEMP BWK13AB 220V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1316",
+      "url": "https://tudoleilao.com.br/item/1316/detalhes",
+      "price": "R$983,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002622/img-2622-69ae0905972b3.jpeg"
+    },
+  {
+      "loteNum": "368",
+      "title": "LAVADORA 12,0K CONSUL CWH12BB 220V BC.",
+      "description": "LOTE. 368 LPN. C1300989 \n1 LAV 12,0K CONSUL CWH12BB 220V BC. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1317",
+      "url": "https://tudoleilao.com.br/item/1317/detalhes",
+      "price": "R$607,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002623/img-2623-69ae0a3e1f21e.jpeg"
+    },
+  {
+      "loteNum": "369",
+      "title": "LAVADORA 15KG CONSUL CWN15AB 110V BRANCO",
+      "description": "LOTE. 369 LPN. C1296922 \n1 LAV 15KG CONSUL CWN15AB 110V BRANCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1318",
+      "url": "https://tudoleilao.com.br/item/1318/detalhes",
+      "price": "R$972,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002624/img-2624-69ae0a9a8c674.jpeg"
+    },
+  {
+      "loteNum": "370",
+      "title": "LAVADORA 14KG BRASTEMP BWF14AB 220V BRANCA",
+      "description": "LOTE. 370 LPN. C1280333 \n1 LAV 14KG BRASTEMP BWF14AB 220V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1319",
+      "url": "https://tudoleilao.com.br/item/1319/detalhes",
+      "price": "R$1.036,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002625/img-2625-69ae0ad169d4b.jpeg"
+    },
+  {
+      "loteNum": "371",
+      "title": "LAVADORA 14KG BRASTEMP BWF14AB 110V BRANCA",
+      "description": "LOTE. 371 LPN. J2105178 \n1 LAV 14KG BRASTEMP BWF14AB 110V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1320",
+      "url": "https://tudoleilao.com.br/item/1320/detalhes",
+      "price": "R$1.036,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002626/img-2626-69ae0b1c4a478.jpeg"
+    },
+  {
+      "loteNum": "372",
+      "title": "LAVA/SECA 13KG SAMSUNG WD13T504DBN/AZ INOX 110V.",
+      "description": "LOTE. 372 LPN. C1296921 \n1 L/S 13KG SAMSUNG WD13T504DBN/AZ INOX 110V. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1321",
+      "url": "https://tudoleilao.com.br/item/1321/detalhes",
+      "price": "R$3.032,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002627/img-2627-69ae0b73d4b50.jpeg"
+    },
+  {
+      "loteNum": "373",
+      "title": "LAVADORA 14,5KG ELECTROLUX LEP15 220V BLACK",
+      "description": "LOTE. 373 LPN. J2105177 \n1 LAV 14,5KG ELECTROLUX LEP15 220V BLACK \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1322",
+      "url": "https://tudoleilao.com.br/item/1322/detalhes",
+      "price": "R$1.284,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002628/img-2628-69ae0ba0c2dc4.jpeg"
+    },
+  {
+      "loteNum": "374",
+      "title": "LAVADORA 18 KG ELECTROLUX LEE18 110V BRANCA",
+      "description": "LOTE. 374 LPN. J2878691 \n1 LAV 18 KG ELECTROLUX LEE18 110V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1323",
+      "url": "https://tudoleilao.com.br/item/1323/detalhes",
+      "price": "R$1.473,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002629/img-2629-69ae0bdc2e222.jpeg"
+    },
+  {
+      "loteNum": "375",
+      "title": "LAVADORA 13KG BRASTEMP BWK13AB 110V BRANCA",
+      "description": "LOTE. 375 LPN. C1296918 \n1 LAV 13KG BRASTEMP BWK13AB 110V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1324",
+      "url": "https://tudoleilao.com.br/item/1324/detalhes",
+      "price": "R$783,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002630/img-2630-69ae0cc9f10e9.jpeg"
+    },
+  {
+      "loteNum": "376",
+      "title": "LAVADORA 10KG SUGGAR NEO ECO BR 110V",
+      "description": "LOTE. 376 LPN. C1293122 \n1 LAV 10KG SUGGAR NEO ECO BR 110V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1325",
+      "url": "https://tudoleilao.com.br/item/1325/detalhes",
+      "price": "R$260,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002631/img-2631-69ae0e7b2b42a.jpeg"
+    },
+  {
+      "loteNum": "377",
+      "title": "LAVADORA 10KG SUGGAR NEO ECO 220V PRETA",
+      "description": "LOTE. 377 LPN. J2919505 \n1 LAV 10KG SUGGAR NEO ECO 220V PRETA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1326",
+      "url": "https://tudoleilao.com.br/item/1326/detalhes",
+      "price": "R$261,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002632/img-2632-69ae12cb228e7.jpeg"
+    },
+  {
+      "loteNum": "378",
+      "title": "LAVADORA 13KG BRASTEMP BWK13AB 220V BRANCA",
+      "description": "LOTE. 378 LPN. C1302407 \n1 LAV 13KG BRASTEMP BWK13AB 220V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1327",
+      "url": "https://tudoleilao.com.br/item/1327/detalhes",
+      "price": "R$983,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002633/img-2633-69ae132926c9d.jpeg"
+    },
+  {
+      "loteNum": "379",
+      "title": "LAVADORA 14,5 KG ELECTROLUX LEE15 220V BRANCA",
+      "description": "LOTE. 379 LPN. C1293699 \n1 LAV 14,5 KG ELECTROLUX LEE15 220V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1328",
+      "url": "https://tudoleilao.com.br/item/1328/detalhes",
+      "price": "R$948,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002634/img-2634-69ae145587cdd.jpeg"
+    },
+  {
+      "loteNum": "380",
+      "title": "LAVADORA LOU SAMSUNG DW50C6070FG/AZ 10S 110V BLACK INX.",
+      "description": "LOTE. 380 LPN. C1296902 \n1 LAV LOU SAMSUNG DW50C6070FG/AZ 10S 110V BLACK INX. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1329",
+      "url": "https://tudoleilao.com.br/item/1329/detalhes",
+      "price": "R$2.468,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002635/img-2635-69ae14d33255c.jpeg"
+    },
+  {
+      "loteNum": "381",
+      "title": "LAVADORA 20KG SUGGAR LAVADORAAMAX ECO PRATA 110V",
+      "description": "LOTE. 381 LPN. C1293318 \n1 LAV 20KG SUGGAR LAVAMAX ECO PRATA 110V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1330",
+      "url": "https://tudoleilao.com.br/item/1330/detalhes",
+      "price": "R$332,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002636/img-2636-69ae150de7b37.jpeg"
+    },
+  {
+      "loteNum": "382",
+      "title": "LAVADORA 12,0K CONSUL CWH12BB 220V BC.",
+      "description": "LOTE. 382 LPN. C1299175 \n1 LAV 12,0K CONSUL CWH12BB 220V BC.\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1331",
+      "url": "https://tudoleilao.com.br/item/1331/detalhes",
+      "price": "R$807,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002637/img-2637-69ae153aab009.jpeg"
+    },
+  {
+      "loteNum": "383",
+      "title": "LAVA/SECA 11KG SAMSUNG WD11A4453BX/AZ 127V INX.",
+      "description": "LOTE. 383 LPN. C1296899 \n1 LAVA/SECA 11KG SAMSUNG WD11A4453BX/AZ 127V INX. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1332",
+      "url": "https://tudoleilao.com.br/item/1332/detalhes",
+      "price": "R$2.357,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002638/img-2638-69ae156782bf4.jpeg"
+    },
+  {
+      "loteNum": "384",
+      "title": "LAVA/SECA 13KG SAMSUNG WD13FG6B34BXBZ INOX 220V",
+      "description": "LOTE. 384 LPN. C1296927 \n1 LAVA/SECA 13KG SAMSUNG WD13FG6B34BXBZ INOX 220V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1333",
+      "url": "https://tudoleilao.com.br/item/1333/detalhes",
+      "price": "R$2.600,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002639/img-2639-69aeaa0157517.jpeg"
+    },
+  {
+      "loteNum": "385",
+      "title": "LAVA/SECA 11KG HISENSE WD3S11 WIFI BRANCA 127V",
+      "description": "LOTE. 385 LPN. C1308229 \n1 LAVA/SECA 11KG HISENSE WD3S11 WIFI BRANCA 127V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1334",
+      "url": "https://tudoleilao.com.br/item/1334/detalhes",
+      "price": "R$1.865,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002640/img-2640-69aeaa2c8cc92.jpeg"
+    },
+  {
+      "loteNum": "386",
+      "title": "LAVADORA 14KG BRASTEMP BWF14AB 220V BRANCA",
+      "description": "LOTE. 386 LPN. C1302645 \n1 LAV 14KG BRASTEMP BWF14AB 220V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1335",
+      "url": "https://tudoleilao.com.br/item/1335/detalhes",
+      "price": "R$736,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002641/img-2641-69aeaa6140aa4.jpeg"
+    },
+  {
+      "loteNum": "387",
+      "title": "LAVADORA 13KG CONSUL CWN13AB 110V BRANCA",
+      "description": "LOTE. 387 LPN. J2795488 \n1 LAV 13KG CONSUL CWN13AB 110V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1336",
+      "url": "https://tudoleilao.com.br/item/1336/detalhes",
+      "price": "R$970,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002642/img-2642-69aeaaa3e4e34.jpeg"
+    },
+  {
+      "loteNum": "388",
+      "title": "LAVADORA 13KG BRASTEMP BWK13AB 220V BRANCA",
+      "description": "LOTE. 388 LPN. C1280348 \n1 LAV 13KG BRASTEMP BWK13AB 220V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1337",
+      "url": "https://tudoleilao.com.br/item/1337/detalhes",
+      "price": "R$983,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002643/img-2643-69aeab3d2c3af.jpeg"
+    },
+  {
+      "loteNum": "389",
+      "title": "LAVADORA 14KG BRASTEMP BWF14AB 220V BRANCA",
+      "description": "LOTE. 389 LPN. C1280332 \n1 LAV 14KG BRASTEMP BWF14AB 220V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1338",
+      "url": "https://tudoleilao.com.br/item/1338/detalhes",
+      "price": "R$936,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002644/img-2644-69aeab6f1efdc.jpeg"
+    },
+  {
+      "loteNum": "390",
+      "title": "LAVA/SECA 13KG SAMSUNG WD13FG6B34BXBZ INOX 220V",
+      "description": "LOTE. 390 LPN. C1295439 \n1 LAVA/SECA 13KG SAMSUNG WD13FG6B34BXBZ INOX 220V\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1339",
+      "url": "https://tudoleilao.com.br/item/1339/detalhes",
+      "price": "R$2.600,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002645/img-2645-69aeabc35474a.jpeg"
+    },
+  {
+      "loteNum": "391",
+      "title": "LAVADORA 9KG CONSUL CWB09BB 220V BC.",
+      "description": "LOTE. 391 LPN. C1301022 \n1 LAV 9KG CONSUL CWB09BB 220V BC. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1340",
+      "url": "https://tudoleilao.com.br/item/1340/detalhes",
+      "price": "R$706,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002646/img-2646-69aeabfe136a6.jpeg"
+    },
+  {
+      "loteNum": "392",
+      "title": "LAVADORA 10KG SUGGAR NEO ECO BR 110V",
+      "description": "LOTE. 392 LPN. C1301781 \n1 LAV 10KG SUGGAR NEO ECO BR 110V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1341",
+      "url": "https://tudoleilao.com.br/item/1341/detalhes",
+      "price": "R$360,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002647/img-2647-69aead563ab8d.jpeg"
+    },
+  {
+      "loteNum": "393",
+      "title": "LAVADORA 14KG BRASTEMP BWF14AB 220V BRANCA",
+      "description": "LOTE. 393 LPN. C1302411 \n1 LAV 14KG BRASTEMP BWF14AB 220V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1342",
+      "url": "https://tudoleilao.com.br/item/1342/detalhes",
+      "price": "R$736,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002648/img-2648-69aead94b0ecf.jpeg"
+    },
+  {
+      "loteNum": "394",
+      "title": "LAVADORA 13KG BRASTEMP BWK13AB 220V BRANCA",
+      "description": "LOTE. 394 LPN. C1302406 \n1 LAV 13KG BRASTEMP BWK13AB 220V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1343",
+      "url": "https://tudoleilao.com.br/item/1343/detalhes",
+      "price": "R$783,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002649/img-2649-69aeae1edde8e.jpeg"
+    },
+  {
+      "loteNum": "395",
+      "title": "LAVADORA 14KG BRASTEMP BWF14AB 220V BRANCA",
+      "description": "LOTE. 395 LPN. C1302414 \n1 LAV 14KG BRASTEMP BWF14AB 220V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1344",
+      "url": "https://tudoleilao.com.br/item/1344/detalhes",
+      "price": "R$936,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002650/img-2650-69aeae71471c7.jpeg"
+    },
+  {
+      "loteNum": "396",
+      "title": "LAVADORA 14,5 KG ELECTROLUX LEE15 220V BRANCA",
+      "description": "LOTE. 396 LPN. C1301109 \n1 LAV 14,5 KG ELECTROLUX LEE15 220V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1345",
+      "url": "https://tudoleilao.com.br/item/1345/detalhes",
+      "price": "R$848,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002651/img-2651-69aeaea3df515.jpeg"
+    },
+  {
+      "loteNum": "397",
+      "title": "LAVADORA 14,5 KG ELECTROLUX LEE15 220V BRANCA",
+      "description": "LOTE. 397 LPN. C1315787 \n1 LAV 14,5 KG ELECTROLUX LEE15 220V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1346",
+      "url": "https://tudoleilao.com.br/item/1346/detalhes",
+      "price": "R$648,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002652/img-2652-69aeaed1e86b7.jpeg"
+    },
+  {
+      "loteNum": "398",
+      "title": "LAVADORA 13KG BRASTEMP BWK13AB 220V BRANCA",
+      "description": "LOTE. 398 LPN. C1315845 \n1 LAV 13KG BRASTEMP BWK13AB 220V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1347",
+      "url": "https://tudoleilao.com.br/item/1347/detalhes",
+      "price": "R$783,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002653/img-2653-69aeaf0616c11.jpeg"
+    },
+  {
+      "loteNum": "399",
+      "title": "LAVADORA 20KG SUGGAR LAVADORAAMAX ECO PRATA 110V",
+      "description": "LOTE. 399 LPN. C1293123 \n1 LAV 20KG SUGGAR LAVAMAX ECO PRATA 110V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1348",
+      "url": "https://tudoleilao.com.br/item/1348/detalhes",
+      "price": "R$332,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002654/img-2654-69aeaf3446b4a.jpeg"
+    },
+  {
+      "loteNum": "400",
+      "title": "LAVADORA 10KG SUGGAR NEO ECO BR 110V",
+      "description": "LOTE. 400 LPN. C1294636 \n1 LAV 10KG SUGGAR NEO ECO BR 110V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1349",
+      "url": "https://tudoleilao.com.br/item/1349/detalhes",
+      "price": "R$260,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002655/img-2655-69aeaf7ad74b8.jpeg"
+    },
+  {
+      "loteNum": "401",
+      "title": "LAVADORA 9K ELECTROLUX LED09 BRANCO 110V",
+      "description": "LOTE. 401 LPN. J2973994 \n1 LAV 9K ELECTROLUX LED09 BRANCO 110V \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1350",
+      "url": "https://tudoleilao.com.br/item/1350/detalhes",
+      "price": "R$920,00",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002656/img-2656-69aeafae595b8.jpeg"
+    },
+  {
+      "loteNum": "402",
+      "title": "LAVADORA 14,5 KG ELECTROLUX LEE15 110V BRANCA",
+      "description": "LOTE. 402 LPN. J2973995 \n1 LAV 14,5 KG ELECTROLUX LEE15 110V BRANCA \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1351",
+      "url": "https://tudoleilao.com.br/item/1351/detalhes",
+      "price": "R$1.048,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002657/img-2657-69aeb06d04eb9.jpeg"
+    },
+  {
+      "loteNum": "403",
+      "title": "LAVADORA 12,0K CONSUL CWH12BB 110V BC",
+      "description": "LOTE. 403 LPN. J2948856 \n1 LAV 12,0K CONSUL CWH12BB 110V BC \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1352",
+      "url": "https://tudoleilao.com.br/item/1352/detalhes",
+      "price": "R$1.307,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002658/img-2658-69aeb0b76473b.jpeg"
+    },
+  {
+      "loteNum": "404",
+      "title": "FOR EL 72L EMB ELECTROLUX OE8ES 220V VIDRO/INOX",
+      "description": "LOTE. 404 LPN. J2948836\n1 FOR EL 72L EMB ELECTROLUX OE8ES 220V VIDRO/INOX\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1470",
+      "url": "https://tudoleilao.com.br/item/1470/detalhes",
+      "price": "R$2.411,36",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002905/img-2905-69b448ea64518.jpg"
+    },
+  {
+      "loteNum": "405",
+      "title": "FOGÃO 4B PISO ESMALTEC IDEAL POP BRANCO",
+      "description": "LOTE. 405 LPN. C1290988 \n1 FG 4B PISO ESMALTEC IDEAL POP BRANCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1353",
+      "url": "https://tudoleilao.com.br/item/1353/detalhes",
+      "price": "R$386,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002659/img-2659-69aeb14a8b73a.jpeg"
+    },
+  {
+      "loteNum": "406",
+      "title": "FOGÃO 4B PISO CONTINENTAL FC4GB BIVOLT PRETO",
+      "description": "LOTE. 406 LPN. C1299186 \n1 FG 4B PISO CONTINENTAL FC4GB BIVOLT PRETO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1354",
+      "url": "https://tudoleilao.com.br/item/1354/detalhes",
+      "price": "R$783,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002660/img-2660-69aeb1f8d0cba.jpeg"
+    },
+  {
+      "loteNum": "407",
+      "title": "FOGÃO 4B PISO ATLAS MONACO PLUS BIV PTO",
+      "description": "LOTE. 407 LPN. C1302202 \n1 FG 4B PISO ATLAS MONACO PLUS BIV PTO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1355",
+      "url": "https://tudoleilao.com.br/item/1355/detalhes",
+      "price": "R$326,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002661/img-2661-69aeb26ac5eb5.jpeg"
+    },
+  {
+      "loteNum": "408",
+      "title": "FG 4B ATLAS PISO AGILE INOX/BCO BIV",
+      "description": "LOTE. 408 LPN. C1290988 \nFG 4B ATLAS PISO AGILE INOX/BCO BIV\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1356",
+      "url": "https://tudoleilao.com.br/item/1356/detalhes",
+      "price": "R$386,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002662/img-2662-69aeb2f004f32.jpeg"
+    },
+  {
+      "loteNum": "409",
+      "title": "FOGÃO 4B PISO ATLAS MONACO TOP GLASS BIV PTO.",
+      "description": "LOTE. 409 LPN. C1290973 \n1 FG 4B PISO ATLAS MONACO TOP GLASS BIV PTO.\nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1357",
+      "url": "https://tudoleilao.com.br/item/1357/detalhes",
+      "price": "R$389,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002663/img-2663-69aeb33aaf50c.jpeg"
+    },
+  {
+      "loteNum": "410",
+      "title": "FOGÃO 5B PISO CONSUL CFS5VAR VIDRO BIV",
+      "description": "LOTE. 410 LPN. C1290970 \n1 FG 5B PISO CONSUL CFS5VAR VIDRO BIV \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1358",
+      "url": "https://tudoleilao.com.br/item/1358/detalhes",
+      "price": "R$809,20",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002664/img-2664-69aeb35fcd278.jpeg"
+    },
+  {
+      "loteNum": "411",
+      "title": "FOGÃO 4B PISO ESMALTEC IDEAL POP BRANCO",
+      "description": "LOTE. 411 LPN. C1299181 \n1 FG 4B PISO ESMALTEC IDEAL POP BRANCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1359",
+      "url": "https://tudoleilao.com.br/item/1359/detalhes",
+      "price": "R$286,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002665/img-2665-69aeb39a64686.jpeg"
+    },
+  {
+      "loteNum": "412",
+      "title": "FOGÃO 4B PISO ATLAS MONACO TOP GLASS BIV PTO.",
+      "description": "LOTE. 412 LPN. C1302203 \n1 FG 4B PISO ATLAS MONACO TOP GLASS BIV PTO. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1360",
+      "url": "https://tudoleilao.com.br/item/1360/detalhes",
+      "price": "R$489,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002666/img-2666-69b4ada9cde3d.jpg"
+    },
+  {
+      "loteNum": "413",
+      "title": "FOGÃO 4B ATLAS PISO AGILE INOX/BCO BIV",
+      "description": "LOTE. 413 LPN. J2795501 \n1 FG 4B ATLAS PISO AGILE INOX/BCO BIV \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1361",
+      "url": "https://tudoleilao.com.br/item/1361/detalhes",
+      "price": "R$390,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002667/img-2667-69aeb4447fdd8.jpeg"
+    },
+  {
+      "loteNum": "414",
+      "title": "FOGÃO 5B PISO ATLAS DAKO MAGISTER GLASS BIV PTO",
+      "description": "LOTE. 414 LPN. C1302206 \n1 FG 5B PISO ATLAS DAKO MAGISTER GLASS BIV PTO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1362",
+      "url": "https://tudoleilao.com.br/item/1362/detalhes",
+      "price": "R$901,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002668/img-2668-69aeb4c75f5c4.jpeg"
+    },
+  {
+      "loteNum": "415",
+      "title": "FOGÃO 4B PISO CONSUL CFO4NAR BIV INX",
+      "description": "LOTE. 415 LPN. C1299856 \n1 FG 4B PISO CONSUL CFO4NAR BIV INX \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1363",
+      "url": "https://tudoleilao.com.br/item/1363/detalhes",
+      "price": "R$581,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002669/img-2669-69aeb4fb4324d.jpeg"
+    },
+  {
+      "loteNum": "416",
+      "title": "FOGÃO 5B PISO ATLAS AGILE UP GLASS BIV PTO",
+      "description": "LOTE. 416 LPN. C1296889 \n1 FG 5B PISO ATLAS AGILE UP GLASS BIV PTO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1364",
+      "url": "https://tudoleilao.com.br/item/1364/detalhes",
+      "price": "R$791,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002670/img-2670-69aeb521d122a.jpeg"
+    },
+  {
+      "loteNum": "417",
+      "title": "FOGÃO 4B PISO CONSUL CFO4VBE MESA VD BIV PTO",
+      "description": "LOTE. 417 LPN. C1296890 \n1 FG 4B PISO CONSUL CFO4VBE MESA VD BIV PTO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1365",
+      "url": "https://tudoleilao.com.br/item/1365/detalhes",
+      "price": "R$526,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002671/img-2671-69aeb545034af.jpeg"
+    },
+  {
+      "loteNum": "418",
+      "title": "FOGÃO 4B PISO ESMALTEC IDEAL POP BRANCO",
+      "description": "LOTE. 418 LPN. C1296905 \n1 FG 4B PISO ESMALTEC IDEAL POP BRANCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1366",
+      "url": "https://tudoleilao.com.br/item/1366/detalhes",
+      "price": "R$386,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002672/img-2672-69aeb5750ba49.jpeg"
+    },
+  {
+      "loteNum": "419",
+      "title": "FOGÃO 4B PISO CONTINENTAL FC4IB BIV BCO",
+      "description": "LOTE. 419 LPN. C1296887 \n1 FG 4B PISO CONTINENTAL FC4IB BIV BCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1367",
+      "url": "https://tudoleilao.com.br/item/1367/detalhes",
+      "price": "R$461,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002673/img-2673-69aeb6f551a17.jpeg"
+    },
+  {
+      "loteNum": "420",
+      "title": "FOGÃO 4B PISO ATLAS MONACO PLUS BIV PTO",
+      "description": "LOTE. 420 LPN. C1296884 \n1 FG 4B PISO ATLAS MONACO PLUS BIV PTO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1368",
+      "url": "https://tudoleilao.com.br/item/1368/detalhes",
+      "price": "R$326,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002674/img-2674-69aeb73595787.jpeg"
+    },
+  {
+      "loteNum": "421",
+      "title": "FOGÃO 4B PISO ESMALTEC IDEAL POP BRANCO",
+      "description": "LOTE. 421 LPN. C1296904 \n1 FG 4B PISO ESMALTEC IDEAL POP BRANCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1369",
+      "url": "https://tudoleilao.com.br/item/1369/detalhes",
+      "price": "R$286,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002675/img-2675-69aeb759cc2c9.jpeg"
+    },
+  {
+      "loteNum": "422",
+      "title": "FOGÃO 4B ATLAS PISO AGILE INOX/BCO BIV",
+      "description": "LOTE. 422 LPN. C1296903 \n1 FG 4B ATLAS PISO AGILE INOX/BCO BIV \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1370",
+      "url": "https://tudoleilao.com.br/item/1370/detalhes",
+      "price": "R$290,40",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002676/img-2676-69aeb788ac0c8.jpeg"
+    },
+  {
+      "loteNum": "423",
+      "title": "FOGÃO 4B PISO ATLAS MONACO TOP GLASS BIV PTO.",
+      "description": "LOTE. 423 LPN. C1296885 \n1 FG 4B PISO ATLAS MONACO TOP GLASS BIV PTO. \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1371",
+      "url": "https://tudoleilao.com.br/item/1371/detalhes",
+      "price": "R$589,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002677/img-2677-69aeb7ccb8f5d.jpeg"
+    },
+  {
+      "loteNum": "424",
+      "title": "FOGÃO 4B PISO ESMALTEC IDEAL POP BRANCO",
+      "description": "LOTE. 424 LPN. C1302225 \n1 FG 4B PISO ESMALTEC IDEAL POP BRANCO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1372",
+      "url": "https://tudoleilao.com.br/item/1372/detalhes",
+      "price": "R$386,80",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002678/img-2678-69aeb7f8d89ef.jpeg"
+    },
+  {
+      "loteNum": "425",
+      "title": "FOGÃO 5B PISO ATLAS DAKO MAGISTER GLASS BIV PTO",
+      "description": "LOTE. 425 LPN. C1302205 \n1 FG 5B PISO ATLAS DAKO MAGISTER GLASS BIV PTO \nItens provenientes de logística reversa. PRODUTOS NÃO TESTADOS, podendo apresentar avarias, falta de peças, acessórios e/ou componentes, PODENDO SER SUCATA. \nNÃO ENTREGAMOS, LOTE ARREMATADO RETIRA EM JUNDIAI-SP \nLocal de Exposição: Jundiaí - SP",
+      "itemId": "1373",
+      "url": "https://tudoleilao.com.br/item/1373/detalhes",
+      "price": "R$1.001,60",
+      "status": "Vendido",
+      "image": "https://d2hmn75ryniytp.cloudfront.net/bens/0000002679/img-2679-69aeb83a00509.jpeg"
+    },
 ];
 
 export function getCategory(title: string): string {
-  const t = title.toUpperCase();
-  if (t.includes('REFRIGERADOR') || t.includes('GELADEIRA') || t.includes('FRIGOBAR')) return 'Refrigeradores';
-  if (t.includes('FREEZER')) return 'Freezers';
-  if (t.includes('LAVADORA') || t.includes('LAVA/SECA') || t.includes('SECADORA')) return 'Lavanderia';
-  if (t.includes('FOGÃO') || t.includes('COOKTOP') || t.includes('FORNO')) return 'Fogões';
-  if (t.includes('MICRO-ONDAS') || t.includes('MICRO ONDAS')) return 'Micro-ondas';
-  if (t.includes('AR CONDICIONADO') || t.includes('AR-CONDICIONADO') || t.includes('SPLIT')) return 'Ar Condicionado';
-  return 'Eletrodomésticos';
-}
-
-export function getCategoryImage(title: string): string {
-  const t = title.toUpperCase();
-
-  const modelImages: Array<[string, string]> = [
-    ['TF71',       '/images/tf71.jpg'],
-    ['IT70S',      '/images/it70s.jpg'],
-    ['DFN41',      '/images/dfn41.jpg'],
-    ['CRM44MB',    '/images/crm44mb.jpg'],
-    ['CRM39',      '/images/crm39.jpg'],
-    ['CRM50LK',    '/images/crm50lk.jpg'],
-    ['BRM55FK',    '/images/brm55fk.jpg'],
-    ['BRE57FB',    '/images/bre57fb.jpg'],
-    ['CVU20GB',    '/images/cvu20gb.jpg'],
-    ['CWB22',      '/images/cwb22.jpg'],
-    ['CWC22',      '/images/cwc22.jpg'],
-    ['CFO5LC',     '/images/cfo5lc.jpg'],
-    ['MAGISTER',   '/images/magister.jpg'],
-  ];
-
-  for (const [model, url] of modelImages) {
-    if (t.includes(model)) return url;
+    const t = title.toUpperCase();
+    if (t.includes("FREEZER") || t.includes("CONGELADOR")) return "Freezers";
+    if (t.includes("LAVADORA") || t.includes("LAVA E SECA") || t.includes("LAVA-ROUPA") || t.includes("SECADORA") || t.includes("CENTRIFUGA")) return "Lavanderia";
+    if (t.includes("FOGÃO") || t.includes("FOGAO") || t.includes("COOKTOP") || t.includes("FORNO")) return "Fogões";
+    if (t.includes("REFRIGERADOR") || t.includes("GELADEIRA")) return "Refrigeradores";
+    return "Eletrodomésticos";
   }
 
-  const fallbacks: Record<string, string> = {
-    'Refrigeradores':  '/images/crm44mb.jpg',
-    'Freezers':        '/images/cvu20gb.jpg',
-    'Lavanderia':      '/images/cwb22.jpg',
-    'Fogões':          '/images/cfo5lc.jpg',
-    'Micro-ondas':     '/images/crm44mb.jpg',
-    'Ar Condicionado': '/images/crm44mb.jpg',
-    'Eletrodomésticos':'/images/crm44mb.jpg',
-  };
-  return fallbacks[getCategory(title)] || fallbacks['Eletrodomésticos'];
-}
+export function getCategoryImage(lot: Lot): string {
+    return lot.image;
+  }
+  
