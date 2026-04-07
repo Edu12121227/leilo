@@ -225,9 +225,18 @@ export default function LotDetailPage() {
                 ) : (
                   <>
                     {/* Suggested bid */}
-                    <div style={{ borderTop: "1px solid #e8e8e8", borderBottom: "1px solid #e8e8e8", padding: "10px 0", marginBottom: 12 }}>
+                    <div style={{ borderTop: "1px solid #e8e8e8", padding: "10px 0", marginBottom: 0 }}>
                       <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 3 }}>Lance sugerido</p>
                       <p style={{ fontSize: 20, fontWeight: 900, color: "#1a1a2e" }}>{formatBRL(priceNum + 80)}</p>
+                    </div>
+
+                    {/* Instant win notice */}
+                    <div style={{ borderBottom: "1px solid #e8e8e8", padding: "10px 0", marginBottom: 12 }}>
+                      <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}>
+                        Em razão do encerramento do leilão nesta data, um lance de{" "}
+                        <strong>{formatBRL(priceNum + 80)}</strong> garante a arrematação imediata deste lote.
+                        Após a confirmação do lance, o arrematante poderá informar o endereço para entrega.
+                      </p>
                     </div>
 
                     {/* Closing time */}
