@@ -69,10 +69,13 @@ export default function LotListPage() {
                 <span style={{ fontSize: 11, opacity: 0.7, fontWeight: 700 }}>Casas Bahia — Linha Branca</span>
               </div>
               <h1 style={{ fontSize: isMobile ? 18 : 24, fontWeight: 900, lineHeight: 1.2, marginBottom: 8 }}>
-                Produtos novos com avaria de logística
+                Linha Branca com Avaria de Logística — Oportunidade Casas Bahia
               </h1>
-              <p style={{ fontSize: isMobile ? 12 : 13, opacity: 0.9, fontWeight: 600, lineHeight: 1.6 }}>
-                Refrigeradores, lavadoras, fogões e freezers que sofreram avarias durante o transporte ou no depósito. <strong>Produtos novos, testados e em funcionamento</strong> — vendidos com desconto por conta das avarias estéticas. <span style={{ opacity: 0.8 }}>Sem garantia Casas Bahia. Entrega em todo o Brasil.</span>
+              <p style={{ fontSize: isMobile ? 12 : 13, opacity: 0.9, fontWeight: 500, lineHeight: 1.75 }}>
+                Este leilão reúne <strong>186 eletrodomésticos de linha branca</strong> — refrigeradores, lavadoras, fogões e freezers — provenientes da logística reversa das Casas Bahia. Os produtos sofreram avarias estéticas durante o transporte ou a armazenagem no depósito (amassados, arranhões ou embalagem danificada), sendo por isso retirados da linha de venda convencional e disponibilizados a preços significativamente abaixo do mercado.
+              </p>
+              <p style={{ fontSize: isMobile ? 11 : 12, opacity: 0.75, fontWeight: 500, lineHeight: 1.7, marginTop: 8 }}>
+                ⚠️ Todos os itens são <strong>novos, testados e em pleno funcionamento</strong>. As avarias são exclusivamente estéticas e não comprometem o desempenho dos equipamentos. <strong>As Casas Bahia não oferecem garantia</strong> sobre estes produtos. Entrega disponível para todo o Brasil.
               </p>
             </div>
             <div style={{ display: "flex", gap: isMobile ? 20 : 28, alignItems: "center" }}>
