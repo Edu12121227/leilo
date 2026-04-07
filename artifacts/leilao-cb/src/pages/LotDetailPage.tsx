@@ -261,7 +261,7 @@ export default function LotDetailPage() {
                         borderRadius: 6, border: "none", cursor: "pointer",
                       }}
                     >
-                      Dar Lance →
+                      Dar Lance — {formatBRL(priceNum + 80)}
                     </button>
 
                     {/* Payment on delivery note */}
