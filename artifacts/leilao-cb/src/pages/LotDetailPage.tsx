@@ -36,7 +36,7 @@ export default function LotDetailPage() {
   const isVendido = lot.status === "Vendido";
   const related = lots.filter(l => getCategory(l.title) === category && l.itemId !== lot.itemId).slice(0, isMobile ? 4 : 5);
   const descLines = lot.description.split("\n").filter(Boolean);
-  const thumbs = [image, image, image];
+  const thumbs = [image];
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#f0f0f5", fontFamily: "'Nunito', sans-serif" }}>
@@ -83,34 +83,33 @@ export default function LotDetailPage() {
                 alt={lot.title}
                 style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
               />
-              <div style={{ position: "absolute", bottom: 10, left: 10, backgroundColor: "rgba(0,0,0,0.4)", color: "white", fontSize: 10, fontWeight: 700, padding: "3px 8px", borderRadius: 4 }}>
-                Imagem ilustrativa
-              </div>
             </div>
 
-            {/* Thumbnails */}
-            <div style={{ display: "flex", gap: 8, marginTop: 10, justifyContent: "flex-start" }}>
-              {thumbs.map((img, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveThumb(i)}
-                  style={{
-                    width: isMobile ? 60 : 70,
-                    height: isMobile ? 60 : 70,
-                    border: `2px solid ${activeThumb === i ? CB_BLUE : "#ddd"}`,
-                    borderRadius: 8,
-                    overflow: "hidden",
-                    cursor: "pointer",
-                    backgroundColor: "white",
-                    padding: 4,
-                    transition: "border-color 0.15s",
-                    flexShrink: 0,
-                  }}
-                >
-                  <img src={img} alt="" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
-                </button>
-              ))}
-            </div>
+            {/* Thumbnails — only shown when there are multiple images */}
+            {thumbs.length > 1 && (
+              <div style={{ display: "flex", gap: 8, marginTop: 10, justifyContent: "flex-start" }}>
+                {thumbs.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveThumb(i)}
+                    style={{
+                      width: isMobile ? 60 : 70,
+                      height: isMobile ? 60 : 70,
+                      border: `2px solid ${activeThumb === i ? CB_BLUE : "#ddd"}`,
+                      borderRadius: 8,
+                      overflow: "hidden",
+                      cursor: "pointer",
+                      backgroundColor: "white",
+                      padding: 4,
+                      transition: "border-color 0.15s",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <img src={img} alt="" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* ── Details ── */}
@@ -198,16 +197,16 @@ export default function LotDetailPage() {
               ← Ver Todos os Lotes
             </button>
 
-            {/* Warning */}
-            <div style={{ backgroundColor: "#fffbeb", border: "1px solid #fcd34d", borderRadius: 10, padding: "12px 14px", display: "flex", gap: 10 }}>
-              <span style={{ fontSize: 16, flexShrink: 0, lineHeight: 1.5 }}>⚠️</span>
+            {/* Info box */}
+            <div style={{ backgroundColor: "#f0fdf4", border: "1px solid #86efac", borderRadius: 10, padding: "12px 14px", display: "flex", gap: 10 }}>
+              <span style={{ fontSize: 16, flexShrink: 0, lineHeight: 1.5 }}>✅</span>
               <div>
-                <p style={{ fontWeight: 900, fontSize: 13, color: "#92400e", marginBottom: 4 }}>Atenção</p>
-                <p style={{ fontSize: 12, color: "#78350f", lineHeight: 1.6 }}>
-                  Produtos <strong>NÃO TESTADOS</strong> — podem apresentar avarias, falta de peças e/ou componentes, <strong>PODENDO SER SUCATA.</strong>
+                <p style={{ fontWeight: 900, fontSize: 13, color: "#166534", marginBottom: 4 }}>Produtos Testados</p>
+                <p style={{ fontSize: 12, color: "#15803d", lineHeight: 1.6 }}>
+                  Todos os produtos são <strong>TESTADOS</strong> e verificados antes do envio, garantindo qualidade e funcionamento.
                 </p>
-                <p style={{ fontSize: 12, fontWeight: 900, color: "#78350f", marginTop: 5 }}>
-                  NÃO ENTREGAMOS — Retirada: Jundiaí - SP
+                <p style={{ fontSize: 12, fontWeight: 900, color: "#166534", marginTop: 5 }}>
+                  Entregamos em todo o Brasil 🚚
                 </p>
               </div>
             </div>
@@ -237,7 +236,7 @@ export default function LotDetailPage() {
                   ["Categoria", category],
                   ["Status", lot.status],
                   ["Valor do Lance", lot.price],
-                  ["Retirada", "Jundiaí - SP"],
+                  ["Entrega", "Todo o Brasil"],
                 ].map(([label, value]) => (
                   <div key={label} style={{ display: "flex", justifyContent: "space-between", padding: "9px 0", borderBottom: "1px solid #f5f5f5" }}>
                     <span style={{ fontSize: 13, color: "#999", fontWeight: 700 }}>{label}</span>
@@ -273,7 +272,7 @@ export default function LotDetailPage() {
           </div>
           <div style={{ textAlign: isMobile ? "left" : "right", fontSize: 13 }}>
             <p style={{ fontWeight: 800, marginBottom: 4 }}>Leiloeiro: TudoLeilão</p>
-            <p style={{ opacity: 0.75, marginBottom: 4 }}>Retirada: Jundiaí - SP</p>
+            <p style={{ opacity: 0.75, marginBottom: 4 }}>Entrega em todo o Brasil 🚚</p>
             <a href="https://tudoleilao.com.br/leilao/144/lotes" target="_blank" rel="noopener noreferrer"
               style={{ color: CB_YELLOW, fontWeight: 900, textDecoration: "none" }}>tudoleilao.com.br →</a>
           </div>

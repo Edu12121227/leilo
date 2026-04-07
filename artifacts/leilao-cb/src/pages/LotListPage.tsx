@@ -9,7 +9,7 @@ const CB_YELLOW = "#FFCC00";
 const CB_BLUE = "#0033C6";
 
 const CATEGORIES = ["Todos", "Refrigeradores", "Lavanderia", "Fogões", "Freezers", "Eletrodomésticos"];
-const STATUSES = ["Todos", "Vendido", "Não Vendido"];
+const STATUSES = ["Todos", "Vendido", "Disponível"];
 
 export default function LotListPage() {
   const [, setLocation] = useLocation();
@@ -72,15 +72,14 @@ export default function LotListPage() {
                 Linha Branca — Logística Reversa
               </h1>
               <p style={{ fontSize: isMobile ? 12 : 13, opacity: 0.85, fontWeight: 600 }}>
-                Refrigeradores • Lavadoras • Fogões • Freezers
-                {!isMobile && " — Retirada em Jundiaí - SP"}
+                Refrigeradores • Lavadoras • Fogões • Freezers — Entrega em todo o Brasil
               </p>
             </div>
             <div style={{ display: "flex", gap: isMobile ? 20 : 28, alignItems: "center" }}>
               {[
                 { val: stats.total, label: "Total", color: CB_YELLOW },
                 { val: stats.vendidos, label: "Vendidos", color: "#4ade80" },
-                { val: stats.naoVendidos, label: "Não Vendidos", color: "#f87171" },
+                { val: stats.naoVendidos, label: "Disponíveis", color: "#4ade80" },
               ].map(item => (
                 <div key={item.label} style={{ textAlign: "center" }}>
                   <div style={{ fontSize: isMobile ? 24 : 30, fontWeight: 900, color: item.color, lineHeight: 1 }}>{item.val}</div>
@@ -211,12 +210,12 @@ export default function LotListPage() {
             <img src="/images/logo-casasbahia-oficial.png" alt="Casas Bahia" style={{ height: 26, width: "auto", filter: "brightness(0) invert(1)", marginBottom: 8 }} />
             <p style={{ fontSize: 12, opacity: 0.65, maxWidth: 380, lineHeight: 1.7 }}>
               Leilão Oficial #144 — Linha Branca Logística Reversa.<br />
-              Fotos <strong>meramente ilustrativas</strong>. Produtos NÃO TESTADOS.
+              Produtos testados. Entrega em todo o Brasil 🚚
             </p>
           </div>
           <div style={{ textAlign: isMobile ? "left" : "right", fontSize: 13 }}>
             <p style={{ fontWeight: 800, marginBottom: 4 }}>Leiloeiro: TudoLeilão</p>
-            <p style={{ opacity: 0.75, marginBottom: 4 }}>Retirada: Jundiaí - SP</p>
+            <p style={{ opacity: 0.75, marginBottom: 4 }}>Galpão: Jundiaí - SP</p>
             <a href="https://tudoleilao.com.br/leilao/144/lotes" target="_blank" rel="noopener noreferrer"
               style={{ color: CB_YELLOW, fontWeight: 900, textDecoration: "none" }}>tudoleilao.com.br →</a>
           </div>
