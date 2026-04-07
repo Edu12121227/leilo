@@ -200,12 +200,12 @@ export default function LotDetailPage() {
             <div style={{ backgroundColor: "#f0fdf4", border: "1px solid #86efac", borderRadius: 10, padding: "12px 14px", display: "flex", gap: 10 }}>
               <span style={{ fontSize: 16, flexShrink: 0, lineHeight: 1.5 }}>✅</span>
               <div>
-                <p style={{ fontWeight: 900, fontSize: 13, color: "#166534", marginBottom: 4 }}>Produtos Testados</p>
+                <p style={{ fontWeight: 900, fontSize: 13, color: "#166534", marginBottom: 4 }}>Produto Novo e Sem Uso</p>
                 <p style={{ fontSize: 12, color: "#15803d", lineHeight: 1.6 }}>
-                  Todos os produtos são <strong>TESTADOS</strong> e verificados antes do envio, garantindo qualidade e funcionamento.
+                  Item <strong>novo e sem uso</strong> com avaria exclusivamente estética (amassado, arranhão ou embalagem danificada). Não compromete o funcionamento do equipamento. As Casas Bahia não oferecem garantia sobre este produto.
                 </p>
                 <p style={{ fontSize: 12, fontWeight: 900, color: "#166534", marginTop: 5 }}>
-                  Entregamos em todo o Brasil 🚚
+                  Entrega em todo o Brasil 🚚
                 </p>
               </div>
             </div>
