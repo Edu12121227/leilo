@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { useLocation } from "wouter";
 import Header from "@/components/Header";
 import { lots, getCategory, getCategoryImage } from "@/data/lots";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const ITEMS_PER_PAGE = 20;
 const CB_YELLOW = "#FFCC00";
@@ -17,6 +18,7 @@ export default function LotListPage() {
   const [status, setStatus] = useState("Todos");
   const [page, setPage] = useState(1);
   const [sortBy, setSortBy] = useState<"lote" | "price-asc" | "price-desc">("lote");
+  const isMobile = useIsMobile();
 
   const filtered = useMemo(() => {
     let result = [...lots];
@@ -57,39 +59,32 @@ export default function LotListPage() {
     <div style={{ minHeight: "100vh", backgroundColor: "#f0f0f5", fontFamily: "'Nunito', sans-serif" }}>
       <Header onSearch={handleSearch} searchValue={search} />
 
-      {/* ── Auction hero banner ── */}
+      {/* ── Hero banner ── */}
       <div style={{ background: `linear-gradient(135deg, ${CB_BLUE} 0%, #0047D0 100%)`, color: "white" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "22px 16px" }}>
-          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "16px 12px" : "22px 16px" }}>
+          <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "center", justifyContent: "space-between", gap: 12 }}>
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 5 }}>
-                <span style={{
-                  backgroundColor: CB_YELLOW,
-                  color: CB_BLUE,
-                  fontSize: 11,
-                  fontWeight: 900,
-                  padding: "3px 10px",
-                  borderRadius: 4,
-                  letterSpacing: "0.5px",
-                }}>LEILÃO #144</span>
-                <span style={{ fontSize: 12, opacity: 0.7, fontWeight: 700 }}>TudoLeilão</span>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                <span style={{ backgroundColor: CB_YELLOW, color: CB_BLUE, fontSize: 10, fontWeight: 900, padding: "3px 9px", borderRadius: 4 }}>LEILÃO #144</span>
+                <span style={{ fontSize: 11, opacity: 0.7, fontWeight: 700 }}>TudoLeilão</span>
               </div>
-              <h1 style={{ fontSize: 26, fontWeight: 900, lineHeight: 1.2, marginBottom: 4 }}>
+              <h1 style={{ fontSize: isMobile ? 20 : 26, fontWeight: 900, lineHeight: 1.2, marginBottom: 4 }}>
                 Linha Branca — Logística Reversa
               </h1>
-              <p style={{ fontSize: 13, opacity: 0.85, fontWeight: 600 }}>
-                Refrigeradores • Lavadoras • Fogões • Freezers — Retirada em Jundiaí - SP
+              <p style={{ fontSize: isMobile ? 12 : 13, opacity: 0.85, fontWeight: 600 }}>
+                Refrigeradores • Lavadoras • Fogões • Freezers
+                {!isMobile && " — Retirada em Jundiaí - SP"}
               </p>
             </div>
-            <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
+            <div style={{ display: "flex", gap: isMobile ? 20 : 28, alignItems: "center" }}>
               {[
-                { val: stats.total, label: "Total de Lotes", color: CB_YELLOW },
+                { val: stats.total, label: "Total", color: CB_YELLOW },
                 { val: stats.vendidos, label: "Vendidos", color: "#4ade80" },
                 { val: stats.naoVendidos, label: "Não Vendidos", color: "#f87171" },
               ].map(item => (
                 <div key={item.label} style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: 30, fontWeight: 900, color: item.color, lineHeight: 1 }}>{item.val}</div>
-                  <div style={{ fontSize: 11, opacity: 0.75, marginTop: 3, fontWeight: 700 }}>{item.label}</div>
+                  <div style={{ fontSize: isMobile ? 24 : 30, fontWeight: 900, color: item.color, lineHeight: 1 }}>{item.val}</div>
+                  <div style={{ fontSize: 10, opacity: 0.75, marginTop: 3, fontWeight: 700 }}>{item.label}</div>
                 </div>
               ))}
             </div>
@@ -106,9 +101,9 @@ export default function LotListPage() {
         zIndex: 40,
         boxShadow: "0 2px 6px rgba(0,0,0,0.07)",
       }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "10px 16px", display: "flex", flexWrap: "wrap", alignItems: "center", gap: 10 }}>
-          {/* Category pills */}
-          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "8px 12px" : "10px 16px" }}>
+          {/* Category pills — scrollable row on mobile */}
+          <div style={{ display: "flex", gap: 6, overflowX: "auto", paddingBottom: isMobile ? 8 : 0, marginBottom: isMobile ? 0 : 8 }} className="no-scrollbar">
             {CATEGORIES.map(cat => (
               <button
                 key={cat}
@@ -124,46 +119,44 @@ export default function LotListPage() {
                   fontWeight: 800,
                   cursor: "pointer",
                   whiteSpace: "nowrap",
+                  flexShrink: 0,
                   transition: "all 0.15s",
                 }}
               >{cat}</button>
             ))}
           </div>
 
-          <div style={{ width: 1, height: 22, backgroundColor: "#e0e0e0", flexShrink: 0 }} />
-
-          {/* Status dropdown */}
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span style={{ fontSize: 12, fontWeight: 800, color: "#666" }}>Status:</span>
-            <select
-              value={status}
-              onChange={e => { setStatus(e.target.value); setPage(1); }}
-              style={{ border: "2px solid #ddd", borderRadius: 6, padding: "4px 10px", fontSize: 12, fontFamily: "'Nunito', sans-serif", fontWeight: 700, color: "#333", outline: "none", cursor: "pointer", backgroundColor: "white" }}
-            >{STATUSES.map(s => <option key={s}>{s}</option>)}</select>
-          </div>
-
-          {/* Sort dropdown */}
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span style={{ fontSize: 12, fontWeight: 800, color: "#666" }}>Ordenar:</span>
-            <select
-              value={sortBy}
-              onChange={e => { setSortBy(e.target.value as typeof sortBy); setPage(1); }}
-              style={{ border: "2px solid #ddd", borderRadius: 6, padding: "4px 10px", fontSize: 12, fontFamily: "'Nunito', sans-serif", fontWeight: 700, color: "#333", outline: "none", cursor: "pointer", backgroundColor: "white" }}
-            >
-              <option value="lote">Nº do Lote</option>
-              <option value="price-asc">Menor Preço</option>
-              <option value="price-desc">Maior Preço</option>
-            </select>
-          </div>
-
-          <div style={{ marginLeft: "auto", fontSize: 13, fontWeight: 800, color: "#666" }}>
-            <span style={{ color: CB_BLUE }}>{filtered.length}</span> lote{filtered.length !== 1 ? "s" : ""} encontrado{filtered.length !== 1 ? "s" : ""}
+          {/* Sort + status row */}
+          <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ fontSize: 12, fontWeight: 800, color: "#666", whiteSpace: "nowrap" }}>Status:</span>
+              <select
+                value={status}
+                onChange={e => { setStatus(e.target.value); setPage(1); }}
+                style={{ border: "2px solid #ddd", borderRadius: 6, padding: "4px 8px", fontSize: 12, fontFamily: "'Nunito', sans-serif", fontWeight: 700, color: "#333", outline: "none", cursor: "pointer", backgroundColor: "white" }}
+              >{STATUSES.map(s => <option key={s}>{s}</option>)}</select>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ fontSize: 12, fontWeight: 800, color: "#666", whiteSpace: "nowrap" }}>Ordenar:</span>
+              <select
+                value={sortBy}
+                onChange={e => { setSortBy(e.target.value as typeof sortBy); setPage(1); }}
+                style={{ border: "2px solid #ddd", borderRadius: 6, padding: "4px 8px", fontSize: 12, fontFamily: "'Nunito', sans-serif", fontWeight: 700, color: "#333", outline: "none", cursor: "pointer", backgroundColor: "white" }}
+              >
+                <option value="lote">Nº Lote</option>
+                <option value="price-asc">Menor Preço</option>
+                <option value="price-desc">Maior Preço</option>
+              </select>
+            </div>
+            <div style={{ marginLeft: "auto", fontSize: 12, fontWeight: 800, color: "#666", whiteSpace: "nowrap" }}>
+              <span style={{ color: CB_BLUE }}>{filtered.length}</span> lotes
+            </div>
           </div>
         </div>
       </div>
 
       {/* ── Product grid ── */}
-      <main style={{ maxWidth: 1280, margin: "0 auto", padding: "20px 16px 48px" }}>
+      <main style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "12px 10px 40px" : "20px 16px 48px" }}>
         {filtered.length === 0 ? (
           <div style={{ textAlign: "center", padding: "64px 0" }}>
             <div style={{ fontSize: 48, marginBottom: 16 }}>🔍</div>
@@ -180,13 +173,14 @@ export default function LotListPage() {
           <>
             <div style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(210px, 1fr))",
-              gap: 16,
+              gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(auto-fill, minmax(210px, 1fr))",
+              gap: isMobile ? 10 : 16,
             }}>
               {paginated.map(lot => (
                 <ProductCard
                   key={lot.itemId}
                   lot={lot}
+                  isMobile={isMobile}
                   onClick={() => setLocation(`/lote/${lot.itemId}`)}
                 />
               ))}
@@ -194,16 +188,16 @@ export default function LotListPage() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div style={{ marginTop: 36, display: "flex", justifyContent: "center", alignItems: "center", gap: 6 }}>
-                <PageBtn onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}>← Anterior</PageBtn>
+              <div style={{ marginTop: 32, display: "flex", justifyContent: "center", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+                <PageBtn onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}>← Ant.</PageBtn>
                 {buildPages(page, totalPages).map((pn, i) =>
                   pn === "..." ? (
-                    <span key={`d${i}`} style={{ padding: "0 4px", color: "#bbb", fontWeight: 700 }}>•••</span>
+                    <span key={`d${i}`} style={{ padding: "0 2px", color: "#bbb", fontWeight: 700 }}>•••</span>
                   ) : (
                     <PageBtn key={pn} onClick={() => setPage(pn as number)} active={page === pn}>{pn}</PageBtn>
                   )
                 )}
-                <PageBtn onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}>Próxima →</PageBtn>
+                <PageBtn onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}>Prox. →</PageBtn>
               </div>
             )}
           </>
@@ -211,22 +205,20 @@ export default function LotListPage() {
       </main>
 
       {/* ── Footer ── */}
-      <footer style={{ backgroundColor: CB_BLUE, color: "white", padding: "32px 16px" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 24, alignItems: "flex-start" }}>
+      <footer style={{ backgroundColor: CB_BLUE, color: "white", padding: isMobile ? "24px 12px" : "32px 16px" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", gap: 16 }}>
           <div>
-            <img src="/images/logo-casasbahia-oficial.png" alt="Casas Bahia" style={{ height: 32, width: "auto", filter: "brightness(0) invert(1)", marginBottom: 10 }} />
+            <img src="/images/logo-casasbahia-oficial.png" alt="Casas Bahia" style={{ height: 26, width: "auto", filter: "brightness(0) invert(1)", marginBottom: 8 }} />
             <p style={{ fontSize: 12, opacity: 0.65, maxWidth: 380, lineHeight: 1.7 }}>
               Leilão Oficial #144 — Linha Branca Logística Reversa.<br />
-              As fotos são <strong>meramente ilustrativas</strong>. Produtos NÃO TESTADOS, podendo apresentar avarias ou falta de componentes.
+              Fotos <strong>meramente ilustrativas</strong>. Produtos NÃO TESTADOS.
             </p>
           </div>
-          <div style={{ textAlign: "right", fontSize: 13 }}>
+          <div style={{ textAlign: isMobile ? "left" : "right", fontSize: 13 }}>
             <p style={{ fontWeight: 800, marginBottom: 4 }}>Leiloeiro: TudoLeilão</p>
-            <p style={{ opacity: 0.75, marginBottom: 4 }}>Local de Retirada: Jundiaí - SP</p>
+            <p style={{ opacity: 0.75, marginBottom: 4 }}>Retirada: Jundiaí - SP</p>
             <a href="https://tudoleilao.com.br/leilao/144/lotes" target="_blank" rel="noopener noreferrer"
-              style={{ color: CB_YELLOW, fontWeight: 900, textDecoration: "none", fontSize: 13 }}>
-              tudoleilao.com.br →
-            </a>
+              style={{ color: CB_YELLOW, fontWeight: 900, textDecoration: "none" }}>tudoleilao.com.br →</a>
           </div>
         </div>
       </footer>
@@ -234,8 +226,8 @@ export default function LotListPage() {
   );
 }
 
-// ── Product Card (matching CB's exact card style) ──
-function ProductCard({ lot, onClick }: { lot: (typeof lots)[0]; onClick: () => void }) {
+// ── Product Card ──
+function ProductCard({ lot, isMobile, onClick }: { lot: (typeof lots)[0]; isMobile: boolean; onClick: () => void }) {
   const isVendido = lot.status === "Vendido";
   const [hovered, setHovered] = useState(false);
 
@@ -252,44 +244,21 @@ function ProductCard({ lot, onClick }: { lot: (typeof lots)[0]; onClick: () => v
         cursor: "pointer",
         display: "flex",
         flexDirection: "column",
-        boxShadow: hovered ? "0 6px 20px rgba(0,0,0,0.12)" : "0 2px 6px rgba(0,0,0,0.06)",
-        transform: hovered ? "translateY(-3px)" : "none",
+        boxShadow: hovered ? "0 6px 20px rgba(0,0,0,0.12)" : "0 2px 6px rgba(0,0,0,0.05)",
+        transform: hovered ? "translateY(-2px)" : "none",
         transition: "box-shadow 0.18s, transform 0.18s, border-color 0.18s",
         position: "relative",
       }}
     >
       {/* Lote badge */}
-      <div style={{
-        position: "absolute",
-        top: 8,
-        left: 8,
-        backgroundColor: "rgba(0,0,0,0.6)",
-        color: "white",
-        fontSize: 10,
-        fontWeight: 900,
-        padding: "2px 7px",
-        borderRadius: 4,
-        zIndex: 2,
-        letterSpacing: "0.3px",
-      }}>
-        Lote {lot.loteNum}
+      <div style={{ position: "absolute", top: 6, left: 6, backgroundColor: "rgba(0,0,0,0.6)", color: "white", fontSize: 9, fontWeight: 900, padding: "2px 6px", borderRadius: 4, zIndex: 2 }}>
+        #{lot.loteNum}
       </div>
-
-      {/* Status indicator dot */}
-      <div style={{
-        position: "absolute",
-        top: 10,
-        right: 10,
-        width: 9,
-        height: 9,
-        borderRadius: "50%",
-        backgroundColor: isVendido ? "#22c55e" : "#ef4444",
-        zIndex: 2,
-        boxShadow: `0 0 0 2px white`,
-      }} />
+      {/* Status dot */}
+      <div style={{ position: "absolute", top: 8, right: 8, width: 8, height: 8, borderRadius: "50%", backgroundColor: isVendido ? "#22c55e" : "#ef4444", zIndex: 2, boxShadow: "0 0 0 2px white" }} />
 
       {/* Image */}
-      <div style={{ aspectRatio: "1", backgroundColor: "#fafafa", display: "flex", alignItems: "center", justifyContent: "center", padding: 12 }}>
+      <div style={{ aspectRatio: "1", backgroundColor: "#fafafa", display: "flex", alignItems: "center", justifyContent: "center", padding: isMobile ? 8 : 12 }}>
         <img
           src={getCategoryImage(lot.title)}
           alt={lot.title}
@@ -299,25 +268,27 @@ function ProductCard({ lot, onClick }: { lot: (typeof lots)[0]; onClick: () => v
       </div>
 
       {/* Content */}
-      <div style={{ padding: "10px 12px 14px", flex: 1, display: "flex", flexDirection: "column" }}>
-        {/* Stars (illustrative) */}
-        <div style={{ display: "flex", alignItems: "center", gap: 2, marginBottom: 5 }}>
-          {[1,2,3,4,5].map(i => (
-            <svg key={i} width="11" height="11" viewBox="0 0 24 24" fill={i <= 4 ? "#FFCC00" : "#ddd"}>
-              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-            </svg>
-          ))}
-          <span style={{ fontSize: 10, color: "#888", marginLeft: 2, fontWeight: 700 }}>(4.0)</span>
-        </div>
+      <div style={{ padding: isMobile ? "8px 8px 10px" : "10px 12px 14px", flex: 1, display: "flex", flexDirection: "column" }}>
+        {/* Stars */}
+        {!isMobile && (
+          <div style={{ display: "flex", alignItems: "center", gap: 2, marginBottom: 4 }}>
+            {[1,2,3,4,5].map(i => (
+              <svg key={i} width="11" height="11" viewBox="0 0 24 24" fill={i <= 4 ? CB_YELLOW : "#ddd"}>
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+              </svg>
+            ))}
+            <span style={{ fontSize: 9, color: "#aaa", marginLeft: 2, fontWeight: 700 }}>4.0</span>
+          </div>
+        )}
 
         {/* Title */}
         <p style={{
-          fontSize: 13,
+          fontSize: isMobile ? 11 : 13,
           fontWeight: 700,
           color: "#333",
           lineHeight: 1.4,
-          marginBottom: 8,
-          minHeight: "2.8em",
+          marginBottom: isMobile ? 6 : 8,
+          minHeight: isMobile ? "2.4em" : "2.8em",
           display: "-webkit-box",
           WebkitLineClamp: 2,
           WebkitBoxOrient: "vertical" as const,
@@ -326,42 +297,42 @@ function ProductCard({ lot, onClick }: { lot: (typeof lots)[0]; onClick: () => v
           {lot.title}
         </p>
 
-        {/* Price section */}
-        <div style={{ marginBottom: 10 }}>
-          <p style={{ fontSize: 10, color: "#aaa", fontWeight: 700, marginBottom: 2 }}>Lance final</p>
-          <p style={{ fontSize: 20, fontWeight: 900, color: CB_BLUE, lineHeight: 1, letterSpacing: "-0.3px" }}>
+        {/* Price */}
+        <div style={{ marginBottom: isMobile ? 8 : 10 }}>
+          {!isMobile && <p style={{ fontSize: 10, color: "#aaa", fontWeight: 700, marginBottom: 2 }}>Lance final</p>}
+          <p style={{ fontSize: isMobile ? 15 : 19, fontWeight: 900, color: CB_BLUE, lineHeight: 1, letterSpacing: "-0.3px" }}>
             {lot.price}
           </p>
-          <p style={{ fontSize: 10, color: "#999", marginTop: 3 }}>+ taxas do leiloeiro</p>
+          {!isMobile && <p style={{ fontSize: 10, color: "#bbb", marginTop: 2 }}>+ taxas do leiloeiro</p>}
         </div>
 
         {/* Status + CTA */}
-        <div style={{ marginTop: "auto", display: "flex", gap: 6, alignItems: "center" }}>
+        <div style={{ marginTop: "auto", display: "flex", gap: 5, alignItems: "center" }}>
           <span style={{
-            fontSize: 11,
+            fontSize: isMobile ? 9 : 11,
             fontWeight: 800,
-            padding: "3px 8px",
+            padding: isMobile ? "2px 6px" : "3px 8px",
             borderRadius: 4,
             backgroundColor: isVendido ? "#e6f9ef" : "#fef2f2",
             color: isVendido ? "#1a7a45" : "#c0392b",
             border: `1px solid ${isVendido ? "#c3e6cb" : "#fcd5d5"}`,
             flexShrink: 0,
+            whiteSpace: "nowrap",
           }}>
-            {isVendido ? "✓ Vendido" : "○ Disponível"}
+            {isVendido ? "✓" : "○"} {isMobile ? (isVendido ? "Vendido" : "Disponível") : (isVendido ? "Vendido" : "Disponível")}
           </span>
           <button
             style={{
               flex: 1,
-              padding: "6px 8px",
+              padding: isMobile ? "5px 4px" : "6px 8px",
               backgroundColor: CB_YELLOW,
               color: "#1a1a2e",
               fontWeight: 900,
-              fontSize: 12,
+              fontSize: isMobile ? 11 : 12,
               border: "none",
               borderRadius: 6,
               cursor: "pointer",
               fontFamily: "'Nunito', sans-serif",
-              letterSpacing: "0.2px",
             }}
           >
             Ver mais
@@ -373,18 +344,15 @@ function ProductCard({ lot, onClick }: { lot: (typeof lots)[0]; onClick: () => v
 }
 
 function PageBtn({ children, onClick, disabled = false, active = false }: {
-  children: React.ReactNode;
-  onClick: () => void;
-  disabled?: boolean;
-  active?: boolean;
+  children: React.ReactNode; onClick: () => void; disabled?: boolean; active?: boolean;
 }) {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
       style={{
-        minWidth: 38,
-        padding: "7px 12px",
+        minWidth: 36,
+        padding: "6px 10px",
         borderRadius: 6,
         border: `2px solid ${active ? CB_BLUE : "#ddd"}`,
         backgroundColor: active ? CB_BLUE : "white",
@@ -393,7 +361,6 @@ function PageBtn({ children, onClick, disabled = false, active = false }: {
         fontWeight: 800,
         fontSize: 13,
         cursor: disabled ? "not-allowed" : "pointer",
-        transition: "all 0.15s",
       }}
     >{children}</button>
   );
