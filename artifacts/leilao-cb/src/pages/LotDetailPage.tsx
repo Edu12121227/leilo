@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, useLocation } from "wouter";
 import Header from "@/components/Header";
+import BidModal from "@/components/BidModal";
 import { lots, getCategory, getCategoryImage } from "@/data/lots";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
@@ -54,6 +55,7 @@ export default function LotDetailPage() {
   const params = useParams<{ itemId: string }>();
   const [, setLocation] = useLocation();
   const [activeThumb, setActiveThumb] = useState(0);
+  const [bidModalOpen, setBidModalOpen] = useState(false);
   const isMobile = useIsMobile();
 
   const lot = lots.find(l => l.itemId === params.itemId);
@@ -255,6 +257,7 @@ export default function LotDetailPage() {
 
                     {/* Dar Lance button */}
                     <button
+                      onClick={() => setBidModalOpen(true)}
                       style={{
                         display: "block", width: "100%", textAlign: "center", padding: "13px",
                         backgroundColor: CB_YELLOW, color: "#1a1a2e", fontWeight: 900, fontSize: 15,
@@ -418,6 +421,16 @@ export default function LotDetailPage() {
           </div>
         </div>
       </footer>
+
+      <BidModal
+        open={bidModalOpen}
+        onClose={() => setBidModalOpen(false)}
+        lotTitle={lot.title}
+        lotNum={lot.loteNum}
+        bidAmount={priceNum + 80}
+        comissao={comissao}
+        itemId={lot.itemId}
+      />
     </div>
   );
 }
