@@ -38,7 +38,7 @@ export default function Header({ onSearch, searchValue = "" }: HeaderProps) {
           justifyContent: "center",
         }}>
           <span style={{ color: "white", fontSize: isMobile ? 11 : 12, fontWeight: 800, letterSpacing: "0.8px", textTransform: "uppercase", textAlign: "center" }}>
-            Leilão Oficial Casas Bahia — Linha Branca com Avaria de Logística — Nº 144
+            Linha Branca com Avaria de Logística — Nº 144
           </span>
         </div>
       </div>
