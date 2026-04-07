@@ -42,7 +42,7 @@ function formatCPF(v: string): string {
 }
 
 function getApiBase(): string {
-  return "/api-server/api";
+  return "/api";
 }
 
 export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, comissao, itemId }: BidModalProps) {
