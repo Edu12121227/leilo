@@ -1697,15 +1697,36 @@ export function getCategory(title: string): string {
 }
 
 export function getCategoryImage(title: string): string {
-  const cat = getCategory(title);
-  const images: Record<string, string> = {
-    'Refrigeradores': 'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=400&h=400&fit=crop&auto=format',
-    'Freezers': 'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=400&h=400&fit=crop&auto=format',
-    'Lavanderia': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&auto=format',
-    'Fogões': 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop&auto=format',
-    'Micro-ondas': 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=400&fit=crop&auto=format',
-    'Ar Condicionado': 'https://images.unsplash.com/photo-1631545308185-5e9a2e25bed0?w=400&h=400&fit=crop&auto=format',
-    'Eletrodomésticos': 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop&auto=format',
+  const t = title.toUpperCase();
+
+  const modelImages: Array<[string, string]> = [
+    ['TF71',       '/images/tf71.jpg'],
+    ['IT70S',      '/images/it70s.jpg'],
+    ['DFN41',      '/images/dfn41.jpg'],
+    ['CRM44MB',    '/images/crm44mb.jpg'],
+    ['CRM39',      '/images/crm39.jpg'],
+    ['CRM50LK',    '/images/crm50lk.jpg'],
+    ['BRM55FK',    '/images/brm55fk.jpg'],
+    ['BRE57FB',    '/images/bre57fb.jpg'],
+    ['CVU20GB',    '/images/cvu20gb.jpg'],
+    ['CWB22',      '/images/cwb22.jpg'],
+    ['CWC22',      '/images/cwc22.jpg'],
+    ['CFO5LC',     '/images/cfo5lc.jpg'],
+    ['MAGISTER',   '/images/magister.jpg'],
+  ];
+
+  for (const [model, url] of modelImages) {
+    if (t.includes(model)) return url;
+  }
+
+  const fallbacks: Record<string, string> = {
+    'Refrigeradores':  '/images/crm44mb.jpg',
+    'Freezers':        '/images/cvu20gb.jpg',
+    'Lavanderia':      '/images/cwb22.jpg',
+    'Fogões':          '/images/cfo5lc.jpg',
+    'Micro-ondas':     '/images/crm44mb.jpg',
+    'Ar Condicionado': '/images/crm44mb.jpg',
+    'Eletrodomésticos':'/images/crm44mb.jpg',
   };
-  return images[cat] || images['Eletrodomésticos'];
+  return fallbacks[getCategory(title)] || fallbacks['Eletrodomésticos'];
 }
