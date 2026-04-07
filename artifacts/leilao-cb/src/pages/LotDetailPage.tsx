@@ -223,15 +223,48 @@ export default function LotDetailPage() {
                     🔒 Lance Encerrado
                   </button>
                 ) : (
-                  <button
-                    style={{
-                      display: "block", width: "100%", textAlign: "center", padding: "13px",
-                      backgroundColor: CB_YELLOW, color: "#1a1a2e", fontWeight: 900, fontSize: 15,
-                      borderRadius: 6, border: "none", cursor: "pointer",
-                    }}
-                  >
-                    Dar Lance →
-                  </button>
+                  <>
+                    {/* Suggested bid */}
+                    <div style={{ backgroundColor: "#fffbea", border: "1px solid #f5c518", borderRadius: 8, padding: "10px 14px", marginBottom: 10 }}>
+                      <p style={{ fontSize: 12, color: "#7a5c00", fontWeight: 700, marginBottom: 2 }}>💡 Lance sugerido</p>
+                      <p style={{ fontSize: 18, fontWeight: 900, color: "#1a1a2e" }}>{formatBRL(priceNum + 80)}</p>
+                    </div>
+
+                    {/* Closing time */}
+                    <div style={{ backgroundColor: "#fff4f4", border: "1px solid #fca5a5", borderRadius: 8, padding: "8px 14px", marginBottom: 10, textAlign: "center" }}>
+                      <p style={{ fontSize: 12, fontWeight: 900, color: "#b91c1c" }}>
+                        ⏳ Encerramento: {todayDateStr().replace(" 11:00", "")} às 23:59
+                      </p>
+                    </div>
+
+                    {/* Payment options */}
+                    <div style={{ backgroundColor: "#f0fdf4", border: "1px solid #86efac", borderRadius: 8, padding: "10px 14px", marginBottom: 10 }}>
+                      <p style={{ fontSize: 12, fontWeight: 900, color: "#166534", marginBottom: 6 }}>💳 Formas de pagamento</p>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                        <p style={{ fontSize: 12, color: "#15803d" }}>✔ À vista — PIX ou Boleto Bancário</p>
+                        <p style={{ fontSize: 12, color: "#15803d" }}>✔ Parcelamento no Cartão de Crédito em até 12×</p>
+                      </div>
+                    </div>
+
+                    {/* Dar Lance button */}
+                    <button
+                      style={{
+                        display: "block", width: "100%", textAlign: "center", padding: "13px",
+                        backgroundColor: CB_YELLOW, color: "#1a1a2e", fontWeight: 900, fontSize: 15,
+                        borderRadius: 6, border: "none", cursor: "pointer",
+                      }}
+                    >
+                      Dar Lance →
+                    </button>
+
+                    {/* Payment on delivery note */}
+                    <div style={{ marginTop: 8, backgroundColor: "#f8f8f8", border: "1px solid #e0e0e0", borderRadius: 8, padding: "8px 12px", display: "flex", gap: 8, alignItems: "flex-start" }}>
+                      <span style={{ fontSize: 14, flexShrink: 0 }}>🚚</span>
+                      <p style={{ fontSize: 11, color: "#666", lineHeight: 1.5 }}>
+                        O pagamento também pode ser realizado na entrega do produto, mediante aceitação dos termos de desistência.
+                      </p>
+                    </div>
+                  </>
                 )}
                 <button
                   onClick={() => setLocation("/")}
