@@ -82,8 +82,6 @@ export default function LotDetailPage() {
   const thumbs = [image];
   const priceNum = parsePrice(lot.price);
   const comissao = priceNum * 0.05;
-  const despesas = 210;
-  const total = priceNum + comissao + despesas;
   const views = fakeViews(lot.itemId);
 
   return (
@@ -171,17 +169,6 @@ export default function LotDetailPage() {
               {lot.title}
             </h1>
 
-            {/* Stars */}
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <div style={{ display: "flex", gap: 2 }}>
-                {[1,2,3,4,5].map(i => (
-                  <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill={i <= 4 ? CB_YELLOW : "#ddd"}>
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                  </svg>
-                ))}
-              </div>
-              <span style={{ fontSize: 11, color: "#888", fontWeight: 700 }}>4.0 — Logística Reversa</span>
-            </div>
 
             {/* ── Auction Info Panel ── */}
             <div style={{ border: "1px solid #ddd", borderRadius: 8, overflow: "hidden", backgroundColor: "white" }}>
@@ -219,15 +206,13 @@ export default function LotDetailPage() {
               {/* Fees block */}
               <div style={{ padding: "12px 16px", borderBottom: "1px solid #eee", fontSize: 13 }}>
                 <p style={{ color: "#444", marginBottom: 3 }}>+ Comissão (5%): <strong>{formatBRL(comissao)}</strong></p>
-                <p style={{ color: "#444", marginBottom: 3 }}>+ Despesas: <strong>{formatBRL(despesas)}</strong></p>
                 <p style={{ fontWeight: 900, color: "#111", fontSize: 14, marginTop: 6 }}>
-                  Total a Pagar: <span style={{ color: CB_BLUE }}>{formatBRL(total)}</span>
+                  Total a Pagar: <span style={{ color: CB_BLUE }}>{formatBRL(priceNum + comissao)}</span>
                 </p>
               </div>
 
-              {/* Increment & views */}
-              <div style={{ padding: "8px 16px", borderBottom: "1px solid #eee", display: "flex", justifyContent: "space-between", fontSize: 12, color: "#666" }}>
-                <span>↑ Incremento Mínimo: <strong>R$100,00</strong></span>
+              {/* Views */}
+              <div style={{ padding: "8px 16px", borderBottom: "1px solid #eee", display: "flex", justifyContent: "flex-end", fontSize: 12, color: "#666" }}>
                 <span>👁 {views.toLocaleString("pt-BR")}</span>
               </div>
 
@@ -268,11 +253,11 @@ export default function LotDetailPage() {
               </div>
 
               {/* Grupo Casas Bahia logo + auction details */}
-              <div style={{ borderTop: "1px solid #eee", padding: "14px 16px", textAlign: "center" }}>
+              <div style={{ borderTop: "1px solid #eee", padding: "18px 16px", textAlign: "center" }}>
                 <img
                   src="/images/grupo-casas-bahia.jpeg"
                   alt="Grupo Casas Bahia"
-                  style={{ height: 50, width: "auto", objectFit: "contain", marginBottom: 10, borderRadius: 6 }}
+                  style={{ height: 90, width: "auto", objectFit: "contain", marginBottom: 12, borderRadius: 8, display: "block", margin: "0 auto 12px" }}
                 />
                 <p style={{ fontSize: 12, color: "#555", lineHeight: 1.6 }}>
                   Leilão de Linha Branca - Logística Reversa<br />
