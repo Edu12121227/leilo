@@ -439,8 +439,8 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
 const inputStyle: React.CSSProperties = {
   display: "block",
   width: "100%",
-  padding: "10px 12px",
-  fontSize: 13,
+  padding: "14px 14px",
+  fontSize: 14,
   border: "1px solid #e0e0e0",
   borderRadius: 8,
   outline: "none",
@@ -448,4 +448,5 @@ const inputStyle: React.CSSProperties = {
   color: "#222",
   backgroundColor: "white",
   boxSizing: "border-box",
+  minHeight: 48,
 };
