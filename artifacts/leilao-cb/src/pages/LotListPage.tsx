@@ -9,7 +9,7 @@ const CB_YELLOW = "#FFCC00";
 const CB_BLUE = "#0033C6";
 
 const CATEGORIES = ["Todos", "Refrigeradores", "Lavanderia", "Fogões", "Freezers", "Eletrodomésticos"];
-const STATUSES = ["Todos", "Vendido", "Disponível"];
+const STATUSES = ["Todos", "Disponível", "Vendido"];
 
 export default function LotListPage() {
   const [, setLocation] = useLocation();
@@ -17,7 +17,7 @@ export default function LotListPage() {
   const [category, setCategory] = useState("Todos");
   const [status, setStatus] = useState("Todos");
   const [page, setPage] = useState(1);
-  const [sortBy, setSortBy] = useState<"lote" | "price-asc" | "price-desc">("lote");
+  const [sortBy, setSortBy] = useState<"padrao" | "lote" | "price-asc" | "price-desc">("padrao");
   const isMobile = useIsMobile();
 
   const filtered = useMemo(() => {
@@ -39,6 +39,7 @@ export default function LotListPage() {
     if (sortBy === "lote") result.sort((a, b) => parseInt(a.loteNum) - parseInt(b.loteNum));
     else if (sortBy === "price-asc") result.sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
     else if (sortBy === "price-desc") result.sort((a, b) => parsePrice(b.price) - parsePrice(a.price));
+    // "padrao" keeps original interleaved array order
     return result;
   }, [search, category, status, sortBy]);
 
@@ -145,6 +146,7 @@ export default function LotListPage() {
                 onChange={e => { setSortBy(e.target.value as typeof sortBy); setPage(1); }}
                 style={{ border: "2px solid #ddd", borderRadius: 6, padding: "4px 8px", fontSize: 12, fontFamily: "'Nunito', sans-serif", fontWeight: 700, color: "#333", outline: "none", cursor: "pointer", backgroundColor: "white" }}
               >
+                <option value="padrao">Padrão</option>
                 <option value="lote">Nº Lote</option>
                 <option value="price-asc">Menor Preço</option>
                 <option value="price-desc">Maior Preço</option>
@@ -256,7 +258,7 @@ function ProductCard({ lot, isMobile, onClick }: { lot: (typeof lots)[0]; isMobi
         #{lot.loteNum}
       </div>
       {/* Status dot */}
-      <div style={{ position: "absolute", top: 8, right: 8, width: 8, height: 8, borderRadius: "50%", backgroundColor: isVendido ? "#22c55e" : "#ef4444", zIndex: 2, boxShadow: "0 0 0 2px white" }} />
+      <div style={{ position: "absolute", top: 8, right: 8, width: 8, height: 8, borderRadius: "50%", backgroundColor: isVendido ? "#ef4444" : "#22c55e", zIndex: 2, boxShadow: "0 0 0 2px white" }} />
 
       {/* Image */}
       <div style={{ aspectRatio: "1", backgroundColor: "#fafafa", display: "flex", alignItems: "center", justifyContent: "center", padding: isMobile ? 8 : 12 }}>
@@ -306,6 +308,14 @@ function ProductCard({ lot, isMobile, onClick }: { lot: (typeof lots)[0]; isMobi
           </p>
         </div>
 
+        {/* Buyer info for sold items */}
+        {isVendido && lot.buyer && !isMobile && (
+          <div style={{ fontSize: 10, color: "#888", marginBottom: 6, lineHeight: 1.4 }}>
+            <span style={{ fontWeight: 700 }}>Arrematante:</span> {lot.buyer}<br />
+            <span style={{ fontWeight: 700 }}>CPF:</span> {lot.cpf}
+          </div>
+        )}
+
         {/* Status + CTA */}
         <div style={{ marginTop: "auto", display: "flex", gap: 5, alignItems: "center" }}>
           <span style={{
@@ -313,20 +323,20 @@ function ProductCard({ lot, isMobile, onClick }: { lot: (typeof lots)[0]; isMobi
             fontWeight: 800,
             padding: isMobile ? "2px 6px" : "3px 8px",
             borderRadius: 4,
-            backgroundColor: isVendido ? "#e6f9ef" : "#fef2f2",
-            color: isVendido ? "#1a7a45" : "#c0392b",
-            border: `1px solid ${isVendido ? "#c3e6cb" : "#fcd5d5"}`,
+            backgroundColor: isVendido ? "#fef2f2" : "#f0fdf4",
+            color: isVendido ? "#c0392b" : "#166534",
+            border: `1px solid ${isVendido ? "#fcd5d5" : "#86efac"}`,
             flexShrink: 0,
             whiteSpace: "nowrap",
           }}>
-            {isVendido ? "✓" : "○"} {isMobile ? (isVendido ? "Vendido" : "Disponível") : (isVendido ? "Vendido" : "Disponível")}
+            {isVendido ? "✓ Vendido" : "● Disponível"}
           </span>
           <button
             style={{
               flex: 1,
               padding: isMobile ? "5px 4px" : "6px 8px",
-              backgroundColor: CB_YELLOW,
-              color: "#1a1a2e",
+              backgroundColor: isVendido ? "#f5f5f5" : CB_YELLOW,
+              color: isVendido ? "#999" : "#1a1a2e",
               fontWeight: 900,
               fontSize: isMobile ? 11 : 12,
               border: "none",
@@ -335,7 +345,7 @@ function ProductCard({ lot, isMobile, onClick }: { lot: (typeof lots)[0]; isMobi
               fontFamily: "'Nunito', sans-serif",
             }}
           >
-            Ver mais
+            {isVendido ? "Ver lote" : "Dar lance"}
           </button>
         </div>
       </div>

@@ -117,9 +117,9 @@ export default function LotDetailPage() {
             {/* Tags */}
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
               <span style={{
-                backgroundColor: isVendido ? "#e6f9ef" : "#fef2f2",
-                color: isVendido ? "#1a7a45" : "#c0392b",
-                border: `1px solid ${isVendido ? "#c3e6cb" : "#fcd5d5"}`,
+                backgroundColor: isVendido ? "#fef2f2" : "#f0fdf4",
+                color: isVendido ? "#c0392b" : "#166534",
+                border: `1px solid ${isVendido ? "#fcd5d5" : "#86efac"}`,
                 fontSize: 12, fontWeight: 900, padding: "4px 12px", borderRadius: 20,
               }}>{isVendido ? "✓ Vendido" : "● Disponível"}</span>
               <span style={{ backgroundColor: "#eef0ff", color: CB_BLUE, fontSize: 12, fontWeight: 800, padding: "4px 12px", borderRadius: 20 }}>Lote #{lot.loteNum}</span>
@@ -156,25 +156,48 @@ export default function LotDetailPage() {
               <p style={{ fontSize: 11, color: "#bbb" }}>Lance mínimo</p>
             </div>
 
+            {/* Buyer info for sold items */}
+            {isVendido && lot.buyer && (
+              <div style={{ backgroundColor: "#fef2f2", border: "1px solid #fcd5d5", borderRadius: 10, padding: "12px 16px" }}>
+                <p style={{ fontSize: 12, fontWeight: 900, color: "#c0392b", marginBottom: 6 }}>🔒 Lote Arrematado</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <span style={{ fontSize: 12, color: "#888", fontWeight: 700 }}>Arrematante</span>
+                    <span style={{ fontSize: 12, color: "#333", fontWeight: 900 }}>{lot.buyer}</span>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <span style={{ fontSize: 12, color: "#888", fontWeight: 700 }}>CPF</span>
+                    <span style={{ fontSize: 12, color: "#333", fontWeight: 900, letterSpacing: "0.5px" }}>{lot.cpf}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* CTA buttons */}
-            <button
-              style={{
-                display: "block",
-                width: "100%",
-                textAlign: "center",
-                padding: isMobile ? "14px" : "15px",
-                backgroundColor: CB_YELLOW,
-                color: "#1a1a2e",
-                fontWeight: 900,
-                fontSize: isMobile ? 15 : 16,
-                borderRadius: 8,
-                border: "none",
-                cursor: "pointer",
-                fontFamily: "'Nunito', sans-serif",
-              }}
-            >
-              Dar Lance →
-            </button>
+            {isVendido ? (
+              <button disabled style={{ display: "block", width: "100%", textAlign: "center", padding: isMobile ? "14px" : "15px", backgroundColor: "#f5f5f5", color: "#aaa", fontWeight: 900, fontSize: isMobile ? 15 : 16, borderRadius: 8, border: "1px solid #ddd", cursor: "not-allowed", fontFamily: "'Nunito', sans-serif" }}>
+                🔒 Lance Encerrado
+              </button>
+            ) : (
+              <button
+                style={{
+                  display: "block",
+                  width: "100%",
+                  textAlign: "center",
+                  padding: isMobile ? "14px" : "15px",
+                  backgroundColor: CB_YELLOW,
+                  color: "#1a1a2e",
+                  fontWeight: 900,
+                  fontSize: isMobile ? 15 : 16,
+                  borderRadius: 8,
+                  border: "none",
+                  cursor: "pointer",
+                  fontFamily: "'Nunito', sans-serif",
+                }}
+              >
+                Dar Lance →
+              </button>
+            )}
 
             <button
               onClick={() => setLocation("/")}
