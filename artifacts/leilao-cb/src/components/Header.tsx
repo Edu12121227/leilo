@@ -1,20 +1,14 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface HeaderProps {
   onSearch?: (query: string) => void;
   searchValue?: string;
 }
 
-const CB_YELLOW = "#FFCC00";
-const CB_BLUE = "#0033C6";
-const CB_DARK = "#1a1a2e";
-
 export default function Header({ onSearch, searchValue = "" }: HeaderProps) {
   const [, setLocation] = useLocation();
   const [query, setQuery] = useState(searchValue);
-  const isMobile = useIsMobile();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,216 +17,123 @@ export default function Header({ onSearch, searchValue = "" }: HeaderProps) {
 
   const categories = ["Refrigeradores", "Lavanderia", "Fogões", "Freezers", "Eletrodomésticos"];
 
+  const navTo = (cat: string) => {
+    setLocation("/");
+    const q = cat === "Refrigeradores" ? "REFRIGERADOR"
+      : cat === "Lavanderia" ? "LAVADORA"
+      : cat === "Fogões" ? "FOGÃO"
+      : cat === "Freezers" ? "FREEZER"
+      : cat.toUpperCase();
+    setQuery(q);
+    if (onSearch) onSearch(q);
+  };
+
   return (
     <header style={{ fontFamily: "'Nunito', sans-serif" }}>
 
-      {/* ── Top utility bar ── */}
-      <div style={{ backgroundColor: CB_BLUE }}>
-        <div style={{
-          maxWidth: 1280,
-          margin: "0 auto",
-          padding: isMobile ? "0 12px" : "0 16px",
-          height: isMobile ? 32 : 36,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 8,
-          overflow: "hidden",
-        }}>
-          {/* Left: only show on desktop */}
-          {!isMobile && (
-            <div style={{ display: "flex", gap: 16, alignItems: "center", minWidth: 0 }}>
-              <span style={{ color: "white", fontSize: 12, fontWeight: 700, opacity: 0.9, whiteSpace: "nowrap" }}>
-                Leilão Oficial Casas Bahia
-              </span>
-              <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 12 }}>|</span>
-              <span style={{ color: "rgba(255,255,255,0.8)", fontSize: 12, fontWeight: 600, whiteSpace: "nowrap" }}>
-                Linha Branca — Logística Reversa
-              </span>
-            </div>
-          )}
-
-          {/* Mobile left: location */}
-          {isMobile && (
-            <span style={{ color: "rgba(255,255,255,0.85)", fontSize: 11, fontWeight: 600, display: "flex", alignItems: "center", gap: 4, whiteSpace: "nowrap" }}>
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+      {/* ── Top bar ── */}
+      <div className="bg-[#0033C6]">
+        <div className="max-w-[1280px] mx-auto px-3 md:px-4 h-8 md:h-9 flex items-center justify-between gap-2">
+          {/* Mobile: location only | Desktop: full text */}
+          <div className="flex items-center gap-3 min-w-0 overflow-hidden">
+            <span className="text-white font-semibold text-[11px] flex items-center gap-1 whitespace-nowrap">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="shrink-0">
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
               </svg>
               Jundiaí - SP
             </span>
-          )}
-
-          {/* Right: TudoLeilão link */}
+            <span className="text-white/30 hidden md:block">|</span>
+            <span className="text-white/80 text-[11px] font-semibold hidden md:block whitespace-nowrap">
+              Leilão Oficial Casas Bahia — Linha Branca
+            </span>
+          </div>
           <a
             href="https://tudoleilao.com.br/leilao/144/lotes"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: CB_YELLOW, fontSize: isMobile ? 11 : 12, fontWeight: 800, textDecoration: "none", whiteSpace: "nowrap", flexShrink: 0 }}
+            className="text-[#FFCC00] text-[11px] md:text-[12px] font-extrabold whitespace-nowrap shrink-0 no-underline"
           >
-            {isMobile ? "TudoLeilão →" : "Ver no TudoLeilão →"}
+            TudoLeilão →
           </a>
         </div>
       </div>
 
       {/* ── Main header ── */}
-      <div style={{ backgroundColor: "white", boxShadow: "0 2px 6px rgba(0,0,0,0.08)" }}>
-        <div style={{
-          maxWidth: 1280,
-          margin: "0 auto",
-          padding: isMobile ? "10px 12px 8px" : "12px 16px",
-          display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          alignItems: isMobile ? "stretch" : "center",
-          gap: isMobile ? 8 : 24,
-        }}>
-          {/* Logo row (mobile: logo left, lotes count right) */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <div className="bg-white shadow-sm">
+        <div className="max-w-[1280px] mx-auto px-3 md:px-4 py-2.5 md:py-3 flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+
+          {/* Logo row — on mobile: logo left + lote count right */}
+          <div className="flex items-center justify-between md:contents">
             <button
               onClick={() => setLocation("/")}
-              style={{ flexShrink: 0, background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center" }}
+              className="border-none bg-transparent p-0 cursor-pointer flex items-center shrink-0"
             >
               <img
                 src="/images/logo-casasbahia-oficial.png"
                 alt="Casas Bahia"
-                style={{ height: isMobile ? 30 : 40, width: "auto", display: "block" }}
+                className="h-[30px] md:h-[40px] w-auto block"
               />
             </button>
-            {isMobile && (
-              <div style={{ textAlign: "right", flexShrink: 0 }}>
-                <div style={{ fontSize: 9, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5px" }}>LEILÃO #144</div>
-                <div style={{ fontSize: 14, fontWeight: 900, color: CB_BLUE, lineHeight: 1.2 }}>186 Lotes</div>
-              </div>
-            )}
+            {/* Mobile-only lote count */}
+            <div className="md:hidden text-right shrink-0">
+              <div className="text-[9px] text-gray-400 font-bold uppercase tracking-wider">LEILÃO #144</div>
+              <div className="text-[14px] font-black text-[#0033C6] leading-tight">186 Lotes</div>
+            </div>
           </div>
 
           {/* Search bar */}
-          <form onSubmit={handleSearch} style={{ flex: 1, minWidth: 0 }}>
-            <div style={{
-              display: "flex",
-              border: `2px solid ${CB_BLUE}`,
-              borderRadius: 8,
-              overflow: "hidden",
-              backgroundColor: "white",
-            }}>
+          <form onSubmit={handleSearch} className="flex-1 min-w-0">
+            <div className="flex border-2 border-[#0033C6] rounded-lg overflow-hidden bg-white">
               <input
                 type="search"
                 value={query}
                 onChange={e => setQuery(e.target.value)}
-                placeholder={isMobile ? "Buscar modelo, categoria ou nº do lote..." : "Buscar modelo, categoria ou nº do lote..."}
-                style={{
-                  flex: 1,
-                  padding: isMobile ? "9px 12px" : "10px 16px",
-                  fontSize: isMobile ? 13 : 14,
-                  fontFamily: "'Nunito', sans-serif",
-                  fontWeight: 500,
-                  border: "none",
-                  outline: "none",
-                  color: CB_DARK,
-                  backgroundColor: "transparent",
-                  minWidth: 0,
-                }}
+                placeholder="Buscar modelo, categoria ou nº do lote..."
+                className="flex-1 px-3 md:px-4 py-2 md:py-2.5 text-[13px] md:text-[14px] font-medium border-none outline-none text-gray-900 bg-transparent min-w-0"
+                style={{ fontFamily: "'Nunito', sans-serif" }}
               />
               <button
                 type="submit"
-                style={{
-                  backgroundColor: CB_BLUE,
-                  border: "none",
-                  padding: isMobile ? "0 12px" : "0 24px",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                  fontFamily: "'Nunito', sans-serif",
-                  fontWeight: 800,
-                  fontSize: 14,
-                  color: "white",
-                  flexShrink: 0,
-                }}
+                className="bg-[#0033C6] border-none px-3 md:px-6 cursor-pointer flex items-center gap-1.5 font-extrabold text-[13px] text-white shrink-0"
+                style={{ fontFamily: "'Nunito', sans-serif" }}
               >
-                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                {!isMobile && <span>Buscar</span>}
+                <span className="hidden md:inline">Buscar</span>
               </button>
             </div>
           </form>
 
-          {/* Lote badge — desktop only */}
-          {!isMobile && (
-            <div style={{ flexShrink: 0, textAlign: "right" }}>
-              <div style={{ fontSize: 10, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5px" }}>LEILÃO #144</div>
-              <div style={{ fontSize: 16, fontWeight: 900, color: CB_BLUE, lineHeight: 1.2 }}>186 Lotes</div>
-            </div>
-          )}
+          {/* Desktop-only lote count */}
+          <div className="hidden md:block text-right shrink-0">
+            <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">LEILÃO #144</div>
+            <div className="text-[16px] font-black text-[#0033C6] leading-tight">186 Lotes</div>
+          </div>
         </div>
       </div>
 
       {/* ── Category nav ── */}
-      <div style={{ backgroundColor: CB_YELLOW, borderBottom: "3px solid rgba(0,0,0,0.08)" }}>
-        <div
-          style={{
-            maxWidth: 1280,
-            margin: "0 auto",
-            padding: "0 4px",
-            display: "flex",
-            alignItems: "stretch",
-            overflowX: "auto",
-            gap: 0,
-          }}
-          className="no-scrollbar"
-        >
-          {/* "Todos" pill */}
+      <div className="bg-[#FFCC00] border-b-[3px] border-black/8">
+        <div className="max-w-[1280px] mx-auto px-1 flex overflow-x-auto no-scrollbar">
+          {/* Todos button */}
           <button
             onClick={() => { setLocation("/"); setQuery(""); if (onSearch) onSearch(""); }}
-            style={{
-              background: CB_BLUE,
-              border: "none",
-              padding: isMobile ? "8px 12px" : "9px 16px",
-              fontFamily: "'Nunito', sans-serif",
-              fontWeight: 800,
-              fontSize: isMobile ? 12 : 13,
-              color: "white",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: 5,
-              flexShrink: 0,
-              whiteSpace: "nowrap",
-            }}
+            className="bg-[#0033C6] border-none px-3 md:px-4 py-2 md:py-2.5 font-extrabold text-[12px] md:text-[13px] text-white cursor-pointer flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+            style={{ fontFamily: "'Nunito', sans-serif" }}
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style={{ opacity: 0.9 }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="opacity-90">
               <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
             </svg>
-            {isMobile ? "Todos" : "Todos os Lotes"}
+            Todos
           </button>
 
           {categories.map(cat => (
             <button
               key={cat}
-              onClick={() => {
-                setLocation("/");
-                const q = cat === "Refrigeradores" ? "REFRIGERADOR"
-                  : cat === "Lavanderia" ? "LAVADORA"
-                  : cat === "Fogões" ? "FOGÃO"
-                  : cat === "Freezers" ? "FREEZER"
-                  : cat.toUpperCase();
-                setQuery(q);
-                if (onSearch) onSearch(q);
-              }}
-              style={{
-                background: "none",
-                border: "none",
-                padding: isMobile ? "8px 11px" : "9px 14px",
-                fontFamily: "'Nunito', sans-serif",
-                fontWeight: 800,
-                fontSize: isMobile ? 12 : 13,
-                color: CB_DARK,
-                cursor: "pointer",
-                whiteSpace: "nowrap",
-                flexShrink: 0,
-              }}
-              onMouseEnter={e => (e.currentTarget.style.color = CB_BLUE)}
-              onMouseLeave={e => (e.currentTarget.style.color = CB_DARK)}
+              onClick={() => navTo(cat)}
+              className="bg-transparent border-none px-3 md:px-3.5 py-2 md:py-2.5 font-extrabold text-[12px] md:text-[13px] text-gray-900 cursor-pointer whitespace-nowrap shrink-0 hover:text-[#0033C6] transition-colors"
+              style={{ fontFamily: "'Nunito', sans-serif" }}
             >
               {cat}
             </button>

@@ -2,11 +2,8 @@ import { useState, useMemo } from "react";
 import { useLocation } from "wouter";
 import Header from "@/components/Header";
 import { lots, getCategory, getCategoryImage } from "@/data/lots";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
 const ITEMS_PER_PAGE = 20;
-const CB_YELLOW = "#FFCC00";
-const CB_BLUE = "#0033C6";
 
 const CATEGORIES = ["Todos", "Refrigeradores", "Lavanderia", "Fogões", "Freezers", "Eletrodomésticos"];
 const STATUSES = ["Todos", "Vendido", "Não Vendido"];
@@ -18,7 +15,6 @@ export default function LotListPage() {
   const [status, setStatus] = useState("Todos");
   const [page, setPage] = useState(1);
   const [sortBy, setSortBy] = useState<"lote" | "price-asc" | "price-desc">("lote");
-  const isMobile = useIsMobile();
 
   const filtered = useMemo(() => {
     let result = [...lots];
@@ -30,15 +26,11 @@ export default function LotListPage() {
         l.loteNum.includes(q)
       );
     }
-    if (category !== "Todos") {
-      result = result.filter(l => getCategory(l.title) === category);
-    }
-    if (status !== "Todos") {
-      result = result.filter(l => l.status === status);
-    }
+    if (category !== "Todos") result = result.filter(l => getCategory(l.title) === category);
+    if (status !== "Todos") result = result.filter(l => l.status === status);
     if (sortBy === "lote") result.sort((a, b) => parseInt(a.loteNum) - parseInt(b.loteNum));
     else if (sortBy === "price-asc") result.sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
-    else if (sortBy === "price-desc") result.sort((a, b) => parsePrice(b.price) - parsePrice(a.price));
+    else result.sort((a, b) => parsePrice(b.price) - parsePrice(a.price));
     return result;
   }, [search, category, status, sortBy]);
 
@@ -56,35 +48,35 @@ export default function LotListPage() {
   }, []);
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#f0f0f5", fontFamily: "'Nunito', sans-serif" }}>
+    <div className="min-h-screen bg-[#f0f0f5]" style={{ fontFamily: "'Nunito', sans-serif" }}>
       <Header onSearch={handleSearch} searchValue={search} />
 
       {/* ── Hero banner ── */}
-      <div style={{ background: `linear-gradient(135deg, ${CB_BLUE} 0%, #0047D0 100%)`, color: "white" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "16px 12px" : "22px 16px" }}>
-          <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "center", justifyContent: "space-between", gap: 12 }}>
+      <div style={{ background: "linear-gradient(135deg, #0033C6 0%, #0047D0 100%)" }} className="text-white">
+        <div className="max-w-[1280px] mx-auto px-3 md:px-4 py-4 md:py-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-4">
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-                <span style={{ backgroundColor: CB_YELLOW, color: CB_BLUE, fontSize: 10, fontWeight: 900, padding: "3px 9px", borderRadius: 4 }}>LEILÃO #144</span>
-                <span style={{ fontSize: 11, opacity: 0.7, fontWeight: 700 }}>TudoLeilão</span>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="bg-[#FFCC00] text-[#0033C6] text-[10px] font-black px-2.5 py-0.5 rounded">LEILÃO #144</span>
+                <span className="text-[11px] opacity-70 font-bold">TudoLeilão</span>
               </div>
-              <h1 style={{ fontSize: isMobile ? 20 : 26, fontWeight: 900, lineHeight: 1.2, marginBottom: 4 }}>
+              <h1 className="text-[20px] md:text-[26px] font-black leading-snug mb-1">
                 Linha Branca — Logística Reversa
               </h1>
-              <p style={{ fontSize: isMobile ? 12 : 13, opacity: 0.85, fontWeight: 600 }}>
+              <p className="text-[12px] md:text-[13px] opacity-85 font-semibold">
                 Refrigeradores • Lavadoras • Fogões • Freezers
-                {!isMobile && " — Retirada em Jundiaí - SP"}
+                <span className="hidden md:inline"> — Retirada em Jundiaí - SP</span>
               </p>
             </div>
-            <div style={{ display: "flex", gap: isMobile ? 20 : 28, alignItems: "center" }}>
+            <div className="flex gap-5 md:gap-7">
               {[
-                { val: stats.total, label: "Total", color: CB_YELLOW },
+                { val: stats.total, label: "Total", color: "#FFCC00" },
                 { val: stats.vendidos, label: "Vendidos", color: "#4ade80" },
                 { val: stats.naoVendidos, label: "Não Vendidos", color: "#f87171" },
               ].map(item => (
-                <div key={item.label} style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: isMobile ? 24 : 30, fontWeight: 900, color: item.color, lineHeight: 1 }}>{item.val}</div>
-                  <div style={{ fontSize: 10, opacity: 0.75, marginTop: 3, fontWeight: 700 }}>{item.label}</div>
+                <div key={item.label} className="text-center">
+                  <div className="text-[26px] md:text-[30px] font-black leading-none" style={{ color: item.color }}>{item.val}</div>
+                  <div className="text-[10px] opacity-75 mt-0.5 font-bold">{item.label}</div>
                 </div>
               ))}
             </div>
@@ -92,107 +84,84 @@ export default function LotListPage() {
         </div>
       </div>
 
-      {/* ── Filters bar ── */}
-      <div style={{
-        backgroundColor: "white",
-        borderBottom: "1px solid #e0e0e0",
-        position: "sticky",
-        top: 0,
-        zIndex: 40,
-        boxShadow: "0 2px 6px rgba(0,0,0,0.07)",
-      }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "8px 12px" : "10px 16px" }}>
-          {/* Category pills — scrollable row on mobile */}
-          <div style={{ display: "flex", gap: 6, overflowX: "auto", paddingBottom: isMobile ? 8 : 0, marginBottom: isMobile ? 0 : 8 }} className="no-scrollbar">
+      {/* ── Sticky filters ── */}
+      <div className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+        <div className="max-w-[1280px] mx-auto px-3 md:px-4 py-2 md:py-2.5">
+          {/* Category pills — single scrollable row */}
+          <div className="flex gap-1.5 overflow-x-auto no-scrollbar pb-2 md:pb-2">
             {CATEGORIES.map(cat => (
               <button
                 key={cat}
                 onClick={() => { setCategory(cat); setPage(1); }}
+                className="px-3 py-1 rounded-full text-[11px] md:text-[12px] font-extrabold cursor-pointer shrink-0 whitespace-nowrap transition-all border-2"
                 style={{
-                  padding: "5px 13px",
-                  borderRadius: 20,
-                  border: `2px solid ${category === cat ? CB_BLUE : "#ddd"}`,
-                  backgroundColor: category === cat ? CB_BLUE : "white",
+                  borderColor: category === cat ? "#0033C6" : "#ddd",
+                  backgroundColor: category === cat ? "#0033C6" : "white",
                   color: category === cat ? "white" : "#555",
                   fontFamily: "'Nunito', sans-serif",
-                  fontSize: 12,
-                  fontWeight: 800,
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
-                  flexShrink: 0,
-                  transition: "all 0.15s",
                 }}
               >{cat}</button>
             ))}
           </div>
-
-          {/* Sort + status row */}
-          <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-              <span style={{ fontSize: 12, fontWeight: 800, color: "#666", whiteSpace: "nowrap" }}>Status:</span>
+          {/* Status + sort row */}
+          <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[11px] font-extrabold text-gray-500 whitespace-nowrap">Status:</span>
               <select
                 value={status}
                 onChange={e => { setStatus(e.target.value); setPage(1); }}
-                style={{ border: "2px solid #ddd", borderRadius: 6, padding: "4px 8px", fontSize: 12, fontFamily: "'Nunito', sans-serif", fontWeight: 700, color: "#333", outline: "none", cursor: "pointer", backgroundColor: "white" }}
+                className="border-2 border-gray-200 rounded-md px-2 py-1 text-[11px] font-bold text-gray-700 outline-none cursor-pointer bg-white"
+                style={{ fontFamily: "'Nunito', sans-serif" }}
               >{STATUSES.map(s => <option key={s}>{s}</option>)}</select>
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-              <span style={{ fontSize: 12, fontWeight: 800, color: "#666", whiteSpace: "nowrap" }}>Ordenar:</span>
+            <div className="flex items-center gap-1.5">
+              <span className="text-[11px] font-extrabold text-gray-500 whitespace-nowrap">Ordenar:</span>
               <select
                 value={sortBy}
                 onChange={e => { setSortBy(e.target.value as typeof sortBy); setPage(1); }}
-                style={{ border: "2px solid #ddd", borderRadius: 6, padding: "4px 8px", fontSize: 12, fontFamily: "'Nunito', sans-serif", fontWeight: 700, color: "#333", outline: "none", cursor: "pointer", backgroundColor: "white" }}
+                className="border-2 border-gray-200 rounded-md px-2 py-1 text-[11px] font-bold text-gray-700 outline-none cursor-pointer bg-white"
+                style={{ fontFamily: "'Nunito', sans-serif" }}
               >
                 <option value="lote">Nº Lote</option>
                 <option value="price-asc">Menor Preço</option>
                 <option value="price-desc">Maior Preço</option>
               </select>
             </div>
-            <div style={{ marginLeft: "auto", fontSize: 12, fontWeight: 800, color: "#666", whiteSpace: "nowrap" }}>
-              <span style={{ color: CB_BLUE }}>{filtered.length}</span> lotes
+            <div className="ml-auto text-[11px] font-extrabold text-gray-500">
+              <span className="text-[#0033C6]">{filtered.length}</span> lotes
             </div>
           </div>
         </div>
       </div>
 
       {/* ── Product grid ── */}
-      <main style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "12px 10px 40px" : "20px 16px 48px" }}>
+      <main className="max-w-[1280px] mx-auto px-2.5 md:px-4 py-3 md:py-5 pb-10">
         {filtered.length === 0 ? (
-          <div style={{ textAlign: "center", padding: "64px 0" }}>
-            <div style={{ fontSize: 48, marginBottom: 16 }}>🔍</div>
-            <h3 style={{ fontSize: 20, fontWeight: 900, color: "#444", marginBottom: 8 }}>Nenhum lote encontrado</h3>
-            <p style={{ fontSize: 14, color: "#888" }}>Tente outro termo ou remova os filtros</p>
+          <div className="text-center py-16">
+            <div className="text-5xl mb-4">🔍</div>
+            <h3 className="text-lg font-black text-gray-600 mb-2">Nenhum lote encontrado</h3>
+            <p className="text-sm text-gray-400">Tente outro termo ou remova os filtros</p>
             <button
               onClick={() => { setSearch(""); setCategory("Todos"); setStatus("Todos"); }}
-              style={{ marginTop: 20, padding: "10px 28px", backgroundColor: CB_YELLOW, color: CB_BLUE, fontWeight: 900, fontSize: 14, border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Nunito', sans-serif" }}
-            >
-              Limpar Filtros
-            </button>
+              className="mt-5 px-6 py-2.5 rounded-lg font-extrabold text-sm border-none cursor-pointer"
+              style={{ backgroundColor: "#FFCC00", color: "#0033C6", fontFamily: "'Nunito', sans-serif" }}
+            >Limpar Filtros</button>
           </div>
         ) : (
           <>
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(auto-fill, minmax(210px, 1fr))",
-              gap: isMobile ? 10 : 16,
-            }}>
+            {/* 2 cols on mobile → 3 on sm → 4 on md → 5 on lg */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 md:gap-4">
               {paginated.map(lot => (
-                <ProductCard
-                  key={lot.itemId}
-                  lot={lot}
-                  isMobile={isMobile}
-                  onClick={() => setLocation(`/lote/${lot.itemId}`)}
-                />
+                <ProductCard key={lot.itemId} lot={lot} onClick={() => setLocation(`/lote/${lot.itemId}`)} />
               ))}
             </div>
 
-            {/* Pagination */}
             {totalPages > 1 && (
-              <div style={{ marginTop: 32, display: "flex", justifyContent: "center", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+              <div className="mt-8 flex justify-center items-center gap-1.5 flex-wrap">
                 <PageBtn onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}>← Ant.</PageBtn>
                 {buildPages(page, totalPages).map((pn, i) =>
                   pn === "..." ? (
-                    <span key={`d${i}`} style={{ padding: "0 2px", color: "#bbb", fontWeight: 700 }}>•••</span>
+                    <span key={`d${i}`} className="px-1 text-gray-300 font-bold">•••</span>
                   ) : (
                     <PageBtn key={pn} onClick={() => setPage(pn as number)} active={page === pn}>{pn}</PageBtn>
                   )
@@ -205,20 +174,21 @@ export default function LotListPage() {
       </main>
 
       {/* ── Footer ── */}
-      <footer style={{ backgroundColor: CB_BLUE, color: "white", padding: isMobile ? "24px 12px" : "32px 16px" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", gap: 16 }}>
+      <footer className="bg-[#0033C6] text-white px-3 md:px-4 py-6 md:py-8">
+        <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row md:justify-between gap-4">
           <div>
-            <img src="/images/logo-casasbahia-oficial.png" alt="Casas Bahia" style={{ height: 26, width: "auto", filter: "brightness(0) invert(1)", marginBottom: 8 }} />
-            <p style={{ fontSize: 12, opacity: 0.65, maxWidth: 380, lineHeight: 1.7 }}>
+            <img src="/images/logo-casasbahia-oficial.png" alt="Casas Bahia"
+              className="h-6 w-auto mb-2" style={{ filter: "brightness(0) invert(1)" }} />
+            <p className="text-[12px] opacity-60 max-w-sm leading-relaxed">
               Leilão Oficial #144 — Linha Branca Logística Reversa.<br />
               Fotos <strong>meramente ilustrativas</strong>. Produtos NÃO TESTADOS.
             </p>
           </div>
-          <div style={{ textAlign: isMobile ? "left" : "right", fontSize: 13 }}>
-            <p style={{ fontWeight: 800, marginBottom: 4 }}>Leiloeiro: TudoLeilão</p>
-            <p style={{ opacity: 0.75, marginBottom: 4 }}>Retirada: Jundiaí - SP</p>
+          <div className="text-[13px] md:text-right">
+            <p className="font-extrabold mb-1">Leiloeiro: TudoLeilão</p>
+            <p className="opacity-75 mb-1">Retirada: Jundiaí - SP</p>
             <a href="https://tudoleilao.com.br/leilao/144/lotes" target="_blank" rel="noopener noreferrer"
-              style={{ color: CB_YELLOW, fontWeight: 900, textDecoration: "none" }}>tudoleilao.com.br →</a>
+              className="text-[#FFCC00] font-black no-underline">tudoleilao.com.br →</a>
           </div>
         </div>
       </footer>
@@ -226,114 +196,80 @@ export default function LotListPage() {
   );
 }
 
-// ── Product Card ──
-function ProductCard({ lot, isMobile, onClick }: { lot: (typeof lots)[0]; isMobile: boolean; onClick: () => void }) {
+function ProductCard({ lot, onClick }: { lot: (typeof lots)[0]; onClick: () => void }) {
   const isVendido = lot.status === "Vendido";
-  const [hovered, setHovered] = useState(false);
+  const [hov, setHov] = useState(false);
 
   return (
     <div
       onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      className="bg-white rounded-lg overflow-hidden cursor-pointer flex flex-col relative"
       style={{
-        backgroundColor: "white",
-        borderRadius: 8,
-        overflow: "hidden",
-        border: `1px solid ${hovered ? "#b0b0b0" : "#e8e8e8"}`,
-        cursor: "pointer",
-        display: "flex",
-        flexDirection: "column",
-        boxShadow: hovered ? "0 6px 20px rgba(0,0,0,0.12)" : "0 2px 6px rgba(0,0,0,0.05)",
-        transform: hovered ? "translateY(-2px)" : "none",
+        border: `1px solid ${hov ? "#aaa" : "#e8e8e8"}`,
+        boxShadow: hov ? "0 6px 20px rgba(0,0,0,0.11)" : "0 2px 6px rgba(0,0,0,0.05)",
+        transform: hov ? "translateY(-2px)" : "none",
         transition: "box-shadow 0.18s, transform 0.18s, border-color 0.18s",
-        position: "relative",
       }}
     >
       {/* Lote badge */}
-      <div style={{ position: "absolute", top: 6, left: 6, backgroundColor: "rgba(0,0,0,0.6)", color: "white", fontSize: 9, fontWeight: 900, padding: "2px 6px", borderRadius: 4, zIndex: 2 }}>
+      <div className="absolute top-1.5 left-1.5 bg-black/60 text-white text-[9px] font-black px-1.5 py-0.5 rounded z-10">
         #{lot.loteNum}
       </div>
       {/* Status dot */}
-      <div style={{ position: "absolute", top: 8, right: 8, width: 8, height: 8, borderRadius: "50%", backgroundColor: isVendido ? "#22c55e" : "#ef4444", zIndex: 2, boxShadow: "0 0 0 2px white" }} />
+      <div
+        className="absolute top-2 right-2 w-2 h-2 rounded-full z-10"
+        style={{ backgroundColor: isVendido ? "#22c55e" : "#ef4444", boxShadow: "0 0 0 2px white" }}
+      />
 
       {/* Image */}
-      <div style={{ aspectRatio: "1", backgroundColor: "#fafafa", display: "flex", alignItems: "center", justifyContent: "center", padding: isMobile ? 8 : 12 }}>
-        <img
-          src={getCategoryImage(lot.title)}
-          alt={lot.title}
-          loading="lazy"
-          style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }}
-        />
+      <div className="aspect-square bg-gray-50 flex items-center justify-center p-2 md:p-3">
+        <img src={getCategoryImage(lot.title)} alt={lot.title} loading="lazy"
+          className="max-w-full max-h-full object-contain block" />
       </div>
 
       {/* Content */}
-      <div style={{ padding: isMobile ? "8px 8px 10px" : "10px 12px 14px", flex: 1, display: "flex", flexDirection: "column" }}>
-        {/* Stars */}
-        {!isMobile && (
-          <div style={{ display: "flex", alignItems: "center", gap: 2, marginBottom: 4 }}>
-            {[1,2,3,4,5].map(i => (
-              <svg key={i} width="11" height="11" viewBox="0 0 24 24" fill={i <= 4 ? CB_YELLOW : "#ddd"}>
-                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-              </svg>
-            ))}
-            <span style={{ fontSize: 9, color: "#aaa", marginLeft: 2, fontWeight: 700 }}>4.0</span>
-          </div>
-        )}
+      <div className="p-2 md:p-3 flex flex-col flex-1">
+        {/* Stars — desktop only */}
+        <div className="hidden md:flex items-center gap-0.5 mb-1.5">
+          {[1,2,3,4,5].map(i => (
+            <svg key={i} width="10" height="10" viewBox="0 0 24 24" fill={i <= 4 ? "#FFCC00" : "#ddd"}>
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+          ))}
+          <span className="text-[9px] text-gray-400 ml-1 font-bold">4.0</span>
+        </div>
 
         {/* Title */}
-        <p style={{
-          fontSize: isMobile ? 11 : 13,
-          fontWeight: 700,
-          color: "#333",
-          lineHeight: 1.4,
-          marginBottom: isMobile ? 6 : 8,
-          minHeight: isMobile ? "2.4em" : "2.8em",
-          display: "-webkit-box",
-          WebkitLineClamp: 2,
-          WebkitBoxOrient: "vertical" as const,
-          overflow: "hidden",
-        }}>
+        <p className="text-[11px] md:text-[12px] font-bold text-gray-800 leading-snug mb-1.5 md:mb-2 line-clamp-2 min-h-[2.4em]">
           {lot.title}
         </p>
 
         {/* Price */}
-        <div style={{ marginBottom: isMobile ? 8 : 10 }}>
-          {!isMobile && <p style={{ fontSize: 10, color: "#aaa", fontWeight: 700, marginBottom: 2 }}>Lance final</p>}
-          <p style={{ fontSize: isMobile ? 15 : 19, fontWeight: 900, color: CB_BLUE, lineHeight: 1, letterSpacing: "-0.3px" }}>
+        <div className="mb-2">
+          <p className="hidden md:block text-[9px] text-gray-400 font-bold mb-0.5">Lance final</p>
+          <p className="text-[15px] md:text-[18px] font-black leading-none" style={{ color: "#0033C6" }}>
             {lot.price}
           </p>
-          {!isMobile && <p style={{ fontSize: 10, color: "#bbb", marginTop: 2 }}>+ taxas do leiloeiro</p>}
+          <p className="hidden md:block text-[9px] text-gray-300 mt-0.5">+ taxas do leiloeiro</p>
         </div>
 
         {/* Status + CTA */}
-        <div style={{ marginTop: "auto", display: "flex", gap: 5, alignItems: "center" }}>
-          <span style={{
-            fontSize: isMobile ? 9 : 11,
-            fontWeight: 800,
-            padding: isMobile ? "2px 6px" : "3px 8px",
-            borderRadius: 4,
-            backgroundColor: isVendido ? "#e6f9ef" : "#fef2f2",
-            color: isVendido ? "#1a7a45" : "#c0392b",
-            border: `1px solid ${isVendido ? "#c3e6cb" : "#fcd5d5"}`,
-            flexShrink: 0,
-            whiteSpace: "nowrap",
-          }}>
-            {isVendido ? "✓" : "○"} {isMobile ? (isVendido ? "Vendido" : "Disponível") : (isVendido ? "Vendido" : "Disponível")}
+        <div className="mt-auto flex items-center gap-1.5">
+          <span
+            className="text-[9px] md:text-[10px] font-extrabold px-1.5 py-0.5 rounded shrink-0"
+            style={{
+              backgroundColor: isVendido ? "#e6f9ef" : "#fef2f2",
+              color: isVendido ? "#1a7a45" : "#c0392b",
+              border: `1px solid ${isVendido ? "#c3e6cb" : "#fcd5d5"}`,
+            }}
+          >
+            {isVendido ? "✓" : "○"} {isVendido ? "Vendido" : "Disponível"}
           </span>
           <button
-            style={{
-              flex: 1,
-              padding: isMobile ? "5px 4px" : "6px 8px",
-              backgroundColor: CB_YELLOW,
-              color: "#1a1a2e",
-              fontWeight: 900,
-              fontSize: isMobile ? 11 : 12,
-              border: "none",
-              borderRadius: 6,
-              cursor: "pointer",
-              fontFamily: "'Nunito', sans-serif",
-            }}
+            className="flex-1 py-1.5 rounded font-extrabold text-[11px] md:text-[12px] border-none cursor-pointer"
+            style={{ backgroundColor: "#FFCC00", color: "#1a1a2e", fontFamily: "'Nunito', sans-serif" }}
           >
             Ver mais
           </button>
@@ -350,16 +286,12 @@ function PageBtn({ children, onClick, disabled = false, active = false }: {
     <button
       onClick={onClick}
       disabled={disabled}
+      className="min-w-[34px] px-2.5 py-1.5 rounded-md font-extrabold text-[12px] border-2 cursor-pointer transition-all"
       style={{
-        minWidth: 36,
-        padding: "6px 10px",
-        borderRadius: 6,
-        border: `2px solid ${active ? CB_BLUE : "#ddd"}`,
-        backgroundColor: active ? CB_BLUE : "white",
+        borderColor: active ? "#0033C6" : "#ddd",
+        backgroundColor: active ? "#0033C6" : "white",
         color: active ? "white" : disabled ? "#ccc" : "#444",
         fontFamily: "'Nunito', sans-serif",
-        fontWeight: 800,
-        fontSize: 13,
         cursor: disabled ? "not-allowed" : "pointer",
       }}
     >{children}</button>
