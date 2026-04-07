@@ -35,25 +35,10 @@ export default function Header({ onSearch, searchValue = "" }: HeaderProps) {
           height: isMobile ? 32 : 36,
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
-          gap: 8,
-          overflow: "hidden",
+          justifyContent: "center",
         }}>
-          {/* Left: only show on desktop */}
-          {!isMobile && (
-            <div style={{ display: "flex", gap: 16, alignItems: "center", minWidth: 0 }}>
-              <span style={{ color: "white", fontSize: 12, fontWeight: 700, opacity: 0.9, whiteSpace: "nowrap" }}>
-                Leilão Oficial Casas Bahia
-              </span>
-              <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 12 }}>|</span>
-              <span style={{ color: "rgba(255,255,255,0.8)", fontSize: 12, fontWeight: 600, whiteSpace: "nowrap" }}>
-                Linha Branca — Logística Reversa
-              </span>
-            </div>
-          )}
-
-          <span style={{ color: isMobile ? "rgba(255,255,255,0.85)" : CB_YELLOW, fontSize: isMobile ? 11 : 12, fontWeight: 800, whiteSpace: "nowrap", flexShrink: 0 }}>
-            🚚 Entrega em todo o Brasil
+          <span style={{ color: "white", fontSize: isMobile ? 11 : 12, fontWeight: 800, letterSpacing: "0.8px", textTransform: "uppercase", textAlign: "center" }}>
+            Leilão Oficial Casas Bahia — Linha Branca com Avaria de Logística — Nº 144
           </span>
         </div>
       </div>
