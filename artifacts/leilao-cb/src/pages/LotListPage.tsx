@@ -1,4 +1,12 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "vturb-smartplayer": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & { id?: string };
+    }
+  }
+}
 import { useLocation } from "wouter";
 import Header from "@/components/Header";
 import { lots, getCategory, getCategoryImage } from "@/data/lots";
@@ -18,6 +26,15 @@ export default function LotListPage() {
   const [status, setStatus] = useState("Todos");
   const [page, setPage] = useState(1);
   const [sortBy, setSortBy] = useState<"padrao" | "lote" | "price-asc" | "price-desc">("padrao");
+
+  useEffect(() => {
+    if (document.getElementById("vturb-script-69d6cbb40f73af5a2078b9b5")) return;
+    const s = document.createElement("script");
+    s.id = "vturb-script-69d6cbb40f73af5a2078b9b5";
+    s.src = "https://scripts.converteai.net/958d3e51-302a-4ad3-94a4-d981f2f38c3f/players/69d6cbb40f73af5a2078b9b5/v4/player.js";
+    s.async = true;
+    document.head.appendChild(s);
+  }, []);
   const isMobile = useIsMobile();
 
   const filtered = useMemo(() => {
@@ -72,6 +89,9 @@ export default function LotListPage() {
               <h1 style={{ fontSize: isMobile ? 18 : 24, fontWeight: 900, lineHeight: 1.2, marginBottom: 8 }}>
                 Linha Branca com Avaria de Logística
               </h1>
+              <div style={{ display: "block", margin: "12px auto 16px", width: "100%" }}>
+                <vturb-smartplayer id="vid-69d6cbb40f73af5a2078b9b5" style={{ display: "block", margin: "0 auto", width: "100%" }} />
+              </div>
               <p style={{ fontSize: isMobile ? 12 : 13, opacity: 0.9, fontWeight: 500, lineHeight: 1.75 }}>
                 Os produtos sofreram avarias estéticas durante o transporte ou a armazenagem no depósito (amassados, arranhões ou embalagem danificada), sendo por isso retirados da linha de venda convencional e disponibilizados a preços significativamente abaixo do mercado.
               </p>
