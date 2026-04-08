@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useLocation } from "wouter";
 import Header from "@/components/Header";
 import BidModal from "@/components/BidModal";
@@ -136,6 +136,21 @@ export default function LotDetailPage() {
   const priceNum = parsePrice(lot.price);
   const comissao = priceNum * 0.05;
   const views = fakeViews(lot.itemId);
+
+  const initViewers = 2 + (parseInt(lot.itemId, 10) % 5);
+  const [liveViewers, setLiveViewers] = useState(initViewers);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLiveViewers(prev => {
+        const delta = Math.random() < 0.5 ? 1 : 2;
+        const dir = Math.random() < 0.5 ? 1 : -1;
+        const next = prev + dir * delta;
+        return Math.min(6, Math.max(2, next));
+      });
+    }, 3500 + Math.random() * 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#f0f0f5", fontFamily: "'SiteFonte','Nunito',sans-serif" }}>
@@ -323,9 +338,12 @@ export default function LotDetailPage() {
                 </p>
               </div>
 
-              {/* Views */}
-              <div style={{ padding: "8px 16px", borderBottom: "1px solid #eee", display: "flex", justifyContent: "flex-end", fontSize: 12, color: "#666" }}>
-                <span>👁 {views.toLocaleString("pt-BR")}</span>
+              {/* Live viewers */}
+              <div style={{ padding: "8px 16px", borderBottom: "1px solid #eee", display: "flex", justifyContent: "center", alignItems: "center", gap: 6 }}>
+                <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "#22c55e", display: "inline-block", boxShadow: "0 0 0 2px #bbf7d0", flexShrink: 0 }} />
+                <span style={{ fontSize: 12, fontWeight: 700, color: "#444" }}>
+                  <span style={{ color: "#22c55e" }}>{liveViewers}</span> {liveViewers === 1 ? "pessoa está" : "pessoas estão"} vendo este produto agora
+                </span>
               </div>
 
               {/* CTA */}
