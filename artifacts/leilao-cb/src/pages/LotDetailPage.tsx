@@ -51,6 +51,45 @@ function lanceinicial(price: number): string {
   return formatBRL(Math.round(price * 0.75 / 10) * 10);
 }
 
+const FAKE_NAMES = [
+  ["Carlos","Oliveira"],["Fernanda","Santos"],["Ricardo","Silva"],["Juliana","Pereira"],
+  ["Marcos","Costa"],["Ana","Rodrigues"],["Paulo","Almeida"],["Beatriz","Ferreira"],
+  ["Leonardo","Souza"],["Camila","Lima"],["Rafael","Carvalho"],["Larissa","Gomes"],
+  ["Thiago","Martins"],["Amanda","Rocha"],["Gabriel","Nascimento"],["Patricia","Araujo"],
+  ["Diego","Barbosa"],["Renata","Cardoso"],["Andre","Melo"],["Vanessa","Ribeiro"],
+  ["Bruno","Dias"],["Monica","Campos"],["Felipe","Pinto"],["Cristiane","Castro"],
+  ["Rodrigo","Monteiro"],["Isabela","Freitas"],["Eduardo","Teixeira"],["Leticia","Rezende"],
+  ["Gustavo","Borges"],["Aline","Cunha"],["Lucas","Azevedo"],["Priscila","Machado"],
+];
+
+const STATES = ["SP","RJ","MG","BA","PR","RS","PE","CE","GO","SC","PA","DF","ES","AM","MT","MS","PB","RN","AL","MA","PI","SE","RO","RR","AP","TO","AC"];
+
+function sr(seed: number, min: number, max: number): number {
+  let h = seed * 2654435761;
+  h = Math.imul(h ^ (h >>> 16), 0x45d9f3b);
+  h = Math.imul(h ^ (h >>> 16), 0x45d9f3b);
+  h = Math.abs(h ^ (h >>> 16));
+  return min + (h % (max - min + 1));
+}
+
+function getFakeBidHistory(itemId: string, currentPrice: number) {
+  const base = parseInt(itemId, 10) * 7919;
+  const results = [];
+  let price = currentPrice;
+  for (let i = 0; i < 5; i++) {
+    const ns = base + i * 137;
+    const [first, last] = FAKE_NAMES[sr(ns, 0, FAKE_NAMES.length - 1)];
+    const cLast = last[0] + "*".repeat(Math.max(last.length - 2, 1)) + last[last.length - 1];
+    const c1 = sr(ns + 3, 100, 999);
+    const c2 = sr(ns + 5, 10, 99);
+    const state = STATES[sr(ns + 7, 0, STATES.length - 1)];
+    results.push({ name: `${first} ${cLast}`, cpf: `${c1}.***.***-${c2}`, state, amount: price });
+    const dec = sr(ns + 11, 4, 18);
+    price = Math.max(Math.round((price - dec) * 100) / 100, currentPrice * 0.75);
+  }
+  return results;
+}
+
 function formatInputBRL(raw: string): string {
   const digits = raw.replace(/\D/g, "");
   if (!digits) return "";
@@ -201,12 +240,49 @@ export default function LotDetailPage() {
               {/* Price block */}
               <div style={{ padding: "14px 16px", borderBottom: "1px solid #eee", textAlign: "center" }}>
                 <p style={{ fontSize: 11, fontWeight: 700, color: "#666", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: 4 }}>
-                  {isVendido ? "Maior Lance no Momento" : "Maior Lance no Momento"}
+                  Maior Lance no Momento
                 </p>
                 <p style={{ fontSize: isMobile ? 26 : 30, fontWeight: 900, color: "#222", lineHeight: 1, marginBottom: 4 }}>
                   {lot.price}
                 </p>
                 <p style={{ fontSize: 11, color: "#999" }}>{todayStr()}</p>
+
+                {/* Bid history — disponível only */}
+                {!isVendido && (() => {
+                  const bids = getFakeBidHistory(lot.itemId, priceNum);
+                  return (
+                    <div style={{ marginTop: 12, borderTop: "1px solid #f0f0f0", paddingTop: 10, textAlign: "left" }}>
+                      <p style={{ fontSize: 10, fontWeight: 800, color: "#bbb", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: 6 }}>Últimos lances</p>
+                      {bids.map((bid, i) => (
+                        <div key={i} style={{
+                          display: "flex", alignItems: "center", justifyContent: "space-between",
+                          padding: "5px 0",
+                          borderBottom: i < bids.length - 1 ? "1px solid #f7f7f7" : "none",
+                          opacity: i === 0 ? 1 : 0.65 + (4 - i) * 0.07,
+                        }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: 6, minWidth: 0 }}>
+                            <span style={{
+                              display: "inline-flex", alignItems: "center", justifyContent: "center",
+                              width: 22, height: 22, borderRadius: "50%",
+                              backgroundColor: i === 0 ? CB_BLUE : "#f0f0f0",
+                              color: i === 0 ? "white" : "#999",
+                              fontSize: 9, fontWeight: 900, flexShrink: 0,
+                            }}>{i + 1}º</span>
+                            <div style={{ minWidth: 0 }}>
+                              <p style={{ fontSize: 11, fontWeight: 800, color: "#333", lineHeight: 1.2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                                {bid.name} · {bid.state}
+                              </p>
+                              <p style={{ fontSize: 10, color: "#bbb", lineHeight: 1.2 }}>{bid.cpf}</p>
+                            </div>
+                          </div>
+                          <span style={{ fontSize: 12, fontWeight: 900, color: i === 0 ? CB_BLUE : "#555", flexShrink: 0, marginLeft: 8 }}>
+                            {formatBRL(bid.amount)}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })()}
 
                 {isVendido && lot.buyer && (
                   <div style={{ marginTop: 8, fontSize: 12, color: "#555" }}>
