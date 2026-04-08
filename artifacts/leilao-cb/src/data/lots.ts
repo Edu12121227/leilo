@@ -27,6 +27,19 @@ export interface Lot {
       "conditionNote": "Produto <strong>novo, sem uso e lacrado de fábrica</strong>. A avaria é exclusivamente estética: <strong>amassado na caixa</strong>. O aparelho está completamente intacto e o lacre original da Apple permanece intacto. <strong>Não é possível realizar trocas ou devoluções.</strong>"
     },
     {
+      "loteNum": "05",
+      "title": "FRITADEIRA SEM ÓLEO MONDIAL FAMILY AIR FRYER 4L AFN-40-BI 127V (2 UNIDADES)",
+      "description": "LOTE. 05 — 2 UNIDADES\n2 FRITADEIRAS SEM ÓLEO MONDIAL FAMILY AIR FRYER 4L AFN-40-BI 127V\n\n⚠️ Este lote contém 2 (duas) unidades.\n\nEspecificações (por unidade):\n• Modelo: AFN-40-BI\n• Capacidade: 4 Litros\n• Cesto removível com 410 cm² de área plana — assa por igual\n• Controle de temperatura: até 200°C\n• Timer: 60 minutos com sinal sonoro automático\n• Painel frontal em aço inox\n• Acompanha livro de receitas\n• Tensão: 127V\n• Cor: Preto/Inox\n\nProdutos novos e sem uso, com avaria exclusivamente estética (embalagem amassada). Galpão localizado em Jundiaí - SP. Entrega disponível para todo o Brasil.",
+      "itemId": "1002",
+      "url": "https://tudoleilao.com.br/item/1002/detalhes",
+      "price": "R$95,00",
+      "status": "Disponível",
+      "image": "/mondial-airfryer-4l.jpg",
+      "buyer": null,
+      "cpf": null,
+      "conditionNote": "Este lote contém <strong>2 (duas) unidades</strong>. Produtos <strong>novos e sem uso</strong>, com avaria exclusivamente estética: <strong>embalagem amassada</strong>. Os aparelhos estão completamente intactos e funcionais. <strong>Não é possível realizar trocas ou devoluções.</strong>"
+    },
+    {
       "loteNum": "240",
       "title": "REFRIGERADOR FF 480L ELECTROLUX TF71 BC 127V",
       "description": "LOTE. 240 LPN. C1237776\n1 REF FF 480L ELECTROLUX TF71 BC 127V\nProduto novo e sem uso com avaria exclusivamente estética. Galpão localizado em Jundiaí - SP. Entrega disponível para todo o Brasil.",
@@ -2263,6 +2276,7 @@ export interface Lot {
   export function getCategory(title: string): string {
     const t = title.toUpperCase();
     if (t.includes("IPHONE") || t.includes("SMARTPHONE") || t.includes("CELULAR") || t.includes("SAMSUNG GALAXY") || t.includes("XIAOMI")) return "Smartphones";
+    if (t.includes("FRITADEIRA") || t.includes("AIR FRYER") || t.includes("AIRFRYER")) return "Fritadeiras";
     if (t.includes("FREEZER") || t.includes("CONGELADOR")) return "Freezers";
     if (t.includes("LAVADORA") || t.includes("LAVA E SECA") || t.includes("LAVA-ROUPA") || t.includes("SECADORA") || t.includes("CENTRIFUGA")) return "Lavanderia";
     if (t.includes("FOGÃO") || t.includes("FOGAO") || t.includes("COOKTOP") || t.includes("FORNO")) return "Fogões";
