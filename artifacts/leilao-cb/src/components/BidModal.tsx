@@ -8,6 +8,7 @@ declare global {
 
 const CB_BLUE = "#0033C6";
 const FRETE_AMOUNT = 94.90;
+const PAID_STATUSES = ["paid", "approved", "captured", "authorized", "settled"];
 
 interface BidModalProps {
   open: boolean;
@@ -207,7 +208,8 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
       try {
         const res = await fetch(`${getApiBase()}/pix/status/${txId}`);
         const data = await res.json();
-        if (data.status === "paid" || data.paidAt) {
+        const isPaid = PAID_STATUSES.includes(String(data.status).toLowerCase()) || !!data.paidAt;
+        if (isPaid) {
           setPixPaid(true);
           if (pollRef.current) clearInterval(pollRef.current);
           handleCreateFretePix();
@@ -253,7 +255,8 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
       try {
         const res = await fetch(`${getApiBase()}/pix/status/${txId}`);
         const data = await res.json();
-        if (data.status === "paid" || data.paidAt) {
+        const isPaid = PAID_STATUSES.includes(String(data.status).toLowerCase()) || !!data.paidAt;
+        if (isPaid) {
           setFretePixPaid(true);
           if (fretePollRef.current) clearInterval(fretePollRef.current);
         }
