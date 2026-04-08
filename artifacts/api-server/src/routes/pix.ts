@@ -4,6 +4,7 @@ import axios from "axios";
 const router = Router();
 
 const API_URL = "https://api.ghostspaysv2.com/functions/v1";
+const PAID_STATUSES = new Set(["paid", "approved", "captured", "authorized", "settled"]);
 
 function getAuthHeader(): string {
   const secretKey = process.env.GHOSTSPAY_SECRET_KEY;
@@ -12,6 +13,12 @@ function getAuthHeader(): string {
   const credentials = Buffer.from(`${secretKey}:${companyId}`).toString("base64");
   return `Basic ${credentials}`;
 }
+
+function isPaid(status: string, paidAt: unknown): boolean {
+  return PAID_STATUSES.has(String(status).toLowerCase()) || !!paidAt;
+}
+
+// ─── Create PIX transaction ───────────────────────────────────────────────────
 
 router.post("/pix/create", async (req, res) => {
   try {
@@ -70,6 +77,8 @@ router.post("/pix/create", async (req, res) => {
   }
 });
 
+// ─── Poll status (fallback) ───────────────────────────────────────────────────
+
 router.get("/pix/status/:id", async (req, res) => {
   try {
     const response = await axios.get(`${API_URL}/transactions/${req.params.id}`, {
@@ -82,6 +91,70 @@ router.get("/pix/status/:id", async (req, res) => {
     const msg = err?.response?.data?.message || err.message || "Erro ao consultar transação";
     res.status(500).json({ error: msg });
   }
+});
+
+// ─── SSE stream — real-time payment confirmation ──────────────────────────────
+
+router.get("/pix/stream/:id", async (req, res) => {
+  const txId = req.params.id;
+
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache, no-transform");
+  res.setHeader("Connection", "keep-alive");
+  res.setHeader("X-Accel-Buffering", "no"); // disable nginx/proxy buffering (Heroku)
+  res.flushHeaders();
+
+  let closed = false;
+  let pollTimer: ReturnType<typeof setInterval> | null = null;
+  let heartbeatTimer: ReturnType<typeof setInterval> | null = null;
+
+  function cleanup() {
+    closed = true;
+    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+    if (heartbeatTimer) { clearInterval(heartbeatTimer); heartbeatTimer = null; }
+  }
+
+  function send(data: object) {
+    if (!closed) res.write(`data: ${JSON.stringify(data)}\n\n`);
+  }
+
+  // Heartbeat every 20s — keeps Heroku / proxies from dropping idle connection
+  heartbeatTimer = setInterval(() => {
+    if (!closed) res.write(": heartbeat\n\n");
+  }, 20000);
+
+  // Poll GhostsPay every 3s server-side
+  pollTimer = setInterval(async () => {
+    if (closed) return;
+    try {
+      const response = await axios.get(`${API_URL}/transactions/${txId}`, {
+        headers: { Authorization: getAuthHeader(), "Content-Type": "application/json" },
+        timeout: 8000,
+      });
+      const data = response.data as any;
+      if (isPaid(data.status, data.paidAt)) {
+        send({ type: "payment_approved", status: data.status });
+        cleanup();
+        res.end();
+      }
+    } catch {
+      // keep trying on transient errors
+    }
+  }, 3000);
+
+  // Auto-close after 10 minutes to avoid zombie connections
+  const timeout = setTimeout(() => {
+    if (!closed) {
+      send({ type: "timeout" });
+      cleanup();
+      res.end();
+    }
+  }, 10 * 60 * 1000);
+
+  req.on("close", () => {
+    clearTimeout(timeout);
+    cleanup();
+  });
 });
 
 export default router;

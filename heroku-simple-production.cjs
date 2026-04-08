@@ -131,6 +131,79 @@ app.get('/api/pix/status/:id', async (req, res) => {
   }
 });
 
+// ─── PIX stream — SSE real-time confirmation ──────────────────────────────────
+
+const PAID_STATUSES_SET = new Set(['paid', 'approved', 'captured', 'authorized', 'settled']);
+
+function isPaid(status, paidAt) {
+  return PAID_STATUSES_SET.has(String(status || '').toLowerCase()) || !!paidAt;
+}
+
+app.get('/api/pix/stream/:id', (req, res) => {
+  const txId = req.params.id;
+
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache, no-transform');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('X-Accel-Buffering', 'no');
+  res.flushHeaders();
+
+  let closed = false;
+  let pollTimer = null;
+  let heartbeatTimer = null;
+
+  function cleanup() {
+    closed = true;
+    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+    if (heartbeatTimer) { clearInterval(heartbeatTimer); heartbeatTimer = null; }
+  }
+
+  function send(data) {
+    if (!closed) res.write('data: ' + JSON.stringify(data) + '\n\n');
+  }
+
+  // Heartbeat every 20s — keeps Heroku from dropping idle connection
+  heartbeatTimer = setInterval(() => {
+    if (!closed) res.write(': heartbeat\n\n');
+  }, 20000);
+
+  // Poll GhostsPay every 3s server-side
+  pollTimer = setInterval(async () => {
+    if (closed) return;
+    try {
+      const response = await axios.get(
+        `${GHOSTSPAY_API_URL}/transactions/${txId}`,
+        {
+          headers: { Authorization: getAuthHeader(), 'Content-Type': 'application/json' },
+          timeout: 8000,
+        }
+      );
+      const data = response.data;
+      if (isPaid(data.status, data.paidAt)) {
+        send({ type: 'payment_approved', status: data.status });
+        cleanup();
+        res.end();
+      }
+    } catch {
+      // keep trying on transient errors
+    }
+  }, 3000);
+
+  // Auto-close after 10 minutes
+  const timeout = setTimeout(() => {
+    if (!closed) {
+      send({ type: 'timeout' });
+      cleanup();
+      res.end();
+    }
+  }, 10 * 60 * 1000);
+
+  req.on('close', () => {
+    clearTimeout(timeout);
+    cleanup();
+  });
+});
+
 // ─── Static frontend (built by Vite) ─────────────────────────────────────────
 
 const STATIC_DIR = path.join(__dirname, 'artifacts', 'leilao-cb', 'dist', 'public');

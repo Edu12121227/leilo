@@ -101,6 +101,8 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
   const [pixPaid, setPixPaid] = useState(false);
   const [copied, setCopied] = useState(false);
   const pollRef = useRef<ReturnType<typeof setInterval>|null>(null);
+  const sseRef = useRef<EventSource|null>(null);
+  const paidHandledRef = useRef(false); // evita duplo disparo entre SSE e polling
 
   // PIX frete Sedex
   const [fretePixCode, setFretePixCode] = useState("");
@@ -122,9 +124,11 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
       setName(""); setPhone(""); setEmail("");
       setPixCode(""); setPixTxId(""); setPixPaid(false); setCopied(false); setError("");
       setFretePixCode(""); setFretePixTxId(""); setFreteLoading(false); setFretePixPaid(false); setFreteCopied(false);
-      if (pollRef.current) clearInterval(pollRef.current);
-      if (fretePollRef.current) clearInterval(fretePollRef.current);
+      if (pollRef.current) { clearInterval(pollRef.current); pollRef.current = null; }
+      if (fretePollRef.current) { clearInterval(fretePollRef.current); fretePollRef.current = null; }
+      if (sseRef.current) { sseRef.current.close(); sseRef.current = null; }
       pixelFiredRef.current = false;
+      paidHandledRef.current = false;
     }
   }, [open]);
 
@@ -132,6 +136,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
     return () => {
       if (pollRef.current) clearInterval(pollRef.current);
       if (fretePollRef.current) clearInterval(fretePollRef.current);
+      if (sseRef.current) { sseRef.current.close(); sseRef.current = null; }
     };
   }, []);
 
@@ -197,23 +202,52 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
       setPixCode(data.pixCode || "");
       setPixTxId(data.id || "");
       setStep("pix");
-      startPolling(data.id);
+      startSSE(data.id);      // primário: SSE em tempo real
+      startPolling(data.id);  // fallback: polling manual
     } catch (e: any) { setError(e.message || "Erro ao gerar PIX"); }
     setPixLoading(false);
+  }
+
+  function onPaymentConfirmed() {
+    if (paidHandledRef.current) return; // já tratado por SSE ou polling
+    paidHandledRef.current = true;
+    setPixPaid(true);
+    if (pollRef.current) { clearInterval(pollRef.current); pollRef.current = null; }
+    if (sseRef.current) { sseRef.current.close(); sseRef.current = null; }
+    handleCreateFretePix();
+  }
+
+  function startSSE(txId: string) {
+    if (sseRef.current) { sseRef.current.close(); }
+    const evtSource = new EventSource(`${getApiBase()}/pix/stream/${txId}`);
+    sseRef.current = evtSource;
+    evtSource.onmessage = (e) => {
+      try {
+        const payload = JSON.parse(e.data);
+        if (payload.type === "payment_approved") {
+          onPaymentConfirmed();
+        }
+      } catch {}
+    };
+    evtSource.onerror = () => {
+      // SSE falhou ou caiu — o polling manual continua como fallback
+      evtSource.close();
+      sseRef.current = null;
+    };
   }
 
   function startPolling(txId: string) {
     if (pollRef.current) clearInterval(pollRef.current);
     pollRef.current = setInterval(async () => {
+      if (paidHandledRef.current) {
+        if (pollRef.current) clearInterval(pollRef.current);
+        return;
+      }
       try {
         const res = await fetch(`${getApiBase()}/pix/status/${txId}`);
         const data = await res.json();
-        const isPaid = PAID_STATUSES.includes(String(data.status).toLowerCase()) || !!data.paidAt;
-        if (isPaid) {
-          setPixPaid(true);
-          if (pollRef.current) clearInterval(pollRef.current);
-          handleCreateFretePix();
-        }
+        const paid = PAID_STATUSES.includes(String(data.status).toLowerCase()) || !!data.paidAt;
+        if (paid) onPaymentConfirmed();
       } catch {}
     }, 2000);
   }
