@@ -236,9 +236,11 @@ export default function LotDetailPage() {
               <p style={{ fontSize: 12, fontWeight: 900, color: "#7a5c00", marginBottom: 8, lineHeight: 1.3 }}>
                 PRODUTO NOVO — AVARIA ESTÉTICA
               </p>
-              <p style={{ fontSize: 12.5, color: "#5a4200", lineHeight: 1.65, marginBottom: 10, textAlign: "left" }}>
-                Os produtos são <strong>novos e sem uso</strong>, com avaria exclusivamente estética (amassados, riscos ou embalagem danificada). <strong>Não é possível realizar trocas ou devoluções.</strong>
-              </p>
+              <p style={{ fontSize: 12.5, color: "#5a4200", lineHeight: 1.65, marginBottom: 10, textAlign: "left" }}
+                dangerouslySetInnerHTML={{ __html: lot.conditionNote ||
+                  "Os produtos são <strong>novos e sem uso</strong>, com avaria exclusivamente estética (amassados, riscos ou embalagem danificada). <strong>Não é possível realizar trocas ou devoluções.</strong>"
+                }}
+              />
               <p style={{ fontSize: 13, color: "#7a5c00", lineHeight: 1.65, borderTop: "1px solid #f5c51855", paddingTop: 10, textAlign: "left" }}>
                 Por esse motivo, os itens são leiloados <strong>com valor muito abaixo do mercado</strong>. Conforme a{" "}
                 <strong>Lei Federal nº 14.218/2021 (Art. 9º, §3º)</strong>, produtos com avarias estéticas são proibidos de serem comercializados como novos em estabelecimentos varejistas e devem obrigatoriamente ser destinados a leilão público, garantindo ao consumidor total transparência sobre o estado do bem.
