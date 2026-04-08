@@ -1,5 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
 const CB_BLUE = "#0033C6";
 const FRETE_AMOUNT = 94.90;
 
@@ -102,6 +108,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
   const [fretePixPaid, setFretePixPaid] = useState(false);
   const [freteCopied, setFreteCopied] = useState(false);
   const fretePollRef = useRef<ReturnType<typeof setInterval>|null>(null);
+  const pixelFiredRef = useRef(false);
 
   const [error, setError] = useState("");
 
@@ -116,6 +123,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
       setFretePixCode(""); setFretePixTxId(""); setFreteLoading(false); setFretePixPaid(false); setFreteCopied(false);
       if (pollRef.current) clearInterval(pollRef.current);
       if (fretePollRef.current) clearInterval(fretePollRef.current);
+      pixelFiredRef.current = false;
     }
   }, [open]);
 
@@ -209,6 +217,14 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
   }
 
   async function handleCreateFretePix() {
+    // Dispara evento de compra no Facebook Pixel — apenas uma vez
+    if (!pixelFiredRef.current && typeof window.fbq === "function") {
+      pixelFiredRef.current = true;
+      window.fbq("track", "Purchase", {
+        value: bidAmount + comissao + FRETE_AMOUNT,
+        currency: "BRL",
+      });
+    }
     setFreteLoading(true);
     try {
       const res = await fetch(`${getApiBase()}/pix/create`, {
