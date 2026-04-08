@@ -446,9 +446,11 @@ export default function LotDetailPage() {
                       </button>
 
                       {/* Payment on delivery note */}
-                      <p style={{ marginTop: 10, fontSize: 11, color: "#888", lineHeight: 1.6, borderTop: "1px solid #f0f0f0", paddingTop: 10 }}>
-                        50% do valor é pago agora para confirmar a arrematação. O restante é pago na entrega.
-                      </p>
+                      <div style={{ marginTop: 12, backgroundColor: "#c0392b", borderRadius: 8, padding: "12px 14px" }}>
+                        <p style={{ fontSize: 13, fontWeight: 900, color: "white", lineHeight: 1.65, textAlign: "center" }}>
+                          Atenção: 50% do valor total deve ser quitado no ato da arrematação para garantir a reserva do lote. O saldo remanescente será cobrado no momento da entrega do produto, conforme os termos e condições do leilão.
+                        </p>
+                      </div>
                     </>
                   );
                 })()}
