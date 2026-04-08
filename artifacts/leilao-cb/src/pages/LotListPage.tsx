@@ -290,8 +290,8 @@ function ProductCard({ lot, isMobile, onClick }: { lot: (typeof lots)[0]; isMobi
 
         {/* Price */}
         <div style={{ marginBottom: isMobile ? 8 : 10 }}>
-          {!isMobile && <p style={{ fontSize: 10, color: "#aaa", fontWeight: 700, marginBottom: 2 }}>Lance final</p>}
           <p style={{ fontSize: isMobile ? 15 : 19, fontWeight: 900, color: CB_BLUE, lineHeight: 1, letterSpacing: "-0.3px" }}>
+            <span style={{ fontSize: isMobile ? 10 : 11, fontWeight: 700, color: "#888", letterSpacing: 0 }}>Lance atual: </span>
             {lot.price}
           </p>
         </div>
@@ -305,17 +305,19 @@ function ProductCard({ lot, isMobile, onClick }: { lot: (typeof lots)[0]; isMobi
         )}
 
         {/* Status + CTA */}
-        <div style={{ marginTop: "auto", display: "flex", gap: 5, alignItems: "center" }}>
+        <div style={{ marginTop: "auto", display: "flex", gap: 5, alignItems: "stretch" }}>
           <span style={{
             fontSize: isMobile ? 9 : 11,
             fontWeight: 800,
-            padding: isMobile ? "2px 6px" : "3px 8px",
-            borderRadius: 4,
-            backgroundColor: isVendido ? "#fef2f2" : "#f0fdf4",
-            color: isVendido ? "#c0392b" : "#166534",
-            border: `1px solid ${isVendido ? "#fcd5d5" : "#86efac"}`,
+            padding: isMobile ? "5px 6px" : "6px 8px",
+            borderRadius: 6,
+            backgroundColor: isVendido ? "#fef2f2" : "#16a34a",
+            color: isVendido ? "#c0392b" : "#fff",
+            border: isVendido ? "1px solid #fcd5d5" : "none",
             flexShrink: 0,
             whiteSpace: "nowrap",
+            display: "flex",
+            alignItems: "center",
           }}>
             {isVendido ? "✓ Vendido" : "● Disponível"}
           </span>

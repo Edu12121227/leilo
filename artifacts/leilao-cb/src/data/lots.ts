@@ -19,7 +19,7 @@ export interface Lot {
       "description": "LOTE. 04\n1 SMARTPHONE APPLE IPHONE 13 PRO 256GB DOURADO 5G\n\nEspecificações:\n• Tela: 6,1\" Super Retina XDR OLED, 2532×1170 px, 460 ppi\n• Processador: Apple A15 Bionic (5 nm)\n• Armazenamento: 256 GB\n• RAM: 6 GB\n• Câmera traseira: Sistema triplo 12 MP — Wide ƒ/1.5 + Ultra Wide ƒ/1.8 + Teleobjetiva 3× ƒ/2.8\n• Câmera frontal: 12 MP TrueDepth ƒ/2.2\n• Bateria: 3.095 mAh — até 22h de reprodução de vídeo\n• Conectividade: 5G, Wi-Fi 6, Bluetooth 5.0, NFC\n• Resistência: IP68 — 6 m por 30 min\n• Sistema: iOS 15 (atualizável)\n• Cor: Dourado\n\nProduto novo, sem uso e lacrado de fábrica. Galpão localizado em Jundiaí - SP. Entrega disponível para todo o Brasil.",
       "itemId": "1001",
       "url": "https://tudoleilao.com.br/item/1001/detalhes",
-      "price": "R$300,00",
+      "price": "R$140,00",
       "status": "Disponível",
       "image": "/iphone13pro-gold.jpg",
       "buyer": null,
