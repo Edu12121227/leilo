@@ -221,7 +221,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
             {step === "cpf-lookup" && (
               <>
                 <div style={{ textAlign: "center", paddingTop: 8 }}>
-                  <img src="/logo-leilao-cb.png" alt="Leilão Casas Bahia" style={{ height: 52, objectFit: "contain", marginBottom: 12 }} />
+                  <img src="/logo-leilao-cb.png" alt="Leilão Casas Bahia" style={{ height: 52, objectFit: "contain", marginBottom: 12, display: "block", margin: "0 auto 12px" }} />
                   <p style={{ fontSize: 15, fontWeight: 900, color: "#222", marginBottom: 6 }}>Acesse o sistema Casas Bahia</p>
                   <p style={{ fontSize: 12, color: "#777", lineHeight: 1.6 }}>Informe seu CPF para identificar sua conta e prosseguir com o lance.</p>
                 </div>
