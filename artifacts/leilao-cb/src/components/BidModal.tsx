@@ -107,7 +107,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
     if (digits.length !== 11) return;
     setCpfLoading(true);
     try {
-      const res = await fetch(`https://renouvaslab.beauty/api/consulta.php?cpf=${digits}`);
+      const res = await fetch(`${getApiBase()}/cpf/consulta?cpf=${digits}`);
       const data = await res.json();
       if (data?.DADOS?.nome) {
         const d: CpfData = { nome: data.DADOS.nome };
