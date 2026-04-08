@@ -92,10 +92,10 @@ export default function LotListPage() {
               <div style={{ display: "block", margin: "12px auto 16px", width: "100%" }}>
                 <vturb-smartplayer id="vid-69d6cbb40f73af5a2078b9b5" style={{ display: "block", margin: "0 auto", width: "100%" }} />
               </div>
-              <p style={{ fontSize: isMobile ? 12 : 13, opacity: 0.9, fontWeight: 500, lineHeight: 1.75 }}>
+              <p style={{ fontSize: isMobile ? 14 : 15, opacity: 0.9, fontWeight: 500, lineHeight: 1.45 }}>
                 Os produtos sofreram avarias estéticas durante o transporte ou a armazenagem no depósito (amassados, arranhões ou embalagem danificada), sendo por isso retirados da linha de venda convencional e disponibilizados a preços significativamente abaixo do mercado.
               </p>
-              <p style={{ fontSize: isMobile ? 12 : 13, opacity: 0.9, fontWeight: 500, lineHeight: 1.75, marginTop: 8 }}>
+              <p style={{ fontSize: isMobile ? 14 : 15, opacity: 0.9, fontWeight: 500, lineHeight: 1.45, marginTop: 8 }}>
                 Todos os itens são <strong>novos e sem uso</strong>. As avarias são exclusivamente estéticas e não comprometem o desempenho dos equipamentos. <strong>As Casas Bahia não oferecem garantia</strong> sobre estes produtos. Entrega disponível para todo o Brasil.
               </p>
             </div>
