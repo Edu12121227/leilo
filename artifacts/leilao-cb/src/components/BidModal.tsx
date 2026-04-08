@@ -238,7 +238,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                     autoFocus
                   />
                 </div>
-                <div style={{ marginTop: "auto", paddingTop: 8 }}>
+                <div style={{ paddingTop: 8 }}>
                   <button
                     disabled={cpfDigits.length !== 11 || cpfLoading}
                     onClick={handleCpfLookup}
