@@ -101,6 +101,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
   }
 
   async function handleCreatePix() {
+    const pixAmount = (bidAmount + comissao) / 2;
     setPixLoading(true);
     setError("");
     try {
@@ -110,7 +111,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
         body: JSON.stringify({
           name,
           cpf: cpf.replace(/\D/g, ""),
-          amount: comissao,
+          amount: pixAmount,
           lotTitle,
           email: `${cpf.replace(/\D/g, "")}@arrematante.com.br`,
         }),
@@ -356,78 +357,109 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
               </>
             )}
 
-            {/* ─── STEP: INFO (leiloeiro) ─── */}
-            {step === "info" && (
-              <>
-                <div>
-                  <p style={{ fontSize: 13, fontWeight: 900, color: "#222", marginBottom: 4 }}>Pagamento da Comissão</p>
-                  <p style={{ fontSize: 12, color: "#777", lineHeight: 1.6 }}>Para concluir a arrematação, é obrigatório o pagamento da comissão do leiloeiro oficial.</p>
-                </div>
-                <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "12px 14px" }}>
-                  <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 8 }}>Leiloeiro Oficial</p>
-                  <p style={{ fontSize: 13, fontWeight: 900, color: "#222" }}>Osmar Campos Vicente Marques</p>
-                  <p style={{ fontSize: 12, color: "#777", marginTop: 2 }}>JUCESP 1487</p>
-                </div>
-                <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "12px 14px" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ fontSize: 12, color: "#555" }}>Valor da comissão (5%)</span>
-                    <span style={{ fontSize: 14, fontWeight: 900, color: CB_BLUE }}>{formatBRL(comissao)}</span>
-                  </div>
-                </div>
-                <p style={{ fontSize: 12, color: "#555", lineHeight: 1.6 }}>
-                  O pagamento será realizado via PIX, gerado automaticamente. Após a confirmação do pagamento, a arrematação será oficializada.
-                </p>
-                {error && <p style={{ fontSize: 12, color: "#c0392b", fontWeight: 700 }}>{error}</p>}
-                <div style={{ marginTop: "auto", paddingTop: 8 }}>
-                  <button
-                    onClick={handleCreatePix}
-                    disabled={pixLoading}
-                    style={{ display: "block", width: "100%", padding: "13px", backgroundColor: pixLoading ? "#e0e0e0" : CB_BLUE, color: pixLoading ? "#aaa" : "white", fontWeight: 900, fontSize: 14, borderRadius: 8, border: "none", cursor: pixLoading ? "not-allowed" : "pointer" }}
-                  >
-                    {pixLoading ? "Gerando PIX..." : "Gerar PIX para pagamento"}
-                  </button>
-                </div>
-              </>
-            )}
-
-            {/* ─── STEP: PIX ─── */}
-            {step === "pix" && (
-              <>
-                <div>
-                  <p style={{ fontSize: 13, fontWeight: 900, color: "#222", marginBottom: 4 }}>Pague via PIX</p>
-                  <p style={{ fontSize: 12, color: "#777" }}>Copie o código abaixo e pague em qualquer aplicativo bancário.</p>
-                </div>
-                <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "12px 14px" }}>
-                  <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 6 }}>Valor</p>
-                  <p style={{ fontSize: 20, fontWeight: 900, color: CB_BLUE }}>{formatBRL(comissao)}</p>
-                </div>
-                {pixCode && (
+            {/* ─── STEP: INFO ─── */}
+            {step === "info" && (() => {
+              const total = bidAmount + comissao;
+              const pixAmount = total / 2;
+              return (
+                <>
                   <div>
-                    <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 6 }}>Código PIX copia e cola</p>
-                    <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "10px 12px", wordBreak: "break-all", fontSize: 11, color: "#333", lineHeight: 1.6, marginBottom: 8 }}>
-                      {pixCode}
+                    <p style={{ fontSize: 13, fontWeight: 900, color: "#222", marginBottom: 4 }}>Confirmar arrematação</p>
+                    <p style={{ fontSize: 12, color: "#777", lineHeight: 1.6 }}>
+                      Para arrematar este lote é obrigatório o pagamento de <strong>50% do valor total agora</strong>.
+                      O restante será pago na entrega com a forma de pagamento selecionada.
+                    </p>
+                  </div>
+                  <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "12px 14px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
+                      <span style={{ fontSize: 12, color: "#555" }}>Valor do lance</span>
+                      <span style={{ fontSize: 12, fontWeight: 700, color: "#222" }}>{formatBRL(bidAmount)}</span>
                     </div>
+                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+                      <span style={{ fontSize: 12, color: "#555" }}>Comissão leiloeiro (5%)</span>
+                      <span style={{ fontSize: 12, fontWeight: 700, color: "#222" }}>{formatBRL(comissao)}</span>
+                    </div>
+                    <div style={{ borderTop: "1px solid #e0e0e0", paddingTop: 8, display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
+                      <span style={{ fontSize: 12, color: "#555" }}>Total</span>
+                      <span style={{ fontSize: 13, fontWeight: 900, color: "#222" }}>{formatBRL(total)}</span>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <span style={{ fontSize: 12, color: "#555" }}>50% agora (PIX)</span>
+                      <span style={{ fontSize: 14, fontWeight: 900, color: CB_BLUE }}>{formatBRL(pixAmount)}</span>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between", marginTop: 3 }}>
+                      <span style={{ fontSize: 12, color: "#555" }}>50% na entrega</span>
+                      <span style={{ fontSize: 12, fontWeight: 700, color: "#555" }}>{formatBRL(pixAmount)}</span>
+                    </div>
+                  </div>
+                  <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "10px 14px" }}>
+                    <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 4 }}>Leiloeiro Oficial</p>
+                    <p style={{ fontSize: 13, fontWeight: 900, color: "#222" }}>Osmar Campos Vicente Marques</p>
+                    <p style={{ fontSize: 12, color: "#777", marginTop: 2 }}>JUCESP 1487</p>
+                  </div>
+                  {error && <p style={{ fontSize: 12, color: "#c0392b", fontWeight: 700 }}>{error}</p>}
+                  <div style={{ marginTop: "auto", paddingTop: 8 }}>
                     <button
-                      onClick={handleCopy}
-                      style={{ display: "block", width: "100%", padding: "11px", backgroundColor: "white", color: CB_BLUE, fontWeight: 900, fontSize: 13, borderRadius: 8, border: `2px solid ${CB_BLUE}`, cursor: "pointer" }}
+                      onClick={handleCreatePix}
+                      disabled={pixLoading}
+                      style={{ display: "block", width: "100%", padding: "13px", backgroundColor: pixLoading ? "#e0e0e0" : CB_BLUE, color: pixLoading ? "#aaa" : "white", fontWeight: 900, fontSize: 14, borderRadius: 8, border: "none", cursor: pixLoading ? "not-allowed" : "pointer" }}
                     >
-                      {copied ? "Copiado!" : "Copiar código PIX"}
+                      {pixLoading ? "Gerando PIX..." : `Pagar ${formatBRL(pixAmount)} via PIX`}
                     </button>
                   </div>
-                )}
-                {!pixPaid ? (
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, paddingTop: 4 }}>
-                    <div className="spin" style={{ width: 18, height: 18, borderRadius: "50%", border: `2px solid #e0e0e0`, borderTopColor: CB_BLUE, flexShrink: 0 }} />
-                    <p style={{ fontSize: 12, color: "#666" }}>Aguardando confirmação do pagamento...</p>
+                </>
+              );
+            })()}
+
+            {/* ─── STEP: PIX ─── */}
+            {step === "pix" && (() => {
+              const pixAmount = (bidAmount + comissao) / 2;
+              return (
+                <>
+                  <div>
+                    <p style={{ fontSize: 13, fontWeight: 900, color: "#222", marginBottom: 4 }}>Pague via PIX</p>
+                    <p style={{ fontSize: 12, color: "#777" }}>Copie o código abaixo e pague em qualquer aplicativo bancário.</p>
                   </div>
-                ) : (
-                  <div style={{ backgroundColor: "#f0fdf4", border: "1px solid #86efac", borderRadius: 8, padding: "12px 14px", textAlign: "center" }}>
-                    <p style={{ fontSize: 14, fontWeight: 900, color: "#166534" }}>Pagamento confirmado!</p>
-                    <p style={{ fontSize: 12, color: "#15803d", marginTop: 4 }}>Sua arrematação foi oficializada. Em breve entraremos em contato.</p>
+                  <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "12px 14px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                      <div>
+                        <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 4 }}>Valor a pagar agora (50%)</p>
+                        <p style={{ fontSize: 22, fontWeight: 900, color: CB_BLUE }}>{formatBRL(pixAmount)}</p>
+                      </div>
+                      <div style={{ textAlign: "right" }}>
+                        <p style={{ fontSize: 10, color: "#bbb", marginBottom: 2 }}>Restante na entrega</p>
+                        <p style={{ fontSize: 13, fontWeight: 700, color: "#999" }}>{formatBRL(pixAmount)}</p>
+                      </div>
+                    </div>
                   </div>
-                )}
-              </>
-            )}
+                  {pixCode && (
+                    <div>
+                      <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 6 }}>Código PIX copia e cola</p>
+                      <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "10px 12px", wordBreak: "break-all", fontSize: 11, color: "#333", lineHeight: 1.6, marginBottom: 8 }}>
+                        {pixCode}
+                      </div>
+                      <button
+                        onClick={handleCopy}
+                        style={{ display: "block", width: "100%", padding: "11px", backgroundColor: "white", color: CB_BLUE, fontWeight: 900, fontSize: 13, borderRadius: 8, border: `2px solid ${CB_BLUE}`, cursor: "pointer" }}
+                      >
+                        {copied ? "Copiado!" : "Copiar código PIX"}
+                      </button>
+                    </div>
+                  )}
+                  {!pixPaid ? (
+                    <div style={{ display: "flex", alignItems: "center", gap: 10, paddingTop: 4 }}>
+                      <div className="spin" style={{ width: 18, height: 18, borderRadius: "50%", border: `2px solid #e0e0e0`, borderTopColor: CB_BLUE, flexShrink: 0 }} />
+                      <p style={{ fontSize: 12, color: "#666" }}>Aguardando confirmação do pagamento...</p>
+                    </div>
+                  ) : (
+                    <div style={{ backgroundColor: "#f0fdf4", border: "1px solid #86efac", borderRadius: 8, padding: "12px 14px", textAlign: "center" }}>
+                      <p style={{ fontSize: 14, fontWeight: 900, color: "#166534" }}>Pagamento confirmado!</p>
+                      <p style={{ fontSize: 12, color: "#15803d", marginTop: 4 }}>Arrematação oficializada. O restante ({formatBRL(pixAmount)}) será pago na entrega.</p>
+                    </div>
+                  )}
+                </>
+              );
+            })()}
 
           </div>
         </div>

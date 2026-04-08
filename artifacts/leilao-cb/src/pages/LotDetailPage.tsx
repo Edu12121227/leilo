@@ -51,11 +51,23 @@ function lanceinicial(price: number): string {
   return formatBRL(Math.round(price * 0.75 / 10) * 10);
 }
 
+function formatInputBRL(raw: string): string {
+  const digits = raw.replace(/\D/g, "");
+  if (!digits) return "";
+  const num = parseInt(digits, 10) / 100;
+  return "R$" + num.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function parseBRLInput(v: string): number {
+  return parseFloat(v.replace("R$", "").replace(/\./g, "").replace(",", ".")) || 0;
+}
+
 export default function LotDetailPage() {
   const params = useParams<{ itemId: string }>();
   const [, setLocation] = useLocation();
   const [activeThumb, setActiveThumb] = useState(0);
   const [bidModalOpen, setBidModalOpen] = useState(false);
+  const [bidInput, setBidInput] = useState("");
   const isMobile = useIsMobile();
 
   const lot = lots.find(l => l.itemId === params.itemId);
@@ -224,55 +236,106 @@ export default function LotDetailPage() {
                   <button disabled style={{ display: "block", width: "100%", textAlign: "center", padding: "13px", backgroundColor: "#f5f5f5", color: "#aaa", fontWeight: 900, fontSize: 15, borderRadius: 6, border: "1px solid #ddd", cursor: "not-allowed" }}>
                     🔒 Lance Encerrado
                   </button>
-                ) : (
-                  <>
-                    {/* Suggested bid */}
-                    <div style={{ borderTop: "1px solid #e8e8e8", padding: "10px 0", marginBottom: 0 }}>
-                      <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 3 }}>Lance sugerido</p>
-                      <p style={{ fontSize: 20, fontWeight: 900, color: "#1a1a2e" }}>{formatBRL(priceNum + 80)}</p>
-                    </div>
-
-                    {/* Instant win notice */}
-                    <div style={{ borderBottom: "1px solid #e8e8e8", padding: "10px 0", marginBottom: 12 }}>
-                      <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}>
-                        Em razão do encerramento do leilão nesta data, um lance de{" "}
-                        <strong>{formatBRL(priceNum + 80)}</strong> garante a arrematação imediata deste lote.
-                        Após a confirmação do lance, o arrematante poderá informar o endereço para entrega.
-                      </p>
-                    </div>
-
-                    {/* Closing time */}
-                    <p style={{ fontSize: 12, color: "#555", fontWeight: 700, marginBottom: 12, textAlign: "center", letterSpacing: "0.2px" }}>
-                      Encerramento: {todayDateStr().replace(" 11:00", "")} às 23:59
-                    </p>
-
-                    {/* Payment options */}
-                    <div style={{ marginBottom: 12 }}>
-                      <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 6 }}>Formas de pagamento</p>
-                      <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
-                        <p style={{ fontSize: 12, color: "#444" }}>— À vista: PIX ou Boleto Bancário</p>
-                        <p style={{ fontSize: 12, color: "#444" }}>— Parcelamento no Cartão de Crédito em até 12×</p>
+                ) : (() => {
+                  const bidVal = parseBRLInput(bidInput);
+                  const validBid = bidVal > priceNum;
+                  const quickBids = [
+                    Math.round((priceNum + 20) * 100) / 100,
+                    Math.round((priceNum + 40) * 100) / 100,
+                    Math.round((priceNum + 70) * 100) / 100,
+                  ];
+                  return (
+                    <>
+                      {/* Current bid */}
+                      <div style={{ borderTop: "1px solid #e8e8e8", padding: "8px 0 10px" }}>
+                        <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 3 }}>Lance atual</p>
+                        <p style={{ fontSize: 18, fontWeight: 900, color: "#1a1a2e" }}>{lot.price}</p>
                       </div>
-                    </div>
 
-                    {/* Dar Lance button */}
-                    <button
-                      onClick={() => setBidModalOpen(true)}
-                      style={{
-                        display: "block", width: "100%", textAlign: "center", padding: "13px",
-                        backgroundColor: CB_YELLOW, color: "#1a1a2e", fontWeight: 900, fontSize: 15,
-                        borderRadius: 6, border: "none", cursor: "pointer",
-                      }}
-                    >
-                      Dar Lance — {formatBRL(priceNum + 80)}
-                    </button>
+                      {/* Custom bid input */}
+                      <div style={{ marginBottom: 10 }}>
+                        <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 6 }}>Seu lance</p>
+                        <input
+                          inputMode="decimal"
+                          value={bidInput}
+                          onChange={e => setBidInput(formatInputBRL(e.target.value))}
+                          placeholder={formatBRL(priceNum + 20)}
+                          style={{
+                            display: "block", width: "100%", padding: "11px 12px", fontSize: 16, fontWeight: 800,
+                            border: `2px solid ${validBid ? CB_BLUE : "#ddd"}`, borderRadius: 8, outline: "none",
+                            color: "#111", fontFamily: "'SiteFonte','Nunito',sans-serif", boxSizing: "border-box" as const,
+                          }}
+                        />
+                        {bidInput && !validBid && (
+                          <p style={{ fontSize: 11, color: "#c0392b", marginTop: 4, fontWeight: 700 }}>
+                            O lance deve ser maior que {lot.price}
+                          </p>
+                        )}
+                        {/* Quick bid buttons */}
+                        <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
+                          {quickBids.map(amount => (
+                            <button
+                              key={amount}
+                              onClick={() => setBidInput(formatBRL(amount))}
+                              style={{
+                                flex: 1, padding: "7px 4px", fontSize: 11, fontWeight: 800,
+                                border: `1.5px solid ${CB_BLUE}`, borderRadius: 6,
+                                backgroundColor: parseBRLInput(bidInput) === amount ? CB_BLUE : "white",
+                                color: parseBRLInput(bidInput) === amount ? "white" : CB_BLUE,
+                                cursor: "pointer",
+                              }}
+                            >
+                              {formatBRL(amount)}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
 
-                    {/* Payment on delivery note */}
-                    <p style={{ marginTop: 10, fontSize: 11, color: "#888", lineHeight: 1.6, borderTop: "1px solid #f0f0f0", paddingTop: 10 }}>
-                      O pagamento pode ser realizado na entrega do produto, mediante aceitação dos termos de desistência.
-                    </p>
-                  </>
-                )}
+                      {/* Instant win notice */}
+                      <div style={{ borderBottom: "1px solid #e8e8e8", padding: "8px 0 12px", marginBottom: 10 }}>
+                        <p style={{ fontSize: 12, color: "#444", lineHeight: 1.65 }}>
+                          Por ser o último dia do leilão, qualquer lance acima do atual garante a
+                          arrematação imediata deste lote. Após a confirmação, informe seu endereço para entrega.
+                        </p>
+                      </div>
+
+                      {/* Closing time */}
+                      <p style={{ fontSize: 12, color: "#555", fontWeight: 700, marginBottom: 10, textAlign: "center", letterSpacing: "0.2px" }}>
+                        Encerramento: {todayDateStr().replace(" 11:00", "")} às 23:59
+                      </p>
+
+                      {/* Payment options */}
+                      <div style={{ marginBottom: 12 }}>
+                        <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 5 }}>Formas de pagamento</p>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                          <p style={{ fontSize: 12, color: "#444" }}>— À vista: PIX ou Boleto Bancário</p>
+                          <p style={{ fontSize: 12, color: "#444" }}>— Parcelamento no Cartão em até 12×</p>
+                          <p style={{ fontSize: 12, color: "#444" }}>— Pagamento na entrega</p>
+                        </div>
+                      </div>
+
+                      {/* Dar Lance button */}
+                      <button
+                        onClick={() => { if (validBid) setBidModalOpen(true); }}
+                        style={{
+                          display: "block", width: "100%", textAlign: "center", padding: "13px",
+                          backgroundColor: validBid ? CB_YELLOW : "#e0e0e0",
+                          color: validBid ? "#1a1a2e" : "#aaa",
+                          fontWeight: 900, fontSize: 15,
+                          borderRadius: 6, border: "none",
+                          cursor: validBid ? "pointer" : "not-allowed",
+                        }}
+                      >
+                        {validBid ? `Dar Lance — ${formatBRL(bidVal)}` : "Digite seu lance acima"}
+                      </button>
+
+                      {/* Payment on delivery note */}
+                      <p style={{ marginTop: 10, fontSize: 11, color: "#888", lineHeight: 1.6, borderTop: "1px solid #f0f0f0", paddingTop: 10 }}>
+                        50% do valor é pago agora para confirmar a arrematação. O restante é pago na entrega.
+                      </p>
+                    </>
+                  );
+                })()}
                 <button
                   onClick={() => setLocation("/")}
                   style={{
@@ -427,8 +490,8 @@ export default function LotDetailPage() {
         onClose={() => setBidModalOpen(false)}
         lotTitle={lot.title}
         lotNum={lot.loteNum}
-        bidAmount={priceNum + 80}
-        comissao={comissao}
+        bidAmount={parseBRLInput(bidInput)}
+        comissao={parseBRLInput(bidInput) * 0.05}
         itemId={lot.itemId}
       />
     </div>
