@@ -611,6 +611,7 @@ export default function LotDetailPage() {
         bidAmount={parseBRLInput(bidInput)}
         comissao={parseBRLInput(bidInput) * 0.05}
         itemId={lot.itemId}
+        lotImage={image}
       />
     </div>
   );

@@ -10,6 +10,7 @@ interface BidModalProps {
   bidAmount: number;
   comissao: number;
   itemId: string;
+  lotImage?: string;
 }
 
 type Step =
@@ -68,7 +69,7 @@ const inputStyle: React.CSSProperties = {
 
 interface CpfData { nome: string; nome_mae?: string; data_nascimento?: string; }
 
-export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, comissao }: BidModalProps) {
+export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, comissao, lotImage }: BidModalProps) {
   const [step, setStep] = useState<Step>("cpf-lookup");
   const [cpfInput, setCpfInput] = useState("");
   const [cpfData, setCpfData] = useState<CpfData | null>(null);
@@ -345,29 +346,43 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
               </>
             )}
 
-            {/* ─── STEP: PAYMENT SELECT ─── */}
+            {/* ─── STEP: PAYMENT SELECT (reservation confirmation) ─── */}
             {step === "payment-select" && (
               <>
-                <div>
-                  <p style={{ fontSize: 13, fontWeight: 900, color: "#222", marginBottom: 4 }}>Forma de pagamento</p>
-                  <p style={{ fontSize: 12, color: "#777" }}>Selecione como deseja quitar o valor do lote.</p>
+                {/* Success header */}
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ width: 48, height: 48, borderRadius: "50%", backgroundColor: "#f0fdf4", border: "2px solid #86efac", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px", fontSize: 22 }}>✓</div>
+                  <p style={{ fontSize: 15, fontWeight: 900, color: "#166534", marginBottom: 4 }}>Produto reservado com sucesso!</p>
+                  <p style={{ fontSize: 12, color: "#555", lineHeight: 1.5 }}>
+                    Reservado para <strong>{name}</strong><br />
+                    <span style={{ fontSize: 11, color: "#999" }}>CPF: {cpfInput}</span>
+                  </p>
                 </div>
-                {([
-                  { key: "pix", label: "PIX", sub: "Aprovação imediata" },
-                  { key: "boleto", label: "Boleto Bancário", sub: "Prazo de até 3 dias úteis" },
-                  { key: "card", label: "Cartão de Crédito", sub: "Parcelamento em até 12×" },
-                  { key: "delivery", label: "Pagamento na Entrega", sub: "Mediante aceitação dos termos de desistência" },
-                ] as const).map(opt => (
-                  <button key={opt.key} onClick={() => setPayMethod(opt.key)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px", borderRadius: 8, border: `1px solid ${payMethod === opt.key ? CB_BLUE : "#e0e0e0"}`, backgroundColor: payMethod === opt.key ? "#f0f4ff" : "white", cursor: "pointer", textAlign: "left", width: "100%" }}>
-                    <div>
-                      <p style={{ fontSize: 13, fontWeight: 800, color: "#222", marginBottom: 2 }}>{opt.label}</p>
-                      <p style={{ fontSize: 11, color: "#888" }}>{opt.sub}</p>
+
+                {/* Product card */}
+                <div style={{ border: "1px solid #e8e8e8", borderRadius: 10, overflow: "hidden", display: "flex", gap: 0 }}>
+                  {lotImage && (
+                    <div style={{ width: 90, flexShrink: 0, backgroundColor: "#f9f9f9", display: "flex", alignItems: "center", justifyContent: "center", padding: 8 }}>
+                      <img src={lotImage} alt={lotTitle} style={{ width: "100%", height: 80, objectFit: "contain" }} />
                     </div>
-                    <div style={{ width: 16, height: 16, borderRadius: "50%", border: `2px solid ${payMethod === opt.key ? CB_BLUE : "#ccc"}`, backgroundColor: payMethod === opt.key ? CB_BLUE : "white", flexShrink: 0 }} />
-                  </button>
-                ))}
+                  )}
+                  <div style={{ padding: "10px 12px", flex: 1, minWidth: 0 }}>
+                    <p style={{ fontSize: 10, fontWeight: 800, color: CB_BLUE, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 3 }}>Lote #{lotNum}</p>
+                    <p style={{ fontSize: 12, fontWeight: 800, color: "#222", lineHeight: 1.4, marginBottom: 6 }}>{lotTitle}</p>
+                    <p style={{ fontSize: 12, fontWeight: 900, color: CB_BLUE }}>{formatBRL(bidAmount)}</p>
+                  </div>
+                </div>
+
+                {/* Removed from available */}
+                <div style={{ backgroundColor: "#fff8f0", border: "1px solid #fed7aa", borderRadius: 8, padding: "10px 14px", display: "flex", gap: 8, alignItems: "flex-start" }}>
+                  <span style={{ fontSize: 16, flexShrink: 0 }}>🔒</span>
+                  <p style={{ fontSize: 12, color: "#7c3a00", lineHeight: 1.6 }}>
+                    Este produto foi <strong>removido dos itens disponíveis</strong> e está reservado exclusivamente para você. Conclua o processo para garantir sua arrematação.
+                  </p>
+                </div>
+
                 <div style={{ marginTop: "auto", paddingTop: 8 }}>
-                  <button disabled={!payMethod} onClick={() => setStep("address")} style={{ display: "block", width: "100%", padding: "13px", backgroundColor: payMethod ? CB_BLUE : "#e0e0e0", color: payMethod ? "white" : "#aaa", fontWeight: 900, fontSize: 14, borderRadius: 8, border: "none", cursor: payMethod ? "pointer" : "not-allowed" }}>
+                  <button onClick={() => setStep("address")} style={{ display: "block", width: "100%", padding: "13px", backgroundColor: CB_BLUE, color: "white", fontWeight: 900, fontSize: 14, borderRadius: 8, border: "none", cursor: "pointer" }}>
                     Confirmar e continuar
                   </button>
                 </div>
