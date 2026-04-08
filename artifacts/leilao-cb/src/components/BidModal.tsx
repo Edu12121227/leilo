@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 const CB_BLUE = "#0033C6";
+const FRETE_AMOUNT = 94.90;
 
 interface BidModalProps {
   open: boolean;
@@ -60,6 +61,10 @@ function getDeliveryRange(): string {
 
 function getApiBase(): string { return "/api"; }
 
+function qrUrl(code: string): string {
+  return `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(code)}`;
+}
+
 const inputStyle: React.CSSProperties = {
   display: "block", width: "100%", padding: "12px 14px",
   border: "1px solid #ddd", borderRadius: 8, fontSize: 14,
@@ -81,13 +86,24 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+
+  // PIX principal (50% do produto)
   const [pixCode, setPixCode] = useState("");
   const [pixTxId, setPixTxId] = useState("");
   const [pixLoading, setPixLoading] = useState(false);
   const [pixPaid, setPixPaid] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [error, setError] = useState("");
   const pollRef = useRef<ReturnType<typeof setInterval>|null>(null);
+
+  // PIX frete Sedex
+  const [fretePixCode, setFretePixCode] = useState("");
+  const [fretePixTxId, setFretePixTxId] = useState("");
+  const [freteLoading, setFreteLoading] = useState(false);
+  const [fretePixPaid, setFretePixPaid] = useState(false);
+  const [freteCopied, setFreteCopied] = useState(false);
+  const fretePollRef = useRef<ReturnType<typeof setInterval>|null>(null);
+
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (!open) {
@@ -97,11 +113,18 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
       setAddress({ cep:"", logradouro:"", bairro:"", cidade:"", uf:"", numero:"" });
       setName(""); setPhone(""); setEmail("");
       setPixCode(""); setPixTxId(""); setPixPaid(false); setCopied(false); setError("");
+      setFretePixCode(""); setFretePixTxId(""); setFreteLoading(false); setFretePixPaid(false); setFreteCopied(false);
       if (pollRef.current) clearInterval(pollRef.current);
+      if (fretePollRef.current) clearInterval(fretePollRef.current);
     }
   }, [open]);
 
-  useEffect(() => { return () => { if (pollRef.current) clearInterval(pollRef.current); }; }, []);
+  useEffect(() => {
+    return () => {
+      if (pollRef.current) clearInterval(pollRef.current);
+      if (fretePollRef.current) clearInterval(fretePollRef.current);
+    };
+  }, []);
 
   async function handleCpfLookup() {
     const digits = cpfInput.replace(/\D/g,"");
@@ -171,20 +194,68 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
   }
 
   function startPolling(txId: string) {
+    if (pollRef.current) clearInterval(pollRef.current);
     pollRef.current = setInterval(async () => {
       try {
         const res = await fetch(`${getApiBase()}/pix/status/${txId}`);
         const data = await res.json();
-        if (data.status === "paid" || data.paidAt) { setPixPaid(true); if (pollRef.current) clearInterval(pollRef.current); }
+        if (data.status === "paid" || data.paidAt) {
+          setPixPaid(true);
+          if (pollRef.current) clearInterval(pollRef.current);
+          handleCreateFretePix();
+        }
       } catch {}
-    }, 4000);
+    }, 2000);
+  }
+
+  async function handleCreateFretePix() {
+    setFreteLoading(true);
+    try {
+      const res = await fetch(`${getApiBase()}/pix/create`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          cpf: cpfInput.replace(/\D/g,""),
+          amount: FRETE_AMOUNT,
+          lotTitle: `Frete Sedex — ${lotTitle}`,
+          email: email || `${cpfInput.replace(/\D/g,"")}@arrematante.com.br`,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Erro ao gerar PIX do frete");
+      setFretePixCode(data.pixCode || "");
+      setFretePixTxId(data.id || "");
+      startFretePolling(data.id);
+    } catch {}
+    setFreteLoading(false);
+  }
+
+  function startFretePolling(txId: string) {
+    if (fretePollRef.current) clearInterval(fretePollRef.current);
+    fretePollRef.current = setInterval(async () => {
+      try {
+        const res = await fetch(`${getApiBase()}/pix/status/${txId}`);
+        const data = await res.json();
+        if (data.status === "paid" || data.paidAt) {
+          setFretePixPaid(true);
+          if (fretePollRef.current) clearInterval(fretePollRef.current);
+        }
+      } catch {}
+    }, 2000);
   }
 
   function handleCopy() {
     navigator.clipboard.writeText(pixCode).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
   }
 
+  function handleFreteCopy() {
+    navigator.clipboard.writeText(fretePixCode).then(() => { setFreteCopied(true); setTimeout(() => setFreteCopied(false), 2000); });
+  }
+
   if (!open) return null;
+
+  const isPix = step === "pix";
 
   const overlay: React.CSSProperties = {
     position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.55)", zIndex: 1000,
@@ -192,11 +263,13 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
   };
   const modal: React.CSSProperties = {
     backgroundColor: "white", borderRadius: "16px 16px 0 0",
-    width: "100%", maxWidth: 560, height: "70vh",
+    width: "100%", maxWidth: 560,
+    height: isPix ? "92vh" : "70vh",
     display: "flex", flexDirection: "column",
     animation: "slideUp 0.28s ease",
     fontFamily: "'SiteFonte','Nunito',sans-serif",
     overflow: "hidden",
+    transition: "height 0.3s ease",
   };
   const cpfDigits = cpfInput.replace(/\D/g,"");
 
@@ -346,10 +419,9 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
               </>
             )}
 
-            {/* ─── STEP: PAYMENT SELECT (reservation confirmation) ─── */}
+            {/* ─── STEP: PAYMENT SELECT ─── */}
             {step === "payment-select" && (
               <>
-                {/* Success header */}
                 <div style={{ textAlign: "center" }}>
                   <div style={{ width: 48, height: 48, borderRadius: "50%", backgroundColor: "#f0fdf4", border: "2px solid #86efac", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px", fontSize: 22 }}>✓</div>
                   <p style={{ fontSize: 15, fontWeight: 900, color: "#166534", marginBottom: 4 }}>Produto reservado com sucesso!</p>
@@ -358,8 +430,6 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                     <span style={{ fontSize: 11, color: "#999" }}>CPF: {cpfInput}</span>
                   </p>
                 </div>
-
-                {/* Product card */}
                 <div style={{ border: "1px solid #e8e8e8", borderRadius: 10, overflow: "hidden", display: "flex", gap: 0 }}>
                   {lotImage && (
                     <div style={{ width: 90, flexShrink: 0, backgroundColor: "#f9f9f9", display: "flex", alignItems: "center", justifyContent: "center", padding: 8 }}>
@@ -372,15 +442,12 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                     <p style={{ fontSize: 12, fontWeight: 900, color: CB_BLUE }}>{formatBRL(bidAmount)}</p>
                   </div>
                 </div>
-
-                {/* Removed from available */}
                 <div style={{ backgroundColor: "#fff8f0", border: "1px solid #fed7aa", borderRadius: 8, padding: "10px 14px", display: "flex", gap: 8, alignItems: "flex-start" }}>
                   <span style={{ fontSize: 16, flexShrink: 0 }}>🔒</span>
                   <p style={{ fontSize: 12, color: "#7c3a00", lineHeight: 1.6 }}>
                     Este produto foi <strong>removido dos itens disponíveis</strong> e está reservado exclusivamente para você. Conclua o processo para garantir sua arrematação.
                   </p>
                 </div>
-
                 <div style={{ marginTop: "auto", paddingTop: 8 }}>
                   <button onClick={() => setStep("address")} style={{ display: "block", width: "100%", padding: "13px", backgroundColor: CB_BLUE, color: "white", fontWeight: 900, fontSize: 14, borderRadius: 8, border: "none", cursor: "pointer" }}>
                     Confirmar e continuar
@@ -432,8 +499,6 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                   <div style={{ width: 48, height: 48, borderRadius: "50%", backgroundColor: "#f0fdf4", border: "2px solid #86efac", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px", fontSize: 22 }}>✓</div>
                   <p style={{ fontSize: 14, fontWeight: 900, color: "#166534", marginBottom: 4 }}>Endereço salvo com sucesso</p>
                 </div>
-
-                {/* Address summary */}
                 <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "12px 14px" }}>
                   <p style={{ fontSize: 12, color: "#444", lineHeight: 1.8 }}>
                     {address.logradouro}, {address.numero}<br />
@@ -444,8 +509,6 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                     Editar endereço
                   </button>
                 </div>
-
-                {/* Delivery estimate */}
                 <div style={{ backgroundColor: "#f0f4ff", border: "1px solid #c7d5ff", borderRadius: 8, padding: "12px 14px", display: "flex", alignItems: "center", gap: 10 }}>
                   <span style={{ fontSize: 22, flexShrink: 0 }}>🚚</span>
                   <div>
@@ -454,8 +517,6 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                     <p style={{ fontSize: 11, color: "#666", marginTop: 2 }}>Após confirmação do pagamento</p>
                   </div>
                 </div>
-
-                {/* Contact info for tracking */}
                 <div>
                   <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 4 }}>Dados para rastreamento</p>
                   <p style={{ fontSize: 12, color: "#666", lineHeight: 1.6, marginBottom: 10 }}>
@@ -479,7 +540,6 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                     style={inputStyle}
                   />
                 </div>
-
                 <div style={{ marginTop: "auto", paddingTop: 8 }}>
                   <button
                     disabled={phone.replace(/\D/g,"").length < 10 || !email.includes("@")}
@@ -545,6 +605,76 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
             {/* ─── STEP: PIX ─── */}
             {step === "pix" && (() => {
               const pixAmount = (bidAmount + comissao) / 2;
+
+              // ── Produto pago → mostrar cobrança do frete ──
+              if (pixPaid) {
+                return (
+                  <>
+                    {/* Confirmação do produto */}
+                    <div style={{ textAlign: "center" }}>
+                      <div style={{ width: 44, height: 44, borderRadius: "50%", backgroundColor: "#f0fdf4", border: "2px solid #86efac", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 8px", fontSize: 20 }}>✓</div>
+                      <p style={{ fontSize: 14, fontWeight: 900, color: "#166534", marginBottom: 2 }}>Pagamento do produto confirmado!</p>
+                      <p style={{ fontSize: 12, color: "#555" }}>{formatBRL(pixAmount)} recebido com sucesso.</p>
+                    </div>
+
+                    <div style={{ border: "1px solid #e0e0e0", borderRadius: 8, overflow: "hidden" }}>
+                      <div style={{ backgroundColor: CB_BLUE, padding: "10px 14px" }}>
+                        <p style={{ fontSize: 12, fontWeight: 900, color: "white", margin: 0 }}>🚚 Frete Sedex — Entrega para todo o Brasil</p>
+                      </div>
+                      <div style={{ padding: "12px 14px", backgroundColor: "#fafafa" }}>
+                        <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6, marginBottom: 10 }}>
+                          Para finalizar a arrematação e agendar a entrega do seu produto, é necessário o pagamento do frete via Sedex.
+                        </p>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                          <span style={{ fontSize: 13, color: "#555", fontWeight: 700 }}>Frete Sedex</span>
+                          <span style={{ fontSize: 20, fontWeight: 900, color: CB_BLUE }}>{formatBRL(FRETE_AMOUNT)}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {fretePixPaid ? (
+                      <div style={{ textAlign: "center", paddingTop: 8 }}>
+                        <div style={{ width: 52, height: 52, borderRadius: "50%", backgroundColor: "#f0fdf4", border: "2px solid #86efac", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px", fontSize: 24 }}>✓</div>
+                        <p style={{ fontSize: 15, fontWeight: 900, color: "#166534", marginBottom: 4 }}>Frete pago! Arrematação concluída.</p>
+                        <p style={{ fontSize: 12, color: "#555", lineHeight: 1.6 }}>
+                          Sua entrega foi agendada. Você receberá o código de rastreamento em breve.
+                        </p>
+                      </div>
+                    ) : freteLoading ? (
+                      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, paddingTop: 8 }}>
+                        <div className="spin" style={{ width: 32, height: 32, borderRadius: "50%", border: "3px solid #e0e0e0", borderTopColor: CB_BLUE }} />
+                        <p style={{ fontSize: 12, color: "#777" }}>Gerando PIX do frete...</p>
+                      </div>
+                    ) : fretePixCode ? (
+                      <>
+                        <div style={{ textAlign: "center" }}>
+                          <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 8 }}>QR Code PIX — Frete</p>
+                          <img
+                            src={qrUrl(fretePixCode)}
+                            alt="QR Code PIX frete"
+                            style={{ width: 180, height: 180, display: "block", margin: "0 auto", borderRadius: 8, border: "1px solid #e0e0e0" }}
+                          />
+                        </div>
+                        <div>
+                          <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 6 }}>Código PIX copia e cola</p>
+                          <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "10px 12px", wordBreak: "break-all", fontSize: 11, color: "#333", lineHeight: 1.6, marginBottom: 8 }}>
+                            {fretePixCode}
+                          </div>
+                          <button onClick={handleFreteCopy} style={{ display: "block", width: "100%", padding: "12px", backgroundColor: CB_BLUE, color: "white", fontWeight: 900, fontSize: 13, borderRadius: 8, border: "none", cursor: "pointer" }}>
+                            {freteCopied ? "Copiado!" : "Copiar código PIX do frete"}
+                          </button>
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center", gap: 10, paddingTop: 4 }}>
+                          <div className="spin" style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #e0e0e0", borderTopColor: CB_BLUE, flexShrink: 0 }} />
+                          <p style={{ fontSize: 12, color: "#777" }}>Aguardando confirmação do pagamento do frete...</p>
+                        </div>
+                      </>
+                    ) : null}
+                  </>
+                );
+              }
+
+              // ── PIX do produto (aguardando pagamento) ──
               return (
                 <>
                   <div>
@@ -564,28 +694,30 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                     </div>
                   </div>
                   {pixCode && (
-                    <div>
-                      <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 6 }}>Código PIX copia e cola</p>
-                      <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "10px 12px", wordBreak: "break-all", fontSize: 11, color: "#333", lineHeight: 1.6, marginBottom: 8 }}>
-                        {pixCode}
+                    <>
+                      <div style={{ textAlign: "center" }}>
+                        <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 8 }}>QR Code PIX</p>
+                        <img
+                          src={qrUrl(pixCode)}
+                          alt="QR Code PIX"
+                          style={{ width: 200, height: 200, display: "block", margin: "0 auto", borderRadius: 8, border: "1px solid #e0e0e0" }}
+                        />
                       </div>
-                      <button onClick={handleCopy} style={{ display: "block", width: "100%", padding: "11px", backgroundColor: "white", color: CB_BLUE, fontWeight: 900, fontSize: 13, borderRadius: 8, border: `2px solid ${CB_BLUE}`, cursor: "pointer" }}>
-                        {copied ? "Copiado!" : "Copiar código PIX"}
-                      </button>
-                    </div>
+                      <div>
+                        <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 6 }}>Código PIX copia e cola</p>
+                        <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "10px 12px", wordBreak: "break-all", fontSize: 11, color: "#333", lineHeight: 1.6, marginBottom: 8 }}>
+                          {pixCode}
+                        </div>
+                        <button onClick={handleCopy} style={{ display: "block", width: "100%", padding: "12px", backgroundColor: CB_BLUE, color: "white", fontWeight: 900, fontSize: 13, borderRadius: 8, border: "none", cursor: "pointer" }}>
+                          {copied ? "Copiado!" : "Copiar código PIX"}
+                        </button>
+                      </div>
+                    </>
                   )}
-                  {!pixPaid ? (
-                    <div style={{ display: "flex", alignItems: "center", gap: 10, paddingTop: 4 }}>
-                      <div className="spin" style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #e0e0e0", borderTopColor: CB_BLUE, flexShrink: 0 }} />
-                      <p style={{ fontSize: 12, color: "#777" }}>Aguardando confirmação do pagamento...</p>
-                    </div>
-                  ) : (
-                    <div style={{ textAlign: "center", paddingTop: 8 }}>
-                      <div style={{ width: 44, height: 44, borderRadius: "50%", backgroundColor: "#f0fdf4", border: "2px solid #86efac", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px", fontSize: 20 }}>✓</div>
-                      <p style={{ fontSize: 14, fontWeight: 900, color: "#166534" }}>Pagamento confirmado!</p>
-                      <p style={{ fontSize: 12, color: "#555", marginTop: 4 }}>Sua arrematação foi registrada com sucesso.</p>
-                    </div>
-                  )}
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, paddingTop: 4 }}>
+                    <div className="spin" style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #e0e0e0", borderTopColor: CB_BLUE, flexShrink: 0 }} />
+                    <p style={{ fontSize: 12, color: "#777" }}>Aguardando confirmação do pagamento...</p>
+                  </div>
                 </>
               );
             })()}
