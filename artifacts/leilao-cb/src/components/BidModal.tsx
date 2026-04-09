@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void;
+    ttq?: { track: (event: string, params?: Record<string, unknown>) => void };
   }
 }
 
@@ -254,12 +255,15 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
 
   async function handleCreateFretePix() {
     // Dispara evento de compra no Facebook Pixel — apenas uma vez
-    if (!pixelFiredRef.current && typeof window.fbq === "function") {
+    if (!pixelFiredRef.current) {
       pixelFiredRef.current = true;
-      window.fbq("track", "Purchase", {
-        value: bidAmount + comissao + FRETE_AMOUNT,
-        currency: "BRL",
-      });
+      const purchaseValue = bidAmount + comissao + FRETE_AMOUNT;
+      if (typeof window.fbq === "function") {
+        window.fbq("track", "Purchase", { value: purchaseValue, currency: "BRL" });
+      }
+      if (typeof window.ttq?.track === "function") {
+        window.ttq.track("Purchase", { value: purchaseValue, currency: "BRL" });
+      }
     }
     setFreteLoading(true);
     try {
