@@ -407,6 +407,21 @@ export default function LotDetailPage() {
                             </button>
                           ))}
                         </div>
+                        {/* Dar Lance button */}
+                        <button
+                          onClick={() => { if (validBid) setBidModalOpen(true); }}
+                          style={{
+                            display: "block", width: "100%", textAlign: "center", padding: "13px",
+                            marginTop: 10,
+                            backgroundColor: validBid ? "#16a34a" : "#bbf7d0",
+                            color: validBid ? "white" : "#4ade80",
+                            fontWeight: 900, fontSize: 15,
+                            borderRadius: 6, border: "none",
+                            cursor: validBid ? "pointer" : "not-allowed",
+                          }}
+                        >
+                          {validBid ? `Dar Lance — ${formatBRL(bidVal)}` : "Digite seu lance acima"}
+                        </button>
                       </div>
 
                       {/* Instant win notice */}
@@ -431,21 +446,6 @@ export default function LotDetailPage() {
                           <p style={{ fontSize: 12, color: "#444" }}>— Pagamento na entrega</p>
                         </div>
                       </div>
-
-                      {/* Dar Lance button */}
-                      <button
-                        onClick={() => { if (validBid) setBidModalOpen(true); }}
-                        style={{
-                          display: "block", width: "100%", textAlign: "center", padding: "13px",
-                          backgroundColor: validBid ? CB_YELLOW : "#e0e0e0",
-                          color: validBid ? "#1a1a2e" : "#aaa",
-                          fontWeight: 900, fontSize: 15,
-                          borderRadius: 6, border: "none",
-                          cursor: validBid ? "pointer" : "not-allowed",
-                        }}
-                      >
-                        {validBid ? `Dar Lance — ${formatBRL(bidVal)}` : "Digite seu lance acima"}
-                      </button>
 
                       {/* Payment on delivery note */}
                       <div style={{ marginTop: 12, backgroundColor: "#c0392b", borderRadius: 8, padding: "12px 14px" }}>
