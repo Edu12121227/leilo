@@ -189,7 +189,7 @@ export default function LotDetailPage() {
           textAlign: "center",
         }}>
           <span style={{ color: "white", fontWeight: 900, fontSize: 13, letterSpacing: "0.8px", textTransform: "uppercase" }}>
-            ⏱ LOTE EXPIRA EM {countdown} — GARANTA SEU LANCE AGORA
+            ⏱ LOTE EXPIRA EM {countdown}
           </span>
         </div>
       )}
