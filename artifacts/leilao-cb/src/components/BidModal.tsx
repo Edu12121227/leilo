@@ -203,6 +203,10 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
       setPixCode(data.pixCode || "");
       setPixTxId(data.id || "");
       setStep("pix");
+      // TikTok Purchase — dispara quando o PIX é gerado
+      if (typeof window.ttq?.track === "function") {
+        window.ttq.track("Purchase", { value: bidAmount + comissao, currency: "BRL" });
+      }
       startSSE(data.id);      // primário: SSE em tempo real
       startPolling(data.id);  // fallback: polling manual
     } catch (e: any) { setError(e.message || "Erro ao gerar PIX"); }
@@ -215,10 +219,6 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
     setPixPaid(true);
     if (pollRef.current) { clearInterval(pollRef.current); pollRef.current = null; }
     if (sseRef.current) { sseRef.current.close(); sseRef.current = null; }
-    // TikTok Purchase — dispara quando o pagamento do produto é confirmado
-    if (typeof window.ttq?.track === "function") {
-      window.ttq.track("Purchase", { value: bidAmount + comissao, currency: "BRL" });
-    }
     handleCreateFretePix();
   }
 
