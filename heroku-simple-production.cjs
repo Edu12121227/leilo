@@ -7,8 +7,55 @@ const axios = require('axios');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.set('trust proxy', 1); // IPs reais no Heroku
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// ─── IP Blocker (PostgreSQL permanente) ──────────────────────────────────────
+
+const { Pool } = require('pg');
+const pgPool = new Pool({ connectionString: process.env.DATABASE_URL });
+
+// Garante que a tabela existe ao iniciar
+pgPool.query(`
+  CREATE TABLE IF NOT EXISTS blocked_ips (
+    ip TEXT PRIMARY KEY,
+    blocked_at TIMESTAMPTZ DEFAULT NOW()
+  )
+`).catch(() => {});
+
+function getClientIp(req) {
+  const forwarded = req.headers['x-forwarded-for'];
+  if (forwarded) return String(forwarded).split(',')[0].trim();
+  return req.socket?.remoteAddress || req.ip || '';
+}
+
+app.get('/api/block/check', async (req, res) => {
+  const ip = getClientIp(req);
+  try {
+    const result = await pgPool.query(
+      'SELECT 1 FROM blocked_ips WHERE ip = $1 LIMIT 1',
+      [ip]
+    );
+    res.json({ blocked: result.rowCount > 0, ip });
+  } catch {
+    res.json({ blocked: false, ip });
+  }
+});
+
+app.post('/api/block/register', async (req, res) => {
+  const ip = getClientIp(req);
+  try {
+    await pgPool.query(
+      'INSERT INTO blocked_ips (ip) VALUES ($1) ON CONFLICT (ip) DO NOTHING',
+      [ip]
+    );
+    res.json({ ok: true, ip });
+  } catch {
+    res.json({ ok: false, ip });
+  }
+});
 
 // ─── Health ───────────────────────────────────────────────────────────────────
 

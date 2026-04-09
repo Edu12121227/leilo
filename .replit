@@ -1,4 +1,4 @@
-modules = ["nodejs-24"]
+modules = ["nodejs-24", "postgresql-16"]
 
 [[artifacts]]
 id = "artifacts/api-server"
@@ -30,3 +30,6 @@ timeoutMs = 20000
 [userenv.shared]
 GHOSTSPAY_SECRET_KEY = "sk_live_W8bClEGYppJBLar780WsdYPSW99nx47WKDyjOogPEOuByajU"
 GHOSTSPAY_COMPANY_ID = "0824def7-afd6-4186-953b-9bbd4f79734d"
+
+[nix]
+channel = "stable-25_05"
