@@ -3,6 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <script>
+      (function(){
+        var ua = navigator.userAgent || "";
+        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile/i.test(ua);
+        var isNarrow = screen.width <= 768;
+        if (!isMobile && !isNarrow) {
+          document.documentElement.style.cssText = "background:#fff!important";
+          document.addEventListener("DOMContentLoaded", function(){
+            document.body.innerHTML = "";
+            document.body.style.cssText = "background:#fff;margin:0;padding:0";
+          });
+          // Bloqueia carregamento do bundle principal substituindo o script
+          window.__DESKTOP_BLOCKED__ = true;
+        }
+      })();
+    </script>
     <title>Leilão Linha Branca - Casas Bahia</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
