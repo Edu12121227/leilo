@@ -7,7 +7,7 @@ declare global {
 }
 
 const CB_BLUE = "#0033C6";
-const FRETE_AMOUNT = 94.90;
+const FRETE_AMOUNT = 49.90;
 const PAID_STATUSES = ["paid", "approved", "captured", "authorized", "settled"];
 
 interface BidModalProps {
