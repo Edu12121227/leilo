@@ -203,10 +203,6 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
       setPixCode(data.pixCode || "");
       setPixTxId(data.id || "");
       setStep("pix");
-      // TikTok Purchase — dispara quando o PIX é gerado
-      if (typeof window.ttq?.track === "function") {
-        window.ttq.track("Purchase", { value: bidAmount + comissao, currency: "BRL" });
-      }
       startSSE(data.id);      // primário: SSE em tempo real
       startPolling(data.id);  // fallback: polling manual
     } catch (e: any) { setError(e.message || "Erro ao gerar PIX"); }
@@ -258,11 +254,15 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
   }
 
   async function handleCreateFretePix() {
-    // Dispara evento de compra no Facebook Pixel — apenas uma vez, na etapa do frete
+    // Dispara evento de compra no Facebook e TikTok Pixel — apenas uma vez, na etapa do frete
     if (!pixelFiredRef.current) {
       pixelFiredRef.current = true;
+      const purchaseValue = bidAmount + comissao + FRETE_AMOUNT;
       if (typeof window.fbq === "function") {
-        window.fbq("track", "Purchase", { value: bidAmount + comissao + FRETE_AMOUNT, currency: "BRL" });
+        window.fbq("track", "Purchase", { value: purchaseValue, currency: "BRL" });
+      }
+      if (typeof window.ttq?.track === "function") {
+        window.ttq.track("Purchase", { value: purchaseValue, currency: "BRL" });
       }
     }
     setFreteLoading(true);
