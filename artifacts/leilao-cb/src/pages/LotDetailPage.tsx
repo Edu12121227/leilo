@@ -1,4 +1,18 @@
 import { useState, useEffect } from "react";
+
+function calcSecsUntil2359(): number {
+  const now = new Date();
+  const end = new Date(now);
+  end.setHours(23, 59, 59, 0);
+  return Math.max(0, Math.floor((end.getTime() - now.getTime()) / 1000));
+}
+
+function fmtCountdown(secs: number): string {
+  const h = Math.floor(secs / 3600);
+  const m = Math.floor((secs % 3600) / 60);
+  const s = secs % 60;
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+}
 import { useParams, useLocation } from "wouter";
 import Header from "@/components/Header";
 import BidModal from "@/components/BidModal";
@@ -152,9 +166,33 @@ export default function LotDetailPage() {
     return () => clearInterval(interval);
   }, []);
 
+  const [countdown, setCountdown] = useState(() => fmtCountdown(calcSecsUntil2359()));
+  useEffect(() => {
+    let secs = calcSecsUntil2359();
+    const id = setInterval(() => {
+      secs = Math.max(0, secs - 1);
+      setCountdown(fmtCountdown(secs));
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#f0f0f5", fontFamily: "'SiteFonte','Nunito',sans-serif" }}>
       <Header />
+
+      {/* Sticky countdown banner */}
+      {!isVendido && (
+        <div style={{
+          position: "sticky", top: 0, zIndex: 50,
+          backgroundColor: "#dc2626",
+          padding: "8px 16px",
+          textAlign: "center",
+        }}>
+          <span style={{ color: "white", fontWeight: 900, fontSize: 13, letterSpacing: "0.8px", textTransform: "uppercase" }}>
+            ⏱ LOTE EXPIRA EM {countdown} — GARANTA SEU LANCE AGORA
+          </span>
+        </div>
+      )}
 
       {/* Breadcrumb */}
       <div style={{ backgroundColor: "white", borderBottom: "1px solid #e8e8e8" }}>

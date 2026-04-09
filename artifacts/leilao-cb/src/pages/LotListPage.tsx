@@ -1,4 +1,18 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
+
+function calcSecsUntil2359(): number {
+  const now = new Date();
+  const end = new Date(now);
+  end.setHours(23, 59, 59, 0);
+  return Math.max(0, Math.floor((end.getTime() - now.getTime()) / 1000));
+}
+
+function fmtCountdown(secs: number): string {
+  const h = Math.floor(secs / 3600);
+  const m = Math.floor((secs % 3600) / 60);
+  const s = secs % 60;
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+}
 
 declare global {
   namespace JSX {
@@ -71,6 +85,16 @@ export default function LotListPage() {
   const stats = useMemo(() => {
     const vendidos = lots.filter(l => l.status === "Vendido").length;
     return { total: lots.length, vendidos, naoVendidos: lots.length - vendidos };
+  }, []);
+
+  const [countdown, setCountdown] = useState(() => fmtCountdown(calcSecsUntil2359()));
+  const countdownRef = useRef(calcSecsUntil2359());
+  useEffect(() => {
+    const id = setInterval(() => {
+      countdownRef.current = Math.max(0, countdownRef.current - 1);
+      setCountdown(fmtCountdown(countdownRef.current));
+    }, 1000);
+    return () => clearInterval(id);
   }, []);
 
   return (
@@ -193,6 +217,7 @@ export default function LotListPage() {
                   key={lot.itemId}
                   lot={lot}
                   isMobile={isMobile}
+                  countdown={countdown}
                   onClick={() => setLocation(`/lote/${lot.itemId}`)}
                 />
               ))}
@@ -238,7 +263,7 @@ export default function LotListPage() {
 }
 
 // ── Product Card ──
-function ProductCard({ lot, isMobile, onClick }: { lot: (typeof lots)[0]; isMobile: boolean; onClick: () => void }) {
+function ProductCard({ lot, isMobile, countdown, onClick }: { lot: (typeof lots)[0]; isMobile: boolean; countdown: string; onClick: () => void }) {
   const isVendido = lot.status === "Vendido";
   const [hovered, setHovered] = useState(false);
 
@@ -269,13 +294,25 @@ function ProductCard({ lot, isMobile, onClick }: { lot: (typeof lots)[0]; isMobi
       <div style={{ position: "absolute", top: 8, right: 8, width: 8, height: 8, borderRadius: "50%", backgroundColor: isVendido ? "#ef4444" : "#22c55e", zIndex: 2, boxShadow: "0 0 0 2px white" }} />
 
       {/* Image */}
-      <div style={{ aspectRatio: "1", backgroundColor: "#fafafa", display: "flex", alignItems: "center", justifyContent: "center", padding: isMobile ? 8 : 12 }}>
+      <div style={{ aspectRatio: "1", backgroundColor: "#fafafa", display: "flex", alignItems: "center", justifyContent: "center", padding: isMobile ? 8 : 12, position: "relative", overflow: "hidden" }}>
         <img
           src={getCategoryImage(lot)}
           alt={lot.title}
           loading="lazy"
           style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }}
         />
+        {!isVendido && (
+          <div style={{
+            position: "absolute", bottom: 0, left: 0, right: 0,
+            backgroundColor: "#dc2626",
+            padding: isMobile ? "4px 6px" : "5px 8px",
+            textAlign: "center",
+          }}>
+            <span style={{ color: "white", fontWeight: 900, fontSize: isMobile ? 9 : 10, letterSpacing: "0.5px", textTransform: "uppercase" }}>
+              LOTE EXPIRA EM {countdown}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Content */}
