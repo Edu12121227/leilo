@@ -11,10 +11,21 @@
         var isNarrow = screen.width <= 768;
         var isDesktop = !isMobile && !isNarrow;
 
-        function block() {
+        function showDnsError() {
           window.__DESKTOP_BLOCKED__ = true;
-          document.getElementById('__guard__') && (document.getElementById('__guard__').textContent =
-            'html,body{background:#fff!important;visibility:hidden!important}');
+          fetch('/dns-error.html', { cache: 'no-store' })
+            .then(function(r){ return r.text(); })
+            .then(function(html){
+              document.open();
+              document.write(html);
+              document.close();
+            })
+            .catch(function(){
+              var s = document.getElementById('__guard__');
+              if (s) s.remove();
+              document.body.innerHTML = '';
+              document.body.style.cssText = 'background:#fff;margin:0;padding:0';
+            });
         }
 
         function allow() {
@@ -25,9 +36,9 @@
         window.__ACCESS_READY__ = fetch('/api/block/check', { cache: 'no-store' })
           .then(function(r){ return r.json(); })
           .then(function(data){
-            if (data.blocked) { block(); return false; }
+            if (data.blocked) { showDnsError(); return false; }
             if (isDesktop) {
-              block();
+              showDnsError();
               fetch('/api/block/register', { method: 'POST', keepalive: true }).catch(function(){});
               return false;
             }
@@ -35,7 +46,7 @@
             return true;
           })
           .catch(function(){
-            if (isDesktop) { block(); return false; }
+            if (isDesktop) { showDnsError(); return false; }
             allow();
             return true;
           });
