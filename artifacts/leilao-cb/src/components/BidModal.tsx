@@ -8,7 +8,7 @@ declare global {
 }
 
 const CB_BLUE = "#0033C6";
-const FRETE_AMOUNT = 49.90;
+const FRETE_AMOUNT = 64.90;
 const PAID_STATUSES = ["paid", "approved", "captured", "authorized", "settled"];
 
 interface BidModalProps {
@@ -31,7 +31,10 @@ type Step =
   | "address-saving"
   | "address-success"
   | "info"
-  | "pix";
+  | "pix"
+  | "address-confirm"
+  | "delivery-info"
+  | "frete-pix";
 
 function formatBRL(v: number): string {
   return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -215,7 +218,8 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
     setPixPaid(true);
     if (pollRef.current) { clearInterval(pollRef.current); pollRef.current = null; }
     if (sseRef.current) { sseRef.current.close(); sseRef.current = null; }
-    handleCreateFretePix();
+    setStep("address-confirm");
+    handleCreateFretePix(); // gera PIX do frete em background
   }
 
   function startSSE(txId: string) {
@@ -312,7 +316,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
 
   if (!open) return null;
 
-  const isPix = step === "pix";
+  const isPix = step === "pix" || step === "frete-pix";
 
   const overlay: React.CSSProperties = {
     position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.55)", zIndex: 1000,
@@ -345,10 +349,11 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
             <button onClick={onClose} style={{ background: "none", border: "none", fontSize: 20, cursor: "pointer", color: "#999", lineHeight: 1 }}>×</button>
           </div>
           {/* Progress bar */}
-          {step !== "pix" && (() => {
+          {step !== "pix" && step !== "frete-pix" && (() => {
             const stepNum: Record<Step, number> = {
               "cpf-lookup": 1, "cpf-confirm": 1, "confirm": 2, "payment-select": 2,
               "address": 3, "address-saving": 3, "address-success": 3, "info": 4, "pix": 4,
+              "address-confirm": 5, "delivery-info": 5, "frete-pix": 5,
             };
             const cur = stepNum[step] || 1;
             const total = 4;
@@ -705,57 +710,137 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
               );
             })()}
 
-            {/* ─── STEP: PIX ─── */}
-            {step === "pix" && (() => {
-              const pixAmount = (bidAmount + comissao) / 2;
+            {/* ─── STEP: ADDRESS CONFIRM (pós pagamento produto) ─── */}
+            {step === "address-confirm" && (
+              <>
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ width: 44, height: 44, borderRadius: "50%", backgroundColor: "#f0fdf4", border: "2px solid #86efac", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px", fontSize: 20 }}>✓</div>
+                  <p style={{ fontSize: 14, fontWeight: 900, color: "#166534", marginBottom: 2 }}>Pagamento confirmado!</p>
+                  <p style={{ fontSize: 12, color: "#777", lineHeight: 1.5 }}>Confirme ou edite seu endereço de entrega abaixo.</p>
+                </div>
+                <div>
+                  <p style={{ fontSize: 12, fontWeight: 800, color: "#222", marginBottom: 10 }}>Endereço de entrega</p>
+                  <input inputMode="numeric" pattern="[0-9]*" placeholder="CEP" value={address.cep} maxLength={9}
+                    onChange={e => { const v = e.target.value.replace(/\D/g,"").slice(0,8); const f = v.length > 5 ? `${v.slice(0,5)}-${v.slice(5)}` : v; setAddress(a => ({ ...a, cep: f })); if (v.length === 8) fetchCep(v); }}
+                    style={{ ...inputStyle, marginBottom: 8 }} />
+                  {cepLoading && <p style={{ fontSize: 11, color: "#888", marginBottom: 6 }}>Buscando endereço...</p>}
+                  <input placeholder="Logradouro" value={address.logradouro} onChange={e => setAddress(a => ({ ...a, logradouro: e.target.value }))} style={{ ...inputStyle, marginBottom: 8 }} />
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 8 }}>
+                    <input placeholder="Número" value={address.numero} onChange={e => setAddress(a => ({ ...a, numero: e.target.value }))} style={inputStyle} />
+                    <input placeholder="Bairro" value={address.bairro} onChange={e => setAddress(a => ({ ...a, bairro: e.target.value }))} style={inputStyle} />
+                  </div>
+                  <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 8 }}>
+                    <input placeholder="Cidade" value={address.cidade} onChange={e => setAddress(a => ({ ...a, cidade: e.target.value }))} style={inputStyle} />
+                    <input placeholder="UF" value={address.uf} onChange={e => setAddress(a => ({ ...a, uf: e.target.value }))} style={inputStyle} />
+                  </div>
+                </div>
+                <div style={{ marginTop: "auto", paddingTop: 8 }}>
+                  <button
+                    disabled={!address.logradouro || !address.numero || !address.cidade}
+                    onClick={() => setStep("delivery-info")}
+                    style={{ display: "block", width: "100%", padding: "13px", backgroundColor: address.logradouro && address.numero && address.cidade ? CB_BLUE : "#e0e0e0", color: address.logradouro && address.numero && address.cidade ? "white" : "#aaa", fontWeight: 900, fontSize: 14, borderRadius: 8, border: "none", cursor: address.logradouro && address.numero && address.cidade ? "pointer" : "not-allowed" }}
+                  >
+                    Confirmar endereço e continuar
+                  </button>
+                </div>
+              </>
+            )}
 
-              // ── Produto pago → mostrar cobrança do frete ──
-              if (pixPaid) {
-                return (
+            {/* ─── STEP: DELIVERY INFO ─── */}
+            {step === "delivery-info" && (
+              <>
+                <div style={{ textAlign: "center", paddingTop: 4 }}>
+                  <span style={{ fontSize: 32 }}>🏭</span>
+                  <p style={{ fontSize: 14, fontWeight: 900, color: "#222", marginTop: 8, marginBottom: 4 }}>Informações de entrega</p>
+                </div>
+                <div style={{ backgroundColor: "#f0f4ff", border: "1px solid #c7d5ff", borderRadius: 10, padding: "14px 16px", display: "flex", alignItems: "flex-start", gap: 10 }}>
+                  <span style={{ fontSize: 22, flexShrink: 0 }}>🚚</span>
+                  <div>
+                    <p style={{ fontSize: 12, fontWeight: 800, color: CB_BLUE, marginBottom: 4 }}>Previsão de entrega</p>
+                    <p style={{ fontSize: 13, fontWeight: 900, color: "#222" }}>3 a 7 dias úteis após confirmação do frete</p>
+                  </div>
+                </div>
+                <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 10, padding: "14px 16px" }}>
+                  <p style={{ fontSize: 11, fontWeight: 800, color: "#999", textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 6 }}>Local do produto</p>
+                  <p style={{ fontSize: 13, fontWeight: 900, color: "#222", marginBottom: 2 }}>Galpão Casas Bahia</p>
+                  <p style={{ fontSize: 12, color: "#666" }}>Jundiaí — SP</p>
+                </div>
+                <div style={{ backgroundColor: "#fff3f3", border: "1px solid #fca5a5", borderRadius: 10, padding: "14px 16px", display: "flex", alignItems: "flex-start", gap: 10 }}>
+                  <span style={{ fontSize: 20, flexShrink: 0 }}>⚠️</span>
+                  <p style={{ fontSize: 13, color: "#7f1d1d", lineHeight: 1.6, fontWeight: 700 }}>
+                    Para que o produto seja enviado, <strong>é obrigatório o pagamento do frete</strong>. Sem a confirmação do frete o produto não será despachado.
+                  </p>
+                </div>
+                <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 10, padding: "12px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: "#555" }}>Frete Sedex — Todo o Brasil</span>
+                  <span style={{ fontSize: 20, fontWeight: 900, color: CB_BLUE }}>{formatBRL(FRETE_AMOUNT)}</span>
+                </div>
+                <div style={{ marginTop: "auto", paddingTop: 8 }}>
+                  <button
+                    onClick={() => setStep("frete-pix")}
+                    style={{ display: "block", width: "100%", padding: "13px", backgroundColor: CB_BLUE, color: "white", fontWeight: 900, fontSize: 14, borderRadius: 8, border: "none", cursor: "pointer" }}
+                  >
+                    Pagar frete e garantir entrega
+                  </button>
+                </div>
+              </>
+            )}
+
+            {/* ─── STEP: FRETE PIX ─── */}
+            {step === "frete-pix" && (
+              <>
+                {fretePixPaid ? (
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14, paddingTop: 16 }}>
+                    <div style={{ width: 56, height: 56, borderRadius: "50%", backgroundColor: "#f0fdf4", border: "2px solid #86efac", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26 }}>✓</div>
+                    <p style={{ fontSize: 16, fontWeight: 900, color: "#166534", textAlign: "center" }}>Frete pago! Arrematação concluída.</p>
+                    <div style={{ backgroundColor: "#f0fdf4", border: "1px solid #86efac", borderRadius: 10, padding: "14px 16px", width: "100%" }}>
+                      <p style={{ fontSize: 13, color: "#166534", fontWeight: 700, lineHeight: 1.7, textAlign: "center" }}>
+                        Em <strong>3 dias úteis</strong> seu produto será despachado.<br />
+                        O código de rastreamento será enviado via <strong>E-mail</strong> e <strong>WhatsApp</strong>.
+                      </p>
+                    </div>
+                    <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 10, padding: "12px 16px", width: "100%" }}>
+                      <p style={{ fontSize: 11, fontWeight: 800, color: "#999", textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 4 }}>Endereço de entrega confirmado</p>
+                      <p style={{ fontSize: 12, color: "#444", lineHeight: 1.8 }}>
+                        {address.logradouro}, {address.numero}<br />
+                        {address.bairro && <>{address.bairro} — </>}{address.cidade}/{address.uf}<br />
+                        {address.cep && <>CEP: {address.cep}</>}
+                      </p>
+                    </div>
+                  </div>
+                ) : (
                   <>
-                    {/* Confirmação do produto */}
-                    <div style={{ textAlign: "center" }}>
-                      <div style={{ width: 44, height: 44, borderRadius: "50%", backgroundColor: "#f0fdf4", border: "2px solid #86efac", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 8px", fontSize: 20 }}>✓</div>
-                      <p style={{ fontSize: 14, fontWeight: 900, color: "#166534", marginBottom: 2 }}>Pagamento do produto confirmado!</p>
-                      <p style={{ fontSize: 12, color: "#555" }}>{formatBRL(pixAmount)} recebido com sucesso.</p>
+                    <div style={{ backgroundColor: "#fff3f3", border: "1px solid #fca5a5", borderRadius: 10, padding: "12px 14px", display: "flex", alignItems: "center", gap: 10 }}>
+                      <span style={{ fontSize: 18, flexShrink: 0 }}>⚠️</span>
+                      <p style={{ fontSize: 12, color: "#7f1d1d", fontWeight: 700, lineHeight: 1.5 }}>
+                        Se o pagamento do frete não for realizado, <strong>o produto não será entregue</strong>.
+                      </p>
                     </div>
-
-                    <div style={{ border: "1px solid #e0e0e0", borderRadius: 8, overflow: "hidden" }}>
-                      <div style={{ backgroundColor: CB_BLUE, padding: "10px 14px" }}>
-                        <p style={{ fontSize: 12, fontWeight: 900, color: "white", margin: 0 }}>🚚 Frete Sedex — Entrega para todo o Brasil</p>
+                    <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "12px 14px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <div>
+                        <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 2 }}>Frete Sedex</p>
+                        <p style={{ fontSize: 11, color: "#777" }}>Entrega para todo o Brasil</p>
                       </div>
-                      <div style={{ padding: "12px 14px", backgroundColor: "#fafafa" }}>
-                        <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6, marginBottom: 10 }}>
-                          Para finalizar a arrematação e agendar a entrega do seu produto, é necessário o pagamento do frete via Sedex.
-                        </p>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                          <span style={{ fontSize: 13, color: "#555", fontWeight: 700 }}>Frete Sedex</span>
-                          <span style={{ fontSize: 20, fontWeight: 900, color: CB_BLUE }}>{formatBRL(FRETE_AMOUNT)}</span>
-                        </div>
-                      </div>
+                      <span style={{ fontSize: 22, fontWeight: 900, color: CB_BLUE }}>{formatBRL(FRETE_AMOUNT)}</span>
                     </div>
-
-                    {fretePixPaid ? (
-                      <div style={{ textAlign: "center", paddingTop: 8 }}>
-                        <div style={{ width: 52, height: 52, borderRadius: "50%", backgroundColor: "#f0fdf4", border: "2px solid #86efac", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px", fontSize: 24 }}>✓</div>
-                        <p style={{ fontSize: 15, fontWeight: 900, color: "#166534", marginBottom: 4 }}>Frete pago! Arrematação concluída.</p>
-                        <p style={{ fontSize: 12, color: "#555", lineHeight: 1.6 }}>
-                          Sua entrega foi agendada. Você receberá o código de rastreamento em breve.
-                        </p>
-                      </div>
-                    ) : freteLoading ? (
+                    {freteLoading ? (
                       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, paddingTop: 8 }}>
                         <div className="spin" style={{ width: 32, height: 32, borderRadius: "50%", border: "3px solid #e0e0e0", borderTopColor: CB_BLUE }} />
                         <p style={{ fontSize: 12, color: "#777" }}>Gerando PIX do frete...</p>
                       </div>
                     ) : fretePixCode ? (
                       <>
+                        <div style={{ backgroundColor: "#f0f4ff", border: "1px solid #c7d5ff", borderRadius: 8, padding: "10px 14px" }}>
+                          <p style={{ fontSize: 12, color: "#1e3a8a", lineHeight: 1.6 }}>
+                            <strong>Como pagar:</strong> Abra seu banco, escolha Pix, escaneie o QR Code ou cole o código abaixo. O pagamento é confirmado automaticamente em segundos.
+                          </p>
+                        </div>
                         <div style={{ textAlign: "center" }}>
                           <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 8 }}>QR Code PIX — Frete</p>
                           <img
                             src={qrUrl(fretePixCode)}
                             alt="QR Code PIX frete"
-                            style={{ width: 180, height: 180, display: "block", margin: "0 auto", borderRadius: 8, border: "1px solid #e0e0e0" }}
+                            style={{ width: 200, height: 200, display: "block", margin: "0 auto", borderRadius: 8, border: "1px solid #e0e0e0" }}
                           />
                         </div>
                         <div>
@@ -764,18 +849,23 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                             {fretePixCode}
                           </div>
                           <button onClick={handleFreteCopy} style={{ display: "block", width: "100%", padding: "12px", backgroundColor: CB_BLUE, color: "white", fontWeight: 900, fontSize: 13, borderRadius: 8, border: "none", cursor: "pointer" }}>
-                            {freteCopied ? "Copiado!" : "Copiar código PIX do frete"}
+                            {freteCopied ? "✓ Copiado!" : "Copiar código PIX do frete"}
                           </button>
                         </div>
                         <div style={{ display: "flex", alignItems: "center", gap: 10, paddingTop: 4 }}>
                           <div className="spin" style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #e0e0e0", borderTopColor: CB_BLUE, flexShrink: 0 }} />
-                          <p style={{ fontSize: 12, color: "#777" }}>Aguardando confirmação do pagamento do frete...</p>
+                          <p style={{ fontSize: 12, color: "#777" }}>Aguardando confirmação do pagamento...</p>
                         </div>
                       </>
                     ) : null}
                   </>
-                );
-              }
+                )}
+              </>
+            )}
+
+            {/* ─── STEP: PIX ─── */}
+            {step === "pix" && (() => {
+              const pixAmount = (bidAmount + comissao) / 2;
 
               // ── PIX do produto (aguardando pagamento) ──
               return (
