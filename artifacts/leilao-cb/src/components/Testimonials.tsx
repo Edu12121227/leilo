@@ -21,6 +21,8 @@ import clienteMarcos from "@assets/cafu-cesar-hortolandia-abc-1_1775859846657.pn
 const CB_BLUE = "#0033C6";
 const CB_YELLOW = "#FFCC00";
 
+const TODAY = "Hoje, 10/04/2025";
+
 interface Testimonial {
   id: number;
   name: string;
@@ -115,18 +117,19 @@ function TestimonialCard({ t, isMobile }: { t: Testimonial; isMobile: boolean })
       border: "1px solid #e8e8e8",
       display: "flex",
       flexDirection: isMobile ? "column" : "row",
-      minWidth: isMobile ? "100%" : 520,
-      maxWidth: isMobile ? "100%" : 640,
+      minWidth: isMobile ? "82vw" : 520,
+      maxWidth: isMobile ? "82vw" : 640,
       flexShrink: 0,
+      scrollSnapAlign: "start",
     }}>
       {/* Foto do produto */}
-      <div style={{ position: "relative", width: isMobile ? "100%" : 220, flexShrink: 0 }}>
+      <div style={{ position: "relative", width: isMobile ? "100%" : 240, flexShrink: 0 }}>
         <img
           src={t.photos[activePhoto]}
           alt={t.product}
           style={{
             width: "100%",
-            height: isMobile ? 200 : "100%",
+            height: isMobile ? 260 : "100%",
             objectFit: "cover",
             display: "block",
           }}
@@ -160,17 +163,18 @@ function TestimonialCard({ t, isMobile }: { t: Testimonial; isMobile: boolean })
       </div>
 
       {/* Conteúdo */}
-      <div style={{ padding: isMobile ? "16px 16px 20px" : "20px 20px 20px", display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
+      <div style={{ padding: isMobile ? "14px 14px 18px" : "20px 20px 20px", display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
         {/* Header cliente */}
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <img
             src={t.avatar}
             alt={t.name}
-            style={{ width: 44, height: 44, borderRadius: "50%", objectFit: "cover", border: `2px solid ${CB_YELLOW}`, flexShrink: 0 }}
+            style={{ width: 48, height: 48, borderRadius: "50%", objectFit: "cover", border: `2px solid ${CB_YELLOW}`, flexShrink: 0 }}
           />
           <div>
             <p style={{ fontWeight: 900, fontSize: 14, color: "#1a1a1a", marginBottom: 1 }}>{t.name}</p>
             <p style={{ fontSize: 11, color: "#888", fontWeight: 700 }}>{t.location}</p>
+            <p style={{ fontSize: 10, color: "#bbb", marginTop: 1, fontWeight: 600 }}>{TODAY}</p>
           </div>
           <div style={{ marginLeft: "auto", textAlign: "right" }}>
             <StarRating count={t.stars} />
@@ -244,10 +248,13 @@ export default function Testimonials({ isMobile }: { isMobile: boolean }) {
         {/* Cards — scroll horizontal no mobile */}
         <div style={{
           display: "flex",
-          gap: 16,
+          gap: 12,
           overflowX: isMobile ? "auto" : "visible",
           flexWrap: isMobile ? "nowrap" : "wrap",
-          paddingBottom: isMobile ? 4 : 0,
+          paddingBottom: isMobile ? 8 : 0,
+          paddingRight: isMobile ? 16 : 0,
+          scrollSnapType: isMobile ? "x mandatory" : "none",
+          WebkitOverflowScrolling: "touch",
         }} className="no-scrollbar">
           {TESTIMONIALS.map((t) => (
             <TestimonialCard key={t.id} t={t} isMobile={isMobile} />
