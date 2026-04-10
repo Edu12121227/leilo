@@ -757,7 +757,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                   <span style={{ fontSize: 22, flexShrink: 0 }}>🚚</span>
                   <div>
                     <p style={{ fontSize: 12, fontWeight: 800, color: CB_BLUE, marginBottom: 4 }}>Previsão de entrega</p>
-                    <p style={{ fontSize: 13, fontWeight: 900, color: "#222" }}>3 a 7 dias úteis após confirmação do frete</p>
+                    <p style={{ fontSize: 13, fontWeight: 900, color: "#222" }}>Entre {getDeliveryRange()}</p>
                   </div>
                 </div>
                 <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 10, padding: "14px 16px" }}>
@@ -795,7 +795,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                     <p style={{ fontSize: 16, fontWeight: 900, color: "#166534", textAlign: "center" }}>Frete pago! Arrematação concluída.</p>
                     <div style={{ backgroundColor: "#f0fdf4", border: "1px solid #86efac", borderRadius: 10, padding: "14px 16px", width: "100%" }}>
                       <p style={{ fontSize: 13, color: "#166534", fontWeight: 700, lineHeight: 1.7, textAlign: "center" }}>
-                        Em <strong>3 dias úteis</strong> seu produto será despachado.<br />
+                        Entrega prevista entre <strong>{getDeliveryRange()}</strong>.<br />
                         O código de rastreamento será enviado via <strong>E-mail</strong> e <strong>WhatsApp</strong>.
                       </p>
                     </div>
