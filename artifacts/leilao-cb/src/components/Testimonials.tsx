@@ -8,6 +8,10 @@ import mideaDetalhe from "@assets/br-11134103-820ls-mmmf8mfqugas1a_1775859312710
 import mideaMaquina from "@assets/ff3b795b-3798-4abc-86ee-792ba7167c43_1775859312714.png";
 import clientePatricia from "@assets/images_1775859312714.jpeg";
 
+import samsungCaixa from "@assets/628ba0b0-6288-4c94-9810-92ec59bdebb7_1775859409974.png";
+import samsungMaquina from "@assets/br-11134103-81z1k-mfb54i7x7xtx2a_1775859409976.webp";
+import clienteAline from "@assets/images_1775859409976.jpeg";
+
 const CB_BLUE = "#0033C6";
 const CB_YELLOW = "#FFCC00";
 
@@ -44,6 +48,17 @@ const TESTIMONIALS: Testimonial[] = [
     pricePaid: "R$ 680,00",
     text: "Eu nunca tinha comprado em leilão online e confesso que meu marido não queria que eu fizesse. Mas o preço era bom demais pra ignorar — essa Midea Lava e Seca custa mais de R$ 3.000 em qualquer loja. Quando chegou ainda estava com o plástico de proteção original, praticamente lacrada. Instalamos, ligamos e funcionou na primeira vez. Não tem absolutamente nada de errado com a máquina, só a embalagem que tinha amassado no transporte. Comprei mais barato do que qualquer promoção que já vi e ainda recebi em casa.",
     photos: [mideaMaquina, mideaDetalhe],
+    stars: 5,
+  },
+  {
+    id: 3,
+    name: "Aline Ferreira C.",
+    location: "Salvador - BA",
+    avatar: clienteAline,
+    product: "Lavadora Samsung 11kg Titanium",
+    pricePaid: "R$ 520,00",
+    text: "Quando a embalagem chegou toda destruída eu já pensei que ia ter problema, mas abri e a Samsung estava impecável — nem uma marquinha. Esse modelo Titanium é lindo, parece que sai de vitrine. Na loja estava R$ 2.300 e eu paguei R$ 520. Já estou usando há três semanas, lava perfeito, sem barulho, sem nada. Pra quem tá com medo do amassado na caixa: pode ir sem medo, é só a embalagem mesmo.",
+    photos: [samsungCaixa, samsungMaquina],
     stars: 5,
   },
 ];
