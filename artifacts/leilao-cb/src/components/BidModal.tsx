@@ -27,6 +27,9 @@ type Step =
   | "cpf-confirm"
   | "confirm"
   | "payment-select"
+  | "address"
+  | "address-saving"
+  | "address-success"
   | "info"
   | "pix";
 
