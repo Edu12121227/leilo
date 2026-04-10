@@ -25,6 +25,7 @@ import { useLocation } from "wouter";
 import Header from "@/components/Header";
 import { lots, getCategory, getCategoryImage } from "@/data/lots";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import Testimonials from "@/components/Testimonials";
 
 const ITEMS_PER_PAGE = 20;
 const CB_YELLOW = "#FFCC00";
@@ -144,6 +145,9 @@ export default function LotListPage() {
           </div>
         </div>
       </div>
+
+      {/* ── Depoimentos ── */}
+      <Testimonials isMobile={isMobile} />
 
       {/* ── Filters bar ── */}
       <div style={{
