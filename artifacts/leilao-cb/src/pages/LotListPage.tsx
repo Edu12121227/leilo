@@ -52,6 +52,14 @@ export default function LotListPage() {
   const [status, setStatus] = useState("Todos");
   const [page, setPage] = useState(1);
   const [sortBy, setSortBy] = useState<"padrao" | "lote" | "price-asc" | "price-desc">("padrao");
+  const productsRef = useRef<HTMLDivElement>(null);
+
+  function changePage(newPage: number) {
+    setPage(newPage);
+    setTimeout(() => {
+      productsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 0);
+  }
 
   useEffect(() => {
     if (document.getElementById("vturb-script-69d6cbb40f73af5a2078b9b5")) return;
@@ -237,7 +245,7 @@ export default function LotListPage() {
           </div>
         ) : (
           <>
-            <div style={{
+            <div ref={productsRef} style={{
               display: "grid",
               gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(auto-fill, minmax(210px, 1fr))",
               gap: isMobile ? 10 : 16,
@@ -256,15 +264,15 @@ export default function LotListPage() {
             {/* Pagination */}
             {totalPages > 1 && (
               <div style={{ marginTop: 32, display: "flex", justifyContent: "center", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-                <PageBtn onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}>← Ant.</PageBtn>
+                <PageBtn onClick={() => changePage(Math.max(1, page - 1))} disabled={page === 1}>← Ant.</PageBtn>
                 {buildPages(page, totalPages).map((pn, i) =>
                   pn === "..." ? (
                     <span key={`d${i}`} style={{ padding: "0 2px", color: "#bbb", fontWeight: 700 }}>•••</span>
                   ) : (
-                    <PageBtn key={pn} onClick={() => setPage(pn as number)} active={page === pn}>{pn}</PageBtn>
+                    <PageBtn key={pn} onClick={() => changePage(pn as number)} active={page === pn}>{pn}</PageBtn>
                   )
                 )}
-                <PageBtn onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}>Prox. →</PageBtn>
+                <PageBtn onClick={() => changePage(Math.min(totalPages, page + 1))} disabled={page === totalPages}>Prox. →</PageBtn>
               </div>
             )}
           </>
