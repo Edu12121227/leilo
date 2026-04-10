@@ -184,6 +184,14 @@ export default function LotListPage() {
                 <option value="price-desc">Maior Preço</option>
               </select>
             </div>
+            {(category !== "Todos" || status !== "Todos" || search.trim()) && (
+              <button
+                onClick={() => { setSearch(""); setCategory("Todos"); setStatus("Todos"); setPage(1); }}
+                style={{ padding: "4px 12px", backgroundColor: "#fee2e2", color: "#b91c1c", fontWeight: 800, fontSize: 11, border: "1px solid #fca5a5", borderRadius: 20, cursor: "pointer", whiteSpace: "nowrap", fontFamily: "'Nunito', sans-serif" }}
+              >
+                ✕ Limpar filtros
+              </button>
+            )}
             <div style={{ marginLeft: "auto", fontSize: 12, fontWeight: 800, color: "#666", whiteSpace: "nowrap" }}>
               <span style={{ color: CB_BLUE }}>{filtered.length}</span> lotes
             </div>

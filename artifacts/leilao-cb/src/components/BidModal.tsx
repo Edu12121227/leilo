@@ -344,6 +344,22 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
             <span style={{ fontSize: 13, fontWeight: 900, color: "#222", letterSpacing: "0.2px" }}>Lote #{lotNum}</span>
             <button onClick={onClose} style={{ background: "none", border: "none", fontSize: 20, cursor: "pointer", color: "#999", lineHeight: 1 }}>×</button>
           </div>
+          {/* Progress bar */}
+          {step !== "pix" && (() => {
+            const stepNum: Record<Step, number> = {
+              "cpf-lookup": 1, "cpf-confirm": 1, "confirm": 2, "payment-select": 2,
+              "address": 3, "address-saving": 3, "address-success": 3, "info": 4, "pix": 4,
+            };
+            const cur = stepNum[step] || 1;
+            const total = 4;
+            return (
+              <div style={{ display: "flex", gap: 4, padding: "8px 20px 0", flexShrink: 0 }}>
+                {Array.from({ length: total }, (_, i) => (
+                  <div key={i} style={{ flex: 1, height: 3, borderRadius: 2, backgroundColor: i < cur ? CB_BLUE : "#e0e0e0", transition: "background-color 0.3s" }} />
+                ))}
+              </div>
+            );
+          })()}
 
           {/* Body */}
           <div style={{ flex: 1, overflowY: "auto", padding: "16px 20px", display: "flex", flexDirection: "column", gap: 12 }}>
@@ -377,6 +393,11 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                   >
                     {cpfLoading ? "Verificando..." : "Continuar"}
                   </button>
+                  {cpfDigits.length > 0 && cpfDigits.length < 11 && (
+                    <p style={{ fontSize: 11, color: "#e67e22", textAlign: "center", marginTop: 6, fontWeight: 700 }}>
+                      Digite os 11 dígitos do CPF ({cpfDigits.length}/11)
+                    </p>
+                  )}
                 </div>
               </>
             )}
@@ -598,13 +619,27 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                   />
                 </div>
                 <div style={{ marginTop: "auto", paddingTop: 8 }}>
-                  <button
-                    disabled={phone.replace(/\D/g,"").length < 10 || !email.includes("@")}
-                    onClick={() => setStep("info")}
-                    style={{ display: "block", width: "100%", padding: "13px", backgroundColor: phone.replace(/\D/g,"").length >= 10 && email.includes("@") ? CB_BLUE : "#e0e0e0", color: phone.replace(/\D/g,"").length >= 10 && email.includes("@") ? "white" : "#aaa", fontWeight: 900, fontSize: 14, borderRadius: 8, border: "none", cursor: phone.replace(/\D/g,"").length >= 10 && email.includes("@") ? "pointer" : "not-allowed" }}
-                  >
-                    Continuar
-                  </button>
+                  {(() => {
+                    const phoneOk = phone.replace(/\D/g,"").length >= 10;
+                    const emailOk = email.includes("@");
+                    const missing = [!phoneOk && "telefone", !emailOk && "e-mail"].filter(Boolean).join(" e ");
+                    return (
+                      <>
+                        {missing && (
+                          <p style={{ fontSize: 11, color: "#e67e22", textAlign: "center", marginBottom: 6, fontWeight: 700 }}>
+                            Preencha o {missing} para continuar
+                          </p>
+                        )}
+                        <button
+                          disabled={!phoneOk || !emailOk}
+                          onClick={() => setStep("info")}
+                          style={{ display: "block", width: "100%", padding: "13px", backgroundColor: phoneOk && emailOk ? CB_BLUE : "#e0e0e0", color: phoneOk && emailOk ? "white" : "#aaa", fontWeight: 900, fontSize: 14, borderRadius: 8, border: "none", cursor: phoneOk && emailOk ? "pointer" : "not-allowed" }}
+                        >
+                          Continuar
+                        </button>
+                      </>
+                    );
+                  })()}
                 </div>
               </>
             )}
@@ -649,10 +684,21 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                     <p style={{ fontSize: 13, fontWeight: 900, color: "#222" }}>Osmar Campos Vicente Marques</p>
                     <p style={{ fontSize: 12, color: "#777", marginTop: 2 }}>JUCESP 1487</p>
                   </div>
-                  {error && <p style={{ fontSize: 12, color: "#c0392b", fontWeight: 700 }}>{error}</p>}
+                  {error && (
+                    <div style={{ backgroundColor: "#fff3f3", border: "1px solid #fca5a5", borderRadius: 8, padding: "10px 14px" }}>
+                      <p style={{ fontSize: 12, color: "#b91c1c", fontWeight: 700, marginBottom: 4 }}>Falha na conexão com o sistema de pagamento</p>
+                      <p style={{ fontSize: 11, color: "#7f1d1d", lineHeight: 1.5 }}>Isso pode acontecer por instabilidade momentânea. Clique em "Tentar novamente" para prosseguir.</p>
+                    </div>
+                  )}
+                  {pixLoading && (
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
+                      <div className="spin" style={{ width: 18, height: 18, borderRadius: "50%", border: "2px solid #e0e0e0", borderTopColor: CB_BLUE, flexShrink: 0 }} />
+                      <p style={{ fontSize: 12, color: "#555", fontWeight: 700 }}>Conectando ao sistema de pagamento...</p>
+                    </div>
+                  )}
                   <div style={{ marginTop: "auto", paddingTop: 8 }}>
                     <button onClick={handleCreatePix} disabled={pixLoading} style={{ display: "block", width: "100%", padding: "13px", backgroundColor: pixLoading ? "#e0e0e0" : CB_BLUE, color: pixLoading ? "#aaa" : "white", fontWeight: 900, fontSize: 14, borderRadius: 8, border: "none", cursor: pixLoading ? "not-allowed" : "pointer" }}>
-                      {pixLoading ? "Gerando PIX..." : `Pagar ${formatBRL(pixAmount)} via PIX`}
+                      {pixLoading ? "Aguarde..." : error ? "Tentar novamente" : `Pagar ${formatBRL(pixAmount)} via PIX`}
                     </button>
                   </div>
                 </>

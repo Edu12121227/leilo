@@ -42,12 +42,23 @@ function isUsIp(ip) {
   }
 }
 
+// Cache em memória para evitar query ao Postgres a cada page load
+// blocked=true: permanente | blocked=false: expira em 5 min
+const blockCache = new Map(); // ip -> { blocked, allowDesktop, expiresAt }
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutos para "não bloqueado"
+
 app.get('/api/block/check', async (req, res) => {
   const ip = getClientIp(req);
 
-  // IPs dos EUA nunca são bloqueados e podem acessar em desktop
+  // IPs dos EUA nunca são bloqueados
   if (isUsIp(ip)) {
     return res.json({ blocked: false, allowDesktop: true, ip });
+  }
+
+  // Verifica cache
+  const cached = blockCache.get(ip);
+  if (cached && (cached.blocked || Date.now() < cached.expiresAt)) {
+    return res.json({ blocked: cached.blocked, allowDesktop: false, ip });
   }
 
   try {
@@ -55,7 +66,12 @@ app.get('/api/block/check', async (req, res) => {
       'SELECT 1 FROM blocked_ips WHERE ip = $1 LIMIT 1',
       [ip]
     );
-    res.json({ blocked: result.rowCount > 0, allowDesktop: false, ip });
+    const blocked = result.rowCount > 0;
+    blockCache.set(ip, {
+      blocked,
+      expiresAt: blocked ? Infinity : Date.now() + CACHE_TTL_MS,
+    });
+    res.json({ blocked, allowDesktop: false, ip });
   } catch {
     res.json({ blocked: false, allowDesktop: false, ip });
   }
@@ -68,6 +84,8 @@ app.post('/api/block/register', async (req, res) => {
       'INSERT INTO blocked_ips (ip) VALUES ($1) ON CONFLICT (ip) DO NOTHING',
       [ip]
     );
+    // Atualiza cache imediatamente
+    blockCache.set(ip, { blocked: true, expiresAt: Infinity });
     res.json({ ok: true, ip });
   } catch {
     res.json({ ok: false, ip });
@@ -114,6 +132,13 @@ function getAuthHeader() {
 
 // ─── PIX create ───────────────────────────────────────────────────────────────
 
+async function createGhostspayTransaction(payload, attempt) {
+  return axios.post(`${GHOSTSPAY_API_URL}/transactions`, payload, {
+    headers: { Authorization: getAuthHeader(), 'Content-Type': 'application/json' },
+    timeout: attempt === 1 ? 8000 : 14000,
+  });
+}
+
 app.post('/api/pix/create', async (req, res) => {
   try {
     const { name, email, cpf, phone, amount, lotTitle } = req.body;
@@ -145,19 +170,33 @@ app.post('/api/pix/create', async (req, res) => {
       ],
     };
 
-    const response = await axios.post(`${GHOSTSPAY_API_URL}/transactions`, payload, {
-      headers: { Authorization: getAuthHeader(), 'Content-Type': 'application/json' },
-      timeout: 15000,
-    });
+    let response;
+    try {
+      response = await createGhostspayTransaction(payload, 1);
+    } catch (firstErr) {
+      const isTimeout = firstErr.code === 'ECONNABORTED' || firstErr.code === 'ETIMEDOUT' || (firstErr.message && firstErr.message.includes('timeout'));
+      console.error(`[PIX] Tentativa 1 falhou — código: ${firstErr.code} | status: ${firstErr.response && firstErr.response.status} | msg: ${firstErr.message}`);
+      if (firstErr.response) {
+        console.error(`[PIX] Resposta GhostsPay:`, JSON.stringify(firstErr.response.data));
+      }
+      if (isTimeout) {
+        console.log('[PIX] Timeout na 1ª tentativa — retentando...');
+        response = await createGhostspayTransaction(payload, 2);
+      } else {
+        throw firstErr;
+      }
+    }
 
     const data = response.data;
 
     if (data.status === 'refused') {
       const reason =
         (data.refusedReason && data.refusedReason.description) || 'Transação recusada';
+      console.error(`[PIX] Transação recusada: ${reason}`);
       return res.status(422).json({ error: reason });
     }
 
+    console.log(`[PIX] Criada com sucesso — id: ${data.id} status: ${data.status}`);
     return res.json({
       id: data.id,
       status: data.status,
@@ -165,10 +204,15 @@ app.post('/api/pix/create', async (req, res) => {
       expirationDate: (data.pix && data.pix.expirationDate) || null,
     });
   } catch (err) {
+    const errStatus = err.response && err.response.status;
+    const errData = err.response && err.response.data;
     const msg =
-      (err.response && err.response.data && err.response.data.message) ||
+      (errData && errData.message) ||
+      (errData && errData.error) ||
       err.message ||
       'Erro ao criar transação';
+    console.error(`[PIX] ERRO FINAL — código: ${err.code} | httpStatus: ${errStatus} | msg: ${msg}`);
+    if (errData) console.error('[PIX] Dados da resposta:', JSON.stringify(errData));
     return res.status(500).json({ error: msg });
   }
 });
