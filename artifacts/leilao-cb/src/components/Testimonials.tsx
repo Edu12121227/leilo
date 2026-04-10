@@ -158,7 +158,7 @@ function TestimonialCard({ t, isMobile }: { t: Testimonial; isMobile: boolean })
       width: "100%",
     }}>
       {/* Foto do produto */}
-      <div style={{ width: isMobile ? "100%" : 240, height: isMobile ? 240 : "auto", flexShrink: 0, minHeight: isMobile ? undefined : 200 }}>
+      <div style={{ width: isMobile ? "100%" : 260, height: isMobile ? 320 : "auto", flexShrink: 0, minHeight: isMobile ? undefined : 240 }}>
         <PhotoCarousel photos={t.photos} product={t.product} />
       </div>
 
