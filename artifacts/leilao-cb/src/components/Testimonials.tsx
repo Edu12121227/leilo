@@ -1,8 +1,12 @@
 import { useState } from "react";
 
 import caixaAmassada from "@assets/Caixa_de_embalagem_da_lavadora_Philco_1775859164204.png";
-import maquinaFoto from "@assets/br-11134103-820le-mme0vzcqibd3cd_1775859164202.webp";
+import philcoMaquina from "@assets/br-11134103-820m5-mme0vzclbhtw3a_1775859164204.webp";
 import clienteCarlos from "@assets/images_1775859164205.jpeg";
+
+import mideaDetalhe from "@assets/br-11134103-820ls-mmmf8mfqugas1a_1775859312710.webp";
+import mideaMaquina from "@assets/ff3b795b-3798-4abc-86ee-792ba7167c43_1775859312714.png";
+import clientePatricia from "@assets/images_1775859312714.jpeg";
 
 const CB_BLUE = "#0033C6";
 const CB_YELLOW = "#FFCC00";
@@ -25,10 +29,21 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Carlos Eduardo M.",
     location: "Goiânia - GO",
     avatar: clienteCarlos,
-    product: "Máquina de Lavar Midea 11kg",
+    product: "Lavadora Philco PL511A 11kg",
     pricePaid: "R$ 390,00",
-    text: "Fui com desconfiança, vou ser honesto. Paguei o PIX e fiquei dois dias sem dormir direito esperando chegar. Quando o frete chegou, a caixa estava bem amassada — dei uma estressada, já pensei o pior. Mas abri e a máquina estava zero, nem um arranhão na lataria. Já lavei umas seis turmas de roupa e funcionando perfeito até agora. Uma Midea 11kg nova por R$ 390 enquanto na loja está passando de R$ 2.100. Não tem discussão, vale muito a pena.",
-    photos: [caixaAmassada, maquinaFoto],
+    text: "Fui com desconfiança, vou ser honesto. Paguei o PIX e fiquei dois dias sem dormir direito esperando chegar. Quando o frete chegou, a caixa estava bem amassada — dei uma estressada, já pensei o pior. Mas abri e a máquina estava zero, nem um arranhão na lataria. Já lavei umas seis turmas de roupa e funcionando perfeito até agora. Uma Philco 11kg nova por R$ 390 enquanto na loja está passando de R$ 2.100. Não tem discussão, vale muito a pena.",
+    photos: [caixaAmassada, philcoMaquina],
+    stars: 5,
+  },
+  {
+    id: 2,
+    name: "Patrícia Alves S.",
+    location: "Campinas - SP",
+    avatar: clientePatricia,
+    product: "Lava e Seca Midea 10,5kg/7kg",
+    pricePaid: "R$ 680,00",
+    text: "Eu nunca tinha comprado em leilão online e confesso que meu marido não queria que eu fizesse. Mas o preço era bom demais pra ignorar — essa Midea Lava e Seca custa mais de R$ 3.000 em qualquer loja. Quando chegou ainda estava com o plástico de proteção original, praticamente lacrada. Instalamos, ligamos e funcionou na primeira vez. Não tem absolutamente nada de errado com a máquina, só a embalagem que tinha amassado no transporte. Comprei mais barato do que qualquer promoção que já vi e ainda recebi em casa.",
+    photos: [mideaMaquina, mideaDetalhe],
     stars: 5,
   },
 ];
