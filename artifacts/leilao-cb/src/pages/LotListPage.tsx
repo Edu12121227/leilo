@@ -33,6 +33,17 @@ const CB_BLUE = "#0033C6";
 const CATEGORIES = ["Todos", "Refrigeradores", "Lavanderia", "Fogões", "Freezers", "Eletrodomésticos"];
 const STATUSES = ["Todos", "Disponível", "Vendido"];
 
+// Mais vendidos em ordem decrescente de vendas (dados reais GhostsPay)
+const FEATURED_SALES: Record<string, number> = {
+  "1332": 12, // Lava/Seca 11KG Samsung WD11A4453BX
+  "1001": 7,  // iPhone 13 Pro 256GB Dourado
+  "1218": 5,  // Refrigerador 490L Electrolux IB7S
+  "1191": 4,  // Refrigerador 377L Consul CRM44MB
+  "1195": 4,  // Refrigerador 463L Brastemp BRM55FK
+  "1310": 4,  // Lavadora 13KG Brastemp BWK13AB
+  "1354": 3,  // Fogão 4B Continental FC4GB
+};
+
 export default function LotListPage() {
   const [, setLocation] = useLocation();
   const [search, setSearch] = useState("");
@@ -70,7 +81,14 @@ export default function LotListPage() {
     if (sortBy === "lote") result.sort((a, b) => parseInt(a.loteNum) - parseInt(b.loteNum));
     else if (sortBy === "price-asc") result.sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
     else if (sortBy === "price-desc") result.sort((a, b) => parsePrice(b.price) - parsePrice(a.price));
-    // "padrao" keeps original interleaved array order
+    else {
+      // "padrao": mais vendidos primeiro, depois o resto na ordem original
+      result.sort((a, b) => {
+        const sa = FEATURED_SALES[a.itemId] ?? 0;
+        const sb = FEATURED_SALES[b.itemId] ?? 0;
+        return sb - sa;
+      });
+    }
     return result;
   }, [search, category, status, sortBy]);
 
@@ -274,6 +292,8 @@ export default function LotListPage() {
 function ProductCard({ lot, isMobile, countdown, onClick }: { lot: (typeof lots)[0]; isMobile: boolean; countdown: string; onClick: () => void }) {
   const isVendido = lot.status === "Vendido";
   const [hovered, setHovered] = useState(false);
+  const salesCount = FEATURED_SALES[lot.itemId] ?? 0;
+  const isFeatured = salesCount > 0;
 
   return (
     <div
@@ -284,11 +304,13 @@ function ProductCard({ lot, isMobile, countdown, onClick }: { lot: (typeof lots)
         backgroundColor: "white",
         borderRadius: 8,
         overflow: "hidden",
-        border: `1px solid ${hovered ? "#b0b0b0" : "#e8e8e8"}`,
+        border: isFeatured
+          ? `2px solid ${CB_YELLOW}`
+          : `1px solid ${hovered ? "#b0b0b0" : "#e8e8e8"}`,
         cursor: "pointer",
         display: "flex",
         flexDirection: "column",
-        boxShadow: hovered ? "0 6px 20px rgba(0,0,0,0.12)" : "0 2px 6px rgba(0,0,0,0.05)",
+        boxShadow: hovered ? "0 6px 20px rgba(0,0,0,0.12)" : isFeatured ? "0 3px 12px rgba(255,204,0,0.25)" : "0 2px 6px rgba(0,0,0,0.05)",
         transform: hovered ? "translateY(-2px)" : "none",
         transition: "box-shadow 0.18s, transform 0.18s, border-color 0.18s",
         position: "relative",
@@ -298,8 +320,31 @@ function ProductCard({ lot, isMobile, countdown, onClick }: { lot: (typeof lots)
       <div style={{ position: "absolute", top: 6, left: 6, backgroundColor: "rgba(0,0,0,0.6)", color: "white", fontSize: 9, fontWeight: 900, padding: "2px 6px", borderRadius: 4, zIndex: 2 }}>
         #{lot.loteNum}
       </div>
-      {/* Status dot */}
-      <div style={{ position: "absolute", top: 8, right: 8, width: 8, height: 8, borderRadius: "50%", backgroundColor: isVendido ? "#ef4444" : "#22c55e", zIndex: 2, boxShadow: "0 0 0 2px white" }} />
+
+      {/* Badge de arrematações (apenas nos mais vendidos) */}
+      {isFeatured && !isVendido && (
+        <div style={{
+          position: "absolute", top: 6, right: 6,
+          backgroundColor: "#dc2626",
+          color: "white",
+          fontSize: 9,
+          fontWeight: 900,
+          padding: "3px 7px",
+          borderRadius: 4,
+          zIndex: 2,
+          letterSpacing: "0.3px",
+          display: "flex",
+          alignItems: "center",
+          gap: 3,
+        }}>
+          🔥 {salesCount} arrematações
+        </div>
+      )}
+
+      {/* Status dot — só mostra se não tiver badge de vendas */}
+      {(!isFeatured || isVendido) && (
+        <div style={{ position: "absolute", top: 8, right: 8, width: 8, height: 8, borderRadius: "50%", backgroundColor: isVendido ? "#ef4444" : "#22c55e", zIndex: 2, boxShadow: "0 0 0 2px white" }} />
+      )}
 
       {/* Image */}
       <div style={{ aspectRatio: "1", backgroundColor: "#fafafa", display: "flex", alignItems: "center", justifyContent: "center", padding: isMobile ? 8 : 12, position: "relative", overflow: "hidden" }}>
