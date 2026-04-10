@@ -15,6 +15,9 @@ import clienteAline from "@assets/images_1775859409976.jpeg";
 import iphoneFoto from "@assets/D_NQ_NP_916853-MLB100095927822_122025-O_1775859791290.webp";
 import clienteRoberto from "@assets/images_(5)_1775859791289.jpeg";
 
+import iphone14Foto from "@assets/Smartphone_e_caixa_em_detalhe_1775859846657.png";
+import clienteMarcos from "@assets/cafu-cesar-hortolandia-abc-1_1775859846657.png";
+
 const CB_BLUE = "#0033C6";
 const CB_YELLOW = "#FFCC00";
 
@@ -73,6 +76,17 @@ const TESTIMONIALS: Testimonial[] = [
     pricePaid: "R$ 1.750,00",
     text: "Nunca comprei nada em leilão na vida, nem acreditava muito nessas coisas. Mas meu filho me mostrou o anúncio e o preço do iPhone era irrecusável. Fiz o PIX, fiquei um pouco apreensivo, mas o aparelho chegou certinho, na caixa original, com todos os acessórios — carregador, cabinho, tudo. Tela perfeita, sem arranhão nenhum. Já sincronizei com minha conta e está rodando redondo. Na loja Apple estaria pagando mais de R$ 6.500. Arrematei por R$ 1.750. Pode confiar.",
     photos: [iphoneFoto],
+    stars: 5,
+  },
+  {
+    id: 5,
+    name: "Marcos Vinícius T.",
+    location: "Ribeirão Preto - SP",
+    avatar: clienteMarcos,
+    product: "iPhone 14 Pro",
+    pricePaid: "R$ 1.690,00",
+    text: "A caixa chegou com um leve amassado e uma fitinha de reforço, dei uma olhada desconfiada. Mas o iPhone estava com plástico de proteção original ainda na tela e na traseira — não tinha sido aberto nenhuma vez. Liguei, configurei, zero problema. Câmera impecável, bateria 100%, tudo funcionando como novo. Trabalhei anos pra comprar um iPhone e consegui pelo preço de um celular intermediário. Isso aqui é real, pode comprar sem medo.",
+    photos: [iphone14Foto],
     stars: 5,
   },
 ];
