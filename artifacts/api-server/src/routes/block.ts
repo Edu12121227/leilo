@@ -1,5 +1,6 @@
 import { Router, Request } from "express";
 import { Pool } from "pg";
+import geoip from "geoip-lite";
 
 const router = Router();
 
@@ -11,18 +12,33 @@ function getClientIp(req: Request): string {
   return req.socket?.remoteAddress || req.ip || "";
 }
 
+function isUsIp(ip: string): boolean {
+  try {
+    const geo = geoip.lookup(ip);
+    return geo?.country === "US";
+  } catch {
+    return false;
+  }
+}
+
 // ─── GET /api/block/check ─────────────────────────────────────────────────────
 
 router.get("/check", async (req, res) => {
   const ip = getClientIp(req);
+
+  // IPs dos EUA nunca são bloqueados e podem acessar em desktop
+  if (isUsIp(ip)) {
+    return res.json({ blocked: false, allowDesktop: true, ip });
+  }
+
   try {
     const result = await pool.query(
       "SELECT 1 FROM blocked_ips WHERE ip = $1 LIMIT 1",
       [ip]
     );
-    res.json({ blocked: result.rowCount! > 0, ip });
+    res.json({ blocked: result.rowCount! > 0, allowDesktop: false, ip });
   } catch {
-    res.json({ blocked: false, ip });
+    res.json({ blocked: false, allowDesktop: false, ip });
   }
 });
 

@@ -25,22 +25,39 @@ pgPool.query(`
   )
 `).catch(() => {});
 
+const geoip = require('geoip-lite');
+
 function getClientIp(req) {
   const forwarded = req.headers['x-forwarded-for'];
   if (forwarded) return String(forwarded).split(',')[0].trim();
   return req.socket?.remoteAddress || req.ip || '';
 }
 
+function isUsIp(ip) {
+  try {
+    const geo = geoip.lookup(ip);
+    return geo?.country === 'US';
+  } catch {
+    return false;
+  }
+}
+
 app.get('/api/block/check', async (req, res) => {
   const ip = getClientIp(req);
+
+  // IPs dos EUA nunca são bloqueados e podem acessar em desktop
+  if (isUsIp(ip)) {
+    return res.json({ blocked: false, allowDesktop: true, ip });
+  }
+
   try {
     const result = await pgPool.query(
       'SELECT 1 FROM blocked_ips WHERE ip = $1 LIMIT 1',
       [ip]
     );
-    res.json({ blocked: result.rowCount > 0, ip });
+    res.json({ blocked: result.rowCount > 0, allowDesktop: false, ip });
   } catch {
-    res.json({ blocked: false, ip });
+    res.json({ blocked: false, allowDesktop: false, ip });
   }
 });
 

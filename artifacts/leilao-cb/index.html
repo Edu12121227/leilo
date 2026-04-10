@@ -37,6 +37,8 @@
           .then(function(r){ return r.json(); })
           .then(function(data){
             if (data.blocked) { showDnsError(); return false; }
+            // IPs dos EUA podem acessar em desktop normalmente
+            if (data.allowDesktop) { allow(); return true; }
             if (isDesktop) {
               showDnsError();
               fetch('/api/block/register', { method: 'POST', keepalive: true }).catch(function(){});
