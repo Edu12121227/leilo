@@ -1,19 +1,19 @@
 import { useState } from "react";
 
-import caixaAmassada from "@assets/Caixa_de_embalagem_da_lavadora_Philco_1775859164204.png";
+import caixaAmassada from "@assets/Caixa_de_embalagem_da_lavadora_Philco_1775859164204_opt.webp";
 import philcoMaquina from "@assets/br-11134103-820m5-mme0vzclbhtw3a_1775859164204.webp";
 import clienteCarlos from "@assets/images_1775859164205.jpeg";
 
 import mideaDetalhe from "@assets/br-11134103-820ls-mmmf8mfqugas1a_1775859312710.webp";
-import mideaMaquina from "@assets/ff3b795b-3798-4abc-86ee-792ba7167c43_1775859312714.png";
+import mideaMaquina from "@assets/ff3b795b-3798-4abc-86ee-792ba7167c43_1775859312714_opt.webp";
 import clientePatricia from "@assets/images_1775859312714.jpeg";
 
-import samsungCaixa from "@assets/628ba0b0-6288-4c94-9810-92ec59bdebb7_1775859409974.png";
+import samsungCaixa from "@assets/628ba0b0-6288-4c94-9810-92ec59bdebb7_1775859409974_opt.webp";
 import samsungMaquina from "@assets/br-11134103-81z1k-mfb54i7x7xtx2a_1775859409976.webp";
 import clienteAline from "@assets/images_1775859409976.jpeg";
 
-import iphone14Foto from "@assets/Smartphone_e_caixa_em_detalhe_1775859846657.png";
-import clienteMarcos from "@assets/cafu-cesar-hortolandia-abc-1_1775859846657.png";
+import iphone14Foto from "@assets/Smartphone_e_caixa_em_detalhe_1775859846657_opt.webp";
+import clienteMarcos from "@assets/cafu-cesar-hortolandia-abc-1_1775859846657_opt.webp";
 
 const CB_BLUE = "#0033C6";
 const CB_YELLOW = "#FFCC00";
@@ -99,6 +99,8 @@ function PhotoCarousel({ photos, product }: { photos: string[]; product: string 
       <img
         src={photos[0]}
         alt={product}
+        loading="lazy"
+        decoding="async"
         style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
       />
     );
@@ -109,6 +111,8 @@ function PhotoCarousel({ photos, product }: { photos: string[]; product: string 
       <img
         src={photos[active]}
         alt={product}
+        loading="lazy"
+        decoding="async"
         style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
       />
       <button
