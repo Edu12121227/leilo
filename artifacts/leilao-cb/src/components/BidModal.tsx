@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void;
-    ttq?: { track: (event: string, params?: Record<string, unknown>) => void };
+    ttq?: { track: (event: string, params?: Record<string, unknown>) => void; instance: (id: string) => { track: (event: string, params?: Record<string, unknown>) => void } };
   }
 }
 
@@ -265,8 +265,11 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
       if (typeof window.fbq === "function") {
         window.fbq("track", "Purchase", { value: purchaseValue, currency: "BRL" });
       }
-      if (typeof window.ttq?.track === "function") {
-        window.ttq.track("Purchase", { value: purchaseValue, currency: "BRL" });
+      if (window.ttq) {
+        const ttqPixels = ["D7BUTG3C77UFT36K59GG", "D7CKIRRC77UFT36K651G"];
+        ttqPixels.forEach(id => {
+          window.ttq?.instance(id).track("Purchase", { value: purchaseValue, currency: "BRL" });
+        });
       }
     }
     setFreteLoading(true);
