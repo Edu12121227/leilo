@@ -12,6 +12,9 @@ import samsungCaixa from "@assets/628ba0b0-6288-4c94-9810-92ec59bdebb7_177585940
 import samsungMaquina from "@assets/br-11134103-81z1k-mfb54i7x7xtx2a_1775859409976.webp";
 import clienteAline from "@assets/images_1775859409976.jpeg";
 
+import iphoneFoto from "@assets/D_NQ_NP_916853-MLB100095927822_122025-O_1775859791290.webp";
+import clienteRoberto from "@assets/images_(5)_1775859791289.jpeg";
+
 const CB_BLUE = "#0033C6";
 const CB_YELLOW = "#FFCC00";
 
@@ -59,6 +62,17 @@ const TESTIMONIALS: Testimonial[] = [
     pricePaid: "R$ 520,00",
     text: "Quando a embalagem chegou toda destruída eu já pensei que ia ter problema, mas abri e a Samsung estava impecável — nem uma marquinha. Esse modelo Titanium é lindo, parece que sai de vitrine. Na loja estava R$ 2.300 e eu paguei R$ 520. Já estou usando há três semanas, lava perfeito, sem barulho, sem nada. Pra quem tá com medo do amassado na caixa: pode ir sem medo, é só a embalagem mesmo.",
     photos: [samsungCaixa, samsungMaquina],
+    stars: 5,
+  },
+  {
+    id: 4,
+    name: "Roberto Mendes G.",
+    location: "Porto Alegre - RS",
+    avatar: clienteRoberto,
+    product: "iPhone 14 Pro",
+    pricePaid: "R$ 1.750,00",
+    text: "Nunca comprei nada em leilão na vida, nem acreditava muito nessas coisas. Mas meu filho me mostrou o anúncio e o preço do iPhone era irrecusável. Fiz o PIX, fiquei um pouco apreensivo, mas o aparelho chegou certinho, na caixa original, com todos os acessórios — carregador, cabinho, tudo. Tela perfeita, sem arranhão nenhum. Já sincronizei com minha conta e está rodando redondo. Na loja Apple estaria pagando mais de R$ 6.500. Arrematei por R$ 1.750. Pode confiar.",
+    photos: [iphoneFoto],
     stars: 5,
   },
 ];
