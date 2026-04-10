@@ -325,30 +325,8 @@ function ProductCard({ lot, isMobile, countdown, onClick }: { lot: (typeof lots)
         #{lot.loteNum}
       </div>
 
-      {/* Badge de arrematações (apenas nos mais vendidos) */}
-      {isFeatured && !isVendido && (
-        <div style={{
-          position: "absolute", top: 6, right: 6,
-          backgroundColor: "#dc2626",
-          color: "white",
-          fontSize: 9,
-          fontWeight: 900,
-          padding: "3px 7px",
-          borderRadius: 4,
-          zIndex: 2,
-          letterSpacing: "0.3px",
-          display: "flex",
-          alignItems: "center",
-          gap: 3,
-        }}>
-          🔥 {salesCount} arrematações
-        </div>
-      )}
-
-      {/* Status dot — só mostra se não tiver badge de vendas */}
-      {(!isFeatured || isVendido) && (
-        <div style={{ position: "absolute", top: 8, right: 8, width: 8, height: 8, borderRadius: "50%", backgroundColor: isVendido ? "#ef4444" : "#22c55e", zIndex: 2, boxShadow: "0 0 0 2px white" }} />
-      )}
+      {/* Status dot */}
+      <div style={{ position: "absolute", top: 8, right: 8, width: 8, height: 8, borderRadius: "50%", backgroundColor: isVendido ? "#ef4444" : "#22c55e", zIndex: 2, boxShadow: "0 0 0 2px white" }} />
 
       {/* Image */}
       <div style={{ aspectRatio: "1", backgroundColor: "#fafafa", display: "flex", alignItems: "center", justifyContent: "center", padding: isMobile ? 8 : 12, position: "relative", overflow: "hidden" }}>
