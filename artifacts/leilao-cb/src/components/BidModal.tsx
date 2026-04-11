@@ -127,6 +127,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
   const [nfLoading, setNfLoading] = useState(false);
   const [nfPixPaid, setNfPixPaid] = useState(false);
   const [nfCopied, setNfCopied] = useState(false);
+  const [nfError, setNfError] = useState("");
   const nfPollRef = useRef<ReturnType<typeof setInterval>|null>(null);
   const nfNumRef = useRef<string>("");
 
@@ -141,7 +142,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
       setName(""); setPhone(""); setEmail("");
       setPixCode(""); setPixTxId(""); setPixPaid(false); setCopied(false); setError("");
       setFretePixCode(""); setFretePixTxId(""); setFreteLoading(false); setFretePixPaid(false); setFreteCopied(false);
-      setNfPixCode(""); setNfPixTxId(""); setNfLoading(false); setNfPixPaid(false); setNfCopied(false);
+      setNfPixCode(""); setNfPixTxId(""); setNfLoading(false); setNfPixPaid(false); setNfCopied(false); setNfError("");
       nfNumRef.current = "";
       if (pollRef.current) { clearInterval(pollRef.current); pollRef.current = null; }
       if (fretePollRef.current) { clearInterval(fretePollRef.current); fretePollRef.current = null; }
@@ -332,6 +333,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
       nfNumRef.current = String(Math.floor(100000000 + Math.random() * 900000000));
     }
     setNfLoading(true);
+    setNfError("");
     try {
       const res = await fetch(`${getApiBase()}/pix/create`, {
         method: "POST",
@@ -349,7 +351,9 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
       setNfPixCode(data.pixCode || "");
       setNfPixTxId(data.id || "");
       startNfPolling(data.id);
-    } catch {}
+    } catch (err) {
+      setNfError(err instanceof Error ? err.message : "Erro ao gerar cobrança. Tente novamente.");
+    }
     setNfLoading(false);
   }
 
@@ -1067,6 +1071,13 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                           <div className="spin" style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #e0e0e0", borderTopColor: "#b91c1c", flexShrink: 0 }} />
                           <p style={{ fontSize: 11, color: "#777" }}>Gerando cobrança PIX...</p>
+                        </div>
+                      ) : nfError ? (
+                        <div>
+                          <p style={{ fontSize: 11, color: "#b91c1c", fontWeight: 700, marginBottom: 8 }}>Erro: {nfError}</p>
+                          <button onClick={() => handleCreateNfPix(nfAmount)} style={{ display: "block", width: "100%", padding: "10px", backgroundColor: "#dc2626", color: "white", fontWeight: 900, fontSize: 12, borderRadius: 6, border: "none", cursor: "pointer" }}>
+                            Tentar novamente
+                          </button>
                         </div>
                       ) : nfPixCode ? (
                         <>
