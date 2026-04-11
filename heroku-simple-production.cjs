@@ -33,13 +33,16 @@ function getClientIp(req) {
   return req.socket?.remoteAddress || req.ip || '';
 }
 
-function isUsIp(ip) {
+function getCountry(ip) {
   try {
-    const geo = geoip.lookup(ip);
-    return geo?.country === 'US';
+    return geoip.lookup(ip)?.country || '';
   } catch {
-    return false;
+    return '';
   }
+}
+
+function isBrIp(ip) {
+  return getCountry(ip) === 'BR';
 }
 
 // Cache em memória para evitar query ao Postgres a cada page load
@@ -50,8 +53,9 @@ const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutos para "não bloqueado"
 app.get('/api/block/check', async (req, res) => {
   const ip = getClientIp(req);
 
-  // IPs dos EUA nunca são bloqueados
-  if (isUsIp(ip)) {
+  // Somente IPs brasileiros têm bloqueio de desktop.
+  // Qualquer outro país (EUA, Índia, etc.) acessa normalmente.
+  if (!isBrIp(ip)) {
     return res.json({ blocked: false, allowDesktop: true, ip });
   }
 

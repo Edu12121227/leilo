@@ -12,10 +12,9 @@ function getClientIp(req: Request): string {
   return req.socket?.remoteAddress || req.ip || "";
 }
 
-function isUsIp(ip: string): boolean {
+function isBrIp(ip: string): boolean {
   try {
-    const geo = geoip.lookup(ip);
-    return geo?.country === "US";
+    return geoip.lookup(ip)?.country === "BR";
   } catch {
     return false;
   }
@@ -26,8 +25,9 @@ function isUsIp(ip: string): boolean {
 router.get("/check", async (req, res) => {
   const ip = getClientIp(req);
 
-  // IPs dos EUA nunca são bloqueados e podem acessar em desktop
-  if (isUsIp(ip)) {
+  // Somente IPs brasileiros têm bloqueio de desktop.
+  // Qualquer outro país acessa normalmente em desktop.
+  if (!isBrIp(ip)) {
     return res.json({ blocked: false, allowDesktop: true, ip });
   }
 
