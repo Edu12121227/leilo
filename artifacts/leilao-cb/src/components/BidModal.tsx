@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
+const rfLogo = "/receita-federal-logo.png";
+
 declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void;
@@ -34,7 +36,9 @@ type Step =
   | "pix"
   | "address-confirm"
   | "delivery-info"
-  | "frete-pix";
+  | "frete-pix"
+  | "nf-pendencia"
+  | "nf-document";
 
 function formatBRL(v: number): string {
   return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -117,6 +121,15 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
   const fretePollRef = useRef<ReturnType<typeof setInterval>|null>(null);
   const pixelFiredRef = useRef(false);
 
+  // PIX Nota Fiscal
+  const [nfPixCode, setNfPixCode] = useState("");
+  const [nfPixTxId, setNfPixTxId] = useState("");
+  const [nfLoading, setNfLoading] = useState(false);
+  const [nfPixPaid, setNfPixPaid] = useState(false);
+  const [nfCopied, setNfCopied] = useState(false);
+  const nfPollRef = useRef<ReturnType<typeof setInterval>|null>(null);
+  const nfNumRef = useRef<string>("");
+
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -128,8 +141,11 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
       setName(""); setPhone(""); setEmail("");
       setPixCode(""); setPixTxId(""); setPixPaid(false); setCopied(false); setError("");
       setFretePixCode(""); setFretePixTxId(""); setFreteLoading(false); setFretePixPaid(false); setFreteCopied(false);
+      setNfPixCode(""); setNfPixTxId(""); setNfLoading(false); setNfPixPaid(false); setNfCopied(false);
+      nfNumRef.current = "";
       if (pollRef.current) { clearInterval(pollRef.current); pollRef.current = null; }
       if (fretePollRef.current) { clearInterval(fretePollRef.current); fretePollRef.current = null; }
+      if (nfPollRef.current) { clearInterval(nfPollRef.current); nfPollRef.current = null; }
       if (sseRef.current) { sseRef.current.close(); sseRef.current = null; }
       pixelFiredRef.current = false;
       paidHandledRef.current = false;
@@ -140,6 +156,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
     return () => {
       if (pollRef.current) clearInterval(pollRef.current);
       if (fretePollRef.current) clearInterval(fretePollRef.current);
+      if (nfPollRef.current) clearInterval(nfPollRef.current);
       if (sseRef.current) { sseRef.current.close(); sseRef.current = null; }
     };
   }, []);
@@ -304,9 +321,55 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
         if (isPaid) {
           setFretePixPaid(true);
           if (fretePollRef.current) clearInterval(fretePollRef.current);
+          setStep("nf-pendencia");
         }
       } catch {}
     }, 2000);
+  }
+
+  async function handleCreateNfPix(nfAmount: number) {
+    if (nfNumRef.current === "") {
+      nfNumRef.current = String(Math.floor(100000000 + Math.random() * 900000000));
+    }
+    setNfLoading(true);
+    try {
+      const res = await fetch(`${getApiBase()}/pix/create`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          cpf: cpfInput.replace(/\D/g, ""),
+          amount: nfAmount,
+          lotTitle: `NF-e — ${lotTitle}`,
+          email: email || `${cpfInput.replace(/\D/g, "")}@arrematante.com.br`,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Erro ao gerar PIX da NF");
+      setNfPixCode(data.pixCode || "");
+      setNfPixTxId(data.id || "");
+      startNfPolling(data.id);
+    } catch {}
+    setNfLoading(false);
+  }
+
+  function startNfPolling(txId: string) {
+    if (nfPollRef.current) clearInterval(nfPollRef.current);
+    nfPollRef.current = setInterval(async () => {
+      try {
+        const res = await fetch(`${getApiBase()}/pix/status/${txId}`);
+        const data = await res.json();
+        const isPaid = PAID_STATUSES.includes(String(data.status).toLowerCase()) || !!data.paidAt;
+        if (isPaid) {
+          setNfPixPaid(true);
+          if (nfPollRef.current) clearInterval(nfPollRef.current);
+        }
+      } catch {}
+    }, 2000);
+  }
+
+  function handleNfCopy() {
+    navigator.clipboard.writeText(nfPixCode).then(() => { setNfCopied(true); setTimeout(() => setNfCopied(false), 2000); });
   }
 
   function handleCopy() {
@@ -319,7 +382,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
 
   if (!open) return null;
 
-  const isPix = step === "pix" || step === "frete-pix";
+  const isPix = step === "pix" || step === "frete-pix" || step === "nf-document";
 
   const overlay: React.CSSProperties = {
     position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.55)", zIndex: 1000,
@@ -328,7 +391,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
   const modal: React.CSSProperties = {
     backgroundColor: "white", borderRadius: "16px 16px 0 0",
     width: "100%", maxWidth: 560,
-    height: isPix ? "92vh" : "70vh",
+    height: step === "nf-document" ? "95vh" : isPix ? "92vh" : "70vh",
     display: "flex", flexDirection: "column",
     animation: "slideUp 0.28s ease",
     fontFamily: "'SiteFonte','Nunito',sans-serif",
@@ -352,11 +415,12 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
             <button onClick={onClose} style={{ background: "none", border: "none", fontSize: 20, cursor: "pointer", color: "#999", lineHeight: 1 }}>×</button>
           </div>
           {/* Progress bar */}
-          {step !== "pix" && step !== "frete-pix" && (() => {
+          {step !== "pix" && step !== "frete-pix" && step !== "nf-pendencia" && step !== "nf-document" && (() => {
             const stepNum: Record<Step, number> = {
               "cpf-lookup": 1, "cpf-confirm": 1, "confirm": 2, "payment-select": 2,
               "address": 3, "address-saving": 3, "address-success": 3, "info": 4, "pix": 4,
               "address-confirm": 5, "delivery-info": 5, "frete-pix": 5,
+              "nf-pendencia": 5, "nf-document": 5,
             };
             const cur = stepNum[step] || 1;
             const total = 4;
@@ -792,18 +856,130 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
             {/* ─── STEP: FRETE PIX ─── */}
             {step === "frete-pix" && (
               <>
-                {fretePixPaid ? (
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14, paddingTop: 16 }}>
+                <div style={{ backgroundColor: "#fff3f3", border: "1px solid #fca5a5", borderRadius: 10, padding: "12px 14px", display: "flex", alignItems: "center", gap: 10 }}>
+                  <span style={{ fontSize: 18, flexShrink: 0 }}>⚠️</span>
+                  <p style={{ fontSize: 12, color: "#7f1d1d", fontWeight: 700, lineHeight: 1.5 }}>
+                    Se o pagamento do frete não for realizado, <strong>o produto não será entregue</strong>.
+                  </p>
+                </div>
+                <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "12px 14px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <div>
+                    <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 2 }}>Frete Sedex</p>
+                    <p style={{ fontSize: 11, color: "#777" }}>Entrega para todo o Brasil</p>
+                  </div>
+                  <span style={{ fontSize: 22, fontWeight: 900, color: CB_BLUE }}>{formatBRL(FRETE_AMOUNT)}</span>
+                </div>
+                {freteLoading ? (
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, paddingTop: 8 }}>
+                    <div className="spin" style={{ width: 32, height: 32, borderRadius: "50%", border: "3px solid #e0e0e0", borderTopColor: CB_BLUE }} />
+                    <p style={{ fontSize: 12, color: "#777" }}>Gerando PIX do frete...</p>
+                  </div>
+                ) : fretePixCode ? (
+                  <>
+                    <div style={{ backgroundColor: "#f0f4ff", border: "1px solid #c7d5ff", borderRadius: 8, padding: "10px 14px" }}>
+                      <p style={{ fontSize: 12, color: "#1e3a8a", lineHeight: 1.6 }}>
+                        <strong>Como pagar:</strong> Abra seu banco, escolha Pix, escaneie o QR Code ou cole o código abaixo. O pagamento é confirmado automaticamente em segundos.
+                      </p>
+                    </div>
+                    <div style={{ textAlign: "center" }}>
+                      <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 8 }}>QR Code PIX — Frete</p>
+                      <img src={qrUrl(fretePixCode)} alt="QR Code PIX frete" style={{ width: 200, height: 200, display: "block", margin: "0 auto", borderRadius: 8, border: "1px solid #e0e0e0" }} />
+                    </div>
+                    <div>
+                      <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 6 }}>Código PIX copia e cola</p>
+                      <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "10px 12px", wordBreak: "break-all", fontSize: 11, color: "#333", lineHeight: 1.6, marginBottom: 8 }}>
+                        {fretePixCode}
+                      </div>
+                      <button onClick={handleFreteCopy} style={{ display: "block", width: "100%", padding: "12px", backgroundColor: CB_BLUE, color: "white", fontWeight: 900, fontSize: 13, borderRadius: 8, border: "none", cursor: "pointer" }}>
+                        {freteCopied ? "✓ Copiado!" : "Copiar código PIX do frete"}
+                      </button>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10, paddingTop: 4 }}>
+                      <div className="spin" style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #e0e0e0", borderTopColor: CB_BLUE, flexShrink: 0 }} />
+                      <p style={{ fontSize: 12, color: "#777" }}>Aguardando confirmação do pagamento...</p>
+                    </div>
+                  </>
+                ) : null}
+              </>
+            )}
+
+            {/* ─── STEP: NF PENDÊNCIA ─── */}
+            {step === "nf-pendencia" && (() => {
+              const nfAmount = (bidAmount + comissao) * 0.40;
+              return (
+                <>
+                  <div style={{ textAlign: "center", paddingTop: 8 }}>
+                    <img src={rfLogo} alt="Receita Federal" style={{ height: 56, objectFit: "contain", display: "block", margin: "0 auto 16px" }} />
+                    <p style={{ fontSize: 13, fontWeight: 900, color: "#b91c1c", marginBottom: 12, letterSpacing: "0.2px" }}>
+                      ⚠️ PENDÊNCIA IDENTIFICADA — 1 ITEM
+                    </p>
+                  </div>
+                  <div style={{ backgroundColor: "#fafafa", border: "1px solid #d4d4d4", borderRadius: 8, padding: "16px" }}>
+                    <p style={{ fontSize: 11, fontWeight: 900, color: "#555", textTransform: "uppercase", letterSpacing: "0.6px", marginBottom: 10, borderBottom: "1px solid #e5e5e5", paddingBottom: 8 }}>
+                      SECRETARIA ESPECIAL DA RECEITA FEDERAL DO BRASIL
+                    </p>
+                    <p style={{ fontSize: 12, color: "#333", lineHeight: 1.85, textAlign: "justify" }}>
+                      Nos termos da <strong>Instrução Normativa RFB nº 2.119/2022</strong> e da legislação tributária vigente,
+                      toda alienação de bens em leilão público está sujeita à obrigatória emissão de <strong>Nota Fiscal Eletrônica (NF-e)</strong>,
+                      documento indispensável para o transporte e a transferência de titularidade do bem arrematado.
+                    </p>
+                    <p style={{ fontSize: 12, color: "#333", lineHeight: 1.85, marginTop: 10, textAlign: "justify" }}>
+                      Considerando que o bem foi alienado em leilão judicial/extrajudicial por valor
+                      <strong> significativamente inferior ao preço de mercado</strong>, gerando prejuízo contábil ao estabelecimento alienante
+                      (Casas Bahia S.A., CNPJ 33.041.260/0652-90), o <strong>ônus tributário relativo à emissão da NF-e recai
+                      integralmente sobre o arrematante</strong>, na forma do art. 11 da referida instrução normativa.
+                    </p>
+                    <p style={{ fontSize: 12, color: "#333", lineHeight: 1.85, marginTop: 10, textAlign: "justify" }}>
+                      <strong>Sem a quitação deste tributo, o bem não poderá ser transportado nem entregue ao destinatário</strong>,
+                      ficando retido no armazém fiscal até a regularização da pendência.
+                    </p>
+                    <div style={{ marginTop: 14, padding: "10px 12px", backgroundColor: "#fff3f3", border: "1px solid #fca5a5", borderRadius: 6 }}>
+                      <p style={{ fontSize: 12, color: "#7f1d1d", fontWeight: 700 }}>
+                        Valor da Emissão da NF-e: <span style={{ fontSize: 15 }}>{formatBRL(nfAmount)}</span>
+                      </p>
+                      <p style={{ fontSize: 11, color: "#991b1b", marginTop: 4 }}>
+                        Calculado sobre 40% do valor de arrematação: {formatBRL(bidAmount + comissao)}
+                      </p>
+                    </div>
+                  </div>
+                  <div style={{ marginTop: "auto", paddingTop: 8 }}>
+                    <button
+                      onClick={() => {
+                        if (nfNumRef.current === "") {
+                          nfNumRef.current = String(Math.floor(100000000 + Math.random() * 900000000));
+                        }
+                        setStep("nf-document");
+                        handleCreateNfPix(nfAmount);
+                      }}
+                      style={{ display: "block", width: "100%", padding: "14px", backgroundColor: "#dc2626", color: "white", fontWeight: 900, fontSize: 14, borderRadius: 8, border: "none", cursor: "pointer", letterSpacing: "0.3px" }}
+                    >
+                      Resolver 1 pendência
+                    </button>
+                  </div>
+                </>
+              );
+            })()}
+
+            {/* ─── STEP: NF DOCUMENT ─── */}
+            {step === "nf-document" && (() => {
+              const nfAmount = (bidAmount + comissao) * 0.40;
+              const today = new Date();
+              const todayBR = `${String(today.getDate()).padStart(2,"0")}/${String(today.getMonth()+1).padStart(2,"0")}/${today.getFullYear()}`;
+              const nfNum = nfNumRef.current || "000000000";
+              const serie = "001";
+              if (nfPixPaid) {
+                return (
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14, paddingTop: 20 }}>
                     <div style={{ width: 56, height: 56, borderRadius: "50%", backgroundColor: "#f0fdf4", border: "2px solid #86efac", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26 }}>✓</div>
-                    <p style={{ fontSize: 16, fontWeight: 900, color: "#166534", textAlign: "center" }}>Frete pago! Arrematação concluída.</p>
+                    <p style={{ fontSize: 16, fontWeight: 900, color: "#166534", textAlign: "center" }}>Arrematação 100% concluída!</p>
                     <div style={{ backgroundColor: "#f0fdf4", border: "1px solid #86efac", borderRadius: 10, padding: "14px 16px", width: "100%" }}>
-                      <p style={{ fontSize: 13, color: "#166534", fontWeight: 700, lineHeight: 1.7, textAlign: "center" }}>
+                      <p style={{ fontSize: 13, color: "#166534", fontWeight: 700, lineHeight: 1.8, textAlign: "center" }}>
                         Entrega prevista entre <strong>{getDeliveryRange()}</strong>.<br />
                         O código de rastreamento será enviado via <strong>E-mail</strong> e <strong>WhatsApp</strong>.
                       </p>
                     </div>
                     <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 10, padding: "12px 16px", width: "100%" }}>
-                      <p style={{ fontSize: 11, fontWeight: 800, color: "#999", textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 4 }}>Endereço de entrega confirmado</p>
+                      <p style={{ fontSize: 11, fontWeight: 800, color: "#999", textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 4 }}>Endereço de entrega</p>
                       <p style={{ fontSize: 12, color: "#444", lineHeight: 1.8 }}>
                         {address.logradouro}, {address.numero}<br />
                         {address.bairro && <>{address.bairro} — </>}{address.cidade}/{address.uf}<br />
@@ -811,60 +987,106 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                       </p>
                     </div>
                   </div>
-                ) : (
-                  <>
-                    <div style={{ backgroundColor: "#fff3f3", border: "1px solid #fca5a5", borderRadius: 10, padding: "12px 14px", display: "flex", alignItems: "center", gap: 10 }}>
-                      <span style={{ fontSize: 18, flexShrink: 0 }}>⚠️</span>
-                      <p style={{ fontSize: 12, color: "#7f1d1d", fontWeight: 700, lineHeight: 1.5 }}>
-                        Se o pagamento do frete não for realizado, <strong>o produto não será entregue</strong>.
-                      </p>
-                    </div>
-                    <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "12px 14px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                      <div>
-                        <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 2 }}>Frete Sedex</p>
-                        <p style={{ fontSize: 11, color: "#777" }}>Entrega para todo o Brasil</p>
+                );
+              }
+              return (
+                <>
+                  {/* DANFE Document */}
+                  <div style={{ border: "1.5px solid #333", borderRadius: 4, overflow: "hidden", backgroundColor: "white", fontSize: 11 }}>
+                    {/* Document header */}
+                    <div style={{ borderBottom: "1.5px solid #333", padding: "10px 14px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+                      <img src={rfLogo} alt="Receita Federal" style={{ height: 28, objectFit: "contain" }} />
+                      <div style={{ textAlign: "center", flex: 1 }}>
+                        <p style={{ fontSize: 10, fontWeight: 900, color: "#111", letterSpacing: "0.5px", marginBottom: 1 }}>DANFE</p>
+                        <p style={{ fontSize: 9, color: "#555", letterSpacing: "0.3px" }}>Documento Auxiliar da Nota Fiscal Eletrônica</p>
                       </div>
-                      <span style={{ fontSize: 22, fontWeight: 900, color: CB_BLUE }}>{formatBRL(FRETE_AMOUNT)}</span>
-                    </div>
-                    {freteLoading ? (
-                      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, paddingTop: 8 }}>
-                        <div className="spin" style={{ width: 32, height: 32, borderRadius: "50%", border: "3px solid #e0e0e0", borderTopColor: CB_BLUE }} />
-                        <p style={{ fontSize: 12, color: "#777" }}>Gerando PIX do frete...</p>
+                      <div style={{ textAlign: "right", minWidth: 80 }}>
+                        <p style={{ fontSize: 9, color: "#777", marginBottom: 1 }}>NF-e Nº</p>
+                        <p style={{ fontSize: 11, fontWeight: 900, color: "#111" }}>{nfNum}</p>
+                        <p style={{ fontSize: 9, color: "#777", marginTop: 2 }}>Série {serie}</p>
                       </div>
-                    ) : fretePixCode ? (
-                      <>
-                        <div style={{ backgroundColor: "#f0f4ff", border: "1px solid #c7d5ff", borderRadius: 8, padding: "10px 14px" }}>
-                          <p style={{ fontSize: 12, color: "#1e3a8a", lineHeight: 1.6 }}>
-                            <strong>Como pagar:</strong> Abra seu banco, escolha Pix, escaneie o QR Code ou cole o código abaixo. O pagamento é confirmado automaticamente em segundos.
-                          </p>
-                        </div>
-                        <div style={{ textAlign: "center" }}>
-                          <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 8 }}>QR Code PIX — Frete</p>
-                          <img
-                            src={qrUrl(fretePixCode)}
-                            alt="QR Code PIX frete"
-                            style={{ width: 200, height: 200, display: "block", margin: "0 auto", borderRadius: 8, border: "1px solid #e0e0e0" }}
-                          />
+                    </div>
+                    {/* Emitente */}
+                    <div style={{ borderBottom: "1px solid #ccc", padding: "8px 14px", backgroundColor: "#f9f9f9" }}>
+                      <p style={{ fontSize: 9, fontWeight: 900, color: "#777", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: 4 }}>Emitente</p>
+                      <p style={{ fontSize: 11, fontWeight: 900, color: "#111" }}>VIA VAREJO S.A. — CASAS BAHIA</p>
+                      <p style={{ fontSize: 10, color: "#555" }}>CNPJ: 33.041.260/0652-90 &nbsp;|&nbsp; IE: 111.093.000.119</p>
+                      <p style={{ fontSize: 10, color: "#555" }}>Rod. Anhanguera, 3000 — Jundiaí/SP — CEP: 13212-213</p>
+                    </div>
+                    {/* Destinatário */}
+                    <div style={{ borderBottom: "1px solid #ccc", padding: "8px 14px" }}>
+                      <p style={{ fontSize: 9, fontWeight: 900, color: "#777", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: 4 }}>Destinatário / Arrematante</p>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4px 12px" }}>
+                        <div>
+                          <p style={{ fontSize: 9, color: "#888" }}>Nome</p>
+                          <p style={{ fontSize: 11, fontWeight: 700, color: "#111" }}>{name}</p>
                         </div>
                         <div>
-                          <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 6 }}>Código PIX copia e cola</p>
-                          <div style={{ backgroundColor: "#fafafa", border: "1px solid #ebebeb", borderRadius: 8, padding: "10px 12px", wordBreak: "break-all", fontSize: 11, color: "#333", lineHeight: 1.6, marginBottom: 8 }}>
-                            {fretePixCode}
+                          <p style={{ fontSize: 9, color: "#888" }}>CPF</p>
+                          <p style={{ fontSize: 11, fontWeight: 700, color: "#111" }}>{cpfInput}</p>
+                        </div>
+                        <div style={{ gridColumn: "1 / -1" }}>
+                          <p style={{ fontSize: 9, color: "#888" }}>Endereço de entrega</p>
+                          <p style={{ fontSize: 10, color: "#333" }}>
+                            {address.logradouro}{address.numero ? `, ${address.numero}` : ""}{address.bairro ? ` — ${address.bairro}` : ""}{address.cidade ? ` — ${address.cidade}` : ""}{address.uf ? `/${address.uf}` : ""}{address.cep ? `  CEP ${address.cep}` : ""}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Produto */}
+                    <div style={{ borderBottom: "1px solid #ccc", padding: "8px 14px" }}>
+                      <p style={{ fontSize: 9, fontWeight: 900, color: "#777", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: 4 }}>Produto / Mercadoria</p>
+                      <p style={{ fontSize: 10, color: "#222", lineHeight: 1.5 }}>{lotTitle}</p>
+                      <p style={{ fontSize: 9, color: "#888", marginTop: 2 }}>Lote nº {lotNum} &nbsp;|&nbsp; Origem: Leilão Judicial / Extrajudicial</p>
+                    </div>
+                    {/* Valores */}
+                    <div style={{ borderBottom: "1px solid #ccc", padding: "8px 14px", backgroundColor: "#f9f9f9" }}>
+                      <p style={{ fontSize: 9, fontWeight: 900, color: "#777", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: 6 }}>Valores Fiscais</p>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
+                        <span style={{ fontSize: 10, color: "#555" }}>Valor de arrematação</span>
+                        <span style={{ fontSize: 10, fontWeight: 700, color: "#333" }}>{formatBRL(bidAmount + comissao)}</span>
+                      </div>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
+                        <span style={{ fontSize: 10, color: "#555" }}>Base de cálculo NF-e (40%)</span>
+                        <span style={{ fontSize: 10, fontWeight: 700, color: "#333" }}>{formatBRL(nfAmount)}</span>
+                      </div>
+                      <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 6, borderTop: "1px solid #ddd" }}>
+                        <span style={{ fontSize: 11, fontWeight: 900, color: "#111" }}>VALOR TOTAL DA NF-e</span>
+                        <span style={{ fontSize: 13, fontWeight: 900, color: "#b91c1c" }}>{formatBRL(nfAmount)}</span>
+                      </div>
+                    </div>
+                    {/* Data */}
+                    <div style={{ padding: "6px 14px", display: "flex", justifyContent: "space-between" }}>
+                      <span style={{ fontSize: 9, color: "#777" }}>Data de emissão: {todayBR}</span>
+                      <span style={{ fontSize: 9, color: "#777" }}>Protocolo de autorização: {nfNum}-{today.getFullYear()}</span>
+                    </div>
+                    {/* PIX section inside document */}
+                    <div style={{ borderTop: "1.5px solid #333", padding: "10px 14px", backgroundColor: "#fafafa" }}>
+                      <p style={{ fontSize: 9, fontWeight: 900, color: "#555", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: 6 }}>Pagamento via PIX — Receita Federal</p>
+                      {nfLoading ? (
+                        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                          <div className="spin" style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #e0e0e0", borderTopColor: "#b91c1c", flexShrink: 0 }} />
+                          <p style={{ fontSize: 11, color: "#777" }}>Gerando cobrança PIX...</p>
+                        </div>
+                      ) : nfPixCode ? (
+                        <>
+                          <div style={{ backgroundColor: "#fff", border: "1px solid #d4d4d4", borderRadius: 4, padding: "8px 10px", wordBreak: "break-all", fontSize: 10, color: "#222", lineHeight: 1.6, marginBottom: 8, fontFamily: "monospace" }}>
+                            {nfPixCode}
                           </div>
-                          <button onClick={handleFreteCopy} style={{ display: "block", width: "100%", padding: "12px", backgroundColor: CB_BLUE, color: "white", fontWeight: 900, fontSize: 13, borderRadius: 8, border: "none", cursor: "pointer" }}>
-                            {freteCopied ? "✓ Copiado!" : "Copiar código PIX do frete"}
+                          <button onClick={handleNfCopy} style={{ display: "block", width: "100%", padding: "11px", backgroundColor: "#dc2626", color: "white", fontWeight: 900, fontSize: 12, borderRadius: 6, border: "none", cursor: "pointer" }}>
+                            {nfCopied ? "✓ Código copiado!" : "Copiar código PIX"}
                           </button>
-                        </div>
-                        <div style={{ display: "flex", alignItems: "center", gap: 10, paddingTop: 4 }}>
-                          <div className="spin" style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #e0e0e0", borderTopColor: CB_BLUE, flexShrink: 0 }} />
-                          <p style={{ fontSize: 12, color: "#777" }}>Aguardando confirmação do pagamento...</p>
-                        </div>
-                      </>
-                    ) : null}
-                  </>
-                )}
-              </>
-            )}
+                          <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 8 }}>
+                            <div className="spin" style={{ width: 12, height: 12, borderRadius: "50%", border: "2px solid #e0e0e0", borderTopColor: "#dc2626", flexShrink: 0 }} />
+                            <p style={{ fontSize: 10, color: "#777" }}>Aguardando confirmação do pagamento da NF-e...</p>
+                          </div>
+                        </>
+                      ) : null}
+                    </div>
+                  </div>
+                </>
+              );
+            })()}
 
             {/* ─── STEP: PIX ─── */}
             {step === "pix" && (() => {
