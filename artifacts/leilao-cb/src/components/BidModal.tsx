@@ -596,12 +596,6 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                     <p style={{ fontSize: 12, fontWeight: 900, color: CB_BLUE }}>{formatBRL(bidAmount)}</p>
                   </div>
                 </div>
-                <div style={{ backgroundColor: "#fff8f0", border: "1px solid #fed7aa", borderRadius: 8, padding: "10px 14px", display: "flex", gap: 8, alignItems: "flex-start" }}>
-                  <span style={{ fontSize: 16, flexShrink: 0 }}>🔒</span>
-                  <p style={{ fontSize: 12, color: "#7c3a00", lineHeight: 1.6 }}>
-                    Este produto foi <strong>removido dos itens disponíveis</strong> e está reservado exclusivamente para você. Conclua o processo para garantir sua arrematação.
-                  </p>
-                </div>
                 <div style={{ marginTop: "auto", paddingTop: 8 }}>
                   <button onClick={() => setStep("address")} style={{ display: "block", width: "100%", padding: "13px", backgroundColor: CB_BLUE, color: "white", fontWeight: 900, fontSize: 14, borderRadius: 8, border: "none", cursor: "pointer" }}>
                     Confirmar e continuar
