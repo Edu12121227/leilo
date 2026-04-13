@@ -304,13 +304,17 @@ export default function LotDetailPage() {
             <div style={{ border: "1px solid #ddd", borderRadius: 8, overflow: "hidden", backgroundColor: "white" }}>
 
               {/* Status header */}
-              <div style={{
-                backgroundColor: isVendido ? "#e53935" : "#2e7d32",
-                padding: "10px 16px",
-                textAlign: "center",
-              }}>
+              <div
+                onClick={!isVendido ? () => document.getElementById("bid-section")?.scrollIntoView({ behavior: "smooth", block: "center" }) : undefined}
+                style={{
+                  backgroundColor: isVendido ? "#e53935" : "#2e7d32",
+                  padding: "10px 16px",
+                  textAlign: "center",
+                  cursor: isVendido ? "default" : "pointer",
+                }}
+              >
                 <span style={{ color: "white", fontWeight: 900, fontSize: 15, letterSpacing: "1px" }}>
-                  {isVendido ? "VENDIDO" : "DISPONÍVEL"}
+                  {isVendido ? "VENDIDO" : "DISPONÍVEL ↓"}
                 </span>
               </div>
 
@@ -409,7 +413,7 @@ export default function LotDetailPage() {
                       </div>
 
                       {/* Custom bid input */}
-                      <div style={{ marginBottom: 10 }}>
+                      <div id="bid-section" style={{ marginBottom: 10 }}>
                         <p style={{ fontSize: 11, color: "#999", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: 6 }}>Seu lance</p>
                         <input
                           inputMode="decimal"
