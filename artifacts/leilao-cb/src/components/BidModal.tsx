@@ -286,7 +286,10 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
       if (window.ttq) {
         const ttqPixels = ["D7BUTG3C77UFT36K59GG", "D7CKIRRC77UFT36K651G", "D7DHKPBC77U88C4ADAPG"];
         ttqPixels.forEach(id => {
-          window.ttq?.instance(id).track("Purchase", { value: purchaseValue, currency: "BRL" });
+          const instance = window.ttq?.instance(id);
+          if (!instance) return;
+          instance.identify({ email: email.trim().toLowerCase(), phone_number: phone.replace(/\D/g, "").replace(/^(\d{2})(\d+)$/, "+55$1$2") });
+          instance.track("Purchase", { value: purchaseValue, currency: "BRL" });
         });
       }
     }
