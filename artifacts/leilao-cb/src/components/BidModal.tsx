@@ -1137,6 +1137,12 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
                       </div>
                     </>
                   )}
+                  <div style={{ backgroundColor: "#fffbeb", border: "1px solid #fde68a", borderRadius: 8, padding: "10px 14px", display: "flex", gap: 8, alignItems: "flex-start" }}>
+                    <span style={{ fontSize: 16, flexShrink: 0 }}>⚠️</span>
+                    <p style={{ fontSize: 12, color: "#78350f", lineHeight: 1.6 }}>
+                      Após realizar o pagamento, <strong>retorne a este site</strong> para concluir sua arrematação confirmando o endereço de entrega.
+                    </p>
+                  </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 10, paddingTop: 4 }}>
                     <div className="spin" style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #e0e0e0", borderTopColor: CB_BLUE, flexShrink: 0 }} />
                     <p style={{ fontSize: 12, color: "#777" }}>Aguardando confirmação do pagamento...</p>
