@@ -1,171 +1,485 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="pt">
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="color-scheme" content="light dark">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title id="pg-title"></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <title>Tudo sobre geladeira e refrigeradores - Blog WebContinental</title>
+  <meta name="description" content="Saiba tudo sobre Geladeiras e Refrigeradores aqui! Acesse o nosso post e tire todas as dúvidas sobre esses aparelhos essenciais em toda casa.">
   <style>
-    a { color: var(--link-color); }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
     body {
-      --background-color: #fff;
-      --error-code-color: var(--google-gray-700);
-      --google-blue-600: rgb(26,115,232);
-      --google-blue-700: rgb(25,103,210);
-      --google-gray-50: rgb(248,249,250);
-      --google-gray-100: rgb(241,243,244);
-      --google-gray-300: rgb(218,220,224);
-      --google-gray-500: rgb(154,160,166);
-      --google-gray-600: rgb(128,134,139);
-      --google-gray-700: rgb(95,99,104);
-      --google-gray-800: rgb(60,64,67);
-      --google-gray-900: rgb(32,33,36);
-      --heading-color: var(--google-gray-900);
-      --link-color: rgb(88,88,88);
-      --primary-button-fill-color: var(--google-blue-600);
-      --primary-button-fill-color-active: var(--google-blue-700);
-      --primary-button-text-color: #fff;
-      --secondary-button-border-color: var(--google-gray-500);
-      --secondary-button-fill-color: #fff;
-      --secondary-button-hover-fill-color: var(--google-gray-50);
-      --secondary-button-text-color: var(--google-gray-700);
-      --small-link-color: var(--google-gray-700);
-      --text-color: var(--google-gray-700);
-      background: var(--background-color);
-      color: var(--text-color);
-      word-wrap: break-word;
-      font-family: system-ui, sans-serif;
-      font-size: 75%;
-      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #3a3a3a;
+      background: #fff;
+      line-height: 1.7;
     }
-    @media (prefers-color-scheme: dark) {
-      body {
-        --background-color: var(--google-gray-900);
-        --error-code-color: var(--google-gray-500);
-        --heading-color: var(--google-gray-500);
-        --link-color: rgb(138,180,248);
-        --primary-button-fill-color: rgb(138,180,248);
-        --primary-button-text-color: var(--google-gray-900);
-        --secondary-button-fill-color: var(--google-gray-900);
-        --secondary-button-text-color: rgb(138,180,248);
-        --small-link-color: rgb(138,180,248);
-        --text-color: var(--google-gray-500);
-      }
-      .icon { filter: invert(1); }
+    a { color: #0070c9; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ── HEADER ── */
+    #site-header {
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
     }
-    html { -webkit-text-size-adjust: 100%; font-size: 125%; }
-    button {
-      border: 0;
-      border-radius: 20px;
-      box-sizing: border-box;
-      color: var(--primary-button-text-color);
-      cursor: pointer;
-      float: right;
-      font-size: .875em;
-      margin: 0;
-      padding: 8px 16px;
-      background: var(--primary-button-fill-color);
-      transition: box-shadow 150ms cubic-bezier(0.4,0,0.2,1);
-      user-select: none;
+    .header-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
     }
-    button:active { background: var(--primary-button-fill-color-active); outline: 0; }
-    h1 {
-      color: var(--heading-color);
-      font-size: 1.6em;
-      font-weight: normal;
-      line-height: 1.25em;
-      margin-bottom: 16px;
-      margin-top: 0;
+    .site-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .site-logo svg { height: 32px; width: auto; }
+    .site-logo-text {
+      font-size: 20px; font-weight: 800;
+      color: #0060a0;
+      letter-spacing: -0.5px;
     }
-    h1 span { font-weight: 500; }
-    .icon {
-      height: 72px;
-      width: 72px;
-      margin: 0 0 40px;
-      background-repeat: no-repeat;
-      background-size: 100%;
+    .site-logo-text span { color: #00a0d6; }
+    .header-nav { display: flex; gap: 24px; }
+    .header-nav a {
+      font-size: 13px; font-weight: 700;
+      color: #444; text-transform: uppercase; letter-spacing: .5px;
+      text-decoration: none;
+    }
+    .header-nav a:hover { color: #0070c9; }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      background: #f7f7f7; border-bottom: 1px solid #ebebeb;
+      padding: 10px 0;
+    }
+    .breadcrumb-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      font-size: 12px; color: #888;
+      display: flex; gap: 6px; align-items: center;
+    }
+    .breadcrumb-inner a { color: #0070c9; text-decoration: none; }
+    .breadcrumb-inner span.sep { color: #bbb; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0060a0 0%, #00a0d6 100%);
+      padding: 40px 24px 36px;
+      text-align: center;
+    }
+    .hero-inner { max-width: 780px; margin: 0 auto; }
+    .hero-category {
       display: inline-block;
-      -webkit-user-select: none;
+      background: rgba(255,255,255,.2);
+      color: #fff;
+      font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 1px;
+      padding: 4px 12px; border-radius: 20px;
+      margin-bottom: 16px;
     }
-    .icon-generic {
-      content: image-set(
-        url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABIAQMAAABvIyEEAAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAENJREFUeF7tzbEJACEQRNGBLeAasBCza2lLEGx0CxFGG9hBMDDxRy/72O9FMnIFapGylsu1fgoBdkXfUHLrQgdfrlJN1BdYBjQQm3UAAAAASUVORK5CYII=) 1x,
-        url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJAAAACQAQMAAADdiHD7AAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAFJJREFUeF7t0cENgDAMQ9FwYgxG6WjpaIzCCAxQxVggFuDiCvlLOeRdHR9yzjncHVoq3npu+wQUrUuJHylSTmBaespJyJQoObUeyxDQb3bEm5Au81c0pSCD8HYAAAAASUVORK5CYII=) 2x);
-      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJAAAACQAQMAAADdiHD7AAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAFJJREFUeF7t0cENgDAMQ9FwYgxG6WjpaIzCCAxQxVggFuDiCvlLOeRdHR9yzjncHVoq3npu+wQUrUuJHylSTmBaespJyJQoObUeyxDQb3bEm5Au81c0pSCD8HYAAAAASUVORK5CYII=);
+    .hero h1 {
+      font-size: clamp(22px, 4vw, 34px);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 16px;
     }
-    .interstitial-wrapper {
-      box-sizing: border-box;
-      font-size: 1em;
-      line-height: 1.6em;
-      margin: 14vh auto 0;
+    .hero-meta {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; flex-wrap: wrap;
+      font-size: 13px; color: rgba(255,255,255,.8);
+    }
+    .hero-meta .dot { width: 4px; height: 4px; background: rgba(255,255,255,.4); border-radius: 50%; }
+
+    /* ── TOC ── */
+    .toc {
+      background: #edf6ff;
+      border: 1px solid #b8d9f5;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+    .toc-title {
+      font-size: 14px; font-weight: 800;
+      color: #0060a0;
+      text-transform: uppercase; letter-spacing: .5px;
+      margin-bottom: 12px;
+    }
+    .toc ol { padding-left: 20px; }
+    .toc ol li { margin-bottom: 6px; }
+    .toc ol li a {
+      font-size: 14px; color: #0070c9; font-weight: 600;
+    }
+
+    /* ── LAYOUT ── */
+    .content-wrap {
+      max-width: 1200px; margin: 0 auto;
+      padding: 40px 24px 60px;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .content-wrap { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+    }
+
+    /* ── ARTICLE ── */
+    .article-body { font-size: 16px; line-height: 1.85; color: #333; }
+    .article-body p { margin-bottom: 20px; }
+    .article-body h2 {
+      font-size: 22px; font-weight: 800;
+      color: #1a1a1a;
+      margin: 40px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 3px solid #00a0d6;
+    }
+    .article-body ul, .article-body ol {
+      padding-left: 24px; margin-bottom: 20px;
+    }
+    .article-body li { margin-bottom: 10px; }
+    .article-body b, .article-body strong { color: #111; }
+    .article-body i, .article-body em { color: #666; }
+    .article-body figure {
+      margin: 28px 0;
+      text-align: center;
+    }
+    .article-body figure img {
+      margin: 0 auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    }
+    .article-body figcaption {
+      font-size: 13px; color: #888;
+      margin-top: 8px; font-style: italic;
+    }
+    .article-body .img-caption {
+      font-size: 13px; color: #888;
+      margin-top: -16px; margin-bottom: 24px;
+      font-style: italic; text-align: center;
+    }
+    .article-img-center {
+      margin: 28px auto;
+      text-align: center;
+    }
+    .article-img-center img {
+      margin: 0 auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
       max-width: 600px;
-      width: 100%;
     }
-    .error-code {
-      color: var(--error-code-color);
-      font-size: .8em;
-      margin-top: 12px;
-      text-transform: uppercase;
+
+    /* ── TAGS ── */
+    .tags-box { margin-top: 40px; padding-top: 24px; border-top: 1px solid #ebebeb; }
+    .tags-title { font-size: 12px; font-weight: 800; color: #999; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 10px; }
+    .tags-list { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag {
+      background: #f0f4f8; color: #0070c9;
+      font-size: 13px; font-weight: 600;
+      padding: 4px 12px; border-radius: 20px;
+      border: 1px solid #c7dff5;
     }
-    .nav-wrapper {
-      margin-top: 51px;
+
+    /* ── SHARE ── */
+    .share-box { margin-top: 32px; padding: 20px; background: #f7f9fb; border-radius: 10px; }
+    .share-title { font-size: 14px; font-weight: 700; color: #555; margin-bottom: 12px; }
+    .share-btns { display: flex; gap: 10px; }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 6px;
+      font-size: 13px; font-weight: 700; color: #fff;
+      text-decoration: none;
     }
-    .nav-wrapper::after {
-      clear: both;
-      content: '';
-      display: table;
-      width: 100%;
+    .share-btn.fb { background: #1877f2; }
+    .share-btn.tw { background: #000; }
+
+    /* ── AUTHOR ── */
+    .author-box {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: #f7f9fb; border-radius: 10px;
+      padding: 20px; margin-top: 32px;
     }
-    #buttons::after {
-      clear: both;
-      content: '';
-      display: block;
-      width: 100%;
+    .author-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg,#0060a0,#00a0d6);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 22px; color: #fff; font-weight: 900;
     }
-    .suggested-right > #control-buttons { float: right; }
-    .suggested-right > #details-button { float: left; }
-    @media (max-width: 700px) {
-      .interstitial-wrapper { padding: 0 10%; }
+    .author-name { font-size: 15px; font-weight: 800; color: #222; margin-bottom: 4px; }
+    .author-bio { font-size: 13px; color: #666; line-height: 1.6; }
+
+    /* ── SIDEBAR ── */
+    .sidebar { position: sticky; top: 80px; }
+    .sidebar-card {
+      background: #f7f9fb; border-radius: 10px;
+      padding: 20px; margin-bottom: 24px;
     }
-    @media (max-width: 420px) {
-      button, .small-link { float: none; font-size: .825em; font-weight: 500; margin: 0; width: 100%; }
-      button { padding: 16px 24px; }
-      .nav-wrapper { margin-top: 30px; }
+    .sidebar-title {
+      font-size: 13px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .5px;
+      color: #0060a0; margin-bottom: 16px;
+      padding-bottom: 8px; border-bottom: 2px solid #00a0d6;
     }
-    #sub-frame-error { display: none; }
+    .related-mini { display: flex; flex-direction: column; gap: 16px; }
+    .related-mini-item { display: flex; gap: 10px; align-items: flex-start; }
+    .related-mini-item .dot-cat {
+      width: 8px; height: 8px; background: #00a0d6;
+      border-radius: 50%; flex-shrink: 0; margin-top: 6px;
+    }
+    .related-mini-item a { font-size: 13px; font-weight: 600; color: #333; line-height: 1.4; }
+    .related-mini-item a:hover { color: #0070c9; }
+
+    .cta-box {
+      background: linear-gradient(135deg,#0060a0,#00a0d6);
+      border-radius: 10px; padding: 24px; text-align: center;
+    }
+    .cta-box p { color: rgba(255,255,255,.9); font-size: 14px; margin-bottom: 14px; line-height: 1.5; }
+    .cta-btn {
+      display: inline-block;
+      background: #fff; color: #0060a0;
+      font-weight: 800; font-size: 13px;
+      padding: 10px 20px; border-radius: 6px;
+      text-decoration: none;
+    }
+
+    /* ── FOOTER ── */
+    #site-footer {
+      background: #1a2942;
+      color: rgba(255,255,255,.7);
+      padding: 40px 24px;
+      font-size: 13px;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-logo { font-size: 18px; font-weight: 900; color: #fff; }
+    .footer-logo span { color: #00a0d6; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: rgba(255,255,255,.6); text-decoration: none; }
+    .footer-links a:hover { color: #fff; }
+    .footer-copy { color: rgba(255,255,255,.4); font-size: 12px; text-align: center; width: 100%; margin-top: 16px; border-top: 1px solid rgba(255,255,255,.1); padding-top: 16px; }
   </style>
-  <script>
-    (function() {
-      var host = window.location.hostname || document.referrer || 'este site';
-      document.title = host;
-      document.addEventListener('DOMContentLoaded', function() {
-        var el = document.getElementById('hostname');
-        if (el) el.textContent = host;
-        var btn = document.getElementById('reload-button');
-        if (btn) btn.setAttribute('data-url', window.location.href);
-      });
-    })();
-  </script>
 </head>
-<body class="neterror">
-  <div id="content">
-    <div id="main-frame-error" class="interstitial-wrapper">
-      <div id="main-content">
-        <div class="icon icon-generic"></div>
-        <div id="main-message">
-          <h1><span>Não é possível acessar esse site</span></h1>
-          <p>Verifique se há um erro de digitação em <b id="hostname"></b>.</p>
-          <div class="error-code">DNS_PROBE_FINISHED_NXDOMAIN</div>
+<body>
+
+<!-- HEADER -->
+<header id="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="https://blog.webcontinental.com.br/">
+      <span class="site-logo-text">Web<span>Continental</span></span>
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.webcontinental.com.br/category/decoracao-e-casa/">Decoração &amp; Casa</a>
+      <a href="https://blog.webcontinental.com.br/category/mundo-tech/">Mundo Tech</a>
+      <a href="https://blog.webcontinental.com.br/category/gastronomia/">Gastronomia</a>
+      <a href="https://www.webcontinental.com.br/">Loja</a>
+    </nav>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="https://blog.webcontinental.com.br/">início</a>
+    <span class="sep">›</span>
+    <a href="https://blog.webcontinental.com.br/category/decoracao-e-casa/">Decoração &amp; Casa</a>
+    <span class="sep">›</span>
+    <span>Tudo sobre geladeira e refrigeradores</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <span class="hero-category">Decoração &amp; Casa</span>
+    <h1>Tudo sobre geladeira e refrigeradores</h1>
+    <div class="hero-meta">
+      <span>Por <strong style="color:#fff">Webcontinental</strong></span>
+      <span class="dot"></span>
+      <span>8 de janeiro de 2026</span>
+      <span class="dot"></span>
+      <span>5 min de leitura</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content-wrap">
+  <main>
+    <!-- TOC -->
+    <div class="toc">
+      <div class="toc-title">Sumário</div>
+      <ol>
+        <li><a href="#tamanho">Como escolher o tamanho?</a></li>
+        <li><a href="#congelador">Congelador em cima ou em baixo?</a></li>
+        <li><a href="#degelo">Degelo manual ou automático?</a></li>
+        <li><a href="#recursos">Outros recursos disponíveis</a></li>
+        <li><a href="#manutencao">Dicas de manutenção</a></li>
+      </ol>
+    </div>
+
+    <!-- ARTICLE -->
+    <div class="article-body">
+      <p>Pensando em trocar aquele refrigerador que não está mais dando conta do recado ou, então, está buscando uma forma de renovar a cozinha? Para não cair no erro de comprar uma geladeira inadequada e se arrepender depois, você precisa considerar alguns aspectos na hora de escolher o modelo ideal para o seu lar. Quer uma ajuda? Então confira o nosso guia com tudo o que você precisa saber sobre geladeiras e refrigeradores.</p>
+
+      <h2 id="tamanho">Como escolher o tamanho?</h2>
+
+      <p>Pode parecer óbvio, mas escolher a geladeira do tamanho certo fará toda a diferença na sua cozinha. Nada pior do que cozinha pequena em que a geladeira é enorme e toma todo o espaço. E tão ruim quanto isso, é quando a geladeira é pequena e acaba faltando lugar para guardar as compras do mês, por exemplo. São detalhes, mas que podem ser solucionados já na escolha do refrigerador.</p>
+
+      <p>Os frigobares (que são aquelas geladeiras menores, com capacidade de <b>até 120 litros</b>) são boas opções para quem não precisa armazenar muitos itens, como, por exemplo, quem mora sozinho e não cozinha muito; para quem possui uma cozinha muito pequena ou, ainda, quer ter um refrigerador no escritório ou quarto.</p>
+
+      <div class="article-img-center">
+        <img src="/blog-images/frigobar.jpg" alt="Frigobar Brastemp Retrô Azul" width="520" height="520">
+      </div>
+      <p class="img-caption"><i>Modelo: Frigobar Brastemp Retrô – Azul – 76L</i></p>
+
+      <p>As geladeiras de uma porta geralmente possuem capacidade <b>entre 220 e 350 litros</b>, o que é suficiente para uma pessoa solteira e até mesmo para casais que não tenham filhos. Elas não ocupam muito espaço e contam com um congelador acoplado, possibilitando assim, congelar alguns alimentos.</p>
+
+      <div class="article-img-center">
+        <img src="/blog-images/uma-porta.jpg" alt="Refrigerador Electrolux 1 Porta" width="520" height="520">
+      </div>
+      <p class="img-caption"><i>Modelo: Refrigerador Electrolux 1 Porta DeFrost – Branco – 240L</i></p>
+
+      <p>Se você tem uma família um pouco maior e precisa armazenar mais coisas na sua geladeira – e, claro, dispõe de um pouco mais de espaço –, o ideal é adquirir um refrigerador de <b>até 500 litros</b>, como os modelos Duplex. Eles possuem duas portas (uma para o refrigerador e outra para o freezer), o que significa ainda mais capacidade, tanto de armazenamento, como de congelamento.</p>
+
+      <div class="article-img-center">
+        <img src="/blog-images/duplex.jpg" alt="Refrigerador Electrolux Duplex Frost Free Inox" width="520" height="520">
+      </div>
+      <p class="img-caption"><i>Modelo: Refrigerador Electrolux Duplex Frost Free – Inox – 459L</i></p>
+
+      <p>Agora, se você tem uma família grande, necessita de um grande espaço para guardar os alimentos e possui uma cozinha bem espaçosa, pode apostar, sem medo, nas geladeiras com <b>mais de 500 litros</b>. Ótimas dicas são os modelos Side By Side e a French Door, que são geladeiras supermodernas e eficientes.</p>
+
+      <h2 id="congelador">Congelador em cima ou em baixo?</h2>
+
+      <p>Como já mencionamos, existem modelos de geladeiras de duas portas que, geralmente, levam o refrigerador na parte de baixo e o freezer, ou congelador, na parte de cima. Mas, atualmente, também existem modelos como o <b>refrigerador Inverse</b> (ou freezer invertido), que como o nome já indica, possui a posição das portas invertidas – ou seja, o freezer fica em baixo e a geladeira em cima.</p>
+
+      <div class="article-img-center">
+        <img src="/blog-images/inverse.jpg" alt="Refrigerador Brastemp Duplex Inverse All Black" width="520" height="520">
+      </div>
+      <p class="img-caption"><i>Modelo: Refrigerador Brastemp Duplex Inverse – All Black – 422L</i></p>
+
+      <p>Se você está na dúvida sobre a funcionalidade dos dois modelos, vamos simplificar: basicamente, eles continuam com a mesma função, a diferença está na facilidade de uso. Isso porque com a geladeira na parte de cima, o manuseio daqueles itens usuais do dia a dia se torna mais prático.</p>
+
+      <h2 id="degelo">Degelo manual ou automático?</h2>
+
+      <p>Se você possui uma geladeira um pouco mais antiga, você sabe o trabalhão que dá descongelar o freezer manualmente. Como nesses modelos o gelo não para de se formar nunca, o degelo periódico é obrigatório – o que geralmente significa ficar com a porta da geladeira aberta e o aparelho desligado enquanto o gelo derrete.</p>
+
+      <p>A boa notícia é que os modelos mais modernos já oferecem funcionalidades para dispensar o degelo manual – de forma completa ou parcialmente. As geladeiras <b>Frost Free</b>, por exemplo, congelam os alimentos sem formar aquelas crostas de gelo, portanto, não há necessidade de degelar – por outro lado, elas geralmente têm um custo maior.</p>
+
+      <p>Se você não puder investir esse valor e não se importar de degelar o aparelho manualmente de vez em quando, opte então por um modelo <b>Cycle Defrost</b>. Ele inibe a formação de gelo em excesso e só precisa ser degelado duas vezes por ano.</p>
+
+      <h2 id="recursos">Outros recursos disponíveis</h2>
+
+      <figure>
+        <img src="/blog-images/dispenser.jpg" alt="Geladeira com dispenser de água na porta" style="max-width:600px;margin:0 auto;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.08)">
+        <figcaption>Foto: GE Refrigerator</figcaption>
+      </figure>
+
+      <p>Agora você já sabe o básico para escolher uma boa geladeira, mas temos também algumas dicas de funcionalidades extra que você pode considerar ao comprar a sua. Confira alguns exemplos:</p>
+
+      <ul>
+        <li><b>Dispenser de água:</b> o que acha de servir um copo de água sem nem abrir a geladeira? Alguns modelos contam com um compartimento na porta no qual você encosta o copo e é servida água gelada.</li>
+        <li><b>Dispenser de gelo:</b> outra funcionalidade muito prática é o dispenser de gelo que, assim como o de água, serve o gelo diretamente na porta, sem você precisar abrir o aparelho.</li>
+        <li><b>Display digital:</b> alguns modelos contam com um painel de controle digital que, entre diversas funcionalidades, permite controlar a temperatura e o resfriamento da geladeira com máxima praticidade e precisão.</li>
+        <li><b>Alerta de porta aberta:</b> você costuma esquecer a porta do seu refrigerador aberta com frequência? Com esse alerta, toda vez que isso acontecer, o aparelho soará um aviso sonoro até que a porta seja fechada novamente. Assim você mantém os alimentos resfriados de forma correta e economiza energia.</li>
+      </ul>
+
+      <h2 id="manutencao">Dicas de manutenção</h2>
+
+      <p>E as dicas não acabam por aqui! Separamos, também, algumas orientações que você deve seguir para manter a sua geladeira sempre tão eficiente quanto uma recém saída da loja:</p>
+
+      <ul>
+        <li>Em hipótese alguma seque panos ou roupas atrás da geladeira! Isso força o motor do aparelho a trabalhar ainda mais, afetando o seu desempenho.</li>
+        <li>Não instale o seu refrigerador ao lado do fogão ou outras fontes de calor.</li>
+        <li>Espere os alimentos esfriarem antes de guardá-los na geladeira, pois itens muito quentes podem alterar a temperatura interna do aparelho.</li>
+        <li>Siga corretamente as indicações do manual a respeito do degelo (manual ou automático).</li>
+        <li>Higienize a sua geladeira periodicamente, utilizando um pano com água e sabão neutro – jamais use produtos abrasivos ou detergentes.</li>
+      </ul>
+
+      <p>Aqui na <a href="https://www.webcontinental.com.br/" target="_blank" rel="noopener">Webcontinental</a> você encontra os principais modelos de geladeira com o preço e qualidade que você precisa. Confira nossas ofertas!</p>
+
+      <!-- TAGS -->
+      <div class="tags-box">
+        <div class="tags-title">Tags</div>
+        <div class="tags-list">
+          <span class="tag"># como escolher geladeira</span>
+          <span class="tag"># Geladeira</span>
+          <span class="tag"># Refrigerador</span>
         </div>
       </div>
-      <div id="buttons" class="nav-wrapper suggested-right">
-        <div id="control-buttons">
-          <button id="reload-button" onclick="window.location.reload()">
-            Recarregar
-          </button>
+
+      <!-- SHARE -->
+      <div class="share-box">
+        <div class="share-title">Gostou do conteúdo? Compartilhe:</div>
+        <div class="share-btns">
+          <a class="share-btn fb" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.webcontinental.com.br/decoracao-e-casa/tudo-sobre-geladeira-e-refrigeradores/" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M20,10.1c0-5.5-4.5-10-10-10S0,4.5,0,10.1c0,5,3.7,9.1,8.4,9.9v-7H5.9v-2.9h2.5V7.9C8.4,5.4,9.9,4,12.2,4c1.1,0,2.2,0.2,2.2,0.2v2.5h-1.3c-1.2,0-1.6,0.8-1.6,1.6v1.9h2.8L13.9,13h-2.3v7C16.3,19.2,20,15.1,20,10.1z"/></svg>
+            Facebook
+          </a>
+          <a class="share-btn tw" href="https://twitter.com/intent/tweet?url=https://blog.webcontinental.com.br/decoracao-e-casa/tudo-sobre-geladeira-e-refrigeradores/&text=Tudo+sobre+geladeira+e+refrigeradores" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M2.9 0C1.3 0 0 1.3 0 2.9v14.3C0 18.7 1.3 20 2.9 20h14.3c1.6 0 2.9-1.3 2.9-2.9V2.9C20 1.3 18.7 0 17.1 0H2.9zm13.2 3.8L11.5 9l5.5 7.2h-4.3l-3.3-4.4-3.8 4.4H3.4l5-5.7-5.3-6.7h4.4l3 4 3.5-4h2.1zM14.4 15 6.8 5H5.6l7.7 10h1.1z"/></svg>
+            Twitter
+          </a>
+        </div>
+      </div>
+
+      <!-- AUTHOR -->
+      <div class="author-box">
+        <div class="author-avatar">W</div>
+        <div>
+          <div class="author-name">Webcontinental</div>
+          <div class="author-bio">Com mais de 15 anos de história, a WebContinental consolidou-se como uma das maiores referências do e-commerce brasileiro, sendo autoridade máxima nos segmentos de climatização, eletrodomésticos, tecnologia e soluções para o lar.</div>
         </div>
       </div>
     </div>
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-title">Posts relacionados</div>
+      <div class="related-mini">
+        <div class="related-mini-item">
+          <span class="dot-cat"></span>
+          <a href="https://blog.webcontinental.com.br/decoracao-e-casa/qual-a-diferenca-entre-geladeira-e-refrigerador/">Qual a diferença entre geladeira e refrigerador?</a>
+        </div>
+        <div class="related-mini-item">
+          <span class="dot-cat"></span>
+          <a href="https://blog.webcontinental.com.br/decoracao-e-casa/tudo-sobre-coifas-tire-suas-duvidas/">Tudo sobre coifas: Tire suas dúvidas</a>
+        </div>
+        <div class="related-mini-item">
+          <span class="dot-cat"></span>
+          <a href="https://blog.webcontinental.com.br/decoracao-e-casa/dicas-presentes-natal/">5 dicas de presentes para quem quer dar Presentão neste Natal!</a>
+        </div>
+        <div class="related-mini-item">
+          <span class="dot-cat"></span>
+          <a href="https://blog.webcontinental.com.br/decoracao-e-casa/5-dicas-para-aproveitar-as-promocoes-da-semana-do-consumidor/">5 dicas para aproveitar as promoções da Semana do Consumidor</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-box">
+      <p>Encontre os melhores refrigeradores com preço e qualidade na WebContinental!</p>
+      <a class="cta-btn" href="https://www.webcontinental.com.br/eletrodomesticos/geladeiras-e-freezers" target="_blank" rel="noopener">Ver ofertas →</a>
+    </div>
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<footer id="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo">Web<span>Continental</span></div>
+    <div class="footer-links">
+      <a href="https://blog.webcontinental.com.br/category/decoracao-e-casa/">Decoração &amp; Casa</a>
+      <a href="https://blog.webcontinental.com.br/category/mundo-tech/">Mundo Tech</a>
+      <a href="https://www.webcontinental.com.br/">Loja</a>
+    </div>
+    <div class="footer-copy">© 2026 WebContinental. Todos os direitos reservados.</div>
   </div>
+</footer>
+
 </body>
 </html>
