@@ -284,7 +284,7 @@ export default function BidModal({ open, onClose, lotTitle, lotNum, bidAmount, c
         window.fbq("track", "Purchase", { value: purchaseValue, currency: "BRL" });
       }
       if (window.ttq) {
-        const ttqPixels = ["D7BUTG3C77UFT36K59GG", "D7CKIRRC77UFT36K651G"];
+        const ttqPixels = ["D7BUTG3C77UFT36K59GG", "D7CKIRRC77UFT36K651G", "D7DHKPBC77U88C4ADAPG"];
         ttqPixels.forEach(id => {
           window.ttq?.instance(id).track("Purchase", { value: purchaseValue, currency: "BRL" });
         });
