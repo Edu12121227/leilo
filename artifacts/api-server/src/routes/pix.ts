@@ -3,20 +3,48 @@ import axios from "axios";
 
 const router = Router();
 
-const API_URL = "https://api.ghostspaysv2.com/functions/v1";
-const PAID_STATUSES = new Set(["paid", "approved", "captured", "authorized", "settled"]);
+const THEKEY_BASE = "https://api.the-key.club/api";
+const WEBHOOK_URL = "https://leilaocasasbahia.comprarprodutos-shop.com/api/webhook/thekey";
 
-function getAuthHeader(): string {
-  const secretKey = process.env.GHOSTSPAY_SECRET_KEY;
-  const companyId = process.env.GHOSTSPAY_COMPANY_ID;
-  if (!secretKey || !companyId) throw new Error("GhostsPay credentials missing");
-  const credentials = Buffer.from(`${secretKey}:${companyId}`).toString("base64");
-  return `Basic ${credentials}`;
+// ── Token cache ───────────────────────────────────────────────────────────────
+
+let cachedToken: string | null = null;
+let tokenExpiry = 0;
+
+async function getToken(): Promise<string> {
+  if (cachedToken && Date.now() < tokenExpiry) return cachedToken;
+  const clientId = process.env.THEKEY_CLIENT_ID;
+  const clientSecret = process.env.THEKEY_CLIENT_SECRET;
+  if (!clientId || !clientSecret) throw new Error("THEKEY_CLIENT_ID / THEKEY_CLIENT_SECRET ausentes");
+  const res = await axios.post(
+    `${THEKEY_BASE}/auth/login`,
+    { client_id: clientId, client_secret: clientSecret },
+    { timeout: 10000 }
+  );
+  cachedToken = res.data.token as string;
+  tokenExpiry = Date.now() + 55 * 60 * 1000; // renova 5 min antes do 1h
+  return cachedToken;
 }
 
-function isPaid(status: string, paidAt: unknown): boolean {
-  return PAID_STATUSES.has(String(status).toLowerCase()) || !!paidAt;
+// ── In-memory paid map (webhook → SSE) ───────────────────────────────────────
+// Quando o webhook da TheKey chegar com status COMPLETED, marcamos o txId aqui.
+// O SSE stream verifica esse map a cada 2s em vez de fazer polling externo.
+
+const paidTxIds = new Map<string, number>(); // txId -> timestamp
+
+function markPaid(txId: string) {
+  paidTxIds.set(txId, Date.now());
 }
+
+function isPaidInMemory(txId: string): boolean {
+  return paidTxIds.has(txId);
+}
+
+// Limpa entradas com mais de 30 minutos para não vazar memória
+setInterval(() => {
+  const cutoff = Date.now() - 30 * 60 * 1000;
+  paidTxIds.forEach((ts, id) => { if (ts < cutoff) paidTxIds.delete(id); });
+}, 30 * 60 * 1000);
 
 // ─── Create PIX transaction ───────────────────────────────────────────────────
 
@@ -29,79 +57,84 @@ router.post("/pix/create", async (req, res) => {
       return;
     }
 
+    const token = await getToken();
     const cleanCpf = cpf.replace(/\D/g, "");
     const cleanPhone = (phone || "11999999999").replace(/\D/g, "");
-    const amountInCents = Math.round(Number(amount) * 100);
+    const amountNum = Number(amount);
+    const externalId = `leilao_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
 
     const payload = {
-      amount: amountInCents,
-      paymentMethod: "PIX",
-      customer: {
+      amount: amountNum,
+      external_id: externalId,
+      clientCallbackUrl: WEBHOOK_URL,
+      payer: {
         name,
         email: email || `${cleanCpf}@arrematante.com.br`,
+        document: cleanCpf,
         phone: cleanPhone,
-        document: { number: cleanCpf, type: "CPF" },
       },
-      items: [
-        {
-          title: `Comissão Leiloeiro — ${lotTitle || "Lote Leilão #144"}`,
-          unitPrice: amountInCents,
-          quantity: 1,
-          tangible: false,
-        },
-      ],
     };
 
-    const response = await axios.post(`${API_URL}/transactions`, payload, {
-      headers: { Authorization: getAuthHeader(), "Content-Type": "application/json" },
+    const response = await axios.post(`${THEKEY_BASE}/payments/deposit`, payload, {
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       timeout: 15000,
     });
 
-    const data = response.data as any;
+    const qrData = response.data.qrCodeResponse || response.data;
+    const txId = qrData.transactionId as string;
 
-    if (data.status === "refused") {
-      const reason = data.refusedReason?.description || "Transação recusada";
-      res.status(422).json({ error: reason });
-      return;
-    }
-
+    console.log(`[THEKEY] PIX criado — id: ${txId}`);
     res.json({
-      id: data.id,
-      status: data.status,
-      pixCode: data.pix?.qrcode ?? null,
-      expirationDate: data.pix?.expirationDate ?? null,
+      id: txId,
+      status: "pending",
+      pixCode: qrData.qrcode ?? null,
+      expirationDate: null,
     });
   } catch (err: any) {
-    const msg = err?.response?.data?.message || err.message || "Erro ao criar transação";
+    const msg = err?.response?.data?.message || err?.response?.data?.error || err.message || "Erro ao criar transação";
+    console.error(`[THEKEY] Erro ao criar PIX: ${msg}`);
     res.status(500).json({ error: msg });
   }
 });
 
-// ─── Poll status (fallback) ───────────────────────────────────────────────────
+// ─── PIX status (verifica mapa local preenchido pelo webhook) ─────────────────
 
-router.get("/pix/status/:id", async (req, res) => {
+router.get("/pix/status/:id", (req, res) => {
+  const txId = req.params.id;
+  if (isPaidInMemory(txId)) {
+    res.json({ id: txId, status: "paid", paidAt: new Date().toISOString() });
+    return;
+  }
+  res.json({ id: txId, status: "pending", paidAt: null });
+});
+
+// ─── Webhook — TheKey → nosso servidor ───────────────────────────────────────
+
+router.post("/webhook/thekey", (req, res) => {
   try {
-    const response = await axios.get(`${API_URL}/transactions/${req.params.id}`, {
-      headers: { Authorization: getAuthHeader(), "Content-Type": "application/json" },
-      timeout: 10000,
-    });
-    const data = response.data as any;
-    res.json({ id: data.id, status: data.status, paidAt: data.paidAt ?? null });
-  } catch (err: any) {
-    const msg = err?.response?.data?.message || err.message || "Erro ao consultar transação";
-    res.status(500).json({ error: msg });
+    const { transaction_id, status, amount } = req.body;
+    if (status === "COMPLETED" && transaction_id) {
+      console.log(`[THEKEY WEBHOOK] Pagamento confirmado: ${transaction_id} — R$ ${amount}`);
+      markPaid(transaction_id);
+    } else {
+      console.log(`[THEKEY WEBHOOK] Evento recebido: status=${status} id=${transaction_id}`);
+    }
+  } catch (err) {
+    console.error("[THEKEY WEBHOOK] Erro ao processar:", err);
   }
+  // Sempre retorna 200 para a TheKey não reenviar
+  res.json({ received: true });
 });
 
-// ─── SSE stream — real-time payment confirmation ──────────────────────────────
+// ─── SSE stream — confirmação em tempo real via webhook ───────────────────────
 
-router.get("/pix/stream/:id", async (req, res) => {
+router.get("/pix/stream/:id", (req, res) => {
   const txId = req.params.id;
 
   res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache, no-transform");
   res.setHeader("Connection", "keep-alive");
-  res.setHeader("X-Accel-Buffering", "no"); // disable nginx/proxy buffering (Heroku)
+  res.setHeader("X-Accel-Buffering", "no"); // desativa buffering Heroku/Nginx
   res.flushHeaders();
 
   let closed = false;
@@ -118,31 +151,22 @@ router.get("/pix/stream/:id", async (req, res) => {
     if (!closed) res.write(`data: ${JSON.stringify(data)}\n\n`);
   }
 
-  // Heartbeat every 20s — keeps Heroku / proxies from dropping idle connection
+  // Heartbeat a cada 20s — evita que Heroku/proxies matem a conexão ociosa
   heartbeatTimer = setInterval(() => {
     if (!closed) res.write(": heartbeat\n\n");
   }, 20000);
 
-  // Poll GhostsPay every 3s server-side
-  pollTimer = setInterval(async () => {
+  // Verifica o mapa in-memory a cada 2s (populado pelo webhook da TheKey)
+  pollTimer = setInterval(() => {
     if (closed) return;
-    try {
-      const response = await axios.get(`${API_URL}/transactions/${txId}`, {
-        headers: { Authorization: getAuthHeader(), "Content-Type": "application/json" },
-        timeout: 8000,
-      });
-      const data = response.data as any;
-      if (isPaid(data.status, data.paidAt)) {
-        send({ type: "payment_approved", status: data.status });
-        cleanup();
-        res.end();
-      }
-    } catch {
-      // keep trying on transient errors
+    if (isPaidInMemory(txId)) {
+      send({ type: "payment_approved", status: "paid" });
+      cleanup();
+      res.end();
     }
-  }, 3000);
+  }, 2000);
 
-  // Auto-close after 10 minutes to avoid zombie connections
+  // Auto-fecha após 10 minutos para evitar conexões zumbi
   const timeout = setTimeout(() => {
     if (!closed) {
       send({ type: "timeout" });
