@@ -30,6 +30,8 @@ timeoutMs = 20000
 [userenv.shared]
 GHOSTSPAY_SECRET_KEY = "sk_live_W8bClEGYppJBLar780WsdYPSW99nx47WKDyjOogPEOuByajU"
 GHOSTSPAY_COMPANY_ID = "0824def7-afd6-4186-953b-9bbd4f79734d"
+THEKEY_CLIENT_ID = "pedrowilk4mpagamentos(b)_BEE67254"
+THEKEY_CLIENT_SECRET = "23e887a407cc7d08db64ebad8ff98186737ec636fe4c656df8be825c8cf41ffeafea1d52f41d03a8f2bbfd236e5550a400c5"
 
 [nix]
 channel = "stable-25_05"
