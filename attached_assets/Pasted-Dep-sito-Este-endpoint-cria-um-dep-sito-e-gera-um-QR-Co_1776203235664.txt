@@ -1,0 +1,94 @@
+Depósito
+Este endpoint cria um depósito e gera um QR Code PIX para efetuar o pagamento. O sistema garante idempotência através do external_id e envia callbacks automáticos sobre mudanças de status da transação.
+
+POST
+/api/payments/deposit
+Requer Autenticação
+curl -X POST https://api.the-key.club/api/payments/deposit \
+  -H "Authorization: Bearer seu_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "amount": 100.00,
+    "external_id": "id_unico_12345",
+    "clientCallbackUrl": "https://seuservidor.com/callback",
+    "payer": {
+      "name": "João da Silva",
+      "email": "joao@example.com",
+      "document": "12345678901"
+    }
+  }'
+Parâmetros da Requisição
+Campo	Tipo	Obrigatório	Descrição
+amount	number	✅	Valor do depósito
+external_id	string	✅	ID único da transação externa para controle idempotente
+clientCallbackUrl	string	✅	URL para receber notificações de status do depósito
+payer.name	string	✅	Nome completo do pagador
+payer.document	string	✅	CPF/CNPJ do pagador
+payer.email	string	✅	E-mail do pagador
+payer.phone	string	❌	Telefone do pagador (opcional)
+Resposta de Sucesso (201)
+{
+  "message": "Deposit created successfully.",
+  "qrCodeResponse": {
+    "transactionId": "abc123def456",
+    "status": "PENDING",
+    "qrcode": "00020126580014BR.GOV.BCB.PIX...",
+    "amount": 100.50
+  }
+}
+Campo	Tipo	Descrição
+message	string	Mensagem de confirmação
+qrCodeResponse.transactionId	string	ID único da transação no gateway
+qrCodeResponse.status	string	Status inicial do depósito (sempre "PENDING")
+qrCodeResponse.qrcode	string	Código PIX para pagamento
+qrCodeResponse.amount	number	Valor do depósito confirmado
+Possíveis Erros e Tratamentos
+400 - Bad Request
+"Erro ao processar pagamento. Você deve preencher os campos obrigatórios ausentes"
+Causa: Campos obrigatórios ausentes (amount, external_id, clientCallbackUrl, payer)
+
+"Configuração do gateway não suportada"
+Causa: Gateway do usuário não é suportado pelo sistema
+
+401 - Unauthorized
+"Access token is missing or invalid."
+Causa: Token de autenticação ausente ou malformado
+
+403 - Forbidden
+"Invalid token."
+Causa: Token de autenticação expirado ou inválido
+
+404 - Not Found
+"Usuario não encontrado"
+Causa: Usuário autenticado não existe na base de dados
+
+500 - Internal Server Error
+"Gateway padrão não configurado"
+Causa: Gateway não está configurado no sistema
+
+"Não foi possível gerar o Transaction ID a partir do QR Code. Tente novamente."
+Causa: Falha na comunicação com o gateway de pagamento ou resposta inválida
+
+"Erro inesperado. Contate o suporte."
+Causa: Erro interno do servidor (falha de banco de dados, comunicação com gateway, etc.)
+
+Comportamentos Importantes
+Idempotência: O external_id garante que a mesma transação não seja criada duas vezes
+Timeout padrão: QR Codes têm validade de 30 minutos (1800 segundos)
+Callback assíncrono: Falhas no envio do callback inicial não impedem a criação do depósito
+Callbacks Automáticos
+Após a criação do depósito, o sistema:
+
+1.
+Envia callback inicial para clientCallbackUrl com status "PENDING"
+2.
+Monitora o pagamento através do gateway configurado
+3.
+Envia atualizações de status conforme o pagamento é processado
+Formato do Callback:
+{
+  "transaction_id": "abc123def456",
+  "status": "PENDING",
+  "amount": 100.50,
+  "type": "Deposit"
+}
