@@ -1,0 +1,160 @@
+import QRCode from "qrcode";
+
+// ============================================================
+// PAGNET BRASIL - Integração PIX completa
+// Variáveis de ambiente necessárias:
+//   PAGNET_PUBLIC_KEY — sua chave pública fornecida pela Pagnet
+//   PAGNET_SECRET_KEY — sua chave secreta fornecida pela Pagnet
+// ============================================================
+
+class PagnetAPI {
+  private baseUrl: string = "https://api.pagnetbrasil.com/v1";
+  private authHeader: string;
+
+  constructor(publicKey: string, secretKey: string) {
+    // Autenticação via Basic Auth: base64(publicKey:secretKey)
+    const authString = `${publicKey}:${secretKey}`;
+    this.authHeader = `Basic ${Buffer.from(authString).toString("base64")}`;
+  }
+
+  // Cria uma transação PIX e retorna o código copia-e-cola + QR code em base64
+  async createPixTransaction(data: {
+    amount: number;           // Valor em reais (ex: 54.70)
+    customer_name: string;
+    customer_email?: string;
+    customer_cpf?: string;
+    customer_phone?: string;
+  }) {
+    // A Pagnet recebe o valor em centavos
+    const amountCents = Math.round(parseFloat(String(data.amount)) * 100);
+    const customerCpf = (data.customer_cpf || "").replace(/\D/g, "");
+    const customerPhone = (data.customer_phone || "11999999999").replace(/\D/g, "");
+    const externalReference = `PIX${Date.now()}${Math.random().toString(36).slice(0, 8).toUpperCase()}`;
+
+    const payload = {
+      amount: amountCents,
+      paymentMethod: "pix",
+      pix: {
+        expiresInDays: 3,
+      },
+      items: [
+        {
+          title: "Produto",           // Altere para o nome do seu produto
+          unitPrice: amountCents,
+          quantity: 1,
+          tangible: false,
+        },
+      ],
+      customer: {
+        name: data.customer_name || "Cliente",
+        email: data.customer_email || "cliente@email.com",
+        document: { type: "cpf", number: customerCpf },
+        phone: customerPhone,
+      },
+      externalReference,
+    };
+
+    const response = await fetch(`${this.baseUrl}/transactions`, {
+      method: "POST",
+      headers: {
+        Authorization: this.authHeader,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Erro da API Pagnet (${response.status}): ${errorText}`);
+    }
+
+    const responseData = await response.json();
+
+    // A Pagnet pode retornar o qrcode em diferentes campos dependendo da versão
+    const pixCode =
+      responseData?.pix?.qrcode ||
+      responseData?.qrCode ||
+      responseData?.qrcode;
+
+    if (!pixCode) {
+      throw new Error("Código PIX não foi gerado pela API Pagnet");
+    }
+
+    // Gera imagem do QR Code em base64 (pronto para usar em <img src="...">)
+    let qrCodeImage: string | null = null;
+    try {
+      qrCodeImage = await QRCode.toDataURL(pixCode, {
+        width: 300,
+        margin: 2,
+        color: { dark: "#000000", light: "#ffffff" },
+      });
+    } catch {
+      // QR code image é opcional
+    }
+
+    return {
+      success: true,
+      transaction_id: String(
+        responseData?.id || responseData?.transactionId || externalReference
+      ),
+      amount: data.amount,
+      status: "pending",
+      created_at: new Date().toISOString(),
+      pix_code: pixCode,           // Código copia-e-cola
+      qr_code_image: qrCodeImage,  // data:image/png;base64,...
+    };
+  }
+
+  // Consulta o status de uma transação diretamente na API
+  async checkPaymentStatus(transactionId: string) {
+    const response = await fetch(`${this.baseUrl}/transactions/${transactionId}`, {
+      headers: {
+        Authorization: this.authHeader,
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Erro ao consultar status (${response.status}): ${errorText}`);
+    }
+
+    const data = await response.json();
+
+    // Status possíveis: paid, pending, expired, cancelled
+    return {
+      success: true,
+      status: data?.status || "unknown",
+      transaction_id: transactionId,
+      raw: data,
+    };
+  }
+}
+
+// ============================================================
+// EXEMPLO DE USO
+// ============================================================
+async function exemplo() {
+  const api = new PagnetAPI(
+    process.env.PAGNET_PUBLIC_KEY!,
+    process.env.PAGNET_SECRET_KEY!
+  );
+
+  // 1. Gerar o PIX
+  const pix = await api.createPixTransaction({
+    amount: 54.70,
+    customer_name: "João da Silva",
+    customer_email: "joao@email.com",
+    customer_cpf: "123.456.789-00",
+    customer_phone: "(11) 99999-9999",
+  });
+
+  console.log("transaction_id:", pix.transaction_id);
+  console.log("pix_code:", pix.pix_code);
+
+  // 2. Verificar status (polling a cada X segundos)
+  const status = await api.checkPaymentStatus(pix.transaction_id);
+  console.log("Status:", status.status); // "paid" | "pending" | "expired" | "cancelled"
+}
+
+export { PagnetAPI };
