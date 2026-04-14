@@ -1,0 +1,179 @@
+import QRCode from "qrcode";
+
+// ============================================================
+// THEKEY CLUB - Integração PIX completa
+// Variáveis de ambiente necessárias:
+//   THEKEY_CLIENT_ID     — seu client_id fornecido pela TheKey
+//   THEKEY_CLIENT_SECRET — seu client_secret fornecido pela TheKey
+// ============================================================
+
+class TheKeyClubAPI {
+  private baseUrl: string = "https://api.the-key.club/api";
+  private clientId: string;
+  private clientSecret: string;
+  private token: string | null = null;
+  private tokenExpiry: number = 0;
+
+  constructor(clientId: string, clientSecret: string) {
+    this.clientId = clientId;
+    this.clientSecret = clientSecret;
+  }
+
+  // Autentica e retorna o token (renova automaticamente quando expira)
+  private async authenticate(): Promise<string> {
+    if (this.token && Date.now() < this.tokenExpiry) {
+      return this.token;
+    }
+
+    const response = await fetch(`${this.baseUrl}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        client_id: this.clientId,
+        client_secret: this.clientSecret,
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      this.token = data.token;
+      // Token válido por 1 hora — renova 5 minutos antes
+      this.tokenExpiry = Date.now() + 55 * 60 * 1000;
+      return this.token!;
+    } else {
+      const errorText = await response.text();
+      throw new Error(`Erro de autenticação TheKey: ${errorText}`);
+    }
+  }
+
+  // Cria uma transação PIX e retorna o código copia-e-cola + QR code em base64
+  async createPixTransaction(data: {
+    amount: number;           // Valor em reais (ex: 54.70)
+    customer_name: string;
+    customer_email?: string;
+    customer_cpf?: string;
+    customer_phone?: string;
+    webhook_url: string;      // URL pública que receberá o webhook de confirmação
+    external_id?: string;     // ID externo opcional para rastreio
+  }) {
+    const token = await this.authenticate();
+
+    const externalId =
+      data.external_id ||
+      `pedido_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
+    const payload = {
+      amount: data.amount,
+      external_id: externalId,
+      clientCallbackUrl: data.webhook_url,
+      payer: {
+        name: data.customer_name,
+        email: data.customer_email || "cliente@email.com",
+        document: data.customer_cpf?.replace(/\D/g, "") || "",
+        phone: data.customer_phone || "11999999999",
+      },
+    };
+
+    const response = await fetch(`${this.baseUrl}/payments/deposit`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Erro da API TheKey (${response.status}): ${errorText}`);
+    }
+
+    const responseData = await response.json();
+    const qrData = responseData.qrCodeResponse || responseData;
+
+    // Gera imagem do QR Code em base64 (pronto para usar em <img src="...">)
+    let qrCodeImage: string | null = null;
+    if (qrData.qrcode) {
+      try {
+        qrCodeImage = await QRCode.toDataURL(qrData.qrcode, {
+          width: 300,
+          margin: 2,
+          color: { dark: "#000000", light: "#ffffff" },
+        });
+      } catch {
+        // QR code image é opcional
+      }
+    }
+
+    return {
+      success: true,
+      transaction_id: qrData.transactionId as string,
+      amount: data.amount,
+      status: "pending",
+      created_at: new Date().toISOString(),
+      pix_code: qrData.qrcode as string,    // Código copia-e-cola
+      qr_code_image: qrCodeImage,            // data:image/png;base64,...
+    };
+  }
+}
+
+// ============================================================
+// WEBHOOK — cole este handler na sua rota POST /webhook/thekey
+// A TheKey chama esta URL automaticamente quando o pagamento
+// for confirmado. Configure a URL no campo webhook_url acima.
+// ============================================================
+//
+// Exemplo com Express:
+//
+//   app.post("/webhook/thekey", theKeyWebhookHandler);
+//
+// O corpo recebido tem o formato:
+//   { transaction_id: string, status: "COMPLETED" | "FAILED", amount: string }
+//
+async function theKeyWebhookHandler(req: any, res: any) {
+  try {
+    const { transaction_id, status, amount } = req.body;
+
+    if (status === "COMPLETED") {
+      console.log(`[THEKEY] Pagamento confirmado: ${transaction_id} — R$ ${amount}`);
+
+      // ✅ Coloque aqui sua lógica após pagamento confirmado:
+      //    - Atualizar banco de dados
+      //    - Enviar e-mail/WhatsApp ao cliente
+      //    - Liberar acesso ao produto
+      //    - etc.
+    }
+
+    // Sempre retorne 200 para a TheKey não reenviar o webhook
+    res.json({ received: true });
+  } catch (error) {
+    console.error("[THEKEY WEBHOOK] Erro:", error);
+    res.json({ received: true });
+  }
+}
+
+// ============================================================
+// EXEMPLO DE USO COMPLETO
+// ============================================================
+async function exemplo() {
+  const clientId = process.env.THEKEY_CLIENT_ID!;
+  const clientSecret = process.env.THEKEY_CLIENT_SECRET!;
+
+  const api = new TheKeyClubAPI(clientId, clientSecret);
+
+  const pix = await api.createPixTransaction({
+    amount: 54.70,
+    customer_name: "João da Silva",
+    customer_email: "joao@email.com",
+    customer_cpf: "123.456.789-00",
+    customer_phone: "(11) 99999-9999",
+    webhook_url: "https://seusite.com/webhook/thekey",
+  });
+
+  console.log("PIX gerado:");
+  console.log("  transaction_id:", pix.transaction_id);
+  console.log("  Código copia-e-cola:", pix.pix_code);
+  console.log("  QR Code (base64):", pix.qr_code_image?.substring(0, 50) + "...");
+}
+
+export { TheKeyClubAPI, theKeyWebhookHandler };
